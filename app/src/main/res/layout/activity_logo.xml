@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/verdeRun"
+
+    >
+
+
+    <LinearLayout
+        android:layout_width="283dp"
+        android:layout_height="278dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="70dp"
+        android:background="@drawable/logo"
+        android:orientation="vertical"></LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="81dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="434dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/archivo_black"
+        android:text="Runnatica"
+        android:textColor="#FFFFFF"
+        android:textFont="Impact"
+        android:textSize="60dp"
+        android:visibility="visible" />
+
+</RelativeLayout>

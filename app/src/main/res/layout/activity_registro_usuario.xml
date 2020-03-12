@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/verdeRun"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btnMujer"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="271dp"
+        android:layout_marginEnd="131dp"
+        android:background="@color/grisBoton"
+        android:text="Mujer"
+        android:textColor="#F0EEEE"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnHombre"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="271dp"
+        android:layout_marginEnd="267dp"
+        android:background="@color/grisBoton"
+        android:text="Hombre"
+        android:textColor="#F0EEEE"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnRegistrarse"
+        android:layout_width="232dp"
+        android:layout_height="59dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="650dp"
+        android:layout_marginEnd="90dp"
+        android:background="@color/grisBoton"
+        android:text="Registrar"
+        android:textColor="#F0EEEE"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnFoto"
+        android:layout_width="159dp"
+        android:layout_height="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="496dp"
+        android:layout_marginEnd="223dp"
+        android:background="@color/grisBoton"
+        android:text="Seleccionar"
+        android:textColor="#F0EEEE"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="81dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-11dp"
+        android:layout_marginEnd="43dp"
+        android:fontFamily="@font/archivo_black"
+        android:text="Runnatica"
+        android:textColor="#FFFFFF"
+        android:textFont="Impact"
+        android:textSize="60dp"
+        android:visibility="visible" />
+
+    <TextView
+        android:layout_width="346dp"
+        android:layout_height="39dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="46dp"
+        android:text="Nombre y Apellido:"
+        android:textColor="#F4F5F7"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="346dp"
+        android:layout_height="39dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="163dp"
+        android:layout_marginEnd="46dp"
+        android:text="Correo Electronico:"
+        android:textColor="#F4F5F7"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="57dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="374dp"
+        android:layout_marginEnd="308dp"
+        android:text="Dia:"
+        android:textColor="#F4F5F7"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="57dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="374dp"
+        android:layout_marginEnd="204dp"
+        android:text="Mes:"
+        android:textColor="#F4F5F7"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="499dp"
+        android:layout_marginEnd="154dp"
+        android:text="Archivo"
+        android:textColor="#F4F5F7"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="57dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="374dp"
+        android:layout_marginEnd="105dp"
+        android:text="Año:"
+        android:textColor="#F4F5F7"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="346dp"
+        android:layout_height="39dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="334dp"
+        android:layout_marginEnd="45dp"
+        android:text="Fecha de Nacimiento:"
+        android:textColor="#F4F5F7"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="454dp"
+        android:layout_marginEnd="327dp"
+        android:text="Foto:"
+        android:textColor="#F4F5F7"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="310dp"
+        android:layout_height="34dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="535dp"
+        android:layout_marginEnd="75dp"
+        android:text="Terminos y Condiciones:"
+        android:textColor="#F4F5F7"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="310dp"
+        android:layout_height="34dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="583dp"
+        android:layout_marginEnd="-27dp"
+        android:text="Terminos y Condiciones"
+        android:textColor="#021BFA"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="346dp"
+        android:layout_height="39dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="234dp"
+        android:layout_marginEnd="46dp"
+        android:text="Sexo:"
+        android:textColor="#F4F5F7"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="346dp"
+        android:layout_height="39dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="46dp"
+        android:text="Nombre y Apellido:"
+        android:textColor="#F4F5F7"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="355dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="118dp"
+        android:layout_marginEnd="38dp" />
+
+    <EditText
+        android:id="@+id/etCorreo"
+        android:layout_width="355dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="37dp" />
+
+    <CheckBox
+        android:id="@+id/checkTerminos"
+        android:layout_width="104dp"
+        android:layout_height="42dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="574dp"
+        android:layout_marginEnd="277dp"
+        android:textColor="#F5F2F2"
+        android:textSize="18sp"
+        tools:text="Aceptar" />
+
+    <EditText
+        android:id="@+id/Dia"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+
+        android:layout_marginTop="403dp"
+        android:layout_marginEnd="307dp"
+
+        />
+
+    <EditText
+        android:id="@+id/Mes"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="403dp"
+        android:layout_marginEnd="201dp" />
+
+    <EditText
+        android:id="@+id/Año"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="82dp" />
+
+
+
+
+    </ScrollView>
+
+</RelativeLayout>
