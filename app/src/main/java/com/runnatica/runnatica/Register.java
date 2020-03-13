@@ -31,10 +31,8 @@ public class Register extends AppCompatActivity {
         Registro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent i = new Intent(this, registro_usuario.class);
+                Intent i = new Intent(v.getContext(), registro_usuario.class);
                 startActivity(i);
-
             }
         });
     }
