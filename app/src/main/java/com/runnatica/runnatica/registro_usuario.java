@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class registro_usuario extends AppCompatActivity {
 
     Button Hombre, Mujer, Foto, Registrarse;
-    EditText Nombre, Correo, Contrasena;
+    EditText Nombre, Correo, Contrasena, contrasena2;
     CheckBox Terminos;
     TextView Condiciones;
 
@@ -27,7 +27,9 @@ public class registro_usuario extends AppCompatActivity {
         Correo = (EditText)findViewById(R.id.etCorreo);
         Terminos = (CheckBox)findViewById(R.id.checkTerminos);
         Contrasena = (EditText)findViewById(R.id.etContrasena);
+        contrasena2 = (EditText)findViewById(R.id.etContrasenaseguridad);
         Condiciones = (TextView)findViewById(R.id.tvCondiciones);
+
 
         Condiciones.setOnClickListener(new View.OnClickListener(){
             @Override
