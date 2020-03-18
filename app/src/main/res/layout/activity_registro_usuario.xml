@@ -72,7 +72,6 @@
         android:fontFamily="@font/archivo_black"
         android:text="Runnatica"
         android:textColor="#FFFFFF"
-        android:textFont="Impact"
         android:textSize="60dp"
         android:visibility="visible" />
 

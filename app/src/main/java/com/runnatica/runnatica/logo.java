@@ -17,12 +17,15 @@ public class logo extends AppCompatActivity {
             @Override
 
             public void run() {
+                paginaDeLogin();
                 // Do something after 5s = 5000ms
             }
         }, 5000);
-        Intent i=new Intent(this, Register.class);
+
+    }
+
+    void paginaDeLogin() {
+        Intent i=new Intent(this, Login.class);
         startActivity(i);
-
-
     }
 }

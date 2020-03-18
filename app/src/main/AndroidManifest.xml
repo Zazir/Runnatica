@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.runnatica.runnatica">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -10,15 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".terminosycondiciones"></activity>
-        <activity android:name=".logo" />
-        <activity android:name=".registro_usuario" />
-        <activity android:name=".Register">
+        <activity android:name=".logo" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".registro_usuario" />
+        <activity android:name=".Login"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
