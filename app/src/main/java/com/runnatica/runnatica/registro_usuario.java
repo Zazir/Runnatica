@@ -24,13 +24,14 @@ import java.util.Map;
 public class registro_usuario extends AppCompatActivity {
 
     Button Hombre, Mujer, Foto, Registrarse;
-    EditText Nombre, Correo, Contrasena, contrasena2, Telefono;
+    EditText Nombre, Correo, Contrasena, contrasena2, Ciudad, Estado, Pais;
     CheckBox Terminos;
     TextView Condiciones;
     private String flagTerminos = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
         Hombre = (Button)findViewById(R.id.btnHombre);
@@ -43,6 +44,9 @@ public class registro_usuario extends AppCompatActivity {
         Contrasena = (EditText)findViewById(R.id.etContrasena);
         contrasena2 = (EditText)findViewById(R.id.etContrasenaseguridad);
         Condiciones = (TextView)findViewById(R.id.tvCondiciones);
+        Ciudad = (EditText)findViewById(R.id.etCiudad);
+        Estado = (EditText)findViewById(R.id.etEstado);
+        Pais = (EditText)findViewById(R.id.etPais);
 
         Registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
