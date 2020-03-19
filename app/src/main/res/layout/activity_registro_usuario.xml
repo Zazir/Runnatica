@@ -17,6 +17,166 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="346dp"
+                android:layout_height="39dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="473dp"
+                android:layout_marginEnd="41dp"
+                android:text="Fecha de Nacimiento:"
+                android:textColor="#F4F5F7"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="513dp"
+                android:layout_marginEnd="306dp"
+                android:text="Dia:"
+                android:textColor="#F4F5F7"
+                android:textSize="25sp" />
+            <TextView
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="513dp"
+                android:layout_marginEnd="306dp"
+                android:text="Dia:"
+                android:textColor="#F4F5F7"
+                android:textSize="25sp" />
+            <TextView
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="513dp"
+                android:layout_marginEnd="306dp"
+                android:text="Dia:"
+                android:textColor="#F4F5F7"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="617dp"
+                android:layout_marginEnd="279dp"
+                android:text="Ciudad:"
+                android:textColor="#F4F5F7"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="617dp"
+                android:layout_marginEnd="148dp"
+                android:text="Estado:"
+                android:textColor="#F4F5F7"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="618dp"
+                android:layout_marginEnd="50dp"
+                android:text="Pais:"
+                android:textColor="#F4F5F7"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/dia"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+
+                android:layout_marginTop="542dp"
+                android:layout_marginEnd="305dp"
+
+                />
+
+            <EditText
+                android:id="@+id/etCiudad"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="652dp"
+                android:layout_marginEnd="267dp" />
+
+            <EditText
+                android:id="@+id/mes"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="652dp"
+                android:layout_marginEnd="131dp" />
+            <EditText
+                android:id="@+id/etEstado"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="652dp"
+                android:layout_marginEnd="131dp" />
+
+            <EditText
+                android:id="@+id/etPais"
+                android:layout_width="121dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="652dp"
+                android:layout_marginEnd="7dp" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="522dp"
+                android:layout_marginEnd="215dp"
+                android:text="Mes:"
+                android:textColor="#F4F5F7"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/año"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="542dp"
+                android:layout_marginEnd="85dp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="522dp"
+                android:layout_marginEnd="116dp"
+                android:text="Año:"
+                android:textColor="#F4F5F7"
+                android:textSize="25sp" />
+
             <Button
                 android:id="@+id/btnMujer"
                 android:layout_width="125dp"
@@ -49,8 +209,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="748dp"
-                android:layout_marginEnd="71dp"
+                android:layout_marginTop="870dp"
+                android:layout_marginEnd="72dp"
                 android:background="@color/grisBoton"
                 android:text="Registrar"
                 android:textColor="#F0EEEE"
@@ -62,8 +222,8 @@
                 android:layout_height="31dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="628dp"
-                android:layout_marginEnd="213dp"
+                android:layout_marginTop="750dp"
+                android:layout_marginEnd="214dp"
                 android:background="@color/grisBoton"
                 android:text="Seleccionar"
                 android:textColor="#F0EEEE"
@@ -79,7 +239,6 @@
                 android:fontFamily="sans-serif"
                 android:text="Runnatica"
                 android:textColor="#FFFFFF"
-                android:textFont="Impact"
                 android:textSize="80dp"
                 android:visibility="visible" />
 
@@ -131,18 +290,6 @@
                 android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/textView4"
-                android:layout_width="57dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="513dp"
-                android:layout_marginEnd="306dp"
-                android:text="Dia:"
-                android:textColor="#F4F5F7"
-                android:textSize="25sp" />
-
-            <TextView
                 android:id="@+id/textView6"
                 android:layout_width="57dp"
                 android:layout_height="wrap_content"
@@ -160,8 +307,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="631dp"
-                android:layout_marginEnd="144dp"
+                android:layout_marginTop="753dp"
+                android:layout_marginEnd="145dp"
                 android:text="Archivo"
                 android:textColor="#F4F5F7"
                 android:textSize="18sp" />
@@ -191,13 +338,25 @@
                 android:textSize="25sp" />
 
             <TextView
+                android:id="@+id/tvRecidencia"
+                android:layout_width="346dp"
+                android:layout_height="39dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="585dp"
+                android:layout_marginEnd="37dp"
+                android:text="Lugar de Residencia:"
+                android:textColor="#F4F5F7"
+                android:textSize="25sp" />
+
+            <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="586dp"
-                android:layout_marginEnd="317dp"
+                android:layout_marginTop="702dp"
+                android:layout_marginEnd="316dp"
                 android:text="Foto:"
                 android:textColor="#F4F5F7"
                 android:textSize="25sp" />
@@ -208,8 +367,8 @@
                 android:layout_height="34dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="659dp"
-                android:layout_marginEnd="71dp"
+                android:layout_marginTop="781dp"
+                android:layout_marginEnd="73dp"
                 android:text="Terminos y Condiciones:"
                 android:textColor="#F4F5F7"
                 android:textSize="25sp" />
@@ -220,8 +379,8 @@
                 android:layout_height="34dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="707dp"
-                android:layout_marginEnd="-31dp"
+                android:layout_marginTop="829dp"
+                android:layout_marginEnd="-29dp"
                 android:text="Terminos y Condiciones"
                 android:textColor="#021BFA"
                 android:textSize="18sp" />
@@ -292,8 +451,8 @@
                 android:layout_height="42dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="698dp"
-                android:layout_marginEnd="273dp"
+                android:layout_marginTop="821dp"
+                android:layout_marginEnd="275dp"
                 android:textColor="#F5F2F2"
                 android:textSize="18sp"
                 tools:text="Aceptar" />
@@ -320,15 +479,6 @@
                 android:layout_marginTop="542dp"
                 android:layout_marginEnd="199dp" />
 
-            <EditText
-                android:id="@+id/Año"
-                android:layout_width="105dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="539dp"
-                android:layout_marginEnd="80dp" />
         </RelativeLayout>
 
     </ScrollView>
