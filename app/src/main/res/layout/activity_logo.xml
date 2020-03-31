@@ -25,7 +25,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="466dp"
-        android:layout_marginEnd="68dp"
+        android:layout_marginEnd="73dp"
         android:fontFamily="sans-serif"
         android:text="Runnatica"
         android:textColor="#FFFFFF"
