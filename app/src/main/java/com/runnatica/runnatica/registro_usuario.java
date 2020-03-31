@@ -24,14 +24,13 @@ import java.util.Map;
 public class registro_usuario extends AppCompatActivity {
 
     Button Hombre, Mujer, Foto, Registrarse;
-    EditText Nombre, Correo, Contrasena, contrasena2, Ciudad, Estado, Pais;
+    EditText Nombre, Correo, Contrasena, contrasena2, Telefono;
     CheckBox Terminos;
     TextView Condiciones;
     private String flagTerminos = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
         Hombre = (Button)findViewById(R.id.btnHombre);
@@ -44,9 +43,6 @@ public class registro_usuario extends AppCompatActivity {
         Contrasena = (EditText)findViewById(R.id.etContrasena);
         contrasena2 = (EditText)findViewById(R.id.etContrasenaseguridad);
         Condiciones = (TextView)findViewById(R.id.tvCondiciones);
-        Ciudad = (EditText)findViewById(R.id.etCiudad);
-        Estado = (EditText)findViewById(R.id.etEstado);
-        Pais = (EditText)findViewById(R.id.etPais);
 
         Registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +50,7 @@ public class registro_usuario extends AppCompatActivity {
                 if(Terminos.equals(1)){
                     flagTerminos = "1";
                 }
-                ejecutarServicio("http://192.168.137.1:811/login/agregarUsuario.php");
+                ejecutarServicio("http://10.156.19.177:811/login/agregarUsuario.php");
             }
         });
 
@@ -71,7 +67,7 @@ public class registro_usuario extends AppCompatActivity {
     * Función diseñada para mandar
     * */
     private void ejecutarServicio(String URL) {
-        //Declaramos un StringRequest definiendo el método que utilizamos, en este caso es POST
+        //Declaramos un StringRequest definiendo el método que utilizamos, en este caso es GET
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -80,7 +76,7 @@ public class registro_usuario extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Hubo un error"+error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Hubo un error", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override

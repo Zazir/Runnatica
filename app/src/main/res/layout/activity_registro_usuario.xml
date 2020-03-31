@@ -109,9 +109,7 @@
                 android:id="@+id/etCiudad"
                 android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="652dp"
                 android:layout_marginEnd="267dp" />
 
             <EditText
@@ -232,10 +230,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="81dp"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="-12dp"
-                android:layout_marginEnd="21dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="23dp"
+                android:layout_marginTop="-1dp"
                 android:fontFamily="sans-serif"
                 android:text="Runnatica"
                 android:textColor="#FFFFFF"
