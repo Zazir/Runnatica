@@ -11,66 +11,54 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="81dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="139dp"
-        android:layout_marginEnd="27dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="43dp"
+        android:layout_marginTop="65dp"
         android:fontFamily="sans-serif"
         android:text="Runnatica"
         android:textColor="#FFFFFF"
         android:textSize="80dp"
         android:visibility="visible" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="172dp"
-        android:layout_height="54dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="368dp"
-        android:layout_marginEnd="194dp"
-        android:text="Contraseña:"
-        android:textColor="#F4F5F7"
-        android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="154dp"
-        android:layout_height="59dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="269dp"
-        android:layout_marginEnd="209dp"
-        android:text="Usuario:"
-        android:textColor="#F4F5F7"
-        android:textSize="30sp" />
-
     <EditText
         android:id="@+id/etUsuario"
         android:layout_width="323dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="306dp"
-        android:layout_marginEnd="40dp" />
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="56dp"
+        android:layout_marginTop="232dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="172dp"
+        android:layout_height="54dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="211dp"
+        android:layout_marginTop="294dp"
+        android:text="Contraseña:"
+        android:textColor="#F4F5F7"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/etContraseña"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="406dp"
-        android:layout_marginEnd="38dp" />
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="54dp"
+        android:layout_marginTop="332dp" />
 
     <Button
         android:id="@+id/btnEntrar"
         android:layout_width="294dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="499dp"
-        android:layout_marginEnd="56dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="73dp"
+        android:layout_marginTop="425dp"
         android:background="@color/grisBoton"
         android:text="Entrar"
         android:textSize="20sp" />
@@ -79,13 +67,25 @@
         android:id="@+id/btnRegistrarse"
         android:layout_width="293dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="563dp"
-        android:layout_marginEnd="57dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="73dp"
+        android:layout_marginTop="489dp"
         android:background="@color/grisBoton"
         android:text="Registrase"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="154dp"
+        android:layout_height="59dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="225dp"
+        android:layout_marginTop="195dp"
+        android:text="Usuario:"
+        android:textColor="#F4F5F7"
+        android:textSize="30sp" />
 
 
 </RelativeLayout>

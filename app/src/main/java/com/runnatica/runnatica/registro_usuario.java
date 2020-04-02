@@ -50,7 +50,7 @@ public class registro_usuario extends AppCompatActivity {
                 if(Terminos.equals(1)){
                     flagTerminos = "1";
                 }
-                ejecutarServicio("http://10.156.19.177:811/login/agregarUsuario.php");
+                ejecutarServicio("http://192.168.137.1:811/login/agregarUsuario.php");
             }
         });
 
@@ -88,7 +88,6 @@ public class registro_usuario extends AppCompatActivity {
                 parametros.put("Contrasena", Contrasena.getText().toString());
                 parametros.put("Sexo", "hombre");
                 parametros.put("FechaNacimiento", "01");
-                parametros.put("FotoUrl", "");
                 parametros.put("Telefono", "10");
                 parametros.put("Terminos", flagTerminos);
 
