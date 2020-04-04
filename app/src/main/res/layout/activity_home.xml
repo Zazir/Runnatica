@@ -75,6 +75,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/imgvCompetencia"
                 android:layout_width="163dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="60dp"
@@ -88,34 +89,37 @@
                 android:background="@drawable/barra_negra"></ImageView>
 
             <TextView
+                android:id="@+id/txvDescripcion"
                 android:layout_width="243dp"
                 android:layout_height="93dp"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="91dp"
+                android:layout_alignParentTop="true"
                 android:layout_marginEnd="3dp"
+                android:layout_marginTop="91dp"
                 android:text="Asiste a una de las mejores carreras en Mexico, el maraton de la CDMX se llevara a cabo el 6 de Mayo del 2020 en el angel de la independencia."
                 android:textColor="@android:color/background_dark"
                 android:textSize="15dp"></TextView>
 
             <TextView
+                android:id="@+id/txvPrecio"
                 android:layout_width="73dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="179dp"
+                android:layout_alignParentTop="true"
                 android:layout_marginEnd="-1dp"
+                android:layout_marginTop="179dp"
                 android:text="$450"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
 
             <TextView
+                android:id="@+id/txvTitulo"
                 android:layout_width="242dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="62dp"
+                android:layout_alignParentTop="true"
                 android:layout_marginEnd="4dp"
+                android:layout_marginTop="62dp"
                 android:text="Maration de la CDMX"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"></TextView>

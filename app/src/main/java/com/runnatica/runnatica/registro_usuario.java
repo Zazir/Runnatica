@@ -24,15 +24,19 @@ import java.util.Map;
 public class registro_usuario extends AppCompatActivity {
 
     Button Hombre, Mujer, Foto, Registrarse;
-    EditText Nombre, Correo, Contrasena, contrasena2, Telefono;
+    EditText Nombre, Correo, Contrasena, contrasena2, Ciudad, Estado, Pais, Dia, Mesedt, Ano;
     CheckBox Terminos;
     TextView Condiciones;
     private String flagTerminos = "0";
+    private String genero = "";
+    private String fechaDeNacimiento = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
+
+        //Enlaces de elementos por id's
         Hombre = (Button)findViewById(R.id.btnHombre);
         Mujer = (Button)findViewById(R.id.btnMujer);
         Foto = (Button)findViewById(R.id.btnRegistrarse);
@@ -42,7 +46,13 @@ public class registro_usuario extends AppCompatActivity {
         Correo = (EditText)findViewById(R.id.etCorreo);
         Contrasena = (EditText)findViewById(R.id.etContrasena);
         contrasena2 = (EditText)findViewById(R.id.etContrasenaseguridad);
+        Dia = (EditText)findViewById(R.id.etDia);
+        Mesedt = (EditText)findViewById(R.id.Mes);
+        Ano = (EditText)findViewById(R.id.etAno);
         Condiciones = (TextView)findViewById(R.id.tvCondiciones);
+        Ciudad = (EditText)findViewById(R.id.etCiudad);
+        Estado = (EditText)findViewById(R.id.etEstado);
+        Pais = (EditText)findViewById(R.id.etPais);
 
         Registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +60,24 @@ public class registro_usuario extends AppCompatActivity {
                 if(Terminos.equals(1)){
                     flagTerminos = "1";
                 }
-                ejecutarServicio("http://192.168.137.1:811/login/agregarUsuario.php");
+                fechaDeNacimiento = fechaNacimiento();
+                SubirUsuario("http://192.168.137.1:811/login/agregarUsuario.php");
+            }
+        });
+
+        Hombre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                genero = "Hombre";
+                Toast.makeText(getApplicationContext(), "Eres un atlético" + genero, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Mujer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                genero = "Mujer";
+                Toast.makeText(getApplicationContext(), "Eres una" + genero + "muy fit", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -66,7 +93,7 @@ public class registro_usuario extends AppCompatActivity {
     /*
     * Función diseñada para mandar
     * */
-    private void ejecutarServicio(String URL) {
+    private void SubirUsuario(String URL) {
         //Declaramos un StringRequest definiendo el método que utilizamos, en este caso es GET
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
@@ -86,10 +113,13 @@ public class registro_usuario extends AppCompatActivity {
                 parametros.put("NombreYApellido", Nombre.getText().toString());
                 parametros.put("Email", Correo.getText().toString());
                 parametros.put("Contrasena", Contrasena.getText().toString());
-                parametros.put("Sexo", "hombre");
-                parametros.put("FechaNacimiento", "01");
-                parametros.put("Telefono", "10");
+                parametros.put("Sexo", genero);
+                parametros.put("FechaNacimiento", fechaDeNacimiento);
+                parametros.put("Telefono", "0");
                 parametros.put("Terminos", flagTerminos);
+                parametros.put("Ciudad", Ciudad.getText().toString());
+                parametros.put("Estado", Estado.getText().toString());
+                parametros.put("Pais", Pais.getText().toString());
 
                 return parametros;
             }
@@ -98,4 +128,8 @@ public class registro_usuario extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    private String fechaNacimiento() {
+        String date;
+        return date = Dia.getText().toString() + Mesedt.getText().toString() + Ano.getText().toString();
+    }
 }
