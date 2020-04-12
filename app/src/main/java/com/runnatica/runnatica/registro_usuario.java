@@ -60,8 +60,8 @@ public class registro_usuario extends AppCompatActivity {
                 if(Terminos.equals(1)){
                     flagTerminos = "1";
                 }
-                fechaDeNacimiento = fechaNacimiento();
-                SubirUsuario("http://192.168.137.1:811/login/agregarUsuario.php");
+                fechaDeNacimiento = fechaNacimiento();SubirUsuario("http://192.168.137.1:811/login/agregarUsuario.php");
+
             }
         });
 
@@ -69,7 +69,7 @@ public class registro_usuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 genero = "Hombre";
-                Toast.makeText(getApplicationContext(), "Eres un atlético" + genero, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Eres un atlético " + genero, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -77,7 +77,7 @@ public class registro_usuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 genero = "Mujer";
-                Toast.makeText(getApplicationContext(), "Eres una" + genero + "muy fit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Eres una " + genero + " muy fit", Toast.LENGTH_SHORT).show();
             }
         });
 

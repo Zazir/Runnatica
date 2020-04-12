@@ -80,7 +80,7 @@ public class Login extends AppCompatActivity implements Response.Listener<JSONOb
     }
 
     private void iniciarSesion() {
-        String url = "http://192.168.137.1:811/login/sesion.php?user="+Usuariotxt.getText().toString()+"&pwd="+Contrasenatxt.getText().toString();
+        String url = "http://192.168.137.1:8080/login/sesion.php?user="+Usuariotxt.getText().toString()+"&pwd="+Contrasenatxt.getText().toString();
 
         jrq = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
         rq.add(jrq);
