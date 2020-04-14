@@ -1,8 +1,9 @@
 package com.runnatica.runnatica;
 
-import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,8 +21,16 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class registro_usuario extends AppCompatActivity {
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[0-9])" +         //Mínimo 1 digito
+                    "(?=.*[a-z])" +         //Mínimo 1 minúscula
+                    "(?=.*[A-Z])" +         //Mínimo 1 mayúscula
+                    ".{8,}" +               //Mínimo 8 caracteres
+                    "$");
 
     Button Hombre, Mujer, Foto, Registrarse;
     EditText Nombre, Correo, Contrasena, contrasena2, Ciudad, Estado, Pais, Dia, Mesedt, Ano;
@@ -30,6 +39,7 @@ public class registro_usuario extends AppCompatActivity {
     private String flagTerminos = "0";
     private String genero = "";
     private String fechaDeNacimiento = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +70,10 @@ public class registro_usuario extends AppCompatActivity {
                 if(Terminos.equals(1)){
                     flagTerminos = "1";
                 }
-                fechaDeNacimiento = fechaNacimiento();
-                SubirUsuario("http://192.168.137.1:811/login/agregarUsuario.php");
+                if (Validaciones())
+                SubirUsuario("http://192.168.137.1:811/WebServiceRunnatica/agregarUsuario.php");
+                else
+                    Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -69,7 +81,7 @@ public class registro_usuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 genero = "Hombre";
-                Toast.makeText(getApplicationContext(), "Eres un atlético" + genero, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Eres un atlético " + genero, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -77,7 +89,7 @@ public class registro_usuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 genero = "Mujer";
-                Toast.makeText(getApplicationContext(), "Eres una" + genero + "muy fit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Eres una" + genero + " muy fit", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -99,11 +111,12 @@ public class registro_usuario extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "OPERACION EXITOSA", Toast.LENGTH_SHORT).show();
+                alHome();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Hubo un error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Hubo un error" + error, Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -131,5 +144,36 @@ public class registro_usuario extends AppCompatActivity {
     private String fechaNacimiento() {
         String date;
         return date = Dia.getText().toString() + Mesedt.getText().toString() + Ano.getText().toString();
+    }
+
+    private Boolean Validaciones() {
+        Boolean siguiente = false;
+
+        if (Nombre.getText().toString().length() <= 0){
+            Nombre.setError("Debes poner tu nombre");
+        }else if (!Patterns.EMAIL_ADDRESS.matcher(Correo.getText().toString()).matches()){
+            Correo.setError("Ese no es un correo válido");
+        }else if (!PASSWORD_PATTERN.matcher(Contrasena.getText().toString()).matches()){
+            Contrasena.setError("La contraseña es debil");
+        }else if (genero.length() == 0){
+            Toast.makeText(this, "Selecciona tu sexo", Toast.LENGTH_SHORT).show();
+        }else if (fechaNacimiento().length() != 8){
+            Toast.makeText(this, "Tienes un error en tu fecha de nacimiento", Toast.LENGTH_SHORT).show();
+        }/*else if (flagTerminos == "0"){
+            Toast.makeText(this, "Tienes que aceptar los términos y condiciones para acceder", Toast.LENGTH_SHORT).show();
+        }*/else if (Ciudad.getText().toString().length() <= 0) {
+            Ciudad.setError("Agrega tu ciudad");
+        }else if (Estado.getText().toString().length() <= 0){
+            Estado.setError("Agrega tu estado");
+        }else if (Pais.getText().toString().length() <= 0){
+            Pais.setError("Agrega tu pais");
+        }else siguiente = true;
+
+        return siguiente;
+    }
+
+    private void alHome() {
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
     }
 }

@@ -164,10 +164,10 @@
                 android:id="@+id/btnRegistrarse"
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="870dp"
-                android:layout_marginEnd="72dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="74dp"
+                android:layout_marginTop="856dp"
                 android:background="@color/grisBoton"
                 android:text="Registrar"
                 android:textColor="#F0EEEE"
@@ -391,8 +391,6 @@
         </RelativeLayout>
 
     </ScrollView>
-
-
 
 
 </RelativeLayout>
