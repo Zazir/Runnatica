@@ -70,10 +70,8 @@ public class registro_usuario extends AppCompatActivity {
                 if(Terminos.equals(1)){
                     flagTerminos = "1";
                 }
-                if (Validaciones())
-                SubirUsuario("http://192.168.137.1:811/WebServiceRunnatica/agregarUsuario.php");
-                else
-                    Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
+                fechaDeNacimiento = fechaNacimiento();SubirUsuario("http://192.168.137.1:8080/WebServiceRunnatica/agregarUsuario.php");
+
             }
         });
 

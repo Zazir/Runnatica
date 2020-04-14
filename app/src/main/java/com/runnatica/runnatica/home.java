@@ -37,7 +37,7 @@ public class home extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        CargarCompetencias("http://192.168.137.1:811/WebServiceRunnatica/obtenerCompetencias.php");
+        CargarCompetencias("http://192.168.137.1:8080/WebServiceRunnatica/obtenerCompetencias.php");
     }
 
     private void CargarCompetencias(String URL) {
