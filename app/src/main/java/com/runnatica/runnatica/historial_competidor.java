@@ -2,6 +2,7 @@ package com.runnatica.runnatica;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.EditText;
 
 public class historial_competidor extends AppCompatActivity {
 
@@ -9,5 +10,8 @@ public class historial_competidor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historial_competidor);
+
+
+
     }
 }

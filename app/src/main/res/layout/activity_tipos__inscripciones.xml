@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Tipos_Inscripciones">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="59dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:text="Tipo de Inscripciones"
+            android:textColor="@android:color/background_light"
+            android:textSize="40dp"></TextView>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvNombreCategoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Categoria Juvenil"
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="25dp"
+                android:textColor="@android:color/background_dark"
+                ></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edad Min:"
+                android:layout_marginTop="105dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                android:textColor="@android:color/background_dark"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/tvEdadMinima"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="105dp"
+                android:text="10"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="105dp"
+                android:text="Años"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20dp"></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edad Min:"
+                android:layout_marginTop="135dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                android:textColor="@android:color/background_dark"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/tvEdadMaxima"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="135dp"
+                android:text="20"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20dp"></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="135dp"
+                android:text="Años"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20dp"></TextView>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="165dp"
+                android:layout_marginEnd="2dp"
+                android:background="@drawable/barra_negra"></ImageView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:layout_width="173dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="620dp"
+        android:background="@color/grisBoton"
+        android:layout_marginLeft="20dp"
+        android:text="Guardar"
+        android:textColor="@android:color/background_light"
+        android:textSize="20dp"
+        ></Button>
+    <Button
+        android:layout_width="173dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="620dp"
+        android:background="@color/grisBoton"
+        android:layout_marginLeft="220dp"
+        android:text="Agregar"
+        android:textColor="@android:color/background_light"
+        android:textSize="20dp"
+        ></Button>
+
+    <LinearLayout
+        android:background="@drawable/barra_verde"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="675dp"
+        android:layout_marginEnd="0dp"
+        ></LinearLayout>
+
+</RelativeLayout>
+
+
+
