@@ -2,10 +2,12 @@ package com.runnatica.runnatica;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class crear_competencia extends AppCompatActivity {
 
@@ -40,4 +42,6 @@ public class crear_competencia extends AppCompatActivity {
         NoReembolso = (RadioButton) findViewById(R.id.rbNoReembolso);
         Guardar = (Button) findViewById(R.id.btnGuardarCompetencia);
     }
+
+
 }

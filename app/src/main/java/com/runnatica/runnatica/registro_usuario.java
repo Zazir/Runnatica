@@ -70,7 +70,11 @@ public class registro_usuario extends AppCompatActivity {
                 if(Terminos.equals(1)){
                     flagTerminos = "1";
                 }
-                fechaDeNacimiento = fechaNacimiento();SubirUsuario("http://192.168.137.1:8080/WebServiceRunnatica/agregarUsuario.php");
+                if (Validaciones())
+                    SubirUsuario("http://192.168.137.1:8080/WebServiceRunnatica/agregarUsuario.php");
+                else
+                    Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -87,7 +91,7 @@ public class registro_usuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 genero = "Mujer";
-                Toast.makeText(getApplicationContext(), "Eres una" + genero + " muy fit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Eres una " + genero + " muy fit", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -104,16 +108,17 @@ public class registro_usuario extends AppCompatActivity {
     * Función diseñada para mandar
     * */
     private void SubirUsuario(String URL) {
+        //stringRequest es el objeto el cual almacena los datos.
         //Declaramos un StringRequest definiendo el método que utilizamos, en este caso es GET
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {//Aqui recibimos un objeto como parametro, es la respuesta a un listener
             @Override
-            public void onResponse(String response) {
+            public void onResponse(String response) {//Operacion exitosa a travez del web service
                 Toast.makeText(getApplicationContext(), "OPERACION EXITOSA", Toast.LENGTH_SHORT).show();
                 alHome();
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error) {// Cuando hay un problema en la conexion.
                 Toast.makeText(getApplicationContext(), "Hubo un error" + error, Toast.LENGTH_SHORT).show();
             }
         }) {
@@ -121,6 +126,7 @@ public class registro_usuario extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> parametros = new HashMap<String,String>();
                 //Mapeo de los valores del usuario para mandarse a través de Volley
+                //Mapeo el cual mandamos los valores del usuario al web service
                 parametros.put("NombreYApellido", Nombre.getText().toString());
                 parametros.put("Email", Correo.getText().toString());
                 parametros.put("Contrasena", Contrasena.getText().toString());
@@ -132,11 +138,11 @@ public class registro_usuario extends AppCompatActivity {
                 parametros.put("Estado", Estado.getText().toString());
                 parametros.put("Pais", Pais.getText().toString());
 
-                return parametros;
+                return parametros;//Aqui devuelve el objeto con los valores adentro.
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);// requestqueue hace la peticion
+        requestQueue.add(stringRequest);// Aqui hacemos la peticion para agregar al web service la informacion.
     }
 
     private String fechaNacimiento() {
@@ -149,9 +155,9 @@ public class registro_usuario extends AppCompatActivity {
 
         if (Nombre.getText().toString().length() <= 0){
             Nombre.setError("Debes poner tu nombre");
-        }else if (!Patterns.EMAIL_ADDRESS.matcher(Correo.getText().toString()).matches()){
+        }/*else if (!Patterns.EMAIL_ADDRESS.matcher(Correo.getText().toString()).matches()){
             Correo.setError("Ese no es un correo válido");
-        }else if (!PASSWORD_PATTERN.matcher(Contrasena.getText().toString()).matches()){
+        }*/else if (!PASSWORD_PATTERN.matcher(Contrasena.getText().toString()).matches()){
             Contrasena.setError("La contraseña es debil");
         }else if (genero.length() == 0){
             Toast.makeText(this, "Selecciona tu sexo", Toast.LENGTH_SHORT).show();
