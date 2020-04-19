@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -19,8 +18,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 public class registro_usuario extends AppCompatActivity {
@@ -38,7 +35,7 @@ public class registro_usuario extends AppCompatActivity {
     TextView Condiciones;
     private String flagTerminos = "0";
     private String genero = "";
-    private String fechaDeNacimiento = "";
+    //private String fechaDeNacimiento = "";
 
 
     @Override
@@ -71,7 +68,17 @@ public class registro_usuario extends AppCompatActivity {
                     flagTerminos = "1";
                 }
                 if (Validaciones())
-                SubirUsuario("http://192.168.137.1:811/WebServiceRunnatica/agregarUsuario.php");
+                SubirUsuario("http://192.168.137.1:811/WebServiceRunnatica/agregarUsuario.php?" +
+                        "NombreYApellido=" + Nombre.getText().toString() +
+                        "&Email=" + Correo.getText().toString() +
+                        "&Contrasena=" + Contrasena.getText().toString() +
+                        "&Sexo=" + genero +
+                        "&FechaNacimiento=" + fechaNacimiento() +
+                        "&Telefono=0" +
+                        "&Terminos=" + flagTerminos +
+                        "&Ciudad=" + Ciudad.getText().toString() +
+                        "&Estado=" + Estado.getText().toString() +
+                        "&Pais=" + Pais.getText().toString());
                 else
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
             }
@@ -118,32 +125,14 @@ public class registro_usuario extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), "Hubo un error" + error, Toast.LENGTH_SHORT).show();
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> parametros = new HashMap<String,String>();
-                //Mapeo de los valores del usuario para mandarse a través de Volley
-                parametros.put("NombreYApellido", Nombre.getText().toString());
-                parametros.put("Email", Correo.getText().toString());
-                parametros.put("Contrasena", Contrasena.getText().toString());
-                parametros.put("Sexo", genero);
-                parametros.put("FechaNacimiento", fechaDeNacimiento);
-                parametros.put("Telefono", "0");
-                parametros.put("Terminos", flagTerminos);
-                parametros.put("Ciudad", Ciudad.getText().toString());
-                parametros.put("Estado", Estado.getText().toString());
-                parametros.put("Pais", Pais.getText().toString());
-
-                return parametros;
-            }
-        };
+        });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
 
     private String fechaNacimiento() {
         String date;
-        return date = Dia.getText().toString() + Mesedt.getText().toString() + Ano.getText().toString();
+        return date = Dia.getText().toString()+ "-" + Mesedt.getText().toString() + Ano.getText().toString();
     }
 
     private Boolean Validaciones() {
