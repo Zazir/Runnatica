@@ -68,7 +68,7 @@ public class registro_usuario extends AppCompatActivity {
                     flagTerminos = "1";
                 }
                 if (Validaciones())
-                SubirUsuario("http://192.168.137.1:811/WebServiceRunnatica/agregarUsuario.php?" +
+                SubirUsuario("http://192.168.137.1:8080/WebServiceRunnatica/agregarUsuario.php?" +
                         "NombreYApellido=" + Nombre.getText().toString() +
                         "&Email=" + Correo.getText().toString() +
                         "&Contrasena=" + Contrasena.getText().toString() +
@@ -81,6 +81,8 @@ public class registro_usuario extends AppCompatActivity {
                         "&Pais=" + Pais.getText().toString());
                 else
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
@@ -96,7 +98,7 @@ public class registro_usuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 genero = "Mujer";
-                Toast.makeText(getApplicationContext(), "Eres una" + genero + " muy fit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Eres una " + genero + " muy fit", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -113,16 +115,17 @@ public class registro_usuario extends AppCompatActivity {
     * Función diseñada para mandar
     * */
     private void SubirUsuario(String URL) {
+        //stringRequest es el objeto el cual almacena los datos.
         //Declaramos un StringRequest definiendo el método que utilizamos, en este caso es GET
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {//Aqui recibimos un objeto como parametro, es la respuesta a un listener
             @Override
-            public void onResponse(String response) {
+            public void onResponse(String response) {//Operacion exitosa a travez del web service
                 Toast.makeText(getApplicationContext(), "OPERACION EXITOSA", Toast.LENGTH_SHORT).show();
                 alHome();
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error) {// Cuando hay un problema en la conexion.
                 Toast.makeText(getApplicationContext(), "Hubo un error" + error, Toast.LENGTH_SHORT).show();
             }
         });
@@ -140,9 +143,9 @@ public class registro_usuario extends AppCompatActivity {
 
         if (Nombre.getText().toString().length() <= 0){
             Nombre.setError("Debes poner tu nombre");
-        }else if (!Patterns.EMAIL_ADDRESS.matcher(Correo.getText().toString()).matches()){
+        }/*else if (!Patterns.EMAIL_ADDRESS.matcher(Correo.getText().toString()).matches()){
             Correo.setError("Ese no es un correo válido");
-        }else if (!PASSWORD_PATTERN.matcher(Contrasena.getText().toString()).matches()){
+        }*/else if (!PASSWORD_PATTERN.matcher(Contrasena.getText().toString()).matches()){
             Contrasena.setError("La contraseña es debil");
         }else if (genero.length() == 0){
             Toast.makeText(this, "Selecciona tu sexo", Toast.LENGTH_SHORT).show();
