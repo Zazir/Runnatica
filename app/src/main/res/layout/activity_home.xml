@@ -96,7 +96,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="3dp"
                 android:layout_marginTop="91dp"
-                android:text="Asiste a una de las mejores carreras en Mexico, el maraton de la CDMX se llevara a cabo el 6 de Mayo del 2020 en el angel de la independencia."
+                android:text="Descripción"
                 android:textColor="@android:color/background_dark"
                 android:textSize="15dp"></TextView>
 
@@ -108,7 +108,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="-1dp"
                 android:layout_marginTop="179dp"
-                android:text="$450"
+                android:text="Precio"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
 
@@ -120,7 +120,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="4dp"
                 android:layout_marginTop="62dp"
-                android:text="Maration de la CDMX"
+                android:text="Nombre Competencia"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"></TextView>
         </RelativeLayout>

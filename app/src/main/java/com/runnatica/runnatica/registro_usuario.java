@@ -146,14 +146,12 @@ public class registro_usuario extends AppCompatActivity {
             Contrasena.setError("La contraseña es debil");
         }else if (genero.length() == 0){
             Toast.makeText(this, "Selecciona tu sexo", Toast.LENGTH_SHORT).show();
-        }else if (fechaNacimiento().length() != 8){
-            if (Dia.getText().toString().length() != 2)
-                Dia.setError("Formato del día: DD");
-            else if (Mesedt.getText().toString().length() != 2)
-                Mesedt.setError("Formato del mes: MM");
-            else if (Ano.getText().toString().length() != 4)
-                Ano.setError("Formato del año: YYYY");
-            Toast.makeText(this, "Tienes un error en tu fecha de nacimiento", Toast.LENGTH_SHORT).show();
+        }else if (Dia.getText().toString().length() != 2){
+            Dia.setError("Formato del día: DD");
+        }else if (Mesedt.getText().toString().length() != 2){
+            Mesedt.setError("Formato del mes: MM");
+        }else if (Ano.getText().toString().length() != 4){
+            Ano.setError("Formato del año: YYYY");
         }/*else if (flagTerminos == "0"){
             Toast.makeText(this, "Tienes que aceptar los términos y condiciones para acceder", Toast.LENGTH_SHORT).show();
         }*/else if (Ciudad.getText().toString().length() <= 0) {
