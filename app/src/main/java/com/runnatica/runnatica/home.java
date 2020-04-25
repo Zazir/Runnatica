@@ -1,8 +1,12 @@
 package com.runnatica.runnatica;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +24,8 @@ public class home extends AppCompatActivity {
     RequestQueue requestQueue;
     TextView Competenciatxv, Descripciontxv, Preciotxv;
     ImageView imgCompetencia;
+    LinearLayout llConfig;
+    Button btnTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +37,33 @@ public class home extends AppCompatActivity {
         Descripciontxv = (TextView)findViewById(R.id.txvDescripcion);
         Preciotxv = (TextView)findViewById(R.id.txvPrecio);
         imgCompetencia = (ImageView)findViewById(R.id.imgvCompetencia);
+        llConfig = (LinearLayout)findViewById(R.id.ajustes);
+        btnTest = (Button)findViewById(R.id.btnPrueba);
 
+        llConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saltarACrearCompe();
+            }
+        });
+
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TesteoPagoPaypal();
+            }
+        });
+    }
+
+    private void TesteoPagoPaypal() {
+        Intent intent = new Intent(this, Donaciones.class);
+        startActivity(intent);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        CargarCompetencias("http://192.168.137.1:8080/WebServiceRunnatica/obtenerCompetencias.php");
+        CargarCompetencias("http://192.168.137.1:811/WebServiceRunnatica/obtenerCompetencias.php");
     }
 
     private void CargarCompetencias(String URL) {
@@ -64,5 +90,10 @@ public class home extends AppCompatActivity {
         });
         requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
+    }
+
+    private void saltarACrearCompe() {
+        Intent next = new Intent(this, crear_competencia.class);
+        startActivity(next);
     }
 }

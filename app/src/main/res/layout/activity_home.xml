@@ -19,6 +19,7 @@
             android:text="Nombre de Ciudad"
             android:textColor="@android:color/background_light"
             android:textSize="40dp"></TextView>
+
     </LinearLayout>
 
     <LinearLayout
@@ -47,7 +48,9 @@
         android:layout_marginLeft="120dp"
         android:layout_marginTop="675dp"
         android:background="@drawable/buscar"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal">
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/historial"
@@ -64,7 +67,9 @@
         android:layout_marginLeft="323dp"
         android:layout_marginTop="675dp"
         android:background="@drawable/ajustes"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal">
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -74,19 +79,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
             <ImageView
                 android:id="@+id/imgvCompetencia"
                 android:layout_width="163dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="60dp"
-                android:background="@drawable/cdmx_maraton"></ImageView>
+            android:background="@drawable/cdmx_maraton"></ImageView>
 
             <ImageView
+                android:id="@+id/linea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="213dp"
                 android:layout_marginEnd="2dp"
-                android:background="@drawable/barra_negra"></ImageView>
+            android:background="@drawable/barra_negra"></ImageView>
 
             <TextView
                 android:id="@+id/txvDescripcion"
@@ -98,7 +105,7 @@
                 android:layout_marginTop="91dp"
                 android:text="Descripción"
                 android:textColor="@android:color/background_dark"
-                android:textSize="15dp"></TextView>
+            android:textSize="15dp"></TextView>
 
             <TextView
                 android:id="@+id/txvPrecio"
@@ -110,7 +117,7 @@
                 android:layout_marginTop="179dp"
                 android:text="Precio"
                 android:textColor="@android:color/background_dark"
-                android:textSize="25dp"></TextView>
+            android:textSize="25dp"></TextView>
 
             <TextView
                 android:id="@+id/txvTitulo"
@@ -122,8 +129,19 @@
                 android:layout_marginTop="62dp"
                 android:text="Nombre Competencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="20dp"></TextView>
+            android:textSize="20dp"></TextView>
+
+            <Button
+                android:id="@+id/btnPrueba"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignEnd="@+id/linea"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="169dp"
+                android:nextFocusDown="@id/txvPrecio"
+                android:text="Testear Pago" />
         </RelativeLayout>
 
     </ScrollView>
+
 </RelativeLayout>

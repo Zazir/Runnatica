@@ -56,7 +56,7 @@ public class crear_competencia extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(Validaciones()){
-                    SubirCompetencia("http://192.168.137.1:8080/WebServiceRunnatica/agregarCompetencia.php?" +
+                    SubirCompetencia("http://192.168.137.1:811/WebServiceRunnatica/agregarCompetencia.php?" +
                     "Foto=X" +
                     "&Descripcion=" + Descripcion.getText().toString() +
                     "&Aval=X" +
@@ -113,17 +113,14 @@ public class crear_competencia extends AppCompatActivity {
             Nombre.setError("Debes de poner el nombre de la inscripcion");
         } else if (Precio.getText().toString().length() <= 0) {
             Precio.setError("Debes de poner el el precio de la inscripcion");
-        }else if(fechadeCompetencia().length() !=8 ){
-            if(Dia.getText().toString().length() !=2){
-                Dia.setError("Formato del Dia: DD");
-            }
-            else if(Mes.getText().toString().length() !=2){
-                Mes.setError("Formato del Mes: MM");
-            }
-            else if(Ano.getText().toString().length() !=2){
-                Ano.setError("Formato del Año: YYYY");
-                Toast.makeText(this, "Tienes un error en LA fecha de la Competencia", Toast.LENGTH_SHORT).show();
-            }
+        }else if(Dia.getText().toString().length() !=2){
+            Dia.setError("Formato del Dia: DD");
+        }
+        else if(Mes.getText().toString().length() !=2){
+            Mes.setError("Formato del Mes: MM");
+        }
+        else if(Ano.getText().toString().length() !=4){
+            Ano.setError("Formato del Año: YYYY");
         }
         else if(GradosUbicacion.getText().toString().length() <= 0) {
             GradosUbicacion.setError("Debes de poner los grados de Google Maps de la Competencia");
