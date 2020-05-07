@@ -2,7 +2,10 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,7 +28,8 @@ public class home extends AppCompatActivity {
     TextView Competenciatxv, Descripciontxv, Preciotxv;
     ImageView imgCompetencia;
     LinearLayout llConfig;
-    Button btnTest;
+    Button btnTest,botontemporal;
+    BottomNavigationView MenuUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +41,10 @@ public class home extends AppCompatActivity {
         Descripciontxv = (TextView)findViewById(R.id.txvDescripcion);
         Preciotxv = (TextView)findViewById(R.id.txvPrecio);
         imgCompetencia = (ImageView)findViewById(R.id.imgvCompetencia);
-        llConfig = (LinearLayout)findViewById(R.id.ajustes);
         btnTest = (Button)findViewById(R.id.btnPrueba);
+        botontemporal=(Button)findViewById(R.id.botondeprueva);
+
+        MenuUsuario=(BottomNavigationView)findViewById(R.id.MenuUsuario);
 
         llConfig.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +59,55 @@ public class home extends AppCompatActivity {
                 TesteoPagoPaypal();
             }
         });
+
+        botontemporal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), crear_competencia.class);
+                startActivity(i);
+            }
+        });
+
+        MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if(menuItem.getItemId() == R.id.menu_home){
+                    home();
+                }
+                if(menuItem.getItemId() == R.id.menu_busqueda){
+                    Busqueda();
+                }
+                if(menuItem.getItemId() == R.id.menu_historial){
+                    Historial();
+                }
+                if(menuItem.getItemId() == R.id.menu_ajustes){
+                    Ajustes();
+                }
+
+                return true;
+            }
+        });
     }
+
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
+    }
+    private void Busqueda(){
+        Intent next = new Intent(this, busqueda_competidor.class);
+        startActivity(next);
+    }
+    private void Historial(){
+        Intent next = new Intent(this, historial_competidor.class);
+        startActivity(next);
+    }
+    private void Ajustes(){
+        Intent next = new Intent(this, ajustes_competidor.class);
+        startActivity(next);
+    }
+
+
 
     private void TesteoPagoPaypal() {
         Intent intent = new Intent(this, Donaciones.class);

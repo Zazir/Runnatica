@@ -14,10 +14,11 @@
         <activity android:name=".Felicidades_Inscripcion" />
         <activity android:name=".Tipos_Inscripciones" />
         <activity android:name=".crear_inscripcion" />
-        <activity android:name=".inscripcion_gratis" />
         <activity android:name=".crear_competencia" />
         <activity android:name=".ajustes_competidor" />
-        <activity android:name=".historial_competidor" />
+        <activity android:name=".historial_competidor"
+
+            />
         <activity android:name=".busqueda_competidor" />
         <activity android:name=".carrera_vista1" />
         <activity android:name=".home" />

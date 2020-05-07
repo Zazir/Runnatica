@@ -146,56 +146,14 @@
         ></Button>
 
 
-
-
-
-
-
-
-
-    <LinearLayout
+    <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
-        android:layout_height="57dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="675dp"
-        android:layout_marginEnd="0dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="658dp"
         android:background="@drawable/barra_verde"
-        ></LinearLayout>
+        app:itemTextColor="@android:color/background_dark"
+        app:menu="@menu/main_menu">
 
-    <LinearLayout
-        android:id="@+id/home"
-        android:layout_width="71dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="675dp"
-        android:background="@drawable/casa"
-        android:orientation="horizontal"></LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/buscar"
-        android:layout_width="71dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="675dp"
-        android:background="@drawable/buscar"
-        android:orientation="horizontal"></LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/historial"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="220dp"
-        android:layout_marginTop="675dp"
-        android:background="@drawable/historial"
-        android:orientation="horizontal"></LinearLayout>
-    <LinearLayout
-        android:id="@+id/ajustes"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="323dp"
-        android:layout_marginTop="675dp"
-        android:background="@drawable/ajustes"
-        android:orientation="horizontal"></LinearLayout>
+    </android.support.design.widget.BottomNavigationView>
 
 </RelativeLayout>

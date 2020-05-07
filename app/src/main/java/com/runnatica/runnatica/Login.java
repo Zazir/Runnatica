@@ -21,7 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Login extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
-    Button Entrar, Registro;
+    Button Entrar, Registro, Prueba;
     EditText Usuariotxt, Contrasenatxt;
     RequestQueue rq;
     JsonRequest jrq;
@@ -36,6 +36,7 @@ public class Login extends AppCompatActivity implements Response.Listener<JSONOb
         Usuariotxt= (EditText) findViewById(R.id.etUsuario);
         Contrasenatxt= (EditText) findViewById(R.id.etContraseña);
         rq = Volley.newRequestQueue(this);
+        Prueba = (Button)findViewById(R.id.btnPrueba);
 
         Entrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +52,14 @@ public class Login extends AppCompatActivity implements Response.Listener<JSONOb
                 startActivity(i);
             }
         });
+
+        Prueba.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               entrar();
+            }
+        });
+
     }
 
     @Override
@@ -80,9 +89,14 @@ public class Login extends AppCompatActivity implements Response.Listener<JSONOb
     }
 
     private void iniciarSesion() {
-        String url = "http://192.168.137.1:811/WebServiceRunnatica/sesion.php?user="+Usuariotxt.getText().toString()+"&pwd="+Contrasenatxt.getText().toString();
+        String url = "http://192.168.137.1:8080/WebServiceRunnatica/sesion.php?user="+Usuariotxt.getText().toString()+"&pwd="+Contrasenatxt.getText().toString();
 
         jrq = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
         rq.add(jrq);
+    }
+
+    private void entrar(){
+        Intent next = new Intent(getApplicationContext(), home.class);
+        startActivity(next);
     }
 }

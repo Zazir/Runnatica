@@ -20,50 +20,6 @@
             android:textColor="@android:color/background_light"
             android:textSize="40dp"></TextView>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="57dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="675dp"
-        android:layout_marginEnd="0dp"
-        android:background="@drawable/barra_verde"
-        ></LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/home"
-        android:layout_width="71dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="675dp"
-        android:background="@drawable/casa"
-        android:orientation="horizontal"></LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/buscar"
-        android:layout_width="71dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="675dp"
-        android:background="@drawable/buscar"
-        android:orientation="horizontal"></LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/historial"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="220dp"
-        android:layout_marginTop="675dp"
-        android:background="@drawable/historial"
-        android:orientation="horizontal"></LinearLayout>
-    <LinearLayout
-        android:id="@+id/ajustes"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="323dp"
-        android:layout_marginTop="675dp"
-        android:background="@drawable/ajustes"
-        android:orientation="horizontal"></LinearLayout>
 
     <ListView
         android:id="@+id/lvAjustesCompetidor"
@@ -74,4 +30,14 @@
         android:layout_marginTop="64dp"
         android:layout_marginEnd="0dp"></ListView>
 
+
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginTop="658dp"
+        android:background="@drawable/barra_verde"
+        app:itemTextColor="@android:color/background_dark"
+        app:menu="@menu/main_menu">
+
+    </android.support.design.widget.BottomNavigationView>
 </RelativeLayout>
