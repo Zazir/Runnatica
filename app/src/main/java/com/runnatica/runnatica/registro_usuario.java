@@ -67,7 +67,7 @@ public class registro_usuario extends AppCompatActivity {
                     flagTerminos = "1";
                 }
                 if (Validaciones())
-                SubirUsuario("http://192.168.137.1:811/WebServiceRunnatica/agregarUsuario.php?" +
+                SubirUsuario("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarUsuario.php?" +
                         "NombreYApellido=" + Nombre.getText().toString() +
                         "&Email=" + Correo.getText().toString() +
                         "&Contrasena=" + Contrasena.getText().toString() +
