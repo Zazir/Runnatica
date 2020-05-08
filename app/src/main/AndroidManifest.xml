@@ -16,7 +16,9 @@
         <activity android:name=".crear_inscripcion" />
         <activity android:name=".crear_competencia" />
         <activity android:name=".ajustes_competidor" />
-        <activity android:name=".historial_competidor" />
+        <activity android:name=".historial_competidor"
+
+            />
         <activity android:name=".busqueda_competidor" />
         <activity android:name=".carrera_vista1" />
         <activity android:name=".home" />

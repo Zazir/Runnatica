@@ -1,7 +1,11 @@
 package com.runnatica.runnatica;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +17,7 @@ import java.util.ArrayList;
 public class ajustes_competidor extends AppCompatActivity {
 
     ListView listview;
+    BottomNavigationView MenuUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +25,7 @@ public class ajustes_competidor extends AppCompatActivity {
         setContentView(R.layout.activity_ajustes_competidor);
 
         listview = (ListView)findViewById(R.id.lvAjustesCompetidor);
+        MenuUsuario=(BottomNavigationView)findViewById(R.id.MenuUsuario);
 
         final ArrayList<String> arrayList=new ArrayList<>();
         arrayList.add("Editar Perfil");
@@ -38,5 +44,43 @@ public class ajustes_competidor extends AppCompatActivity {
                 Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
             }
         });
+        MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if(menuItem.getItemId() == R.id.menu_home){
+                    home();
+                }
+                if(menuItem.getItemId() == R.id.menu_busqueda){
+                    Busqueda();
+                }
+                if(menuItem.getItemId() == R.id.menu_historial){
+                    Historial();
+                }
+                if(menuItem.getItemId() == R.id.menu_ajustes){
+                    Ajustes();
+                }
+
+                return true;
+            }
+        });
+    }
+
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
+    }
+    private void Busqueda(){
+        Intent next = new Intent(this, busqueda_competidor.class);
+        startActivity(next);
+    }
+    private void Historial(){
+        Intent next = new Intent(this, historial_competidor.class);
+        startActivity(next);
+    }
+    private void Ajustes(){
+        Intent next = new Intent(this, ajustes_competidor.class);
+        startActivity(next);
     }
 }
+
