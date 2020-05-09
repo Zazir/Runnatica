@@ -21,7 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Login extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
-    Button Entrar, Registro, Prueba;
+    Button Entrar, Registro;
     EditText Usuariotxt, Contrasenatxt;
     RequestQueue rq;
     JsonRequest jrq;
@@ -36,7 +36,6 @@ public class Login extends AppCompatActivity implements Response.Listener<JSONOb
         Usuariotxt= (EditText) findViewById(R.id.etUsuario);
         Contrasenatxt= (EditText) findViewById(R.id.etContraseña);
         rq = Volley.newRequestQueue(this);
-        Prueba = (Button)findViewById(R.id.btnPrueba);
 
         Entrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,13 +52,6 @@ public class Login extends AppCompatActivity implements Response.Listener<JSONOb
             }
         });
 
-        Prueba.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               entrar();
-            }
-        });
-
     }
 
     @Override
@@ -68,7 +60,7 @@ public class Login extends AppCompatActivity implements Response.Listener<JSONOb
         Toast.makeText(getApplicationContext(), "Bienvenido "+Usuariotxt.getText().toString(), Toast.LENGTH_SHORT).show();
 
         JSONArray jsonarray = response.optJSONArray("datos");
-        JSONObject jsonobject = null;
+        JSONObject jsonobject;
 
         try {
             jsonobject = jsonarray.getJSONObject(0);
@@ -93,10 +85,5 @@ public class Login extends AppCompatActivity implements Response.Listener<JSONOb
 
         jrq = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
         rq.add(jrq);
-    }
-
-    private void entrar(){
-        Intent next = new Intent(getApplicationContext(), home.class);
-        startActivity(next);
     }
 }

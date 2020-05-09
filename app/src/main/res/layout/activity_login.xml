@@ -78,18 +78,6 @@
         android:text="Registrase"
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btnPrueba"
-        android:layout_width="294dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="56dp"
-        android:layout_marginTop="500dp"
-        android:background="@color/grisBoton"
-        android:text="Entrar"
-        android:textSize="20sp" />
-
     <EditText
         android:id="@+id/etUsuario"
         android:layout_width="323dp"

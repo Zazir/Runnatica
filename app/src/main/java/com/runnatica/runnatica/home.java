@@ -2,7 +2,6 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,12 +44,12 @@ public class home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         //Enlaces de elementos por id's
-        recyclerView = (RecyclerView)findViewById(R.id.rcvCompetencia);
+        recyclerView = (RecyclerView) findViewById(R.id.rcvCompetencia);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        llConfig = (LinearLayout)findViewById(R.id.ajustes);
-        btnTest = (Button)findViewById(R.id.btnPrueba);
-        botontemporal=(Button)findViewById(R.id.botondeprueva);
+        llConfig = (LinearLayout) findViewById(R.id.ajustes);
+        btnTest = (Button) findViewById(R.id.btnPrueba);
+        botontemporal = (Button) findViewById(R.id.botondeprueva);
 
         //Inicializar arreglo de competencias
         competenciasList = new ArrayList<>();
@@ -78,8 +77,8 @@ public class home extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+    }
+        /*MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -116,7 +115,7 @@ public class home extends AppCompatActivity {
     private void Ajustes(){
         Intent next = new Intent(this, ajustes_competidor.class);
         startActivity(next);
-    }
+    }*/
 
 
 
@@ -124,12 +123,6 @@ public class home extends AppCompatActivity {
         Intent intent = new Intent(this, Donaciones.class);
         startActivity(intent);
     }
-
-    /*@Override
-    protected void onStart() {
-        super.onStart();
-        CargarCompetencias("http://192.168.137.1:811/WebServiceRunnatica/obtenerCompetencias.php");
-    }*/
 
     private void CargarCompetencias(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
@@ -171,29 +164,6 @@ public class home extends AppCompatActivity {
         });
 
         Volley.newRequestQueue(this).add(stringRequest);
-        /*JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                JSONObject jsonObject = null;
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        jsonObject = response.getJSONObject(i);
-                        Competenciatxv.setText(jsonObject.getString("nombre"));
-                        Descripciontxv.setText(jsonObject.getString("descripcion"));
-                        Preciotxv.setText(jsonObject.getString("precio"));
-                    } catch (JSONException e) {
-                        Toast.makeText(getApplicationContext(), "Hubo un error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Error de conección con el servidor", Toast.LENGTH_SHORT).show();
-            }
-        });
-        requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonArrayRequest);*/
     }
 
     private void saltarACrearCompe() {
