@@ -25,7 +25,7 @@ public class ajustes_competidor extends AppCompatActivity {
         setContentView(R.layout.activity_ajustes_competidor);
 
         listview = (ListView)findViewById(R.id.lvAjustesCompetidor);
-        MenuUsuario=(BottomNavigationView)findViewById(R.id.MenuUsuario);
+        MenuUsuario=(BottomNavigationView)findViewById(R.id.bottomNavigation);
 
         final ArrayList<String> arrayList=new ArrayList<>();
         arrayList.add("Editar Perfil");

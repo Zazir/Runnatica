@@ -32,9 +32,10 @@
 
 
     <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:layout_marginTop="658dp"
+        android:layout_marginTop="570dp"
         android:background="@drawable/barra_verde"
         app:itemTextColor="@android:color/background_dark"
         app:menu="@menu/main_menu">

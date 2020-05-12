@@ -17,7 +17,7 @@ public class historial_competidor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historial_competidor);
 
-        MenuUsuario=(BottomNavigationView)findViewById(R.id.MenuUsuario);
+        MenuUsuario=(BottomNavigationView)findViewById(R.id.bottomNavigation);
 
         MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
