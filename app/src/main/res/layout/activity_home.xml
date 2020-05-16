@@ -63,11 +63,17 @@
     </ScrollView>
 
 
-
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="78dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="83dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="570dp"
         android:background="@drawable/barra_verde"
         app:itemIconTint="@android:color/background_light"

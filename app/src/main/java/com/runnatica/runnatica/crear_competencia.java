@@ -56,7 +56,7 @@ public class crear_competencia extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(Validaciones()){
-                    SubirCompetencia("http://192.168.137.1:811/WebServiceRunnatica/agregarCompetencia.php?" +
+                    SubirCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?" +
                     "Foto=X" +
                     "&Descripcion=" + Descripcion.getText().toString() +
                     "&Aval=X" +

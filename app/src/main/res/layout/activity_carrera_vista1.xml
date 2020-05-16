@@ -20,15 +20,6 @@
         android:layout_marginEnd="4dp"
         android:background="@drawable/barra_verde">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Inscribirse"
-            android:textColor="@android:color/background_light"
-            android:textSize="35dp"
-            android:layout_marginLeft="120dp"
-
-            ></TextView>
     </LinearLayout>
 
 
@@ -67,6 +58,7 @@
                 android:text="Por:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="30dp"></TextView>
+
             <TextView
                 android:id="@+id/tvNombreOrganizador"
                 android:layout_width="wrap_content"
@@ -91,18 +83,21 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="470dp"
                 android:background="@drawable/reloj"></ImageView>
+
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="530dp"
                 android:background="@drawable/lugar"></ImageView>
+
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="590dp"
                 android:background="@drawable/boleto"></ImageView>
+
             <TextView
                 android:id="@+id/tvFechaCompetencia"
                 android:layout_width="match_parent"
@@ -113,6 +108,7 @@
                 android:textSize="25dp"
                 android:textColor="@android:color/background_dark"
                 ></TextView>
+
             <TextView
                 android:id="@+id/tvHoraCompetencia"
                 android:layout_width="match_parent"
@@ -123,6 +119,7 @@
                 android:textSize="25dp"
                 android:textColor="@android:color/background_dark"
                 ></TextView>
+
             <TextView
                 android:id="@+id/tvLugarCompetencia"
                 android:layout_width="match_parent"
@@ -133,6 +130,7 @@
                 android:textSize="25dp"
                 android:textColor="@android:color/background_dark"
                 ></TextView>
+
             <TextView
                 android:id="@+id/tvPrecioCompetencia"
                 android:layout_width="match_parent"
@@ -143,6 +141,7 @@
                 android:textSize="25dp"
                 android:textColor="@android:color/background_dark"
                 ></TextView>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -152,6 +151,7 @@
                 android:textSize="35dp"
                 android:textColor="@android:color/background_dark"
                 ></TextView>
+
             <TextView
                 android:id="@+id/tvDescripcion"
                 android:layout_width="match_parent"
@@ -162,6 +162,7 @@
                 android:textSize="15dp"
                 android:textColor="@android:color/background_dark"
                 ></TextView>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -229,6 +230,18 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="1350dp"></ImageView>
 
+            <Button
+                android:id="@+id/btnIncribirse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Inscribirse"
+                android:textColor="@android:color/background_light"
+                android:textSize="35dp"
+                android:layout_marginLeft="120dp"
+                android:background="@null"
+                android:layout_gravity="center"
+                android:layout_alignEnd="@id/ivResultados"
+                ></Button>
         </RelativeLayout>
     </ScrollView>
 

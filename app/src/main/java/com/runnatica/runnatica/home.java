@@ -16,7 +16,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -43,16 +41,15 @@ import java.util.List;
 import java.util.Locale;
 
 public class home extends AppCompatActivity {
-    RequestQueue requestQueue;
     LinearLayout llConfig;
-    Button btnTest, botontemporal, botongps;
+    Button btnTest, botontemporal;
     BottomNavigationView MenuUsuario;
     TextView NombreCiudad;
-
 
     private List<Competencias> competenciasList;
     private RecyclerView recyclerView;
     private MyAdapter adapter;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +81,7 @@ public class home extends AppCompatActivity {
                 Toast.makeText(home.this, "No funciona", Toast.LENGTH_SHORT).show();
             }
         }
+
 
 
         //Inicializar arreglo de competencias
@@ -205,7 +203,6 @@ public class home extends AppCompatActivity {
         startActivity(next);
     }
 
-
     private void TesteoPagoPaypal() {
         Intent intent = new Intent(this, Donaciones.class);
         startActivity(intent);
@@ -227,19 +224,23 @@ public class home extends AppCompatActivity {
 
                                 //Añadir valores a los correspondientes textview
                                 competenciasList.add(new Competencias(
-                                        competencia.getInt("id_competencia"),
+                                        id = competencia.getInt("id_competencia"),
                                         competencia.getString("nom_comp"),
                                         competencia.getString("descripcion"),
-                                        competencia.getInt("precio"),
+                                        competencia.getString("precio"),
                                         competencia.getString("foto")
                                 ));
                             }
 
                             //Creamos instancia del adapter
-                            adapter = new MyAdapter(home.this, competenciasList);
+                            adapter = new MyAdapter(home.this, competenciasList, new MyAdapter.OnItemClickListener() {
+                                @Override
+                                public void OnItemClick(int position) {
+                                    launchCompetenciaView();
+                                }
+                            });
                             recyclerView.setAdapter(adapter);
                         } catch (JSONException e) {
-                            Log.i("Adaptador", "Se va a la verga");
                             e.printStackTrace();
                         }
                     }
@@ -251,6 +252,12 @@ public class home extends AppCompatActivity {
         });
 
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void launchCompetenciaView() {
+        Intent intent = new Intent(this, carrera_vista1.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
     }
 
     private void saltarACrearCompe() {

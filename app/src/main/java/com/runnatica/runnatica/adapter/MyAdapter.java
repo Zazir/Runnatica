@@ -1,9 +1,8 @@
 package com.runnatica.runnatica.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,23 +17,29 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolderCompeten
 
     private Context mCtx;
     private List<Competencias> competenciasList;
+    private OnItemClickListener listener;
 
-    public MyAdapter(Context mCtx, List<Competencias> competenciasList) {
-        Log.i("Adaptador", "Inicializa el adaptador, se crea constructor");
-        this.mCtx = mCtx;
-        this.competenciasList = competenciasList;
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
     }
 
+    public MyAdapter(Context mCtx, List<Competencias> competenciasList, OnItemClickListener listener) {
+        this.mCtx = mCtx;
+        this.competenciasList = competenciasList;
+        this.listener = listener;
+    }
+
+    @NonNull
     @Override
-    public ViewHolderCompetencia onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.lista_layout, null);
+    public MyAdapter.ViewHolderCompetencia onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = View.inflate(parent.getContext() ,R.layout.lista_layout, null);
         return new ViewHolderCompetencia(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolderCompetencia holder, int position) {
-        Competencias competencia = competenciasList.get(position);
+    public void onBindViewHolder(@NonNull MyAdapter.ViewHolderCompetencia holder, int position) {
+        holder.asignarDatos(competenciasList.get(position), position, listener);
+        /*Competencias competencia = competenciasList.get(position);
 
         //Cargar imagen
         //Glide.with(mCtx).load(competencia.getImageCompetencia()).into(holder.imgCompetencia);
@@ -42,7 +47,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolderCompeten
         //holder.txtid.setText(competencia.getId());
         holder.txtNombreCompetencias.setText(competencia.getNombreCompetencia());
         holder.txtDescripcionCompetencia.setText(competencia.getDescripcionCompetencia());
-        holder.txtPrecioCompetencia.setText(String.valueOf(competencia.getPrecioCompetencia()));
+        holder.txtPrecioCompetencia.setText(String.valueOf(competencia.getPrecioCompetencia()));*/
     }
 
     @Override
@@ -61,6 +66,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolderCompeten
             txtDescripcionCompetencia = (TextView) itemView.findViewById(R.id.tvDescripcionCompe);
             txtPrecioCompetencia = (TextView) itemView.findViewById(R.id.tvPrecioCompe);
             imgCompetencia = (ImageView) itemView.findViewById(R.id.imgvCompe);
+        }
+
+        public void asignarDatos(Competencias pojoCompetencia, final int posicion, final OnItemClickListener listener) {
+            txtNombreCompetencias.setText(pojoCompetencia.getNombreCompetencia());
+            txtDescripcionCompetencia.setText(pojoCompetencia.getDescripcionCompetencia());
+            txtPrecioCompetencia.setText(pojoCompetencia.getPrecioCompetencia());
+            if (!pojoCompetencia.getImageCompetencia().equals("null")){
+                //imgCompetencia.setBackground(null);
+                //Glide.with(mCtx).load(pojoCompetencia.getImageCompetencia()).into(imgCompetencia);
+            }
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.OnItemClick(posicion);
+                }
+            });
         }
     }
 }
