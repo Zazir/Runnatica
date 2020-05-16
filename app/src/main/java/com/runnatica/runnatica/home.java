@@ -42,7 +42,7 @@ import java.util.Locale;
 
 public class home extends AppCompatActivity {
     LinearLayout llConfig;
-    Button btnTest, botontemporal;
+    Button botontemporal;
     BottomNavigationView MenuUsuario;
     TextView NombreCiudad;
 
@@ -61,7 +61,6 @@ public class home extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         llConfig = (LinearLayout) findViewById(R.id.ajustes);
-        btnTest = (Button) findViewById(R.id.btnPrueba);
         botontemporal = (Button) findViewById(R.id.botondeprueva);
         //botongps = (Button) findViewById(R.id.botongps);
         NombreCiudad = (TextView) findViewById(R.id.tvNombreCiudad);
@@ -93,13 +92,6 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saltarACrearCompe();
-            }
-        });
-
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TesteoPagoPaypal();
             }
         });
 
@@ -201,11 +193,6 @@ public class home extends AppCompatActivity {
     private void Ajustes(){
         Intent next = new Intent(this, ajustes_competidor.class);
         startActivity(next);
-    }
-
-    private void TesteoPagoPaypal() {
-        Intent intent = new Intent(this, Donaciones.class);
-        startActivity(intent);
     }
 
     private void CargarCompetencias(String URL) {
