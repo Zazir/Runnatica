@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
+import com.runnatica.runnatica.poho.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,7 +57,7 @@ public class Login extends AppCompatActivity implements Response.Listener<JSONOb
 
     @Override
     public void onResponse(JSONObject response) {
-        UserModel user = new UserModel();
+        Usuario user = new Usuario();
         Toast.makeText(getApplicationContext(), "Bienvenido "+Usuariotxt.getText().toString(), Toast.LENGTH_SHORT).show();
 
         JSONArray jsonarray = response.optJSONArray("datos");
@@ -65,7 +66,7 @@ public class Login extends AppCompatActivity implements Response.Listener<JSONOb
         try {
             jsonobject = jsonarray.getJSONObject(0);
             user.setCorreo(jsonobject.optString("user"));
-            user.setContrasena(jsonobject.optString("pwd"));
+            //user.setContrasena(jsonobject.optString("pwd"));
             user.setNombre(jsonobject.optString("nombre"));
         } catch (JSONException e) {
             e.printStackTrace();
