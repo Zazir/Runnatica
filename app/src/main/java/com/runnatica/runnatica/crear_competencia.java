@@ -60,7 +60,7 @@ public class crear_competencia extends AppCompatActivity {
                     "Foto=X" +
                     "&Descripcion=" + Descripcion.getText().toString() +
                     "&Aval=X" +
-                    "Coordenadas=" + GradosUbicacion.getText().toString() +
+                    "&Coordenadas=" + GradosUbicacion.getText().toString() +
                     "&Nombre_competencia=" + Nombre.getText().toString() +
                     "&Pais=X" +
                     "&Colonia=" + Colonia.getText().toString() +
