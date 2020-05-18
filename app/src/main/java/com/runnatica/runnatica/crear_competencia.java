@@ -36,7 +36,7 @@ public class crear_competencia extends AppCompatActivity {
         Informacion = (Button)findViewById(R.id.btnInformacionPrecio);
         Dia = (EditText)findViewById(R.id.etDiaCompetencia);
         Mes = (EditText)findViewById(R.id.etMesCompetencia);
-        Ano = (EditText)findViewById(R.id.etAno);
+        Ano = (EditText)findViewById(R.id.ttAnoCompetencia);
         Hora = (EditText)findViewById(R.id.etHoraCompetencia);
         Imagen = (Button) findViewById(R.id.btnImagenCompetencia);
         GradosUbicacion = (EditText)findViewById(R.id.etGradosUbicacion);
@@ -56,17 +56,18 @@ public class crear_competencia extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(Validaciones()){
+                    String fecha = fechadeCompetencia();
                     SubirCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?" +
                     "Foto=X" +
-                    "&Descripcion=" + Descripcion.getText().toString() +
+                    "&Descripcion=" + Descripcion.getText().toString().replaceAll(" ", "%20")+
                     "&Aval=X" +
                     "&Coordenadas=" + GradosUbicacion.getText().toString() +
-                    "&Nombre_competencia=" + Nombre.getText().toString() +
+                    "&Nombre_competencia=" + Nombre.getText().toString().replaceAll(" ", "%20") +
                     "&Pais=X" +
-                    "&Colonia=" + Colonia.getText().toString() +
-                    "&Calle=" + Calle.getText().toString() +
-                    "&Ciudad=" + Ciudad.getText().toString() +
-                    "&Fecha="+ fechadeCompetencia()+
+                    "&Colonia=" + Colonia.getText().toString().replaceAll(" ", "%20") +
+                    "&Calle=" + Calle.getText().toString().replaceAll(" ", "%20") +
+                    "&Ciudad=" + Ciudad.getText().toString().replaceAll(" ", "%20") +
+                    "&Fecha="+ fecha+
                     "&Resultados=X" +
                     "&Hora=" + Hora.getText().toString() +
                     "&Estado=X" +
@@ -101,9 +102,8 @@ public class crear_competencia extends AppCompatActivity {
 
 
     private String fechadeCompetencia(){
-        String date;
-
-        return date = Dia.getText().toString() + Mes.getText().toString() + Ano.getText().toString();
+        String date = Dia.getText().toString() + Mes.getText().toString() + Ano.getText().toString();
+        return date;
     }
 
     private Boolean Validaciones() {

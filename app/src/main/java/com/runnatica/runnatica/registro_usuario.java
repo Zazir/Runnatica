@@ -68,16 +68,16 @@ public class registro_usuario extends AppCompatActivity {
                 }
                 if (Validaciones())
                 SubirUsuario("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarUsuario.php?" +
-                        "NombreYApellido=" + Nombre.getText().toString() +
+                        "NombreYApellido=" + Nombre.getText().toString().replaceAll(" ", "%20") +
                         "&Email=" + Correo.getText().toString() +
                         "&Contrasena=" + Contrasena.getText().toString() +
                         "&Sexo=" + genero +
                         "&FechaNacimiento=" + fechaNacimiento() +
                         "&Telefono=0" +
                         "&Terminos=" + flagTerminos +
-                        "&Ciudad=" + Ciudad.getText().toString() +
-                        "&Estado=" + Estado.getText().toString() +
-                        "&Pais=" + Pais.getText().toString());
+                        "&Ciudad=" + Ciudad.getText().toString().replaceAll(" ", "%20") +
+                        "&Estado=" + Estado.getText().toString().replaceAll(" ", "%20") +
+                        "&Pais=" + Pais.getText().toString().replaceAll(" ", "%20"));
                 else
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
 
