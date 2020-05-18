@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".crear_inscripcion">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="59dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:text="Tipo de Inscripciones"
+            android:textColor="@android:color/background_light"
+            android:textSize="40dp"></TextView>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="80dp"
+        android:text="Nombre de la Inscripción"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30dp"></TextView>
+
+    <EditText
+        android:id="@+id/etNombreInscripcion"
+        android:layout_width="381dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@android:color/background_dark"
+        >
+    </EditText>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="170dp"
+        android:text="Cantidad"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30dp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="210dp"
+        android:text="Normal:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="210dp"
+        android:text="Foraneos:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+
+    <EditText
+        android:id="@+id/etCantidadNormal"
+        android:layout_width="124dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="250dp"
+        android:textColor="@android:color/background_dark"></EditText>
+
+    <EditText
+        android:id="@+id/etCantidadForaneos"
+        android:layout_width="124dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="250dp"
+        android:textColor="@android:color/background_dark"></EditText>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="300dp"
+        android:text="Restricción de Edad"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30dp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="340dp"
+        android:text="Desde:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="400dp"
+        android:text="Hasta:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+
+    <EditText
+        android:id="@+id/etDesdeAnos"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="105dp"
+        android:layout_marginTop="340dp"
+        android:textColor="@android:color/background_dark"></EditText>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginLeft="205dp"
+        android:layout_marginTop="340dp"
+        android:text="Años:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+
+    <EditText
+        android:id="@+id/etHastaAnos"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="105dp"
+        android:layout_marginTop="390dp"
+        android:textColor="@android:color/background_dark"></EditText>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginLeft="205dp"
+        android:layout_marginTop="400dp"
+        android:text="Años:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+
+    <Button
+        android:id="@+id/btnCrearInscripcion"
+        android:layout_width="285dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="620dp"
+        android:background="@color/grisBoton"
+        android:text="Crear"
+        android:textColor="@android:color/background_light"
+        android:textSize="20dp"
+        ></Button>
+
+
+
+
+    <LinearLayout
+        android:background="@drawable/barra_verde"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="675dp"
+        android:layout_marginEnd="0dp"
+        >
+
+    </LinearLayout>
+
+</RelativeLayout>

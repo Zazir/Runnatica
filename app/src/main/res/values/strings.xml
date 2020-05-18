@@ -3,4 +3,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="categorias">
+        <item>General</item>
+        <item>Precio/Inscripción</item>
+        <item>Ruta/Pista</item>
+        <item>Organizadores</item>
+        <item>Ubicación</item>
+        <item>Fechas/Horarios</item>
+        <item>Entrega de Kits</item>
+    </string-array>
 </resources>

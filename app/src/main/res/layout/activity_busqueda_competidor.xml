@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".busqueda_competidor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="5dp"
+            android:text="Buscar/Filtrar"
+            android:textColor="@android:color/background_light"
+            android:textSize="40dp"></TextView>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="281dp"
+        android:text="Fecha:"
+        android:textSize="40dp"
+        android:textColor="@android:color/background_dark"
+        >
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="110dp"
+        android:text="Día"
+        android:textColor="@android:color/background_dark"
+        android:textSize="40dp"></TextView>
+
+    <Spinner
+        android:layout_width="103dp"
+        android:layout_height="51dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="170dp">
+    </Spinner>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="110dp"
+        android:text="Mes"
+        android:textColor="@android:color/background_dark"
+        android:textSize="40dp"></TextView>
+    <Spinner
+        android:layout_width="103dp"
+        android:layout_height="51dp"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="170dp">
+    </Spinner>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="110dp"
+        android:text="Año"
+        android:textColor="@android:color/background_dark"
+        android:textSize="40dp"></TextView>
+
+    <Spinner
+        android:layout_width="131dp"
+        android:layout_height="49dp"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="170dp"></Spinner>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="240dp"
+        android:text="Lugar:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="45dp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="300dp"
+        android:text="Pais"
+        android:textColor="@android:color/background_dark"
+        android:textSize="40dp"></TextView>
+
+    <Spinner
+        android:layout_width="169dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="350dp"></Spinner>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="245dp"
+        android:layout_marginTop="300dp"
+        android:text="Estado"
+        android:textColor="@android:color/background_dark"
+        android:textSize="40dp"></TextView>
+
+    <Spinner
+        android:layout_width="168dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="350dp"></Spinner>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="420dp"
+        android:text="Kilometros"
+        android:textColor="@android:color/background_dark"
+        android:textSize="40dp"></TextView>
+
+    <EditText
+        android:id="@+id/BuscarKilometros"
+        android:layout_width="201dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="480dp"
+        ></EditText>
+
+    <Button
+        android:layout_width="264dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="580dp"
+        android:text="Buscar"
+        android:textColor="@android:color/background_light"
+        android:textSize="20dp"
+        android:background="@color/verdeRun"
+        ></Button>
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginTop="570dp"
+        android:background="@drawable/barra_verde"
+        app:itemTextColor="@android:color/background_dark"
+        app:menu="@menu/main_menu">
+
+    </android.support.design.widget.BottomNavigationView>
+
+</RelativeLayout>

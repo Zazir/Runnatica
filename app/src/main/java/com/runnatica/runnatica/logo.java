@@ -20,7 +20,7 @@ public class logo extends AppCompatActivity {
                 paginaDeLogin();
                 // Do something after 5s = 5000ms
             }
-        }, 5000);
+        }, 3000);
 
     }
 

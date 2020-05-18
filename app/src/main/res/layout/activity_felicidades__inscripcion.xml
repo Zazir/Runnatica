@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Felicidades_Inscripcion">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde"></LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Felicidades"
+        android:textSize="60dp"
+        android:textColor="@android:color/background_dark"
+        android:layout_marginLeft="58dp"
+        android:layout_marginTop="160dp"
+        ></TextView>
+
+    <TextView
+        android:layout_width="388dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="250dp"
+        android:text="Has Creado Una Competencia"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="50dp"></TextView>
+
+    <Button
+        android:id="@+id/btnRegresar_Inscripcion"
+        android:layout_width="360dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginLeft="25dp"
+        android:background="@color/grisBoton"
+        android:textColor="@android:color/background_light"
+        android:text="Ir a Inicio"
+        android:textSize="25dp"
+        ></Button>
+
+
+
+    <LinearLayout
+        android:background="@drawable/barra_verde"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="675dp"
+        android:layout_marginEnd="0dp"
+        ></LinearLayout>
+
+</FrameLayout>

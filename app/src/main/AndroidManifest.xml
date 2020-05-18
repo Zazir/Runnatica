@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.runnatica.runnatica">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -10,8 +13,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".terminosycondiciones"></activity>
-        <activity android:name=".logo" >
+        <activity android:name=".DetallesTransaccion"></activity>
+        <activity android:name=".Donaciones" />
+        <activity android:name=".Felicidades_Inscripcion" />
+        <activity android:name=".Tipos_Inscripciones" />
+        <activity android:name=".crear_inscripcion" />
+        <activity android:name=".crear_competencia" />
+        <activity android:name=".ajustes_competidor" />
+        <activity android:name=".historial_competidor"
+
+            />
+        <activity android:name=".busqueda_competidor" />
+        <activity android:name=".carrera_vista1" />
+        <activity android:name=".home" />
+        <activity android:name=".terminosycondiciones" />
+        <activity android:name=".logo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,11 +35,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".registro_usuario" />
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Login" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <service
+            android:name=".FetchAddressIntentService"
+            android:exported="false"/>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

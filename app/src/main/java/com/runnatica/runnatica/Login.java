@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
+import com.runnatica.runnatica.poho.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,26 +52,27 @@ public class Login extends AppCompatActivity implements Response.Listener<JSONOb
                 startActivity(i);
             }
         });
+
     }
 
     @Override
     public void onResponse(JSONObject response) {
-        UserModel user = new UserModel();
+        Usuario user = new Usuario();
         Toast.makeText(getApplicationContext(), "Bienvenido "+Usuariotxt.getText().toString(), Toast.LENGTH_SHORT).show();
 
         JSONArray jsonarray = response.optJSONArray("datos");
-        JSONObject jsonobject = null;
+        JSONObject jsonobject;
 
         try {
             jsonobject = jsonarray.getJSONObject(0);
             user.setCorreo(jsonobject.optString("user"));
-            user.setContrasena(jsonobject.optString("pwd"));
+            //user.setContrasena(jsonobject.optString("pwd"));
             user.setNombre(jsonobject.optString("nombre"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        Intent next = new Intent(this, terminosycondiciones.class);
+        Intent next = new Intent(this, home.class);
         startActivity(next);
     }
 
@@ -80,7 +82,7 @@ public class Login extends AppCompatActivity implements Response.Listener<JSONOb
     }
 
     private void iniciarSesion() {
-        String url = "http://192.168.1.67/login/sesion.php?user="+Usuariotxt.getText().toString()+"&pwd="+Contrasenatxt.getText().toString();
+        String url = "https://runnatica.000webhostapp.com/WebServiceRunnatica/sesion.php?user="+Usuariotxt.getText().toString()+"&pwd="+Contrasenatxt.getText().toString();
 
         jrq = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
         rq.add(jrq);
