@@ -24,7 +24,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rcvCompetencia"
             android:layout_width="match_parent"
-            android:layout_height="319dp"
+            android:layout_height="464dp"
             android:layout_below="@+id/tvNombreCiudad"
             android:layout_marginTop="0dp"
             android:nextFocusDown="@id/tvNombreCiudad" />
@@ -39,20 +39,6 @@
             app:menu="@menu/main_menu"></android.support.design.widget.BottomNavigationView>
     </RelativeLayout>
 
-
-    <Button
-    android:id="@+id/botondeprueva"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="502dp"
-    ></Button>
-
-    <Button
-        android:id="@+id/btnPrueba"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="702dp"
-        ></Button>
 
     <LinearLayout
         android:id="@+id/ajustes"

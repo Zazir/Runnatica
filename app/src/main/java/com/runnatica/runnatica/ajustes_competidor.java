@@ -33,6 +33,7 @@ public class ajustes_competidor extends AppCompatActivity {
         arrayList.add("Crear Una Competencia");
         arrayList.add("Centro de Ayuda");
         arrayList.add("Ubicación");
+        arrayList.add("Aviso de Privacidad");
         arrayList.add("Cerrar Sesión");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
@@ -41,7 +42,35 @@ public class ajustes_competidor extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
+
+                if(i == 0){
+                    Editar();
+                }
+                if(i == 1){
+                    Notificaciones();
+                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(i == 2){
+                    CrearCompetencia();
+                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(i == 3){
+                    Ayuda();
+                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(i == 4){
+                    Ubicacion();
+                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(i == 5){
+                    Editar();
+                    Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(i == 6){
+                    CerrarSesion();
+                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -82,6 +111,30 @@ public class ajustes_competidor extends AppCompatActivity {
     }
     private void Ajustes(){
         Intent next = new Intent(this, ajustes_competidor.class);
+        startActivity(next);
+    }
+    private void CrearCompetencia(){
+        Intent next = new Intent(this, crear_competencia.class);
+        startActivity(next);
+    }
+    private void Editar(){
+        Intent next = new Intent(this, Editar_perfil.class);
+        startActivity(next);
+    }
+    private void Notificaciones(){
+        Intent next = new Intent(this, Notificaciones.class);
+        startActivity(next);
+    }
+    private void Ayuda(){
+        Intent next = new Intent(this, Ayuda_Competidor.class);
+        startActivity(next);
+    }
+    private void Ubicacion(){
+        Intent next = new Intent(this, Ubicacion.class);
+        startActivity(next);
+    }
+    private void CerrarSesion(){
+        Intent next = new Intent(this, Cerrar_sesion.class);
         startActivity(next);
     }
 }
