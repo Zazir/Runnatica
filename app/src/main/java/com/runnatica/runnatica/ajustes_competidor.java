@@ -63,7 +63,7 @@ public class ajustes_competidor extends AppCompatActivity {
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
                 if(i == 5){
-                    Editar();
+                    AvisoPrivacidad();
                     Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
                 if(i == 6){
@@ -131,6 +131,10 @@ public class ajustes_competidor extends AppCompatActivity {
     }
     private void Ubicacion(){
         Intent next = new Intent(this, Ubicacion.class);
+        startActivity(next);
+    }
+    private void AvisoPrivacidad(){
+        Intent next = new Intent(this, AvisoPrivacidad.class);
         startActivity(next);
     }
     private void CerrarSesion(){
