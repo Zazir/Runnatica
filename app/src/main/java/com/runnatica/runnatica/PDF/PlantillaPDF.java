@@ -21,13 +21,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Properties;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.mail.Authenticator;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 
 public class PlantillaPDF {
@@ -149,11 +154,21 @@ public class PlantillaPDF {
             });
 
             if (session != null){
+                BodyPart text = new MimeBodyPart();
+                BodyPart adjunto = new MimeBodyPart();
+                MimeMultipart mimeMultipart = new MimeMultipart();
+
                 Message message = new MimeMessage(session);
                 message.setFrom(new InternetAddress(correo));
-                message.setSubject("Runnatica - Datos de la inscripción");
+
+                text.setText("Datos de la inscripción");
+                adjunto.setDataHandler(new DataHandler(new FileDataSource(archivoPDF.getAbsolutePath())));
+                mimeMultipart.addBodyPart(text);
+                mimeMultipart.addBodyPart(adjunto);
+
+                message.setSubject("Runnatica Inscrición");
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("fernandozazir@gmail.com"));
-                message.setContent(archivoPDF, "text/html; charset=utf-8");
+                message.setContent(mimeMultipart, "text/html; charset=utf-8");
 
                 Transport.send(message);
             }
