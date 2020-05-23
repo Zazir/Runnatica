@@ -16,7 +16,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -204,10 +203,9 @@ public class home extends AppCompatActivity {
                             adapter = new MyAdapter(home.this, competenciasList, new MyAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(int position) {
-                                    Log.i("Position", "el valor de la posición es: "+position);
-                                    String idS = new String("" + id[position]);
-                                    Log.i("Position", "el valor de la posición es: "+id[position]);
-                                    launchCompetenciaView("1");
+                                    //Log.i("Position", "el valor de la posición es: "+ competenciasList.get(position).getId());
+                                    String idS = new String("" + competenciasList.get(position).getId());
+                                    launchCompetenciaView(idS);
                                 }
                             });
                             recyclerView.setAdapter(adapter);
