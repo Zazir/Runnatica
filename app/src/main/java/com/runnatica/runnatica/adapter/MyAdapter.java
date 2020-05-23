@@ -39,15 +39,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolderCompeten
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.ViewHolderCompetencia holder, int position) {
         holder.asignarDatos(competenciasList.get(position), position, listener);
-        /*Competencias competencia = competenciasList.get(position);
-
-        //Cargar imagen
-        //Glide.with(mCtx).load(competencia.getImageCompetencia()).into(holder.imgCompetencia);
-        //Cargar datos de la competencia
-        //holder.txtid.setText(competencia.getId());
-        holder.txtNombreCompetencias.setText(competencia.getNombreCompetencia());
-        holder.txtDescripcionCompetencia.setText(competencia.getDescripcionCompetencia());
-        holder.txtPrecioCompetencia.setText(String.valueOf(competencia.getPrecioCompetencia()));*/
     }
 
     @Override

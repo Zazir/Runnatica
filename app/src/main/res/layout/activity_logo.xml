@@ -10,26 +10,24 @@
 
 
     <LinearLayout
+        android:id="@+id/logo"
         android:layout_width="283dp"
         android:layout_height="278dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="170dp"
-        android:layout_marginEnd="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:background="@drawable/logo"
         android:orientation="vertical"></LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="81dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="466dp"
-        android:layout_marginEnd="73dp"
+        android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif"
+        android:nextFocusUp="@id/logo"
+        android:layout_above="@+id/logo"
         android:text="Runnatica"
         android:textColor="#FFFFFF"
-        android:textSize="60dp"
+        android:textSize="50dp"
         android:visibility="visible" />
 
 </RelativeLayout>

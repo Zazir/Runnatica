@@ -21,135 +21,179 @@
             android:textSize="40dp"></TextView>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="58dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="80dp"
-        android:text="Nombre de la Inscripción"
-        android:textColor="@android:color/background_dark"
-        android:textSize="30dp"></TextView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/etNombreInscripcion"
-        android:layout_width="381dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:layout_marginLeft="20dp"
-        android:textColor="@android:color/background_dark"
-        >
-    </EditText>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="58dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="170dp"
-        android:text="Cantidad"
-        android:textColor="@android:color/background_dark"
-        android:textSize="30dp"></TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="58dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="210dp"
-        android:text="Normal:"
-        android:textColor="@android:color/background_dark"
-        android:textSize="25dp"></TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="58dp"
-        android:layout_marginLeft="180dp"
-        android:layout_marginTop="210dp"
-        android:text="Foraneos:"
-        android:textColor="@android:color/background_dark"
-        android:textSize="25dp"></TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etCantidadNormal"
-        android:layout_width="124dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="250dp"
-        android:textColor="@android:color/background_dark"></EditText>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="80dp"
+                android:text="Nombre de la Inscripción"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"></TextView>
 
-    <EditText
-        android:id="@+id/etCantidadForaneos"
-        android:layout_width="124dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="175dp"
-        android:layout_marginTop="250dp"
-        android:textColor="@android:color/background_dark"></EditText>
+            <EditText
+                android:id="@+id/etNombreInscripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@android:color/background_dark"></EditText>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="58dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="300dp"
-        android:text="Restricción de Edad"
-        android:textColor="@android:color/background_dark"
-        android:textSize="30dp"></TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="58dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="340dp"
-        android:text="Desde:"
-        android:textColor="@android:color/background_dark"
-        android:textSize="25dp"></TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="58dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="400dp"
-        android:text="Hasta:"
-        android:textColor="@android:color/background_dark"
-        android:textSize="25dp"></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:text="Cantidad"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"></TextView>
 
-    <EditText
-        android:id="@+id/etDesdeAnos"
-        android:layout_width="98dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="105dp"
-        android:layout_marginTop="340dp"
-        android:textColor="@android:color/background_dark"></EditText>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="58dp"
-        android:layout_marginLeft="205dp"
-        android:layout_marginTop="340dp"
-        android:text="Años:"
-        android:textColor="@android:color/background_dark"
-        android:textSize="25dp"></TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etHastaAnos"
-        android:layout_width="98dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="105dp"
-        android:layout_marginTop="390dp"
-        android:textColor="@android:color/background_dark"></EditText>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="58dp"
-        android:layout_marginLeft="205dp"
-        android:layout_marginTop="400dp"
-        android:text="Años:"
-        android:textColor="@android:color/background_dark"
-        android:textSize="25dp"></TextView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnCrearInscripcion"
-        android:layout_width="285dp"
-        android:layout_height="45dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="620dp"
-        android:background="@color/grisBoton"
-        android:text="Crear"
-        android:textColor="@android:color/background_light"
-        android:textSize="20dp"
-        ></Button>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="58dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Normal"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="25dp"></TextView>
+
+                    <EditText
+                        android:id="@+id/etCantidadNormal"
+                        android:layout_width="124dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@android:color/background_dark"></EditText>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="58dp"
+                        android:layout_marginLeft="20dp"
+                        android:text="Foraneos"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="25dp"></TextView>
+
+                    <EditText
+                        android:id="@+id/etCantidadForaneos"
+                        android:layout_width="124dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/background_dark"></EditText>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:text="Restricción de Edad"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:text="Mínimo de edad"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="25dp"></TextView>
+
+                    <EditText
+                        android:id="@+id/etDesdeAnos"
+                        android:layout_width="98dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/background_dark"></EditText>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:text="Máximo de edad"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="25dp"></TextView>
+
+                    <EditText
+                        android:id="@+id/etHastaAnos"
+                        android:layout_width="98dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/background_dark"></EditText>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnCrearInscripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/grisBoton"
+                    android:text="Pagar con Paypal"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="20dp"></Button>
+
+                <Button
+                    android:id="@+id/btnTarjeta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/grisBoton"
+                    android:text="Pagar con tarjeta"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="20dp"></Button>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/contenedorTarjeta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </FrameLayout>
 
 
+        </LinearLayout>
+
+    </ScrollView>
 
 
     <LinearLayout

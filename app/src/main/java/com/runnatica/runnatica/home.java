@@ -16,10 +16,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,15 +39,13 @@ import java.util.List;
 import java.util.Locale;
 
 public class home extends AppCompatActivity {
-    LinearLayout llConfig;
-    Button botontemporal;
     BottomNavigationView MenuUsuario;
     TextView NombreCiudad;
 
     private List<Competencias> competenciasList;
     private RecyclerView recyclerView;
     private MyAdapter adapter;
-    private int id;
+    private int[] id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +56,6 @@ public class home extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rcvCompetencia);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        llConfig = (LinearLayout) findViewById(R.id.ajustes);
-        botontemporal = (Button) findViewById(R.id.botondeprueva);
         //botongps = (Button) findViewById(R.id.botongps);
         NombreCiudad = (TextView) findViewById(R.id.tvNombreCiudad);
 
@@ -87,21 +81,6 @@ public class home extends AppCompatActivity {
         competenciasList = new ArrayList<>();
 
         CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php");
-
-        llConfig.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saltarACrearCompe();
-            }
-        });
-
-        botontemporal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), crear_competencia.class);
-                startActivity(i);
-            }
-        });
 
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
@@ -208,22 +187,27 @@ public class home extends AppCompatActivity {
                             for (int i = 0; i < array.length(); i++) {
                                 //Obtenemos los objetos tipo competencias del array
                                 JSONObject competencia = array.getJSONObject(i);
+                                id = new int[array.length()];
 
                                 //Añadir valores a los correspondientes textview
                                 competenciasList.add(new Competencias(
-                                        id = competencia.getInt("id_competencia"),
+                                        competencia.getInt("id_competencia"),
                                         competencia.getString("nom_comp"),
                                         competencia.getString("descripcion"),
                                         competencia.getString("precio"),
                                         competencia.getString("foto")
                                 ));
+                                id[i] = competenciasList.get(i).getId();
                             }
 
                             //Creamos instancia del adapter
                             adapter = new MyAdapter(home.this, competenciasList, new MyAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(int position) {
-                                    launchCompetenciaView();
+                                    Log.i("Position", "el valor de la posición es: "+position);
+                                    String idS = new String("" + id[position]);
+                                    Log.i("Position", "el valor de la posición es: "+id[position]);
+                                    launchCompetenciaView("1");
                                 }
                             });
                             recyclerView.setAdapter(adapter);
@@ -241,14 +225,9 @@ public class home extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-    private void launchCompetenciaView() {
-        Intent intent = new Intent(this, carrera_vista1.class);
+    private void launchCompetenciaView(String id) {
+        Intent intent = new Intent(home.this, carrera_vista1.class);
         intent.putExtra("id", id);
         startActivity(intent);
-    }
-
-    private void saltarACrearCompe() {
-        Intent next = new Intent(this, crear_competencia.class);
-        startActivity(next);
     }
 }

@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity implements Response.Listener<JSONOb
         Entrar = (Button) findViewById(R.id.btnEntrar);
         Registro= (Button) findViewById(R.id.btnRegistrarse);
         Usuariotxt= (EditText) findViewById(R.id.etUsuario);
-        Contrasenatxt= (EditText) findViewById(R.id.etContraseña);
+        Contrasenatxt= (EditText) findViewById(R.id.etContrasena);
         rq = Volley.newRequestQueue(this);
 
         Entrar.setOnClickListener(new View.OnClickListener() {
