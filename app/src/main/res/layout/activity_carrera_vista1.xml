@@ -4,25 +4,6 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     tools:context=".home">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="59dp"
-        android:background="@drawable/barra_verde">
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="57dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="680dp"
-        android:layout_marginEnd="4dp"
-        android:background="@drawable/barra_verde">
-
-    </LinearLayout>
-
-
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
@@ -30,6 +11,12 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:background="@drawable/barra_verde">
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/ivFotoCompetencia"
@@ -232,18 +219,32 @@
 
             <Button
                 android:id="@+id/btnIncribirse"
-                android:layout_width="match_parent"
+                android:layout_width="362dp"
                 android:layout_height="wrap_content"
-                android:text="Inscribirse"
-                android:textColor="@android:color/background_light"
-                android:textSize="35dp"
+                android:layout_alignEnd="@id/ivResultados"
+                android:layout_gravity="center"
                 android:layout_marginLeft="120dp"
                 android:background="@null"
-                android:layout_gravity="center"
-                android:layout_alignEnd="@id/ivResultados"
-                ></Button>
+                android:text="Inscribirse"
+                android:textColor="@android:color/background_light"
+                android:textSize="35dp"></Button>
         </RelativeLayout>
     </ScrollView>
+    <LinearLayout
+        android:layout_width="495dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="570dp"
+        android:background="@drawable/barra_verde">
 
+        <TextView
+            android:id="@+id/tvRegistrarse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Registrarse"
+            android:textColor="@android:color/background_light"
+            android:textSize="40dp"></TextView>
+
+    </LinearLayout>
 
 </RelativeLayout>

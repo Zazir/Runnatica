@@ -38,4 +38,9 @@ dependencies {
     implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/additionnal.jar')
     implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/activation.jar')
     implementation 'io.conekta:conektasdk:2.0'
+
+    implementation 'com.google.android.gms:play-services-safetynet:11.8.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.github.d-max:spots-dialog:0.7@aar'
 }

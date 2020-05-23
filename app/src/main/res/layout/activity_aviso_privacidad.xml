@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Notificaciones">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:text="Aviso de Privacidad"
+            android:textColor="@android:color/background_light"
+            android:textSize="40dp"></TextView>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="5351dp"
+                android:layout_marginTop="60dp"
+                android:text="FECHA DE ÚLTIMA ACTUALIZACIÓN: MAYO, 2020.
+
+I. Identificación del responsable.
+De conformidad con lo establecido en la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (en lo sucesivo la “Ley”) y su Reglamento le informamos que Runnatica., sus filiales y/o subsidiarias (en lo sucesivo el “Responsable”), con domicilio en Calle Nueva Escocia 1885, Guadalajara, Jal., (la “Dirección de Contacto”) tratará los datos personales que Usted como Titular nos proporcione en términos del presente Aviso de Privacidad (en lo sucesivo “Aviso”).
+II. Datos personales que recabamos.
+Los datos personales y datos personales sensibles que recabaremos serán aquellos que usted haya incluido en su perfil de cada red social con la que ingrese y esté habilitada en la aplicación, y serán tratados y resguardados con base en los principios establecidos en la Ley y su Reglamento, los cuales son: licitud, consentimiento, información, calidad, finalidad, lealtad, proporcionalidad y responsabilidad. Para cumplir con las finalidades que se mencionan en el presente Aviso, requerimos que nos proporcione los siguientes Datos Personales: Nombre completo, Correo electrónico, Teléfono (fijo y móvil), Domicilio o Lugar de residencia actual y previos, Sexo, Fecha de nacimiento o cumpleaños, usuario de Facebook, usuario de LinkedIn, Google+ URL de cuenta, Links de otros perfiles, Links personales, Link canal de YouTube y Fotos de perfiles. Es importante mencionar que adicionalmente a los datos personales mencionados anteriormente, el Responsable podrá tratar los siguientes Datos Sensibles: Ideología Política y Creencias Religiosas.
+III. Finalidades del tratamiento de sus datos personales.
+El Responsable, sus filiales y/o subsidiarias, recaban sus datos personales y datos personales sensibles con el objeto de utilizarlos para los siguientes fines:
+a) Obtener información y datos estadísticos de hábitos de navegación,
+b) Identificar perfiles que ingresan a la aplicación,
+c) Filtrar contenidos basado en la cuenta de correo de acceso.
+IV. Transferencia de sus datos personales.
+Le informamos que sus datos personales serán transferidos dentro y fuera del país, a los siguientes destinatarios, y con las siguientes finalidades: Empresas del mismo grupo del responsable, con las finalidades de mercadotecnia, publicidad y proyección comercial. Por lo anterior solicitamos su consentimiento expreso para la transferencia de sus datos. Por favor seleccione la opción deseada:
+
+V. Medios para limitar el uso o divulgación de sus datos personales.
+Hacemos de su conocimiento que sus datos personales y datos personales sensibles serán resguardados bajo estrictas medidas de seguridad administrativas, técnicas y físicas las cuales han sido implementadas, en términos del Reglamento, con el objeto de proteger y garantizar sus datos personales contra daño, pérdida, alteración, destrucción o el uso, acceso o tratamiento no autorizados.
+VI. Medios para revocar el consentimiento para el tratamiento de
+      sus datos personales.
+Usted podrá revocar su consentimiento para el tratamiento de sus datos personales de la misma forma por la cual otorgo su consentimiento. Asimismo Usted tiene derecho de: (i) Acceder a sus datos personales en nuestro poder y conocer los detalles del tratamiento de los mismos, (ii) Rectificarlos en caso de ser inexactos o incompletos, (iii) Cancelarlos cuando considere que no se requieren para alguna de las finalidades señaladas en el presente Aviso, estén siendo utilizados para finalidades no consentidas o haya finalizado la relación contractual o de servicio, u (iv) Oponerse al tratamiento de los mismos para fines específicos, según lo disponga la Ley (en adelante “Derechos ARCO”). Para el ejercicio de sus Derechos ARCO, deberá presentar una Solicitud (en adelante “Solicitud ARCO”), a la atención del Oficial de Privacidad, a la Dirección de Contacto o al siguiente correo electrónico: runnatica.comAlexlopezoficial1@gmail.com acompañada de la siguiente información y documentos:
+a) Su nombre, domicilio y correo electrónico para poder comunicarle la respuesta a la Solicitud ARCO;
+b) Una copia de los documentos que acrediten su identidad (copia de IFE, pasaporte o cualquier otra identificación oficial) o en su caso, los documentos que acrediten su representación legal, cuyo original deberá presentar para poder recibir la respuesta del Responsable;
+c) Una descripción clara y precisa de los datos personales respecto de los cuales busca ejercer alguno de los Derechos ARCO;
+d) Cualquier documento o información que facilite la localización de sus datos personales;
+e) En caso de solicitar una rectificación de sus datos personales, deberá de indicar también, las modificaciones a realizarse y aportar la documentación que sustente su petición.
+
+El Oficial de Privacidad responderá y dará seguimiento a su Solicitud de Derechos ARCO en los plazos establecidos por la Ley. De igual manera, Usted podrá revocar su consentimiento para el tratamiento de sus datos personales siguiendo el mismo procedimiento que el mencionado para el ejercicio de sus Derechos ARCO.
+VII. Cambios o modificaciones al presente aviso.
+El Responsable se reserva el derecho de efectuar en cualquier momento modificaciones o actualizaciones al presente Aviso, en el entendido de que toda modificación al mismo se hará de su conocimiento por correo electrónico o a través de nuestra página web: runnatica.com Solicitamos su consentimiento expreso para el tratamiento de sus datos personales.
+"
+                android:textSize="25dp"></TextView>
+
+        </RelativeLayout>
+    </ScrollView>
+    
+
+    <LinearLayout
+        android:layout_width="495dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="570dp"
+        android:background="@drawable/barra_verde"
+        ></LinearLayout>
+
+</RelativeLayout>

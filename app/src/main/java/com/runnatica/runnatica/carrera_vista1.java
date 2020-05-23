@@ -16,6 +16,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
+import com.runnatica.runnatica.Config.PaypalConfig;
+import com.runnatica.runnatica.Remote.Recapcha;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +27,7 @@ import org.json.JSONObject;
 
 public class carrera_vista1 extends AppCompatActivity {
     ImageView imgCompetencia;
-    TextView txtNomCompe, txtOrganizador, txtFechaCompe, txtHoraCompe, txtLugarCompe, txtPrecioCompe, txtDescripcionCompe;
+    TextView txtNomCompe, txtOrganizador, txtFechaCompe, txtHoraCompe, txtLugarCompe, txtPrecioCompe, txtDescripcionCompe, txtRegistrarse;
     Button btnInscripcion;
 
     private String id;
@@ -48,6 +52,7 @@ public class carrera_vista1 extends AppCompatActivity {
         txtPrecioCompe = (TextView)findViewById(R.id.tvPrecioCompetencia);
         txtDescripcionCompe = (TextView)findViewById(R.id.tvDescripcion);
         btnInscripcion = (Button)findViewById(R.id.btnIncribirse);
+        txtRegistrarse = (TextView)findViewById(R.id.tvRegistrarse);
 
         getLastViewData();
         cargarInfoCarrera("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencia.php?idCompe=" + id);
@@ -56,6 +61,13 @@ public class carrera_vista1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CrearInscripcion();
+            }
+        });
+
+        txtRegistrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReCapcha();
             }
         });
     }
@@ -98,5 +110,10 @@ public class carrera_vista1 extends AppCompatActivity {
     private void getLastViewData() {
         Bundle extra = carrera_vista1.this.getIntent().getExtras();
         id = extra.getString("id");
+    }
+
+    private void ReCapcha(){
+        Intent next = new Intent(this, Recapcha.class);
+        startActivity(next);
     }
 }
