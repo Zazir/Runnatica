@@ -29,7 +29,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class crear_inscripcion extends AppCompatActivity {
+public class crear_inscripcion extends AppCompatActivity{
     private static final int PAYPAL_REQUEST_CODE = 7171;
     private static PayPalConfiguration config = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)//Seleccionado el modo sandbox
             .clientId(PaypalConfig.PAYPAL_CLIENT_ID);

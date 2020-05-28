@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InscripcionesCompetidor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde">
+
+        <TextView
+            android:id="@+id/tvNombreCiudad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Inscripcion Competidor"
+            android:textColor="@android:color/background_light"
+            android:textSize="40dp"></TextView>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la Inscripcion"
+        android:layout_marginTop="65dp"
+        android:textSize="30dp"
+        ></TextView>
+
+    <TextView
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:text="Edad Minima:"
+        android:textSize="25dp"></TextView>
+
+    <TextView
+        android:layout_width="174dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="105dp"
+        android:text="Edad Maxima:"
+        android:textSize="25dp"></TextView>
+
+    <Spinner
+        android:layout_width="89dp"
+        android:layout_height="41dp"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="120dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="180dp"
+        android:background="@android:color/background_dark"></LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la Inscripcion"
+        android:layout_marginTop="195dp"
+        android:textSize="30dp"
+        ></TextView>
+
+    <TextView
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:text="Edad Minima:"
+        android:textSize="25dp"></TextView>
+
+    <TextView
+        android:layout_width="174dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="275dp"
+        android:text="Edad Maxima:"
+        android:textSize="25dp"></TextView>
+
+    <Spinner
+        android:layout_width="89dp"
+        android:layout_height="41dp"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="240dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="315dp"
+        android:background="@android:color/background_dark"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="495dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="570dp"
+        android:background="@drawable/barra_verde">
+        <TextView
+            android:id="@+id/tvRegistrarse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Registrarse"
+            android:textColor="@android:color/background_light"
+            android:textSize="40dp"></TextView>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

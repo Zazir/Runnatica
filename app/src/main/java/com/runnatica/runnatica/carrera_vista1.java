@@ -16,10 +16,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.paypal.android.sdk.payments.PayPalService;
-import com.paypal.android.sdk.payments.PaymentActivity;
-import com.paypal.android.sdk.payments.PaymentConfirmation;
-import com.runnatica.runnatica.Config.PaypalConfig;
-import com.runnatica.runnatica.Remote.Recapcha;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -113,7 +109,7 @@ public class carrera_vista1 extends AppCompatActivity {
     }
 
     private void ReCapcha(){
-        Intent next = new Intent(this, Recapcha.class);
+        Intent next = new Intent(this, ReCaptcha.class);
         startActivity(next);
     }
 }

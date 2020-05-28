@@ -28,7 +28,7 @@ public class ajustes_competidor extends AppCompatActivity {
         MenuUsuario=(BottomNavigationView)findViewById(R.id.bottomNavigation);
 
         final ArrayList<String> arrayList=new ArrayList<>();
-        arrayList.add("Editar Perfil");
+        arrayList.add("Perfil Competidor");
         arrayList.add("Notificaciones");
         arrayList.add("Crear Una Competencia");
         arrayList.add("Centro de Ayuda");
@@ -44,7 +44,7 @@ public class ajustes_competidor extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 if(i == 0){
-                    Editar();
+                    Perfil();
                 }
                 if(i == 1){
                     Notificaciones();
@@ -117,8 +117,8 @@ public class ajustes_competidor extends AppCompatActivity {
         Intent next = new Intent(this, crear_competencia.class);
         startActivity(next);
     }
-    private void Editar(){
-        Intent next = new Intent(this, Editar_perfil.class);
+    private void Perfil(){
+        Intent next = new Intent(this, VerPerfil.class);
         startActivity(next);
     }
     private void Notificaciones(){
