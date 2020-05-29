@@ -63,7 +63,7 @@ public class carrera_vista1 extends AppCompatActivity {
         txtRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ReCapcha();
+
             }
         });
     }
@@ -109,7 +109,6 @@ public class carrera_vista1 extends AppCompatActivity {
     }
 
     private void ReCapcha(){
-        Intent next = new Intent(this, ReCaptcha.class);
-        startActivity(next);
+
     }
 }
