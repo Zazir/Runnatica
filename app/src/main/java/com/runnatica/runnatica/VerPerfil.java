@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.runnatica.runnatica.Remote.Recapcha;
 
 public class VerPerfil extends AppCompatActivity {
 
