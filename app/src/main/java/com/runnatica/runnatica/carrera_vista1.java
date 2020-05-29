@@ -16,8 +16,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.paypal.android.sdk.payments.PayPalService;
-import com.runnatica.runnatica.Remote.Recapcha;
-import com.runnatica.runnatica.poho.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,7 +75,7 @@ public class carrera_vista1 extends AppCompatActivity {
         txtRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ReCapcha();
+
             }
         });
     }
@@ -123,8 +121,7 @@ public class carrera_vista1 extends AppCompatActivity {
     }
 
     private void ReCapcha(){
-        Intent next = new Intent(this, Recapcha.class);
-        startActivity(next);
+
     }
 
     private void comentarForo(String URL) {

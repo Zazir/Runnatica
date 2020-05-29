@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FelicidadesCompetidor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde">
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¡Felicidades!"
+        android:gravity="center"
+        android:layout_marginTop="190dp"
+        android:textSize="50dp"
+        android:textColor="@android:color/background_dark"
+        ></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Te has inscrito a:"
+        android:gravity="center"
+        android:layout_marginTop="250dp"
+        android:textSize="30dp"
+        android:textColor="@android:color/background_dark"
+        ></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la Competencia"
+        android:gravity="center"
+        android:layout_marginTop="310dp"
+        android:textSize="30dp"
+        android:textColor="@android:color/background_dark"
+        ></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inscripcion:"
+        android:layout_marginTop="380dp"
+        android:textSize="30dp"
+        android:textColor="@android:color/background_dark"
+        ></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="PDF"
+        android:layout_marginTop="450dp"
+        android:textSize="30dp"
+        android:textColor="@android:color/background_dark"
+        ></TextView>
+
+    <LinearLayout
+        android:layout_width="495dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="570dp"
+        android:background="@drawable/barra_verde">
+    </LinearLayout>
+
+</RelativeLayout>

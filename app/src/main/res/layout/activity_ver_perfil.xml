@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VerPerfil">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Perfil Competidor"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="40dp"></TextView>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="510dp"
+        android:layout_marginTop="60dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Nombre y Apellido:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:id="@+id/tvNombreUsuario"
+                android:layout_marginTop="40dp"
+                android:text="Nombre del usuario"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:text="Correo Electronico:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"
+                android:layout_marginTop="80dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:id="@+id/tvCorreoUsuario"
+                android:layout_marginTop="115dp"
+                android:text="Correo del usuario"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:text="Sexo:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"
+                android:layout_marginTop="150dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:id="@+id/tvSexoUsuario"
+                android:layout_marginTop="185dp"
+                android:text="Sexo del usuario"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:text="Fecha de Nacimiento:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"
+                android:layout_marginTop="220dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:id="@+id/tvFechaNacimientoUsuario"
+                android:layout_marginTop="255dp"
+                android:text="Fecha de Nacimiento del usuario"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:text="Ciudad:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"
+                android:layout_marginTop="290dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:id="@+id/tvCiudadUsuario"
+                android:layout_marginTop="325dp"
+                android:text="Ciudad del usuario"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:text="Estado:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"
+                android:layout_marginTop="360dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:id="@+id/tvEstadoUsuario"
+                android:layout_marginTop="395dp"
+                android:text="Estado del usuario"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:text="Pais:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"
+                android:layout_marginTop="430dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:id="@+id/tvPaisUsuario"
+                android:layout_marginTop="465dp"
+                android:text="Pais del usuario"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:text="Fotografia:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"
+                android:layout_marginTop="500dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="620dp"
+                ></TextView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="495dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="570dp"
+        android:background="@drawable/barra_verde"
+        >
+        <TextView
+            android:id="@+id/tvEditarUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Editar Perfil"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="40dp"></TextView>
+
+    </LinearLayout>
+
+</RelativeLayout>
