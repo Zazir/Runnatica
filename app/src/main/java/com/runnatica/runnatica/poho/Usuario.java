@@ -1,11 +1,15 @@
 package com.runnatica.runnatica.poho;
 
 public class Usuario {
+    private static Usuario usuario;
     private int id;
     private int fechaNacimiento;
     private String nombre;
     private String tipoUsuario;
     private String correo;
+
+    private Usuario() {
+    }
 
     public Usuario(int id, int fechaNacimiento, String nombre, String tipoUsuario, String correo) {
         this.id = id;
@@ -15,11 +19,19 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public Usuario() {
+    public static Usuario getUsuarioInstance() {
+        if (usuario == null){
+            usuario = new Usuario();
+        }
+        return usuario;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getFechaNacimiento() {

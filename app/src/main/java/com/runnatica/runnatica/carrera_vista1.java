@@ -16,10 +16,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.paypal.android.sdk.payments.PayPalService;
-import com.paypal.android.sdk.payments.PaymentActivity;
-import com.paypal.android.sdk.payments.PaymentConfirmation;
-import com.runnatica.runnatica.Config.PaypalConfig;
 import com.runnatica.runnatica.Remote.Recapcha;
+import com.runnatica.runnatica.poho.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,10 +25,12 @@ import org.json.JSONObject;
 
 public class carrera_vista1 extends AppCompatActivity {
     ImageView imgCompetencia;
-    TextView txtNomCompe, txtOrganizador, txtFechaCompe, txtHoraCompe, txtLugarCompe, txtPrecioCompe, txtDescripcionCompe, txtRegistrarse;
-    Button btnInscripcion;
-
-    private String id;
+    TextView txtNomCompe, txtOrganizador, txtFechaCompe, txtHoraCompe,
+            txtLugarCompe, txtPrecioCompe, txtDescripcionCompe, txtRegistrarse,
+            txtComentario;
+    Button btnInscripcion, btnEnviarComentario;
+    private Usuario user = Usuario.getUsuarioInstance();
+    private String id_competencia;
 
     @Override
     protected void onDestroy() {
@@ -53,14 +53,24 @@ public class carrera_vista1 extends AppCompatActivity {
         txtDescripcionCompe = (TextView)findViewById(R.id.tvDescripcion);
         btnInscripcion = (Button)findViewById(R.id.btnIncribirse);
         txtRegistrarse = (TextView)findViewById(R.id.tvRegistrarse);
+        txtComentario = (TextView)findViewById(R.id.etRespuestaForo);
+        btnEnviarComentario = (Button)findViewById(R.id.btnEnviarForo);
 
         getLastViewData();
-        cargarInfoCarrera("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencia.php?idCompe=" + id);
+        cargarInfoCarrera("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencia.php?idCompe=" + id_competencia);
 
         btnInscripcion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CrearInscripcion();
+            }
+        });
+
+        btnEnviarComentario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                comentarForo("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarComentario.php?id_usuario="+ user.getId() +
+                        "&id_competencia=" + id_competencia + "&mensaje="+txtComentario.getText().toString());
             }
         });
 
@@ -109,11 +119,28 @@ public class carrera_vista1 extends AppCompatActivity {
 
     private void getLastViewData() {
         Bundle extra = carrera_vista1.this.getIntent().getExtras();
-        id = extra.getString("id");
+        id_competencia = extra.getString("id");
     }
 
     private void ReCapcha(){
         Intent next = new Intent(this, Recapcha.class);
         startActivity(next);
+    }
+
+    private void comentarForo(String URL) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(this, "Hubo un error con el servidor", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(stringRequest);
     }
 }

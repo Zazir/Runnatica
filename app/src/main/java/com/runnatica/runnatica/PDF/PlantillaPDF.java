@@ -163,6 +163,7 @@ public class PlantillaPDF {
 
                 text.setText("Datos de la inscripción");
                 adjunto.setDataHandler(new DataHandler(new FileDataSource(archivoPDF.getAbsolutePath())));
+                adjunto.setFileName("Datos_inscripcion.pdf");
                 mimeMultipart.addBodyPart(text);
                 mimeMultipart.addBodyPart(adjunto);
 
