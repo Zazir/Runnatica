@@ -18,7 +18,7 @@
             android:layout_marginTop="5dp"
             android:text="Crear Competencia"
             android:textColor="@android:color/background_light"
-            android:textSize="40dp"></TextView>
+            android:textSize="30dp"></TextView>
     </LinearLayout>
 
     <ScrollView
@@ -35,7 +35,7 @@
                 android:layout_marginTop="60dp"
                 android:text="Información Principal"
                 android:textColor="@android:color/background_dark"
-                android:textSize="35dp"></TextView>
+                android:textSize="25dp"></TextView>
 
             <TextView
 
@@ -45,7 +45,7 @@
                 android:layout_marginTop="100dp"
                 android:text="Nombre de la Competencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30dp"></TextView>
+                android:textSize="25dp"></TextView>
 
             <EditText
                 android:id="@+id/etNombreCompetencia"
@@ -64,7 +64,7 @@
                 android:layout_marginTop="180dp"
                 android:text="Precio de la Competencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30dp"></TextView>
+                android:textSize="25dp"></TextView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="58dp"
@@ -96,7 +96,7 @@
                 android:layout_marginTop="255dp"
                 android:text="Fecha de la Competencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30dp"></TextView>
+                android:textSize="25dp"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"

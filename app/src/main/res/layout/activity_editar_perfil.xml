@@ -326,6 +326,15 @@
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
 
+            <TextView
+                android:id="@+id/tvRegistrarse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Registrar"
+                android:textColor="@android:color/background_light"
+                android:textSize="40dp"></TextView>
+
         </RelativeLayout>
 
     </ScrollView>
@@ -336,14 +345,7 @@
         android:layout_marginTop="570dp"
         android:background="@drawable/barra_verde"
         >
-        <TextView
-            android:id="@+id/tvRegistrarse"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Registrar"
-            android:textColor="@android:color/background_light"
-            android:textSize="40dp"></TextView>
+
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,10 +1,360 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".editar_competencia2">
 
-  </android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde">
+
+        <TextView
+            android:id="@+id/tvNombreCiudad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Editar Competencia"
+            android:textColor="@android:color/background_light"
+            android:textSize="40dp"></TextView>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+
+                android:layout_width="393dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="62dp"
+                android:layout_marginEnd="18dp"
+                android:text="Nombre de la Competencia:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <EditText
+                android:id="@+id/etNombreCompetencia"
+                android:layout_width="381dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="26dp"
+                android:textColor="@android:color/background_dark"></EditText>
+
+            <TextView
+                android:layout_width="362dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="141dp"
+                android:layout_marginEnd="19dp"
+                android:text="Fecha de la Competencia"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="58dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="173dp"
+                android:layout_marginEnd="288dp"
+                android:text="Dia"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <EditText
+                android:id="@+id/etDiaCompetencia"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="209dp"
+                android:layout_marginEnd="261dp"></EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="58dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="130dp"
+                android:layout_marginTop="171dp"
+                android:layout_marginEnd="192dp"
+                android:text="Mes"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <EditText
+                android:id="@+id/etMesCompetencia"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="119dp"
+                android:layout_marginTop="209dp"
+                android:layout_marginEnd="176dp"></EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="58dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="170dp"
+                android:layout_marginEnd="115dp"
+                android:text="Año"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <EditText
+                android:id="@+id/ttAnoCompetencia"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="209dp"
+                android:layout_marginTop="210dp"
+                android:layout_marginEnd="94dp"></EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="58dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="310dp"
+                android:layout_marginTop="173dp"
+                android:layout_marginEnd="16dp"
+                android:text="Hora"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <EditText
+                android:id="@+id/etHoraCompetencia"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="302dp"
+                android:layout_marginTop="210dp"
+                android:layout_marginEnd="9dp"></EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="58dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="252dp"
+                android:layout_marginEnd="52dp"
+                android:text="Ubicación de Google Maps"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="292dp"
+                android:layout_marginEnd="-27dp"
+                android:text="Grados Decimales:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20dp"></TextView>
+
+            <EditText
+                android:id="@+id/etGradosUbicacion"
+                android:layout_width="321dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="312dp"
+                android:layout_marginEnd="36dp"></EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="58dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="354dp"
+                android:layout_marginEnd="230dp"
+                android:text="Dirección"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="395dp"
+                android:layout_marginEnd="2dp"
+                android:text="Pais:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="468dp"
+                android:layout_marginEnd="13dp"
+                android:text="Estado:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="535dp"
+                android:layout_marginEnd="14dp"
+                android:text="Ciudad:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20dp"></TextView>
+
+            <EditText
+                android:id="@+id/etCiudadCompetencia"
+                android:layout_width="321dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="566dp"
+                android:layout_marginEnd="37dp"></EditText>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="611dp"
+                android:layout_marginEnd="17dp"
+                android:text="Colonia:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20dp"></TextView>
+
+            <EditText
+                android:id="@+id/etColoniaCompetencia"
+                android:layout_width="321dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="642dp"
+                android:layout_marginEnd="35dp"></EditText>
+
+            <Spinner
+                android:id="@+id/spPaisCompetencia"
+                android:layout_width="207dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="418dp"
+                android:layout_marginEnd="152dp"></Spinner>
+
+            <Spinner
+                android:id="@+id/spEstadoCompetencia"
+                android:layout_width="207dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="491dp"
+                android:layout_marginEnd="149dp"></Spinner>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="702dp"
+                android:layout_marginEnd="-4dp"
+                android:text="Calle:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20dp"></TextView>
+
+            <EditText
+                android:id="@+id/etCalleCompetencia"
+                android:layout_width="321dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="729dp"
+                android:layout_marginEnd="36dp"></EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="58dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="780dp"
+                android:layout_marginEnd="15dp"
+                android:text="Descripcion de la Competencia"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <EditText
+                android:id="@+id/etDescripcionCompetencia"
+                android:layout_width="369dp"
+                android:layout_height="129dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="829dp"
+                android:layout_marginEnd="13dp"
+                android:textColor="@android:color/background_dark"></EditText>
+
+            <Button
+                android:layout_width="183dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="980dp"
+                android:layout_marginEnd="93dp"></Button>
+
+            <Textview
+                android:layout_width="321dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="1705dp"></Textview>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="495dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="570dp"
+        android:background="@drawable/barra_verde"
+        ></LinearLayout>
+
+</RelativeLayout>

@@ -1,9 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Centrodeayuda">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:background="@drawable/barra_verde">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Centro de Ayuda"
+                android:textColor="@android:color/background_light"
+                android:textSize="40dp">
+            </TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="238dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="81dp"
+        android:layout_marginEnd="162dp"
+        android:text="Telefonos:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30dp"></TextView>
+
+    <TextView
+        android:layout_width="181dp"
+        android:layout_height="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="193dp"
+        android:text="(33)26738162"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+
+    <TextView
+        android:layout_width="181dp"
+        android:layout_height="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="191dp"
+        android:text="(33)33427679"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+
+    <TextView
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="233dp"
+        android:layout_marginEnd="13dp"
+        android:text="Mandar Mensaje:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+
+    <EditText
+        android:id="@+id/et_text"
+        android:layout_width="376dp"
+        android:layout_height="115dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="272dp"
+        android:layout_marginEnd="24dp"></EditText>
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="155dp"
+        android:layout_height="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="410dp"
+        android:layout_marginEnd="134dp"
+        android:background="@color/verdeRun"
+        android:text="Enviar"></Button>
+
+    <TextView
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="463dp"
+        android:layout_marginEnd="0dp"
+        android:text="La respuesta se mandara a su correo en 24 a 72 horas"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+
+    <LinearLayout
+        android:layout_width="495dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="570dp"
+        android:background="@drawable/barra_verde"
+        ></LinearLayout>
+
+
+
+</RelativeLayout>

@@ -35,10 +35,11 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:layout_marginTop="570dp"
+        android:layout_alignTop="@+id/lvAjustesCompetidor"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="470dp"
         android:background="@drawable/barra_verde"
         app:itemTextColor="@android:color/background_dark"
-        app:menu="@menu/main_menu">
-    </android.support.design.widget.BottomNavigationView>
+        app:menu="@menu/main_menu"></android.support.design.widget.BottomNavigationView>
 
 </RelativeLayout>

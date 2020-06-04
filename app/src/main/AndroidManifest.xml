@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.runnatica.runnatica">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReCaptcha"></activity>
+        <activity android:name=".editar_competencia2"></activity>
+        <activity android:name=".borrar_competencia" />
+        <activity android:name=".cancelar_competencia" />
+        <activity android:name=".posponer_competencia" />
+        <activity android:name=".editar_competencia" />
+        <activity android:name=".ajustes_organizador" />
+        <activity android:name=".historial_organizador" />
+        <activity android:name=".home_organizador" />
+        <activity android:name=".Centrodeayuda" />
         <activity android:name=".EditarContrasena" />
         <activity android:name=".VerPerfil" />
         <activity android:name=".FelicidadesCompetidor" />
@@ -21,7 +27,6 @@
         <activity android:name=".AvisoPrivacidad" />
         <activity android:name=".Cerrar_sesion" />
         <activity android:name=".Ubicacion" />
-        <activity android:name=".Ayuda_Competidor" />
         <activity android:name=".Notificaciones" />
         <activity android:name=".Editar_perfil" />
         <activity android:name=".DetallesTransaccion" />
@@ -54,6 +59,9 @@
             android:name=".FetchAddressIntentService"
             android:exported="false" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

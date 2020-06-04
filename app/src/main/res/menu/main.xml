@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/menu_home"
+        android:title="Home"
+        android:icon="@mipmap/ic_home2"
+        ></item>
+    <item
+        android:id="@+id/menu_historial"
+        android:title="Historial"
+        android:icon="@mipmap/ic_historial2"
+        ></item>
+    <item
+        android:id="@+id/menu_ajustes"
+        android:title="Ajustes"
+        android:icon="@mipmap/ic_ajustes"
+        ></item>
 </menu>

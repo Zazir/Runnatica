@@ -34,6 +34,7 @@ public class ajustes_competidor extends AppCompatActivity {
         arrayList.add("Centro de Ayuda");
         arrayList.add("Ubicación");
         arrayList.add("Aviso de Privacidad");
+        arrayList.add("Administrador de Competencia");
         arrayList.add("Cerrar Sesión");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
@@ -67,6 +68,10 @@ public class ajustes_competidor extends AppCompatActivity {
                     Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
                 if(i == 6){
+                    AdministrarCarrera();
+                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(i == 7){
                     CerrarSesion();
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
@@ -126,7 +131,7 @@ public class ajustes_competidor extends AppCompatActivity {
         startActivity(next);
     }
     private void Ayuda(){
-        Intent next = new Intent(this, Ayuda_Competidor.class);
+        Intent next = new Intent(this, Centrodeayuda.class);
         startActivity(next);
     }
     private void Ubicacion(){
@@ -136,6 +141,11 @@ public class ajustes_competidor extends AppCompatActivity {
     private void AvisoPrivacidad(){
         Intent next = new Intent(this, AvisoPrivacidad.class);
         startActivity(next);
+    }
+    private void AdministrarCarrera(){
+        Intent next = new Intent(this, home_organizador.class);
+        startActivity(next);
+
     }
     private void CerrarSesion(){
         Intent next = new Intent(this, Cerrar_sesion.class);

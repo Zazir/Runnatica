@@ -21,6 +21,30 @@
             android:textSize="40dp"></TextView>
     </LinearLayout>
 
+    <Switch
+        android:id="@+id/swNotificaciones"
+        android:layout_width="61dp"
+        android:layout_height="47dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="32dp"
+        ></Switch>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginTop="60dp"
+        android:text="Activar/Desactivar"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="100dp"
+        android:background="@android:color/background_dark"></LinearLayout>
+
     <LinearLayout
         android:layout_width="495dp"
         android:layout_height="78dp"

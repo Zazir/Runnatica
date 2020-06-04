@@ -162,7 +162,7 @@ public class carrera_vista1 extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //Toast.makeText(carrera_vista1.this, response.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(carrera_vista1.this, response.toString(), Toast.LENGTH_LONG).show();
                         try {
                             //Hacer el string a json array object
                             JSONArray array = new JSONArray(response);
