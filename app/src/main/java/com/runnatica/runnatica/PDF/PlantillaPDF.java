@@ -16,6 +16,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.runnatica.runnatica.poho.Usuario;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,9 +37,13 @@ import javax.mail.internet.MimeMultipart;
 
 
 public class PlantillaPDF {
+
+    private Usuario usuario = Usuario.getUsuarioInstance();
+
+
     //Datos para enviar correo
-    private String correo = "palaciosroberto963@gmail.com";
-    private String contraseña = "lavagina2019";
+    private String correo = "alexlopezoficial1@gmail.com";
+    private String contraseña = "Lotoloto2125";
     private Session session;
 
     //Text Constant
@@ -168,7 +173,7 @@ public class PlantillaPDF {
                 mimeMultipart.addBodyPart(adjunto);
 
                 message.setSubject("Runnatica Inscrición");
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("fernandozazir@gmail.com"));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("chocosogamer@gmail.com"));
                 message.setContent(mimeMultipart, "text/html; charset=utf-8");
 
                 Transport.send(message);

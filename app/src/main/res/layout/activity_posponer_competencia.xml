@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ayuda_Competidor">
+    tools:context=".posponer_competencia">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,13 +12,14 @@
         android:background="@drawable/barra_verde">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:layout_marginLeft="90dp"
-            android:layout_marginTop="5dp"
-            android:text="Centro de Ayuda "
+            android:id="@+id/tvNombreCiudad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Posponer Competencia"
             android:textColor="@android:color/background_light"
-            android:textSize="40dp"></TextView>
+            android:textSize="30dp"></TextView>
     </LinearLayout>
 
     <LinearLayout
