@@ -3,6 +3,7 @@ package com.runnatica.runnatica;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -65,6 +66,8 @@ public class carrera_vista1 extends AppCompatActivity {
         txtComentario = (TextView)findViewById(R.id.etRespuestaForo);
         btnEnviarComentario = (Button)findViewById(R.id.btnEnviarForo);
         ForoRecycler = (RecyclerView)findViewById(R.id.rvForo);
+        ForoRecycler.setHasFixedSize(true);
+        ForoRecycler.setLayoutManager(new LinearLayoutManager(this));
 
 
         getLastViewData();
@@ -170,7 +173,6 @@ public class carrera_vista1 extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(carrera_vista1.this, response.toString(), Toast.LENGTH_LONG).show();
                         try {
                             //Hacer el string a json array object
                             JSONArray array = new JSONArray(response);
