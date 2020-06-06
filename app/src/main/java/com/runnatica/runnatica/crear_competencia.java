@@ -74,8 +74,7 @@ public class crear_competencia extends AppCompatActivity {
                     "&Hora=" + Hora.getText().toString() +
                     "&Estado=X" +
                     "&Reembolso=X" +
-                    "&Precio=" + Precio.getText().toString()
-                    );
+                    "&Precio=" + Precio.getText().toString());
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
                 }
