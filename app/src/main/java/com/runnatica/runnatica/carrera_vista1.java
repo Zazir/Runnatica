@@ -104,11 +104,10 @@ public class carrera_vista1 extends AppCompatActivity {
     }
 
     private String crearFecha(String fechaEvento) {
-        String fecha = ""+fechaEvento;
-        String dia = fecha.substring(0, 2);
-        String mes = fecha.substring(2, 4);
-        String ano = fecha.substring(4);
-        return dia + mes + ano;
+        String dia = fechaEvento.substring(0, 2);
+        String mes = fechaEvento.substring(2, 4);
+        String ano = fechaEvento.substring(4);
+        return dia+"/" + mes + "/" + ano;
     }
 
     private void cargarInfoCarrera(String URL) {
