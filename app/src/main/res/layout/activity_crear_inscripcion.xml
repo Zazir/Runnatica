@@ -155,6 +155,12 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/background_dark"></EditText>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvCantidadInscripciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No has creado ninguna inscripción" />
             </LinearLayout>
 
             <LinearLayout
@@ -168,16 +174,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:background="@color/grisBoton"
-                    android:text="Pagar con Paypal"
+                    android:text="Crear inscripción"
                     android:textColor="@android:color/background_light"
                     android:textSize="20dp"></Button>
 
                 <Button
-                    android:id="@+id/btnTarjeta"
+                    android:id="@+id/btnFinalizarCompetencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/grisBoton"
-                    android:text="Pagar con tarjeta"
+                    android:text="Finalizar"
+                    android:enabled="false"
                     android:textColor="@android:color/background_light"
                     android:textSize="20dp"></Button>
 

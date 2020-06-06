@@ -40,7 +40,7 @@
             android:textSize="20dp"></Button>
 
         <Button
-            android:id="@+id/btnTarjeta"
+            android:id="@+id/btnFinalizarCompetencia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/grisBoton"

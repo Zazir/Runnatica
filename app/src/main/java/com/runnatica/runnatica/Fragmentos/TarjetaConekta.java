@@ -1,4 +1,4 @@
-package com.runnatica.runnatica;
+package com.runnatica.runnatica.Fragmentos;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.runnatica.runnatica.PDF.PlantillaPDF;
+import com.runnatica.runnatica.R;
 
 import org.json.JSONObject;
 
@@ -25,7 +26,7 @@ import io.conekta.conektasdk.Token;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TarjetaConekta#newInstance} factory method to
+ * Use the {@link TarjetaConekta#} factory method to
  * create an instance of this fragment.
  */
 public class TarjetaConekta extends Fragment implements Token.CreateToken{
@@ -35,45 +36,16 @@ public class TarjetaConekta extends Fragment implements Token.CreateToken{
 
     Calendar calendar = Calendar.getInstance();
     final String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private Context context;
 
     public TarjetaConekta() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TarjetaConekta.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TarjetaConekta newInstance(String param1, String param2, Context context) {
-        TarjetaConekta fragment = new TarjetaConekta();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
         // ------------------------------> Iniciar el servicio Conekta

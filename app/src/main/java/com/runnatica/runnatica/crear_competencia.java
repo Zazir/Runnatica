@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.runnatica.runnatica.poho.Usuario;
 
 public class crear_competencia extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class crear_competencia extends AppCompatActivity {
     private Spinner Pais, Estado;
     private RadioButton SiReembolso, NoReembolso;
     private String cadenaVacia;
+    private Usuario usuario = Usuario.getUsuarioInstance();
 
 
     @Override
@@ -58,7 +60,8 @@ public class crear_competencia extends AppCompatActivity {
                 if(Validaciones()){
                     String fecha = fechadeCompetencia();
                     SubirCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?" +
-                    "Foto=X" +
+                    "Id_usuario="+ usuario.getId() +
+                    "&Foto=X" +
                     "&Descripcion=" + Descripcion.getText().toString().replaceAll(" ", "%20")+
                     "&Aval=X" +
                     "&Coordenadas=" + GradosUbicacion.getText().toString() +
@@ -68,7 +71,6 @@ public class crear_competencia extends AppCompatActivity {
                     "&Calle=" + Calle.getText().toString().replaceAll(" ", "%20") +
                     "&Ciudad=" + Ciudad.getText().toString().replaceAll(" ", "%20") +
                     "&Fecha="+ fecha+
-                    "&Resultados=X" +
                     "&Hora=" + Hora.getText().toString() +
                     "&Estado=X" +
                     "&Reembolso=X" +
@@ -87,13 +89,15 @@ public class crear_competencia extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {//Aqui recibimos un objeto como parametro, es la respuesta a un listener
             @Override
             public void onResponse(String response) {//Operacion exitosa a travez del web service
-                Toast.makeText(getApplicationContext(), "OPERACION EXITOSA", Toast.LENGTH_SHORT).show();
-                alCrearInscripcion();
+                if (response.equals("error al crear el competencia")){
+                    Toast.makeText(getApplicationContext(), "Hubo un error al crear la competencia", Toast.LENGTH_SHORT).show();
+                } else if (Integer.parseInt(response) >= 0)
+                    alCrearInscripcion(response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {// Cuando hay un problema en la conexion.
-                Toast.makeText(getApplicationContext(), "Hubo un error" + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Hubo un error con el servidor: " + error, Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -147,8 +151,9 @@ public class crear_competencia extends AppCompatActivity {
         return siguiente;
     }
 
-    private void alCrearInscripcion() {
+    private void alCrearInscripcion(String id) {
         Intent next = new Intent(this, crear_inscripcion.class);
+        next.putExtra("ID_COMPETENCIA", id);
         startActivity(next);
     }
 

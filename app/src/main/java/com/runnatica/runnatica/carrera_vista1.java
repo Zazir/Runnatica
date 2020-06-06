@@ -97,9 +97,18 @@ public class carrera_vista1 extends AppCompatActivity {
     }
 
     private void CrearInscripcion() {
-        Intent intent = new Intent(carrera_vista1.this, crear_inscripcion.class);
+        Intent intent = new Intent(carrera_vista1.this, InscripcionesCompetidor.class);
         intent.putExtra("monto", txtPrecioCompe.getText().toString());
+        intent.putExtra("ID_COMPENTENCIA", id_competencia);
         startActivity(intent);
+    }
+
+    private String crearFecha(String fechaEvento) {
+        String fecha = ""+fechaEvento;
+        String dia = fecha.substring(0, 2);
+        String mes = fecha.substring(2, 4);
+        String ano = fecha.substring(4);
+        return dia + mes + ano;
     }
 
     private void cargarInfoCarrera(String URL) {
@@ -112,10 +121,10 @@ public class carrera_vista1 extends AppCompatActivity {
                             JSONObject respuesta = jsonArray.getJSONObject(0);
                             txtNomCompe.setText(respuesta.optString("nom_comp"));
                             txtOrganizador.setText(respuesta.optString("id_usuario"));
-                            txtFechaCompe.setText(respuesta.optString("fecha"));
-                            txtHoraCompe.setText(respuesta.optString("hora"));
+                            txtFechaCompe.setText(crearFecha(respuesta.optString("fecha")));
+                            txtHoraCompe.setText(respuesta.optString("hora") + " horas");
                             txtLugarCompe.setText(respuesta.optString("coordenadas"));
-                            txtPrecioCompe.setText(respuesta.optString("precio"));
+                            txtPrecioCompe.setText("$" + respuesta.optString("precio"));
                             txtDescripcionCompe.setText(respuesta.optString("descripcion"));
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -182,6 +191,7 @@ public class carrera_vista1 extends AppCompatActivity {
 
                             //Creamos instancia del adapter
                             adaptador = new comentariosAdapter(carrera_vista1.this, comentariosList);
+                            adaptador.notifyDataSetChanged();
                             ForoRecycler.setAdapter(adaptador);
                         } catch (JSONException e) {
                             e.printStackTrace();

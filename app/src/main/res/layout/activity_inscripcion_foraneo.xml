@@ -27,10 +27,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre de la Inscripcion"
         android:layout_marginTop="65dp"
-        android:textSize="30dp"
-        ></TextView>
+        android:text="Nombre de la Inscripcion"
+        android:textSize="30dp"></TextView>
 
     <TextView
         android:layout_width="170dp"
@@ -106,6 +105,27 @@
             android:textSize="40dp"></TextView>
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/etCantidadForaneos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="329dp"
+        android:ems="10"
+        android:hint="Cuántos foráneos"/>
+
+    <Button
+        android:id="@+id/btnPasarAInscripcionForaneo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aceptar"
+        android:layout_marginTop="375dp"/>
+
+    <FrameLayout
+        android:id="@+id/contenedorForaneos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="430dp">
+    </FrameLayout>
 
 
 </RelativeLayout>

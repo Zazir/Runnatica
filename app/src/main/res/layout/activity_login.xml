@@ -43,6 +43,14 @@
         android:textSize="30sp" />
 
     <EditText
+        android:id="@+id/etUsuario"
+        android:layout_width="323dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Runnatica"
+        android:inputType="textEmailAddress"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
         android:id="@+id/etContrasena"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
@@ -74,12 +82,7 @@
         android:text="Registrase"
         android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/etUsuario"
-        android:layout_width="323dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Runnatica"
-        android:layout_centerHorizontal="true"/>
+
 
 
 
