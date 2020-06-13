@@ -178,6 +178,7 @@
                 android:text="Subir"></Button>
 
             <TextView
+                android:id="@+id/tvImgNombre"
                 android:layout_width="108dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="270dp"
@@ -186,6 +187,13 @@
                 android:textSize="20dp"
                 android:textColor="@android:color/background_dark"
                 ></TextView>
+
+            <ImageView
+                android:id="@+id/imgCompetencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="430dp"
+                android:layout_marginLeft="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -349,22 +357,28 @@
                 android:text="¿Se reembolsa el dinero en caso de cancelación de evento?"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"></TextView>
-            <RadioButton
-                android:id="@+id/rbSiReembolso"
+            <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="1280dp"
-                android:text="Si hay Reembolso"
-                ></RadioButton>
-            <RadioButton
-                android:id="@+id/rbNoReembolso"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="180dp"
-                android:layout_marginTop="1280dp"
-                android:text="No hay Reembolso"
-                ></RadioButton>
+                android:layout_marginTop="1280dp">
+
+                <RadioButton
+                    android:id="@+id/rbSiReembolso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Si hay Reembolso"
+                    ></RadioButton>
+                <RadioButton
+                    android:id="@+id/rbNoReembolso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="180dp"
+                    android:text="No hay Reembolso"
+                    ></RadioButton>
+
+            </RadioGroup>
+
 
             <Button
                 android:id="@+id/btnGuardarCompetencia"

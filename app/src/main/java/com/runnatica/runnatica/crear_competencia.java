@@ -1,11 +1,18 @@
 package com.runnatica.runnatica;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -18,14 +25,19 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.runnatica.runnatica.poho.Usuario;
 
+import java.io.ByteArrayOutputStream;
+
 public class crear_competencia extends AppCompatActivity {
 
     private EditText Nombre, Precio, Dia, Mes, Ano, Hora, GradosUbicacion, Ciudad, Colonia, Calle, Descripcion;
-    private Button Informacion, Imagen, Aval, Guardar;
+    private Button Informacion, btnImagen, Aval, Guardar;
     private Spinner Pais, Estado;
     private RadioButton SiReembolso, NoReembolso;
+    private ImageView img;
     private String cadenaVacia;
     private Usuario usuario = Usuario.getUsuarioInstance();
+
+    private Bitmap bitmap;
 
 
     @Override
@@ -40,7 +52,8 @@ public class crear_competencia extends AppCompatActivity {
         Mes = (EditText)findViewById(R.id.etMesCompetencia);
         Ano = (EditText)findViewById(R.id.ttAnoCompetencia);
         Hora = (EditText)findViewById(R.id.etHoraCompetencia);
-        Imagen = (Button) findViewById(R.id.btnImagenCompetencia);
+        btnImagen = (Button) findViewById(R.id.btnImagenCompetencia);
+        img = (ImageView)findViewById(R.id.imgCompetencia);
         GradosUbicacion = (EditText)findViewById(R.id.etGradosUbicacion);
         Ciudad = (EditText)findViewById(R.id.etCiudadCompetencia);
         Colonia = (EditText)findViewById(R.id.etColoniaCompetencia);
@@ -53,6 +66,13 @@ public class crear_competencia extends AppCompatActivity {
         NoReembolso = (RadioButton) findViewById(R.id.rbNoReembolso);
         Guardar = (Button) findViewById(R.id.btnGuardarCompetencia);
 
+        btnImagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Guardar imagen
+                CargarImagen();
+            }
+        });
 
         Guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +81,8 @@ public class crear_competencia extends AppCompatActivity {
                     String fecha = fechadeCompetencia();
                     SubirCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?" +
                     "Id_usuario="+ usuario.getId() +
-                    "&Foto=X" +
+                    "&Foto=" + getStringImage(bitmap) +
+                    "&NombreFoto=" + System.currentTimeMillis()/1000+".jpg" +
                     "&Descripcion=" + Descripcion.getText().toString().replaceAll(" ", "%20")+
                     "&Aval=X" +
                     "&Coordenadas=" + GradosUbicacion.getText().toString() +
@@ -82,12 +103,24 @@ public class crear_competencia extends AppCompatActivity {
         });
 
     }
+
+    private String getStringImage(Bitmap btm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        btm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imgBytes = baos.toByteArray();
+        String encodeImg = Base64.encodeToString(imgBytes, Base64.DEFAULT);
+
+        return encodeImg;
+    }
+
     private void SubirCompetencia(String URL) {
+        final ProgressDialog cargando = ProgressDialog.show(this, "Creando tu competencia", "Espera por favor...");
         //stringRequest es el objeto el cual almacena los datos.
         //Declaramos un StringRequest definiendo el método que utilizamos, en este caso es GET
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {//Aqui recibimos un objeto como parametro, es la respuesta a un listener
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {//Operacion exitosa a travez del web service
+                cargando.dismiss();
                 if (response.equals("error al crear el competencia")){
                     Toast.makeText(getApplicationContext(), "Hubo un error al crear la competencia", Toast.LENGTH_SHORT).show();
                 } else if (Integer.parseInt(response) >= 0)
@@ -96,6 +129,7 @@ public class crear_competencia extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {// Cuando hay un problema en la conexion.
+                cargando.dismiss();
                 Toast.makeText(getApplicationContext(), "Hubo un error con el servidor: " + error, Toast.LENGTH_SHORT).show();
             }
         });
@@ -103,8 +137,22 @@ public class crear_competencia extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    private void CargarImagen() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/");
+        startActivityForResult(intent.createChooser(intent, "Seleccione la aplicación"), 10);
+    }
 
-    private String fechadeCompetencia(){
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            Uri path = data.getData();
+            img.setImageURI(path);
+        }
+    }
+
+    private String fechadeCompetencia() {
         String date = Dia.getText().toString() + Mes.getText().toString() + Ano.getText().toString();
         return date;
     }

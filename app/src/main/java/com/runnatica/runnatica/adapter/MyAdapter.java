@@ -32,7 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolderCompeten
     @NonNull
     @Override
     public MyAdapter.ViewHolderCompetencia onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(parent.getContext() ,R.layout.lista_layout, null);
+        View view = View.inflate(parent.getContext() ,R.layout.recyclerview_competencias, null);
         return new ViewHolderCompetencia(view);
     }
 

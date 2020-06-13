@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".editar_competencia2"></activity>
+        <activity android:name=".pagarInscripciones"></activity>
+        <activity android:name=".agregarForaneo" />
+        <activity android:name=".editar_competencia2" />
         <activity android:name=".borrar_competencia" />
         <activity android:name=".cancelar_competencia" />
         <activity android:name=".posponer_competencia" />

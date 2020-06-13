@@ -7,125 +7,65 @@
     tools:context=".InscripcionForaneo">
 
     <LinearLayout
+        android:id="@+id/kk"
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:background="@drawable/barra_verde">
 
         <TextView
-            android:id="@+id/tvNombreCiudad"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="Inscripcion Foraneo"
+            android:text="¿Quieres inscribir foráneos?"
             android:textColor="@android:color/background_light"
-            android:textSize="40dp"></TextView>
+            android:textSize="25dp"></TextView>
     </LinearLayout>
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
-        android:text="Nombre de la Inscripcion"
-        android:textSize="30dp"></TextView>
-
-    <TextView
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:text="Edad Minima:"
-        android:textSize="25dp"></TextView>
-
-    <TextView
-        android:layout_width="174dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="105dp"
-        android:text="Edad Maxima:"
-        android:textSize="25dp"></TextView>
-
-    <Spinner
-        android:layout_width="89dp"
-        android:layout_height="41dp"
-        android:layout_marginLeft="350dp"
-        android:layout_marginTop="120dp" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="180dp"
-        android:background="@android:color/background_dark"></LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre de la Inscripcion"
-        android:layout_marginTop="195dp"
-        android:textSize="30dp"
-        ></TextView>
+        android:layout_below="@+id/kk"
+        android:layout_above="@+id/kkta"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
-        android:text="Edad Minima:"
-        android:textSize="25dp"></TextView>
+        <Button
+            android:id="@+id/btnPasarACrearForaneo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Dar de alta usuarios foráneos"/>
 
-    <TextView
-        android:layout_width="174dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="275dp"
-        android:text="Edad Maxima:"
-        android:textSize="25dp"></TextView>
-
-    <Spinner
-        android:layout_width="89dp"
-        android:layout_height="41dp"
-        android:layout_marginLeft="350dp"
-        android:layout_marginTop="240dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="315dp"
-        android:background="@android:color/background_dark"></LinearLayout>
-
-    <LinearLayout
-        android:layout_width="495dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="570dp"
-        android:background="@drawable/barra_verde">
         <TextView
-            android:id="@+id/tvRegistrarse"
+            android:id="@+id/etCantidadForaneos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Nota* No puedes inscribir a más de 5 usuarios foráneos"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvInscripcionesForaneos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/kkta"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/barra_verde">
+        <Button
+            android:id="@+id/btnPagarInscripciones"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Registrarse"
+            android:text="Pagar ticket"
             android:textColor="@android:color/background_light"
-            android:textSize="40dp"></TextView>
+            android:background="@android:color/transparent"
+            android:textSize="35dp"></Button>
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/etCantidadForaneos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="329dp"
-        android:ems="10"
-        android:hint="Cuántos foráneos"/>
-
-    <Button
-        android:id="@+id/btnPasarAInscripcionForaneo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Aceptar"
-        android:layout_marginTop="375dp"/>
-
-    <FrameLayout
-        android:id="@+id/contenedorForaneos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="430dp">
-    </FrameLayout>
-
 
 </RelativeLayout>

@@ -67,31 +67,19 @@ public class Login extends AppCompatActivity {
                 try {
                     JSONArray jsonarray = new JSONArray(response);
                     JSONObject jsonobject;
-                    jsonobject = jsonarray.getJSONObject(0);
-                    user.setId(Integer.parseInt(jsonobject.getString("id_usuarios")));
-                    user.setTipoUsuario(jsonobject.optString("tipo_usr"));
-                    user.setFechaNacimiento(jsonobject.optInt("f_nacimiento"));
-                    user.setCorreo(jsonobject.optString("correo"));
-                    user.setNombre(jsonobject.optString("nombre"));
+                    /*if (jsonarray.get(0).equals("")){
+                        Toast.makeText(getApplicationContext(), "Error en las credenciales", Toast.LENGTH_SHORT).show();
+                    }else if (jsonarray.length() > 1){*/
+                        jsonobject = jsonarray.getJSONObject(0);
+                        user.setId(Integer.parseInt(jsonobject.getString("id_usuarios")));
+                        user.setTipoUsuario(jsonobject.optString("tipo_usr"));
+                        user.setFechaNacimiento(jsonobject.optInt("f_nacimiento"));
+                        user.setCorreo(jsonobject.optString("correo"));
+                        user.setNombre(jsonobject.optString("nombre"));
+                    //}
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                /*try {
-
-                    jsonarray = new JSONArray(response);
-                    if (jsonarray.length() <= 0){
-                        Toast.makeText(getApplicationContext(), "Error en las credenciales", Toast.LENGTH_SHORT).show();
-
-                    }else if (jsonarray.length() >= 2){
-
-                    }else if (jsonarray == null)
-                        Toast.makeText(getApplicationContext(), "Error en las credenciales", Toast.LENGTH_SHORT).show();
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }*/
-
 
                 alHome();
             }

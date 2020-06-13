@@ -1,5 +1,11 @@
 package com.runnatica.runnatica.poho;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class Usuario {
     private static Usuario usuario;
     private int id;
@@ -66,20 +72,63 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getEdadUsuario() {
+    public int getEdadUsuario() {
         //1-4-1-1-1-9-9-9
         //0-1-2-3-4-5-6-7
         String fecha = ""+fechaNacimiento;
         String dia = fecha.substring(0, 2);
         String mes = fecha.substring(2, 4);
         String ano = fecha.substring(4);
+        String dateBorn = dia+"-"+mes+"-"+ano;
 
-        /*DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate fechaNac = LocalDate.parse(dia+"/" + mes + "/" + ano, fmt);
-        LocalDate ahora = LocalDate.now();
+        Date startdate = null;
+        Date enddate = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        enddate.getDate();
 
-        Period periodo = Period.between(fechaNac, ahora);
-        String edad = "" + periodo.getYears() + periodo.getMonths() + periodo.getDays();*/
-        return dia + mes + ano;
+        try {
+            startdate = formatter.parse(dateBorn);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar startCalendar = new GregorianCalendar();
+        startCalendar.setTime(startdate);
+
+        Calendar endCalendar = new GregorianCalendar();
+        endCalendar.setTime(enddate);
+
+        int monthCount = 0;
+        int firstDayInFirstMonth = startCalendar.get(Calendar.DAY_OF_MONTH);
+        startCalendar.set(Calendar.DAY_OF_MONTH, 1);
+        endCalendar.add(Calendar.DAY_OF_YEAR, -firstDayInFirstMonth + 1);
+
+        while (!startCalendar.after(endCalendar)) {
+            startCalendar.add(Calendar.MONTH, 1);
+            ++monthCount;
+        }
+
+        startCalendar.add(Calendar.MONTH, -1);
+        --monthCount;
+        int remainingDays = 0;
+        while (!startCalendar.after(endCalendar)) {
+            startCalendar.add(Calendar.DAY_OF_YEAR, 1);
+            ++remainingDays;
+        }
+
+        startCalendar.add(Calendar.DAY_OF_YEAR, -1);
+        --remainingDays;
+
+        int lastMonthMaxDays = endCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        if (remainingDays >= lastMonthMaxDays) {
+            ++monthCount;
+            remainingDays -= lastMonthMaxDays;
+        }
+
+        int diffMonth = monthCount % 12;
+        int diffYear = monthCount / 12;
+        int diffDay = remainingDays;
+
+        return diffYear;
     }
 }

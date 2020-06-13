@@ -41,6 +41,7 @@ public class carrera_vista1 extends AppCompatActivity {
     private Usuario user = Usuario.getUsuarioInstance();
     private String id_competencia;
     private comentariosAdapter adaptador;
+    private String monto;
 
     @Override
     protected void onDestroy() {
@@ -71,6 +72,7 @@ public class carrera_vista1 extends AppCompatActivity {
 
 
         getLastViewData();
+        Toast.makeText(this, "" + user.getEdadUsuario(), Toast.LENGTH_SHORT).show();
         cargarInfoCarrera("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencia.php?idCompe=" + id_competencia);
 
         cargarComentarios("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerComentarios.php?id_compentencia=" + id_competencia);
@@ -101,9 +103,10 @@ public class carrera_vista1 extends AppCompatActivity {
 
     private void CrearInscripcion() {
         Intent intent = new Intent(carrera_vista1.this, InscripcionesCompetidor.class);
-        intent.putExtra("monto", txtPrecioCompe.getText().toString());
+        intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia);
         startActivity(intent);
+        finish();
     }
 
     private String crearFecha(String fechaEvento) {
@@ -127,6 +130,7 @@ public class carrera_vista1 extends AppCompatActivity {
                             txtHoraCompe.setText(respuesta.optString("hora") + " horas");
                             txtLugarCompe.setText(respuesta.optString("coordenadas"));
                             txtPrecioCompe.setText("$" + respuesta.optString("precio"));
+                            monto = respuesta.optString("precio");
                             txtDescripcionCompe.setText(respuesta.optString("descripcion"));
                         } catch (JSONException e) {
                             e.printStackTrace();
