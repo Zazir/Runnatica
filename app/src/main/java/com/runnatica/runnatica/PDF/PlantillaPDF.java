@@ -1,12 +1,20 @@
 package com.runnatica.runnatica.PDF;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -35,8 +43,11 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class PlantillaPDF {
+
+public class PlantillaPDF implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private Usuario usuario = Usuario.getUsuarioInstance();
 
@@ -53,13 +64,18 @@ public class PlantillaPDF {
     private Font FECHA = new Font(Font.FontFamily.ZAPFDINGBATS, 10, Font.BOLD);
 
     private Context context;
+    private Activity activity;
+    private String PackageName;
+
     private File archivoPDF;
     private Document documento;
     private PdfWriter pdfWriter;
     private Paragraph parrafo;
 
-    public PlantillaPDF(Context context) {
+    public PlantillaPDF(Context context, Activity activity, String PackageName) {
         this.context = context;
+        this.activity = activity;
+        this.PackageName = PackageName;
     }
 
     private void crearArchivo() {
@@ -173,15 +189,87 @@ public class PlantillaPDF {
                 mimeMultipart.addBodyPart(adjunto);
 
                 message.setSubject("Runnatica Inscrición");
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("chocosogamer@gmail.com"));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("fernandozazir@gmail.com"));
                 message.setContent(mimeMultipart, "text/html; charset=utf-8");
 
                 Transport.send(message);
             }
         }catch (Exception e) {
+            Toast.makeText(context, "No se pudo enviar el email con tus datos de inscripción", Toast.LENGTH_SHORT).show();
             Log.e("Error con mail", "" + e);
         }
 
 
+    }
+
+    public boolean validarPermisos() {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+            return true;
+
+        if (ContextCompat.checkSelfPermission(context, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(context, READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+            return true;
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, WRITE_EXTERNAL_STORAGE) ||
+                ActivityCompat.shouldShowRequestPermissionRationale(activity, READ_EXTERNAL_STORAGE))
+            cargarDialogoPermisos();
+        else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                activity.requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, 100);
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] strings, @NonNull int[] grantResults) {
+
+        if (requestCode == 100) {
+            if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(context, "Aceptaste los permisos", Toast.LENGTH_SHORT).show();
+            } else {
+                solicitarPermisosManual();
+            }
+        }
+    }
+
+    private void solicitarPermisosManual() {
+        final CharSequence[] opciones = {"Si", "No"};
+        final AlertDialog.Builder alertOptions = new AlertDialog.Builder(activity);
+        alertOptions.setTitle("¿Quieres configurar manualmente los permisos?");
+        alertOptions.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (opciones[which].equals("Si")){
+                    Intent intent = new Intent();
+                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package", PackageName, null);
+                    intent.setData(uri);
+                    activity.startActivity(intent);
+                } else {
+                    Toast.makeText(context, "Los permisos no fueron aceptados", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            }
+        });
+    }
+
+    private void cargarDialogoPermisos() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+        dialog.setTitle("Permisos desactivados");
+        dialog.setMessage("Debes aceptar los permisos para el funcionamiento correcto de la aplicación");
+
+        dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    activity.requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, 100);
+                }
+            }
+        });
+
+        dialog.show();
     }
 }

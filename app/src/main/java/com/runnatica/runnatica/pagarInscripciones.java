@@ -31,6 +31,7 @@ import java.util.Calendar;
 
 public class pagarInscripciones extends AppCompatActivity {
     private Button paypal, conekta;
+    PlantillaPDF plantillaPDF = new PlantillaPDF(getApplicationContext(), pagarInscripciones.this, getPackageName());;
 
     private static final int PAYPAL_REQUEST_CODE = 7171;
     private static PayPalConfiguration config = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)//Seleccionado el modo sandbox
@@ -51,6 +52,14 @@ public class pagarInscripciones extends AppCompatActivity {
         conekta = (Button)findViewById(R.id.btnConekta);
 
         getLastViewData();
+
+        if (plantillaPDF.validarPermisos()) {
+            paypal.setEnabled(true);
+            conekta.setEnabled(true);
+        } else {
+            paypal.setEnabled(false);
+            conekta.setEnabled(false);
+        }
 
         // ------------------------------> Iniciar el servicio Paypal
         Intent intent = new Intent(this, PayPalService.class);
@@ -131,7 +140,6 @@ public class pagarInscripciones extends AppCompatActivity {
     }
 
     private void crearPDF(String Fecha) {
-        PlantillaPDF plantillaPDF = new PlantillaPDF(getApplicationContext());
         plantillaPDF.abrirArchivo();
         plantillaPDF.addMetadata("Carrera", "Inscripcion", "Runnatica");
         plantillaPDF.addHeaders("Nombre de la carrera", "Marca", Fecha);

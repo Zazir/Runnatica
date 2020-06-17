@@ -31,7 +31,7 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
     private Context ctx;
     private List<Inscripciones> inscripcionesList;
     private int contForaneos = 0;
-    private int[] idForaneo = new int[5];
+    private String foraneoSeleccionado;
 
     public inscripcionesForaneoAdapter(Context ctx, List<Inscripciones> inscripcionesList) {
         this.ctx = ctx;
@@ -59,15 +59,16 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
         return inscripcionesList.size();
     }
 
-    public int[] getIdForaneo() {
-        return idForaneo;
+    public String getForaneoSeleccionado() {
+        return foraneoSeleccionado;
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(ctx, "Seleccionaste "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT ).show();
         //idForaneo += ;
-        contForaneos++;
+        //contForaneos++;
+        foraneoSeleccionado = parent.getItemAtPosition(position).toString();
     }
 
     @Override
@@ -124,7 +125,7 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
                     JSONObject foraneo = jsonArray.getJSONObject(i);
 
                     if (foraneo.optInt("edad") >= inscripciones.getEdadMinina() && foraneo.optInt("edad") <= inscripciones.getEdadMaxima()){
-                        listaParaSp.add(foraneo.optString("nombre"));
+                        listaParaSp.add(foraneo.optInt("id_foraneo") + " : " + foraneo.optString("nombre"));
                     }
                 }
                 ArrayAdapter<String> foraneoArrayAdapter = new ArrayAdapter<>(ctx, android.R.layout.simple_dropdown_item_1line, listaParaSp);

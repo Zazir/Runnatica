@@ -67,7 +67,7 @@ public class Login extends AppCompatActivity {
                 try {
                     JSONArray jsonarray = new JSONArray(response);
                     JSONObject jsonobject;
-                    /*if (jsonarray.get(0).equals("")){
+                    /*if (jsonarray.get(0).equals("[")){
                         Toast.makeText(getApplicationContext(), "Error en las credenciales", Toast.LENGTH_SHORT).show();
                     }else if (jsonarray.length() > 1){*/
                         jsonobject = jsonarray.getJSONObject(0);
