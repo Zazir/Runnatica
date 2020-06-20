@@ -72,7 +72,6 @@ public class carrera_vista1 extends AppCompatActivity {
 
 
         getLastViewData();
-        Toast.makeText(this, "" + user.getEdadUsuario(), Toast.LENGTH_SHORT).show();
         cargarInfoCarrera("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencia.php?idCompe=" + id_competencia);
 
         cargarComentarios("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerComentarios.php?id_compentencia=" + id_competencia);

@@ -95,12 +95,16 @@ public class pagarInscripciones extends AppCompatActivity {
 
     // --------------------------> PAYPAL INTEGRATION <------------------------------- //
     private void hacerPago() {
-        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(monto)), "MXN", "Prueba", PayPalPayment.PAYMENT_INTENT_SALE);
+        if (monto == null) {
+            Toast.makeText(this, "Hubo un error al cargar la información de la competencia, vuelve a seleccionar la competenca", Toast.LENGTH_SHORT).show();
+        }else {
+            PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(monto)), "MXN", "Prueba", PayPalPayment.PAYMENT_INTENT_SALE);
 
-        Intent intent = new Intent(this, PaymentActivity.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
-        startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+            Intent intent = new Intent(this, PaymentActivity.class);
+            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+            intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
+            startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+        }
     }
 
     @Override
@@ -157,7 +161,6 @@ public class pagarInscripciones extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
             String authorities = getApplicationContext().getPackageName()+".provider";
             FileProvider.getUriForFile(this, authorities, plantillaPDF.archivoPDF);
-            //intent.putExtra(MediaStore.EXTRA_OUTPUT, pdfUri);
         }
 
         plantillaPDF.abrirArchivo();
