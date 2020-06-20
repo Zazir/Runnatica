@@ -76,7 +76,7 @@ public class home extends AppCompatActivity {
         //Inicializar arreglo de competencias
         competenciasList = new ArrayList<>();
 
-        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?ciudad=Jalisco");
+        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?estado=Jalisco");
 
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 

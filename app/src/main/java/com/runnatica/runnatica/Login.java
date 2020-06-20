@@ -63,11 +63,10 @@ public class Login extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 user = Usuario.getUsuarioInstance();
-                Toast.makeText(getApplicationContext(), "Bienvenido "+Usuariotxt.getText().toString(), Toast.LENGTH_SHORT).show();
                 try {
                     JSONArray jsonarray = new JSONArray(response);
                     JSONObject jsonobject;
-                    if (jsonarray.get(0).equals("[]")){
+                    if (response.equals("[]")){
                         Toast.makeText(getApplicationContext(), "Error en las credenciales", Toast.LENGTH_SHORT).show();
                         return;
                     }else if (jsonarray.length() > 1){
@@ -77,6 +76,7 @@ public class Login extends AppCompatActivity {
                         user.setFechaNacimiento(jsonobject.optInt("f_nacimiento"));
                         user.setCorreo(jsonobject.optString("correo"));
                         user.setNombre(jsonobject.optString("nombre"));
+                        Toast.makeText(getApplicationContext(), "Bienvenido "+user.getNombre(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
