@@ -1,10 +1,17 @@
 package com.runnatica.runnatica;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -29,9 +36,12 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.util.Calendar;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
 public class pagarInscripciones extends AppCompatActivity {
     private Button paypal, conekta;
-    PlantillaPDF plantillaPDF = new PlantillaPDF(pagarInscripciones.this, getParent(), "Runnatica");;
+    PlantillaPDF plantillaPDF = new PlantillaPDF(pagarInscripciones.this);;
 
     private static final int PAYPAL_REQUEST_CODE = 7171;
     private static PayPalConfiguration config = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)//Seleccionado el modo sandbox
@@ -50,10 +60,11 @@ public class pagarInscripciones extends AppCompatActivity {
         setContentView(R.layout.activity_pagar_inscripciones);
         paypal = (Button)findViewById(R.id.btnPaypal);
         conekta = (Button)findViewById(R.id.btnConekta);
+        paypal.setEnabled(false);
 
         getLastViewData();
 
-        if (plantillaPDF.validarPermisos()) {
+        if (validarPermisos()) {
             paypal.setEnabled(true);
             conekta.setEnabled(true);
         } else {
@@ -149,5 +160,79 @@ public class pagarInscripciones extends AppCompatActivity {
         plantillaPDF.addParagraph("Nomre del organizador");
         plantillaPDF.cerrarDocumento();
         plantillaPDF.sendPDF(this);
+    }
+
+    public boolean validarPermisos() {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+            return true;
+        }
+
+        if ((checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) &&
+                (checkSelfPermission(READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+            return true;
+        }
+
+        if ((shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) ||
+                (shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE))) {
+            cargarDialogoPermisos();
+        }else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, 100);
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == 100) {
+            if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                paypal.setEnabled(true);
+            } else {
+                solicitarPermisosManual();
+            }
+        }
+    }
+
+    private void solicitarPermisosManual() {
+        final CharSequence[] opciones = {"Si", "No"};
+        final AlertDialog.Builder alertOptions = new AlertDialog.Builder(pagarInscripciones.this);
+        alertOptions.setTitle("¿Quieres configurar manualmente los permisos?");
+        alertOptions.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (opciones[which].equals("Si")){
+                    Intent intent = new Intent();
+                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                    intent.setData(uri);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(pagarInscripciones.this, "Los permisos no fueron aceptados", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            }
+        });
+    }
+
+    private void cargarDialogoPermisos() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(pagarInscripciones.this);
+        dialog.setTitle("Permisos desactivados");
+        dialog.setMessage("Debes aceptar los permisos para el funcionamiento correcto de la aplicación");
+
+        dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, 100);
+                }
+            }
+        });
+
+        dialog.show();
     }
 }

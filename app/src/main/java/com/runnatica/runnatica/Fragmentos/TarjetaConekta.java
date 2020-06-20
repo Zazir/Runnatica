@@ -100,7 +100,7 @@ public class TarjetaConekta extends Fragment implements Token.CreateToken{
     }
 
     private void crearPDF(String Fecha) {
-        PlantillaPDF plantillaPDF = new PlantillaPDF(getActivity(), getActivity(), "");
+        PlantillaPDF plantillaPDF = new PlantillaPDF(getActivity());
         plantillaPDF.abrirArchivo();
         plantillaPDF.addMetadata("Carrera", "Inscripcion", "Runnatica");
         plantillaPDF.addHeaders("Nombre de la carrera", "Marca", Fecha);
