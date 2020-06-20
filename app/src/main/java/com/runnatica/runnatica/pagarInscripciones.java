@@ -31,7 +31,7 @@ import java.util.Calendar;
 
 public class pagarInscripciones extends AppCompatActivity {
     private Button paypal, conekta;
-    PlantillaPDF plantillaPDF = new PlantillaPDF(getApplicationContext(), pagarInscripciones.this, getPackageName());;
+    PlantillaPDF plantillaPDF = new PlantillaPDF(pagarInscripciones.this, getParent(), "Runnatica");;
 
     private static final int PAYPAL_REQUEST_CODE = 7171;
     private static PayPalConfiguration config = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)//Seleccionado el modo sandbox

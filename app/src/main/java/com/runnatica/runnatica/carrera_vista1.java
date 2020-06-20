@@ -109,13 +109,6 @@ public class carrera_vista1 extends AppCompatActivity {
         finish();
     }
 
-    private String crearFecha(String fechaEvento) {
-        String dia = fechaEvento.substring(0, 2);
-        String mes = fechaEvento.substring(2, 4);
-        String ano = fechaEvento.substring(4);
-        return dia+"/" + mes + "/" + ano;
-    }
-
     private void cargarInfoCarrera(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
@@ -126,7 +119,7 @@ public class carrera_vista1 extends AppCompatActivity {
                             JSONObject respuesta = jsonArray.getJSONObject(0);
                             txtNomCompe.setText(respuesta.optString("nom_comp"));
                             txtOrganizador.setText(respuesta.optString("id_usuario"));
-                            txtFechaCompe.setText(crearFecha(respuesta.optString("fecha")));
+                            txtFechaCompe.setText(respuesta.optString("fecha"));
                             txtHoraCompe.setText(respuesta.optString("hora") + " horas");
                             txtLugarCompe.setText(respuesta.optString("coordenadas"));
                             txtPrecioCompe.setText("$" + respuesta.optString("precio"));
