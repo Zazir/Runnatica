@@ -54,7 +54,7 @@ public class PlantillaPDF {
 
     private Context context;
 
-    private File archivoPDF;
+    public File archivoPDF;
     private Document documento;
     private PdfWriter pdfWriter;
     private Paragraph parrafo;
@@ -63,7 +63,7 @@ public class PlantillaPDF {
         this.context = context;
     }
 
-    private void crearArchivo() {
+    public void crearArchivo() {
         File folder = new File(Environment.getExternalStorageDirectory().toString(), "UserDocs");
         if(!folder.exists())
             folder.mkdir();
@@ -71,7 +71,6 @@ public class PlantillaPDF {
     }
 
     public void abrirArchivo() {
-        crearArchivo();
         try{
             documento = new Document(PageSize.A4);
             pdfWriter = PdfWriter.getInstance(documento, new FileOutputStream(archivoPDF));
