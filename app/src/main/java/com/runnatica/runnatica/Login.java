@@ -69,14 +69,13 @@ public class Login extends AppCompatActivity {
                     if (response.equals("[]")){
                         Toast.makeText(getApplicationContext(), "Error en las credenciales", Toast.LENGTH_SHORT).show();
                         return;
-                    }else if (jsonarray.length() > 1){
+                    }else {
                         jsonobject = jsonarray.getJSONObject(0);
                         user.setId(Integer.parseInt(jsonobject.getString("id_usuarios")));
                         user.setTipoUsuario(jsonobject.optString("tipo_usr"));
                         user.setFechaNacimiento(jsonobject.optInt("f_nacimiento"));
                         user.setCorreo(jsonobject.optString("correo"));
                         user.setNombre(jsonobject.optString("nombre"));
-                        Toast.makeText(getApplicationContext(), "Bienvenido "+user.getNombre(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

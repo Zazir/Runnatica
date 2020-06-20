@@ -73,8 +73,6 @@ public class Usuario {
     }
 
     public int getEdadUsuario() {
-        //1-4-1-1-1-9-9-9
-        //0-1-2-3-4-5-6-7
         String fecha = ""+fechaNacimiento;
         String dia = fecha.substring(0, 2);
         String mes = fecha.substring(2, 4);
