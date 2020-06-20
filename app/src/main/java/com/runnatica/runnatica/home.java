@@ -55,7 +55,6 @@ public class home extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rcvCompetencia);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //botongps = (Button) findViewById(R.id.botongps);
         NombreCiudad = (TextView) findViewById(R.id.tvNombreCiudad);
 
         //Localizacion GPS para buscar el nombre de la ciudad
@@ -74,12 +73,10 @@ public class home extends AppCompatActivity {
             }
         }
 
-
-
         //Inicializar arreglo de competencias
         competenciasList = new ArrayList<>();
 
-        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php");
+        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?ciudad=Jalisco");
 
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
@@ -216,7 +213,7 @@ public class home extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Error de conección con el servidor", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
             }
         });
 
