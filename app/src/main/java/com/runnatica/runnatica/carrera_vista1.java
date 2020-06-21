@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -17,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.runnatica.runnatica.adapter.comentariosAdapter;
 import com.runnatica.runnatica.poho.Comentarios;
@@ -35,6 +38,7 @@ public class carrera_vista1 extends AppCompatActivity {
             txtLugarCompe, txtPrecioCompe, txtDescripcionCompe, txtRegistrarse,
             txtComentario;
     Button btnInscripcion, btnEnviarComentario;
+    Spinner spCategorias;
     RecyclerView ForoRecycler;
 
     private List<Comentarios> comentariosList = new ArrayList<>();
@@ -42,6 +46,7 @@ public class carrera_vista1 extends AppCompatActivity {
     private String id_competencia;
     private comentariosAdapter adaptador;
     private String monto;
+    private String categoria;
 
     @Override
     protected void onDestroy() {
@@ -53,7 +58,7 @@ public class carrera_vista1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrera_vista1);
-        Spinner spinner = (Spinner)findViewById(R.id.spForo);
+        spCategorias = (Spinner)findViewById(R.id.spRespuestaCategoria);
         imgCompetencia = (ImageView)findViewById(R.id.ivFotoCompetencia);
         txtNomCompe = (TextView)findViewById(R.id.tvNombreCompetencia);
         txtOrganizador = (TextView)findViewById(R.id.tvNombreOrganizador);
@@ -70,11 +75,13 @@ public class carrera_vista1 extends AppCompatActivity {
         ForoRecycler.setHasFixedSize(true);
         ForoRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-
         getLastViewData();
+
         cargarInfoCarrera("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencia.php?idCompe=" + id_competencia);
 
         cargarComentarios("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerComentarios.php?id_compentencia=" + id_competencia);
+
+        cargarSpinner();
 
         btnInscripcion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,9 +93,11 @@ public class carrera_vista1 extends AppCompatActivity {
         btnEnviarComentario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                comentarForo("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarComentario.php?id_usuario="+ user.getId() +
-                        "&id_competencia=" + id_competencia + "&mensaje="+txtComentario.getText().toString().replaceAll(" ", "%20"));
-                txtComentario.setText("");
+                comentarForo("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarComentario.php?" +
+                        "id_usuario="+ user.getId() +
+                        "&id_competencia=" + id_competencia +
+                        "&mensaje="+txtComentario.getText().toString().replaceAll(" ", "%20") +
+                        "&tipo_mensaje=" + categoria);
             }
         });
 
@@ -108,6 +117,23 @@ public class carrera_vista1 extends AppCompatActivity {
         finish();
     }
 
+    private void cargarSpinner() {
+        ArrayAdapter<CharSequence> opcionesSpCat = ArrayAdapter.createFromResource(this, R.array.categorias, android.R.layout.simple_spinner_item);
+        spCategorias.setAdapter(opcionesSpCat);
+
+        spCategorias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                categoria = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
     private void cargarInfoCarrera(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
@@ -116,6 +142,7 @@ public class carrera_vista1 extends AppCompatActivity {
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             JSONObject respuesta = jsonArray.getJSONObject(0);
+                            Glide.with(carrera_vista1.this).load(respuesta.optString("foto")).into(imgCompetencia);
                             txtNomCompe.setText(respuesta.optString("nom_comp"));
                             txtOrganizador.setText(respuesta.optString("id_usuario"));
                             txtFechaCompe.setText(respuesta.optString("fecha"));
@@ -152,7 +179,10 @@ public class carrera_vista1 extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        if (response.equals("Exito"))
+                            txtComentario.setText("");
+                        else if (response.equals("Error"))
+                            Toast.makeText(carrera_vista1.this, "Vuelve a intentarlo en un poco de tiempo", Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {

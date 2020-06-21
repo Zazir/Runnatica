@@ -7,6 +7,7 @@
     tools:context=".home_organizador">
 
     <LinearLayout
+        android:id="@+id/mmda"
         android:layout_width="match_parent"
         android:layout_height="102dp"
         android:background="@drawable/barra_verde">
@@ -21,6 +22,13 @@
             android:textSize="40dp"></TextView>
     </LinearLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvAdministradorCompetencias"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/MenuOrganizador"
+        android:layout_below="@+id/mmda"/>
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/MenuOrganizador"
@@ -29,7 +37,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="165dp"
         android:background="@drawable/barra_verde"
         android:minHeight="@android:dimen/thumbnail_height"
         app:itemTextColor="@android:color/background_dark"

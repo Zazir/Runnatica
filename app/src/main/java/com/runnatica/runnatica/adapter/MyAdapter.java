@@ -3,11 +3,13 @@ package com.runnatica.runnatica.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.runnatica.runnatica.R;
 import com.runnatica.runnatica.poho.Competencias;
 
@@ -63,10 +65,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolderCompeten
             txtNombreCompetencias.setText(pojoCompetencia.getNombreCompetencia());
             txtDescripcionCompetencia.setText(pojoCompetencia.getDescripcionCompetencia());
             txtPrecioCompetencia.setText(pojoCompetencia.getPrecioCompetencia());
-            if (!pojoCompetencia.getImageCompetencia().equals("null")){
-                //imgCompetencia.setBackground(null);
-                //Glide.with(mCtx).load(pojoCompetencia.getImageCompetencia()).into(imgCompetencia);
-            }
+            //if (!pojoCompetencia.getImageCompetencia().equals("null")){
+                try {
+                    imgCompetencia.setBackground(null);
+                    Glide.with(mCtx).load(pojoCompetencia.getImageCompetencia()).into(imgCompetencia);
+                }catch (IllegalArgumentException ex){
+                    Log.i("Glide-tag", String.valueOf(pojoCompetencia.getImageCompetencia()));
+                }
+            //}
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

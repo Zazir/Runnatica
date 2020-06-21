@@ -99,51 +99,23 @@
                 android:textSize="25dp"></TextView>
 
             <TextView
+                android:id="@+id/tvFechaPicker"
                 android:layout_width="wrap_content"
-                android:layout_height="58dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="290dp"
-                android:text="Dia"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25dp"></TextView>
-
-            <EditText
-                android:id="@+id/etDiaCompetencia"
-                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="325dp"></EditText>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="58dp"
-                android:layout_marginLeft="130dp"
                 android:layout_marginTop="290dp"
-                android:text="Mes"
+                android:text="Selecciona la Fecha de la carrera"
                 android:textColor="@android:color/background_dark"
-                android:textSize="25dp"></TextView>
+                android:textSize="20sp"></TextView>
 
-            <EditText
-                android:id="@+id/etMesCompetencia"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="119dp"
-                android:layout_marginTop="325dp"></EditText>
-
-            <TextView
+            <Button
+                android:id="@+id/btnSeleccionarFecha"
                 android:layout_width="wrap_content"
-                android:layout_height="58dp"
-                android:layout_marginLeft="220dp"
-                android:layout_marginTop="290dp"
-                android:text="Año"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25dp"></TextView>
-
-            <EditText
-                android:id="@+id/ttAnoCompetencia"
-                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="209dp"
-                android:layout_marginTop="325dp"></EditText>
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="325dp"
+                android:text="Seleccionar fecha"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="58dp"
