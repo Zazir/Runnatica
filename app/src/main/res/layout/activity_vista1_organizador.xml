@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".vista1_organizador">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/barra_verde">
+
+        <TextView
+            android:id="@+id/tvNombreCompetencia"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:text="Nombre Competencia"
+            android:textColor="@android:color/background_light"
+            android:textSize="35dp"></TextView>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="518dp"
+        android:layout_marginTop="55dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Total Ventas"
+                android:textSize="35dp"
+                android:textColor="@android:color/background_dark"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/etPrecioCompetencia"
+                android:textColor="@android:color/background_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="50dp"
+                android:text="Precio"
+                android:textSize="35dp"
+                ></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="111dp"
+                android:layout_marginEnd="135dp"
+                android:text="Resumen de ventas:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <TextView
+                android:layout_width="279dp"
+                android:layout_height="42dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="376dp"
+                android:layout_marginEnd="80dp"
+                android:text="Inscripciones Vendidas:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <TextView
+                android:id="@+id/tvInscripcionesVendidasMin"
+                android:layout_width="49dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="416dp"
+                android:layout_marginEnd="276dp"
+                android:text="50"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="413dp"
+                android:layout_marginEnd="255dp"
+                android:text="/"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"></TextView>
+
+            <TextView
+                android:id="@+id/tvInscripcionesVendidasMax"
+                android:layout_width="49dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="417dp"
+                android:layout_marginEnd="192dp"
+                android:text="500"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <TextView
+                android:layout_width="279dp"
+                android:layout_height="42dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="376dp"
+                android:layout_marginEnd="80dp"
+                android:text="Inscripciones Vendidas:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <Button
+                android:id="@+id/btnListaInscritos"
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="468dp"
+                android:layout_marginEnd="17dp"
+                android:text="Lista de Inscritos"
+                ></Button>
+
+            <Button
+                android:id="@+id/btnFotosResultados"
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="525dp"
+                android:layout_marginEnd="15dp"
+                android:text="Subir Fotos de Resultados"
+                ></Button>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="495dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="570dp"
+        android:background="@drawable/barra_verde"
+        >
+    </LinearLayout>
+
+</RelativeLayout>

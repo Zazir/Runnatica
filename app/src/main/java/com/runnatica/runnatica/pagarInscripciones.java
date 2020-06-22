@@ -158,10 +158,10 @@ public class pagarInscripciones extends AppCompatActivity {
     private void crearPDF(String Fecha) {
         plantillaPDF.crearArchivo();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            String authorities = getApplicationContext().getPackageName()+".provider";
-            FileProvider.getUriForFile(this, authorities, plantillaPDF.archivoPDF);
-        }
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+           // String authorities = getApplicationContext().getPackageName()+".provider";
+            //FileProvider.getUriForFile(this, authorities, plantillaPDF.archivoPDF);
+        //}
 
         plantillaPDF.abrirArchivo();
         plantillaPDF.addMetadata("Carrera", "Inscripcion", "Runnatica");

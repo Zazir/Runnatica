@@ -2,14 +2,31 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.runnatica.runnatica">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_index"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_index"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".pagarInscripciones"/>
+        <activity android:name=".informacion_inscrito"></activity>
+        <activity android:name=".lista_inscritos" />
+        <activity android:name=".Subir_Resultados" />
+        <activity android:name=".vista1_organizador" />
+        <activity android:name=".pagarInscripciones" />
         <activity android:name=".agregarForaneo" />
         <activity android:name=".editar_competencia2" />
         <activity android:name=".borrar_competencia" />
@@ -52,6 +69,7 @@
         </activity>
         <activity android:name=".registro_usuario" />
         <activity android:name=".Login" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="$[applicationId].provider"
@@ -59,7 +77,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <meta-data
@@ -70,18 +88,5 @@
             android:name=".FetchAddressIntentService"
             android:exported="false" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

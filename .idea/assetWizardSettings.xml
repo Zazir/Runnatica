@@ -24,7 +24,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\Jesus\AppData\Local\Temp\ic_android_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\choco\AppData\Local\Temp\ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -73,7 +73,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="imagePath" value="C:\Users\Jesus\AppData\Local\Temp\ic_android_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\choco\AppData\Local\Temp\ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -128,7 +128,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\Jesus\AppData\Local\Temp\ic_archive_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\choco\AppData\Local\Temp\ic_archive_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -151,7 +151,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\choco\OneDrive\Escritorio\Thinks\CETI\7mo Semestre\Proyecto Final DS\Documentación\Der\Vistas\Objetos\165789984e908db.png" />
+                                                <entry key="imagePath" value="C:\Users\choco\OneDrive\Escritorio\Thinks\CETI\9no Semestre\Proyecto Final DS\Documentación\Diseño\Logo\Logo.png" />
+                                                <entry key="paddingPercent" value="-10" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -183,9 +184,11 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="backgroundColor" value="1aa32c" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="C:\Users\choco\OneDrive\Escritorio\Thinks\CETI\7mo Semestre\Proyecto Final DS\Documentación\Der\Vistas\Objetos\165789984e908db.png" />
-                                      <entry key="outputName" value="ic_historial2" />
+                                      <entry key="imageAsset" value="C:\Users\choco\OneDrive\Escritorio\Thinks\CETI\9no Semestre\Proyecto Final DS\Documentación\Diseño\Logo\Logo.png" />
+                                      <entry key="outputName" value="ic_index" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -202,7 +205,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\Jesus\AppData\Local\Temp\ic_android_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\choco\AppData\Local\Temp\ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -266,7 +269,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="imagePath" value="C:\Users\Jesus\AppData\Local\Temp\ic_android_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\choco\AppData\Local\Temp\ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>

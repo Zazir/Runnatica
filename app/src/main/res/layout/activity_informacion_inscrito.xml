@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".informacion_inscrito">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde">
+
+        <TextView
+            android:id="@+id/tvNombreCompetencia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:text="Datos Inscrito"
+            android:textColor="@android:color/background_light"
+            android:textSize="35dp"></TextView>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="0dp"
+        android:text="Nombre del Usuario Competidor"
+        android:textColor="@android:color/background_dark"
+        android:textSize="35dp"></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="166dp"
+        android:layout_marginEnd="278dp"
+        android:text="Correo:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="202dp"
+        android:layout_marginEnd="0dp"
+        android:text="Correo del usuario competidor"
+        android:textColor="@android:color/background_dark"
+        android:textSize="20dp"></TextView>
+
+    <TextView
+        android:layout_width="274dp"
+        android:layout_height="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="238dp"
+        android:layout_marginEnd="83dp"
+        android:text="Fecha de Inscripción:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="270dp"
+        android:layout_marginEnd="1dp"
+        android:text="4 - 04 - 2019"
+        android:textColor="@android:color/background_dark"
+        android:textSize="20dp"></TextView>
+
+    <LinearLayout
+        android:layout_width="495dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="570dp"
+        android:background="@drawable/barra_verde"
+        >
+        <TextView
+            android:id="@+id/btnAtras"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Atras"
+            android:textColor="@android:color/background_light"
+            android:textSize="25dp"></TextView>
+
+    </LinearLayout>
+
+</RelativeLayout>
