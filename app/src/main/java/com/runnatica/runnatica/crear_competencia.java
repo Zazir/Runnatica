@@ -120,38 +120,35 @@ public class crear_competencia extends AppCompatActivity {
 
     }
 
-    private String getStringImage(Bitmap btm) {
-        ByteArrayOutputStream array = new ByteArrayOutputStream();
-        btm.compress(Bitmap.CompressFormat.JPEG, 100, array);
-        byte[] imgBytes = array.toByteArray();
-        String encodeImg = Base64.encodeToString(imgBytes, Base64.DEFAULT);
+    private String getStringImage(Bitmap btm) {// se recive el parametro
+        ByteArrayOutputStream array = new ByteArrayOutputStream(); //Declaramos el objeto que le da el formato de texto a la imagen
+        btm.compress(Bitmap.CompressFormat.JPEG, 100, array);//Comprimimos el bitmap de la imagen
+        byte[] imgBytes = array.toByteArray();//creamos un arreglo de bites
+        String encodeImg = Base64.encodeToString(imgBytes, Base64.DEFAULT);//Creamos un sting el cual guarda la imagen codificada de forma de cadena de texto
 
-        return encodeImg;
+        return encodeImg;//retornamos el sting que es la imagen codificada
     }
 
-    private void SubirCompetencia(String URL) {
-        progreso = new ProgressDialog(crear_competencia.this);
-        progreso.setMessage("Creando competencia, tus chingaderas...");
-        progreso.show();
+    private void SubirCompetencia(String URL) {//recibimos la url
+        progreso = new ProgressDialog(crear_competencia.this);//creas dialogo de proceso
+        progreso.setMessage("Creando competencia...");//el mensaje
+        progreso.show();//se lanza
 
-        //stringRequest es el objeto el cual almacena los datos.
-        //Declaramos un StringRequest definiendo el método que utilizamos, en este caso es GET
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {//resibimos el parametro, el metodo de peticion
             @Override
             public void onResponse(String response) {//Operacion exitosa a travez del web service
                 progreso.dismiss();
-                if (response.equals("error al crear el competencia")){
+                if (response.equals("error al crear el competencia")){//mensaje desde el web service, si el respose es igual a "error al crear competencia"
                     Toast.makeText(getApplicationContext(), "Hubo un error al crear la competencia", Toast.LENGTH_SHORT).show();
-                } else if (Integer.parseInt(response) >= 0){
-                    progreso.dismiss();
+                } else if (Integer.parseInt(response) >= 0){//si la respuesta es mayor o iguala cero (ya que retornamos el id de la competenbcia) si creamos una competenbcia va a ser mayopr a cero
                     alCrearInscripcion(response);
                 }
             }
-        }, new Response.ErrorListener() {
+        }, new Response.ErrorListener() {//dice si hubo un error en el web servic
             @Override
             public void onErrorResponse(VolleyError error) {// Cuando hay un problema en la conexion.
                 progreso.dismiss();
-                Toast.makeText(getApplicationContext(), "Hubo un error con el servidor: " + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -174,7 +171,7 @@ public class crear_competencia extends AppCompatActivity {
                 String Reembolso = "X";
                 String PrecioS = Precio.getText().toString();
 
-                Map<String, String> parametros = new HashMap<>();
+                Map<String, String> parametros = new HashMap<>();//nombre que recibes
                 parametros.put("Id_usuario", id_user);
                 parametros.put("Foto", Foto);
                 parametros.put("NombreFoto", NombreImg);
@@ -192,29 +189,29 @@ public class crear_competencia extends AppCompatActivity {
                 parametros.put("Reembolso", Reembolso);
                 parametros.put("Precio", PrecioS);
 
-                return parametros;
+                return parametros; //retornamos los parametros enlazados
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);//creamos la peticion hacemos la peticion
+        requestQueue.add(stringRequest);//hacemos la peticion
     }
 
-    private void CargarImagen() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/");
-        startActivityForResult(intent.createChooser(intent, "Seleccione la aplicación"), 10);
+    private void CargarImagen() {//funcion de tipo void para hacer un proceso
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);//Intent se inicalisa (action pick formato para buscar en la galeria) y entrar imagenes
+        intent.setType("image/");//el tipo de archivo que va a buscar va a ser imagen.
+        startActivityForResult(intent.createChooser(intent, "Seleccione la aplicación"), 10);//inicia la actividad y recibe el intent (createChooser muestra las opciones para mostrtar imagenes)
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {//metodo que se manda llamar una vez que se selecciono una imagen
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK){
-            Uri path = data.getData();
-            img.setImageURI(path);
+        if (resultCode == RESULT_OK){//si el usuario ya selecciono la imagen
+            Uri path = data.getData();//valor que te devuelve el metodo sobrecargado (el data es la imagen de la galeria)
+            img.setImageURI(path);//poner la imagen que busco
 
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), path);
-                img.setImageBitmap(bitmap);
+                bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), path);//metodo para convetir la imagen a bitmap, el path es la imagen que obtuviste del metodo sobrecargado
+                img.setImageBitmap(bitmap);//Se obtiene el bipmap
             } catch (IOException e) {
                 e.printStackTrace();
             }

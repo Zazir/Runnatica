@@ -46,14 +46,14 @@
                 android:textSize="35dp"></TextView>
 
             <Button
-                android:id="@+id/btnSubirResultados"
+                android:id="@+id/btnSeleccioarResultados"
                 android:layout_width="164dp"
                 android:layout_height="37dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="146dp"
                 android:layout_marginEnd="168dp"
-                android:text="Subir"
+                android:text="Seleccionar"
                 android:textColor="@android:color/background_dark"></Button>
 
             <TextView
@@ -66,11 +66,23 @@
                 android:text="Imagenes"
                 android:textColor="@android:color/background_dark"></TextView>
 
+            <Button
+                android:id="@+id/btnSubirResultados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="195dp"
+                android:layout_marginEnd="1dp"
+                android:text="Subir Fotos"
+                android:textColor="@android:color/background_dark"></Button>
+
             <ImageView
                 android:id="@+id/ivFotosResultados"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/btnSubirResultados"
+                android:layout_below="@+id/btnSubirResultados"
                 ></ImageView>
 
         </RelativeLayout>
