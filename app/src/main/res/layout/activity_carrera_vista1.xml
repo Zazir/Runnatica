@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="60dp"
-                android:background="@drawable/cdmx_maraton"></ImageView>
+                android:background="@color/cardview_dark_background"></ImageView>
 
             <TextView
                 android:id="@+id/tvNombreCompetencia"
