@@ -5,10 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +27,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Subir_Resultados extends AppCompatActivity {
 
@@ -57,7 +58,7 @@ public class Subir_Resultados extends AppCompatActivity {
         btnSubirResultados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //SubirImagen("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?"); Subir con la URL correcta hacia el web service
+                SubirImagen("https://runnatica.000webhostapp.com/WebServiceRunnatica/actualizarCompetencia.php?");
             }
         });
 
@@ -88,7 +89,7 @@ public class Subir_Resultados extends AppCompatActivity {
             public void onResponse(String response) {
                 progreso.dismiss();
                 if (response.equals("error al crear el competencia")){//mensaje desde el web service, si el respose es igual a "error al crear competencia"
-                    Toast.makeText(getApplicationContext(), "Hubo un error al crear la competencia", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Hubo un error al Imagen", Toast.LENGTH_SHORT).show();
                 } else if (Integer.parseInt(response) >= 0){//si la respuesta es mayor o iguala cero (ya que retornamos el id de la competenbcia) si creamos una competenbcia va a ser mayopr a cero
 
                 }
@@ -104,7 +105,11 @@ public class Subir_Resultados extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 String Foto = getStringImage(bitmap);
                 Map<String, String> parametros = new HashMap<>();//nombre que recibes
+                Random rand = new Random(System.currentTimeMillis());
+                String cadena="";
                 parametros.put("Foto", Foto);
+                parametros.put("NombreFoto", cadena+rand);
+                parametros.put("id_competencia", cadena+rand);
                 return parametros; //retornamos los parametros enlazados
             }
         };
