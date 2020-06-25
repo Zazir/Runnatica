@@ -109,14 +109,6 @@
         android:background="@drawable/barra_verde"
         ></LinearLayout>
 
-    <TextView
-        android:id="@+id/tvNombreCiudad"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Posponer Competencia"
-        android:textColor="@android:color/background_light"
-        android:textSize="30dp"></TextView>
+
 
 </RelativeLayout>

@@ -22,6 +22,54 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/logo"
+        android:layout_width="186dp"
+        android:layout_height="183dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="94dp"
+        android:background="@drawable/cancelar"
+        android:orientation="vertical"></LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="301dp"
+        android:layout_marginEnd="4dp"
+        android:gravity="center"
+        android:text="¿Estas seguro de cancelar esta competencia?"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30dp"></TextView>
+
+    <Button
+        android:id="@+id/btnSiCancelar"
+        android:layout_width="122dp"
+        android:layout_height="71dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="385dp"
+        android:layout_marginEnd="210dp"
+        android:text="Si"
+        android:textSize="25dp"
+        ></Button>
+
+    <Button
+        android:id="@+id/btnNoCancelar"
+        android:layout_width="122dp"
+        android:layout_height="71dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="387dp"
+        android:layout_marginEnd="28dp"
+        android:text="No"
+        android:textSize="25dp"
+        ></Button>
+
+    <LinearLayout
         android:layout_width="495dp"
         android:layout_height="78dp"
         android:layout_marginTop="570dp"

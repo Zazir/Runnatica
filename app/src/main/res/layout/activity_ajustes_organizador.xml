@@ -9,16 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:background="@drawable/barra_verde">
-
-
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:text="Ajustes Competidor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Ajustes Organizador"
             android:textColor="@android:color/background_light"
-            android:textSize="40dp"></TextView>
+            android:textSize="35dp"></TextView>
     </LinearLayout>
 
     <ListView
@@ -29,20 +26,5 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="0dp"></ListView>
-
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/MenuOrganizador"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="165dp"
-        android:background="@drawable/barra_verde"
-        android:minHeight="@android:dimen/thumbnail_height"
-        app:itemTextColor="@android:color/background_dark"
-        app:menu="@menu/main"
-        ></android.support.design.widget.BottomNavigationView>
 
 </RelativeLayout>
