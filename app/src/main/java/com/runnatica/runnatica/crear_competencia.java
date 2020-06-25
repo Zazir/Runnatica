@@ -222,7 +222,7 @@ public class crear_competencia extends AppCompatActivity {
         Boolean siguiente = false;
 
         if (Nombre.getText().toString().length() <= 0) {
-            Nombre.setError("Debes de poner el nombre de la inscripcion");
+            Nombre.setError("Debes de poner el nombre de la competencia");
         } else if (Precio.getText().toString().length() <= 0) {
             Precio.setError("Debes de poner el el precio de la inscripcion");
         }
