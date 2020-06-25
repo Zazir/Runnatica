@@ -26,7 +26,6 @@ public class ajustes_organizador extends AppCompatActivity {
         MenuUsuario=(BottomNavigationView)findViewById(R.id.bottomNavigation);
 
         final ArrayList<String> arrayList=new ArrayList<>();
-        arrayList.add("Editar Competencia");
         arrayList.add("Posponer Competencia");
         arrayList.add("Cancelar Competencia");
         arrayList.add("Borrar Ayuda");
@@ -39,18 +38,14 @@ public class ajustes_organizador extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 if(i == 0){
-                    EditarCompetencia();
-                }
-                if(i == 1){
                     PosponerCompetencia();
                 }
-                if(i == 2){
+                if(i == 1){
                     CancelarCompetencia();
                 }
-                if(i == 3){
+                if(i == 2){
                     BorrarCompetencia();
                 }
-
             }
         });
         MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

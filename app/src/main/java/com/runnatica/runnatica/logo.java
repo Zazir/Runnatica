@@ -12,7 +12,7 @@ public class logo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logo);
 
-        final Handler handler = new Handler();
+        final Handler handler = new Handler();//que es y para que se utiliza el Handler
         handler.postDelayed(new Runnable() {
             @Override
 

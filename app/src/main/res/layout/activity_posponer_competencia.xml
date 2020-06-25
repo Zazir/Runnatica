@@ -10,17 +10,97 @@
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:background="@drawable/barra_verde">
-
         <TextView
-            android:id="@+id/tvNombreCiudad"
+            android:id="@+id/tvNombreCompetencia"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
             android:gravity="center"
             android:text="Posponer Competencia"
             android:textColor="@android:color/background_light"
             android:textSize="30dp"></TextView>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="-2dp"
+        android:text="Fecha Actual:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30dp"></TextView>
+
+    <TextView
+        android:id="@+id/tvFecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="114dp"
+        android:layout_marginEnd="-4dp"
+        android:text="2020-12-15"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30dp"></TextView>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="182dp"
+        android:layout_marginEnd="-2dp"
+        android:text="Fecha Pospuesta:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30dp"></TextView>
+
+    <Button
+        android:id="@+id/btnSeleccionarFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="253dp"
+        android:layout_marginEnd="196dp"
+        android:text="Seleccionar Fecha" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="218dp"
+        android:layout_marginEnd="98dp"
+        android:text="Hora"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+
+    <EditText
+        android:id="@+id/etHora"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="302dp"
+        android:layout_marginTop="257dp"
+        android:layout_marginEnd="82dp"></EditText>
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="259dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="356dp"
+        android:layout_marginEnd="50dp"
+        android:background="@color/grisBoton"
+        android:text="Guardar"
+        android:textColor="#F0EEEE"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="495dp"
@@ -28,5 +108,15 @@
         android:layout_marginTop="570dp"
         android:background="@drawable/barra_verde"
         ></LinearLayout>
+
+    <TextView
+        android:id="@+id/tvNombreCiudad"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Posponer Competencia"
+        android:textColor="@android:color/background_light"
+        android:textSize="30dp"></TextView>
 
 </RelativeLayout>

@@ -17,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,11 +42,13 @@ import java.util.Locale;
 public class home extends AppCompatActivity {
     BottomNavigationView MenuUsuario;
     TextView NombreCiudad;
+    Button Estado, Pais;
 
     private List<Competencias> competenciasList;
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     private int[] id;
+    int bandera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,8 @@ public class home extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         NombreCiudad = (TextView) findViewById(R.id.tvNombreCiudad);
+        Estado = (Button)findViewById(R.id.btnEstado);
+        Pais = (Button)findViewById(R.id.btnPais);
 
         //Localizacion GPS para buscar el nombre de la ciudad
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -100,6 +106,26 @@ public class home extends AppCompatActivity {
                 return true;
             }
         });
+        Estado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                estado();
+            }
+        });
+
+        Pais.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Pais();
+            }
+        });
+    }
+
+    public void estado(){
+
+    }
+    public void Pais(){
+
     }
 
     @Override
@@ -139,13 +165,13 @@ public class home extends AppCompatActivity {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         List<Address> addresses;
         try{
-            addresses = geocoder.getFromLocation(lat, lon, 10);
+            addresses = geocoder.getFromLocation(lat, lon, 20);
             if(addresses.size() > 0){
                 for(Address adr: addresses){
-                    if(adr.getLocality() != null && adr.getLocality().length() > 0){
-                        cityName = adr.getLocality();
+                        if(adr.getCountryName() != null && adr.getCountryName().length() > 0){
+                            cityName = adr.getCountryName();
+                        }
                         break;
-                    }
                 }
             }
         }catch(IOException e){
