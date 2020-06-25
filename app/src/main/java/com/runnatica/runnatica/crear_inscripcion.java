@@ -55,6 +55,8 @@ public class crear_inscripcion extends AppCompatActivity{
                         "&cant_foraneos=" + CantidadForaneos.getText().toString() +
                         "&edadMin=" + DesdeAnos.getText().toString() +
                         "&edadMax=" + HastaAnos.getText().toString());
+                }else{
+                    Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -115,18 +117,18 @@ public class crear_inscripcion extends AppCompatActivity{
         if (Nombre.getText().toString().length() <= 0) {
             Nombre.setError("Debes de poner el nombre de la inscripcion");
         }
-        else if (CantidadNormal.getText().toString().length() <= 0 && CantidadNormal.getText().toString().length() >= 5) {
+        else if (CantidadNormal.getText().toString().length() <= 0 || CantidadNormal.getText().toString().length() >= 5) {
             CantidadNormal.setError("Ingresa una Cantidad Valida");
         }
-        else if (CantidadForaneos.getText().toString().length() <= 0 && CantidadForaneos.getText().toString().length() >= 5) {
+        else if (CantidadForaneos.getText().toString().length() <= 0 || CantidadForaneos.getText().toString().length() >= 5) {
             CantidadForaneos.setError("Ingresa una Cantidad Valida");
         }
-        else if (DesdeAnos.getText().toString().length() <= 0 && DesdeAnos.getText().toString().length() >= 3) {
+        else if (DesdeAnos.getText().toString().length() <= 0 || DesdeAnos.getText().toString().length() >= 3) {
             DesdeAnos.setError("Ingresa un Año Valido");
         }
-        else if (HastaAnos.getText().toString().length() <= 0 && HastaAnos.getText().toString().length() >= 3) {
+        else if (HastaAnos.getText().toString().length() <= 0 || HastaAnos.getText().toString().length() >= 3) {
             HastaAnos.setError("Ingresa un Año Valido");
-        }
+        }else siguiente = true;
 
         return siguiente;
     }
