@@ -9,16 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:background="@drawable/barra_verde">
-
-
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Ajustes Competidor"
             android:textColor="@android:color/background_light"
-            android:textSize="40dp"></TextView>
+            android:textSize="35dp"></TextView>
     </LinearLayout>
 
     <ListView
@@ -28,7 +25,20 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="64dp"
-        android:layout_marginEnd="0dp"></ListView>
+        android:layout_marginEnd="0dp">
+    </ListView>
 
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="496dp"
+        android:background="@drawable/barra_verde"
+        android:minHeight="@android:dimen/thumbnail_height"
+        app:itemTextColor="@android:color/background_dark"
+        android:layout_marginTop="560dp"
+        app:menu="@menu/main_menu"></android.support.design.widget.BottomNavigationView>
 
 </RelativeLayout>
