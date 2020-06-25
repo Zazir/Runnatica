@@ -84,7 +84,7 @@
             <TextView
                 android:id="@+id/tvFechaNacimientoUsuario"
                 android:layout_marginTop="255dp"
-                android:text="Fecha de Nacimiento del usuario"
+                android:text="Fecha de Nacimiento"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"
                 android:layout_width="match_parent"
@@ -135,6 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
             <TextView
+                android:id="@+id/tvFotografia"
                 android:text="Fotografia:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="30dp"
@@ -142,11 +143,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
 
+            <ImageView
+                android:id="@+id/ivFotoPerfilUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="192dp"
+                android:layout_below="@+id/tvFotografia"></ImageView>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="620dp"
+                android:layout_marginTop="850dp"
                 ></TextView>
 
         </RelativeLayout>

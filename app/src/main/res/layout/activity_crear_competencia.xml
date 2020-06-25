@@ -79,7 +79,10 @@
                 android:layout_width="181dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
-                android:layout_marginTop="215dp"></EditText>
+                android:layout_marginTop="215dp"
+                android:numeric="integer"
+                android:inputType="number"
+                ></EditText>
 
             <Button
                 android:id="@+id/btnInformacionPrecio"
@@ -117,20 +120,23 @@
                 android:text="Seleccionar fecha"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="58dp"
-                android:layout_marginLeft="310dp"
-                android:layout_marginTop="290dp"
+                android:layout_width="74dp"
+                android:layout_height="52dp"
+                android:layout_marginLeft="290dp"
+                android:layout_marginTop="310dp"
                 android:text="Hora"
                 android:textColor="@android:color/background_dark"
-                android:textSize="25dp"></TextView>
+                android:textSize="20dp"></TextView>
 
             <EditText
                 android:id="@+id/etHoraCompetencia"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="302dp"
-                android:layout_marginTop="325dp"></EditText>
+                android:layout_marginLeft="290dp"
+                android:layout_marginTop="325dp"
+                android:numeric="integer"
+                android:inputType="number"
+                ></EditText>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -162,6 +168,7 @@
 
             <ImageView
                 android:id="@+id/imgCompetencia"
+                android:layout_below="@+id/btnGuardarCompetencia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="430dp"
@@ -294,13 +301,21 @@
                 android:layout_marginTop="1000dp"
                 android:text="Subir"></Button>
 
+            <ImageView
+                android:id="@+id/imgCompetencia2"
+                android:layout_below="@+id/imgCompetencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="430dp"
+                android:layout_marginLeft="20dp"/>
+
             <TextView
                 android:layout_width="108dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="270dp"
                 android:layout_marginTop="1005dp"
                 android:text="Documento"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:textColor="@android:color/background_dark"
                 ></TextView>
 

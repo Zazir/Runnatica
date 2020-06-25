@@ -12,11 +12,10 @@
         android:background="@drawable/barra_verde">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="59dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:text="Tipo de Inscripciones"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Categorias"
             android:textColor="@android:color/background_light"
             android:textSize="40dp"></TextView>
     </LinearLayout>
@@ -79,7 +78,11 @@
                         android:layout_width="124dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:textColor="@android:color/background_dark"></EditText>
+                        android:textColor="@android:color/background_dark"
+                        android:numeric="integer"
+                        android:inputType="number"
+                        ></EditText>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -99,7 +102,11 @@
                         android:id="@+id/etCantidadForaneos"
                         android:layout_width="124dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/background_dark"></EditText>
+                        android:textColor="@android:color/background_dark"
+                        android:numeric="integer"
+                        android:inputType="number"
+                        ></EditText>
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -133,7 +140,10 @@
                         android:id="@+id/etDesdeAnos"
                         android:layout_width="98dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/background_dark"></EditText>
+                        android:textColor="@android:color/background_dark"
+                        android:numeric="integer"
+                        android:inputType="number"
+                        ></EditText>
                 </LinearLayout>
 
                 <LinearLayout
@@ -160,7 +170,10 @@
                     android:id="@+id/tvCantidadInscripciones"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="No has creado ninguna inscripción" />
+                    android:text="No has creado ninguna inscripción"
+                    android:numeric="integer"
+                    android:inputType="number"
+                    />
             </LinearLayout>
 
             <LinearLayout

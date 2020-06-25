@@ -54,6 +54,10 @@ public class crear_competencia extends AppCompatActivity {
     private String fecha;
 
     int imagen=0;
+    private int requestCode;
+    private int resultCode;
+    @Nullable
+    private Intent data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +91,13 @@ public class crear_competencia extends AppCompatActivity {
                 //Guardar imagen
                 CargarImagen();
                 imagen = 1;
+            }
+        });
+        Aval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Guardar la imagen del aval
+                CargarImagen();
             }
         });
 
@@ -222,7 +233,7 @@ public class crear_competencia extends AppCompatActivity {
         }
     }
 
-    private Boolean Validaciones() {
+        private Boolean Validaciones() {
         Boolean siguiente = false;
 
         if (Nombre.getText().toString().length() <= 0) {
