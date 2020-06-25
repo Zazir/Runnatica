@@ -11,13 +11,12 @@
         android:layout_height="59dp"
         android:background="@drawable/barra_verde">
         <TextView
-            android:id="@+id/tvNombreCompetencia"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="Posponer Competencia"
             android:textColor="@android:color/background_light"
-            android:textSize="30dp"></TextView>
+            android:textSize="30sp"/>
     </LinearLayout>
 
     <TextView
@@ -29,10 +28,10 @@
         android:layout_marginEnd="-2dp"
         android:text="Fecha Actual:"
         android:textColor="@android:color/background_dark"
-        android:textSize="30dp"></TextView>
+        android:textSize="30dp"/>
 
     <TextView
-        android:id="@+id/tvFecha"
+        android:id="@+id/tvFechaActual"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -41,27 +40,28 @@
         android:layout_marginEnd="-4dp"
         android:text="2020-12-15"
         android:textColor="@android:color/background_dark"
-        android:textSize="30dp"></TextView>
+        android:textSize="30sp"/>
 
 
     <TextView
+        android:id="@+id/tvFechaPosponer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="182dp"
         android:layout_marginEnd="-2dp"
-        android:text="Fecha Pospuesta:"
+        android:text="Fecha Pospuesta"
         android:textColor="@android:color/background_dark"
-        android:textSize="30dp"></TextView>
+        android:textSize="30sp"/>
 
     <Button
-        android:id="@+id/btnSeleccionarFecha"
+        android:id="@+id/btnPosponerFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="253dp"
         android:layout_marginEnd="196dp"
         android:text="Seleccionar Fecha" />
@@ -77,7 +77,7 @@
         android:layout_marginEnd="98dp"
         android:text="Hora"
         android:textColor="@android:color/background_dark"
-        android:textSize="25dp"></TextView>
+        android:textSize="25dp"/>
 
     <EditText
         android:id="@+id/etHora"
@@ -87,14 +87,13 @@
         android:layout_alignParentEnd="true"
         android:layout_marginLeft="302dp"
         android:layout_marginTop="257dp"
-        android:layout_marginEnd="82dp"></EditText>
+        android:layout_marginEnd="82dp"/>
 
     <Button
-        android:id="@+id/btnGuardar"
+        android:id="@+id/btnActualizar"
         android:layout_width="259dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="356dp"
         android:layout_marginEnd="50dp"
         android:background="@color/grisBoton"
@@ -102,21 +101,34 @@
         android:textColor="#F0EEEE"
         android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="495dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="570dp"
-        android:background="@drawable/barra_verde"
-        ></LinearLayout>
-
     <TextView
-        android:id="@+id/tvNombreCiudad"
+        android:id="@+id/algo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Posponer Competencia"
-        android:textColor="@android:color/background_light"
-        android:textSize="30dp"></TextView>
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="410dp"
+        android:layout_marginEnd="-2dp"
+        android:text="¿Quieres cancelar la competencia?"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25sp"/>
+
+    <Button
+        android:id="@+id/btnActualizarC"
+        android:layout_width="259dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="50dp"
+        android:layout_below="@+id/algo"
+        android:background="#cb3234"
+        android:text="Cancelar"
+        android:textColor="@color/primary_text"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/barra_verde"
+        />
 
 </RelativeLayout>

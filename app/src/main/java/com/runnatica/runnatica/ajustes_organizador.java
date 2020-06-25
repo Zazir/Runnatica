@@ -2,7 +2,6 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 
 public class ajustes_organizador extends AppCompatActivity {
     ListView listview;
-    BottomNavigationView MenuUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +19,6 @@ public class ajustes_organizador extends AppCompatActivity {
         setContentView(R.layout.activity_ajustes_competidor);
 
         listview = (ListView)findViewById(R.id.lvAjustesCompetidor);
-        MenuUsuario=(BottomNavigationView)findViewById(R.id.bottomNavigation);
 
         final ArrayList<String> arrayList=new ArrayList<>();
         arrayList.add("Posponer Competencia");
@@ -46,10 +43,6 @@ public class ajustes_organizador extends AppCompatActivity {
                 }
             }
         });
-    }
-    private void EditarCompetencia(){
-        Intent next = new Intent(this, editar_competencia.class);
-        startActivity(next);
     }
     private void PosponerCompetencia(){
         Intent next = new Intent(this, editar_competencia.class);
