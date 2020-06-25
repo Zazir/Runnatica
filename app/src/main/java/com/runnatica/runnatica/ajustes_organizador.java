@@ -2,10 +2,8 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,35 +51,6 @@ public class ajustes_organizador extends AppCompatActivity {
 
             }
         });
-        MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-                if (menuItem.getItemId() == R.id.menu_home) {
-                    homeOrganizador();
-                }
-                if (menuItem.getItemId() == R.id.menu_historial) {
-                    historialOrganizador();
-                }
-                if (menuItem.getItemId() == R.id.menu_ajustes) {
-                    ajuestesOrganizador();
-                }
-
-                return true;
-            }
-        });
-    }
-    private void homeOrganizador(){
-        Intent next = new Intent(this, home_organizador.class);
-        startActivity(next);
-    }
-    private void historialOrganizador(){
-        Intent next = new Intent(this, historial_organizador.class);
-        startActivity(next);
-    }
-    private void ajuestesOrganizador(){
-        Intent next = new Intent(this, ajustes_organizador.class);
-        startActivity(next);
     }
     private void EditarCompetencia(){
         Intent next = new Intent(this, editar_competencia.class);
