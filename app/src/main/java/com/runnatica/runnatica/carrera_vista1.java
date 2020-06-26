@@ -121,6 +121,9 @@ public class carrera_vista1 extends AppCompatActivity {
         intent.putExtra("NOMBRE_COMPETENCIA", txtNomCompe.getText());
         intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia);
+        intent.putExtra("FECHA", txtFechaCompe.getText());
+        intent.putExtra("LUGAR", txtLugarCompe.getText());
+        intent.putExtra("ORGANIZADOR", txtOrganizador.getText());
         startActivity(intent);
         finish();
     }

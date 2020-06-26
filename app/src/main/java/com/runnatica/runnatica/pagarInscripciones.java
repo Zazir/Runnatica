@@ -52,7 +52,7 @@ public class pagarInscripciones extends AppCompatActivity {
     Usuario usuario = Usuario.getUsuarioInstance();
 
     private String monto = "";
-    private String id_competencia;
+    private String id_competencia, NombreCompetencia, Fecha1, Lugar, Organizador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +90,10 @@ public class pagarInscripciones extends AppCompatActivity {
         Bundle extra = pagarInscripciones.this.getIntent().getExtras();
         id_competencia = extra.getString("ID_COMPENTENCIA");
         monto = extra.getString("monto");
-
+        NombreCompetencia = extra.getString("NOMBRE_COMPETENCIA");
+        Fecha1 = extra.getString("FECHA");
+        Lugar = extra.getString("LUGAR");
+        Organizador = extra.getString("ORGANIZADOR");
     }
 
     // --------------------------> PAYPAL INTEGRATION <------------------------------- //
@@ -165,11 +168,11 @@ public class pagarInscripciones extends AppCompatActivity {
 
         plantillaPDF.abrirArchivo();
         plantillaPDF.addMetadata("Carrera", "Inscripcion", "Runnatica");
-        plantillaPDF.addHeaders("Nombre de la carrera", "Marca", Fecha);
+        plantillaPDF.addHeaders(NombreCompetencia, "Marca", Fecha1);
         plantillaPDF.addParagraph("Código QR");
         plantillaPDF.addParagraph(usuario.getNombre());
-        plantillaPDF.addParagraph("Ubicación del evento");
-        plantillaPDF.addParagraph("Nomre del organizador");
+        plantillaPDF.addParagraph(Lugar);
+        plantillaPDF.addParagraph(Organizador);
         plantillaPDF.cerrarDocumento();
         plantillaPDF.sendMail();
     }
