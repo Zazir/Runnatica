@@ -18,6 +18,7 @@ public class logo extends AppCompatActivity {
 
             public void run() {
                 paginaDeLogin();
+                finish();
                 // Do something after 5s = 5000ms
             }
         }, 3000);

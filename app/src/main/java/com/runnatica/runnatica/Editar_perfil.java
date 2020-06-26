@@ -1,18 +1,47 @@
 package com.runnatica.runnatica;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.runnatica.runnatica.poho.Usuario;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Editar_perfil extends AppCompatActivity {
 
-    Button MujerEditar, HombreEditar, FotoEditar, EditarContrasena, Guardar;
+    Button MujerEditar, HombreEditar, btnFotoEditar, EditarContrasena, btnGuardar;
     EditText DiaEditar, CiudadEditar, EstadoEditar, PaisEditar, AnoEditar, NombreEditar, CorreoEditar, MesEditar;
+    ImageView img;
     private String genero = "";
+    private String fechaNacimiento;
+
+    private Bitmap bitmap;
+    private ProgressDialog progreso;
+
+    private String dominio;
+    private Usuario usuario = Usuario.getUsuarioInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +50,7 @@ public class Editar_perfil extends AppCompatActivity {
 
         MujerEditar = (Button)findViewById(R.id.btnMujerEditar);
         HombreEditar = (Button)findViewById(R.id.btnHombreEditar);
-        FotoEditar = (Button)findViewById(R.id.btnFotoEditar);
+        btnFotoEditar = (Button)findViewById(R.id.btnFotoEditar);
         EditarContrasena = (Button)findViewById(R.id.btnEditarContrasena);
         DiaEditar = (EditText) findViewById(R.id.etDiaEditar);
         CiudadEditar = (EditText) findViewById(R.id.etCiudadEditar);
@@ -31,8 +60,10 @@ public class Editar_perfil extends AppCompatActivity {
         NombreEditar = (EditText) findViewById(R.id.etNombreEditar);
         CorreoEditar = (EditText) findViewById(R.id.etCorreoEditar);
         MesEditar = (EditText) findViewById(R.id.etMesEditar);
-        Guardar = (Button)findViewById(R.id.btnGuardar);
+        btnGuardar = (Button)findViewById(R.id.btnGuardar);
+        img = (ImageView)findViewById(R.id.imgFotoPerfil);
 
+        dominio = getString(R.string.ip);
 
         EditarContrasena.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,15 +89,23 @@ public class Editar_perfil extends AppCompatActivity {
         });
 
 
-        Guardar.setOnClickListener(new View.OnClickListener() {
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(validaciones()){
-
+                    fechaNacimiento = DiaEditar.getText().toString() + MesEditar.getText().toString() + AnoEditar.getText().toString();
+                    actualizarPerfil(dominio + "actualizarPerfil.php?");
 
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
                 };
+            }
+        });
+
+        btnFotoEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CargarImagen();
             }
         });
     }
@@ -96,5 +135,95 @@ public class Editar_perfil extends AppCompatActivity {
         }else siguiente = true;
 
         return siguiente;
+    }
+
+    private String getStringImage(Bitmap btm) {
+        ByteArrayOutputStream array = new ByteArrayOutputStream();
+        btm.compress(Bitmap.CompressFormat.JPEG, 100, array);
+        byte[] imgBytes = array.toByteArray();
+        String encodeImg = Base64.encodeToString(imgBytes, Base64.DEFAULT);
+
+        return encodeImg;
+    }
+
+    private void actualizarPerfil(String URL) {
+        progreso = new ProgressDialog(Editar_perfil.this);
+        progreso.setMessage("Subiendo imagen...");
+        progreso.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progreso.dismiss();
+                if (response.equals("Exito")){
+                    NombreEditar.setText("");
+                    CorreoEditar.setText("");
+                    CiudadEditar.setText("");
+                    EstadoEditar.setText("");
+                    PaisEditar.setText("");
+                    img.setImageResource(android.R.color.transparent);
+                    Toast.makeText(getApplicationContext(), "Perfil actualizado con éxito", Toast.LENGTH_SHORT).show();
+                } else if (response.equals("Error")){
+                    Toast.makeText(getApplicationContext(), "Algo salió mal, vuelve a intentarlo", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progreso.dismiss();
+                Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                String id_user = ""+usuario.getId();
+                String nombre = NombreEditar.getText().toString();
+                String correo = CorreoEditar.getText().toString();
+                String ciudad = CiudadEditar.getText().toString();
+                String estado = EstadoEditar.getText().toString();
+                String pais = PaisEditar.getText().toString();
+                String Foto = getStringImage(bitmap);
+                String NombreImg = System.currentTimeMillis()/1000+"";
+
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("id_usuario", id_user);
+                parametros.put("nombre", nombre);
+                parametros.put("correo", correo);
+                parametros.put("sexo", genero);
+                parametros.put("f_nacimiento", fechaNacimiento);
+                parametros.put("ciudad", ciudad);
+                parametros.put("estado", estado);
+                parametros.put("pais", pais);
+                parametros.put("foto", Foto);
+                parametros.put("nombreFoto", NombreImg);
+
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void CargarImagen() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/");
+        startActivityForResult(intent.createChooser(intent, "Seleccione la aplicación"), 10);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            Uri path = data.getData();
+            img.setImageURI(path);
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), path);
+                img.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

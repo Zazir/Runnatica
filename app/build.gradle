@@ -34,16 +34,20 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
     implementation 'com.itextpdf:itextg:5.5.10'
-    implementation files('C:/Runnatica/Runnatica/.idea/libraries/mail.jar')
-    implementation files('C:/Runnatica/Runnatica/.idea/libraries/additionnal.jar')
-    implementation files('C:/Runnatica/Runnatica/.idea/libraries/activation.jar')
+    implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/mail.jar')
+    implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/additionnal.jar')
+    implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/activation.jar')
     implementation 'io.conekta:conektasdk:2.0'
     implementation 'com.google.android.gms:play-services-safetynet:11.8.0'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.github.d-max:spots-dialog:0.7@aar'
     implementation 'com.android.support:support-core-utils:28.0.0'
+<<<<<<< HEAD
     implementation files('C:/Runnatica/Runnatica/.idea/libraries/glide-3.6.0.jar')
     implementation 'com.google.android.gms:play-services-safetynet:15.0.0'
     implementation 'com.android.volley:volley:1.1.0'
+=======
+    implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/glide-3.6.0.jar')
+>>>>>>> RamaZ_save
 }

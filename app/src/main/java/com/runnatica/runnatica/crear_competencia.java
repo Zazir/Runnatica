@@ -125,7 +125,6 @@ public class crear_competencia extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(Validaciones()){
-
                     SubirCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
@@ -153,7 +152,9 @@ public class crear_competencia extends AppCompatActivity {
             @Override
             public void onResponse(String response) {//Operacion exitosa a travez del web service
                 progreso.dismiss();
-                if (response.equals("error al crear el competencia")){//mensaje desde el web service, si el respose es igual a "error al crear competencia"
+                if (response.equals("NO")) {
+                    Toast.makeText(getApplicationContext(), "Hoy ya creaste una competencia", Toast.LENGTH_SHORT).show();
+                }else if (response.equals("error al crear el competencia")){//mensaje desde el web service, si el respose es igual a "error al crear competencia"
                     Toast.makeText(getApplicationContext(), "Hubo un error al crear la competencia", Toast.LENGTH_SHORT).show();
                 } else if (Integer.parseInt(response) >= 0){//si la respuesta es mayor o iguala cero (ya que retornamos el id de la competenbcia) si creamos una competenbcia va a ser mayopr a cero
                     alCrearInscripcion(response);
