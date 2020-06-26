@@ -49,6 +49,7 @@ public class home extends AppCompatActivity {
     private MyAdapter adapter;
     private int[] id;
     int bandera;
+    String Localizacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,26 +64,10 @@ public class home extends AppCompatActivity {
         Estado = (Button)findViewById(R.id.btnEstado);
         Pais = (Button)findViewById(R.id.btnPais);
 
-        //Localizacion GPS para buscar el nombre de la ciudad
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1000);
-        } else {
-            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            try {
-                String city = hereLocation(location.getLatitude(), location.getLongitude());
-                NombreCiudad.setText(city);
-            } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(home.this, "No funciona", Toast.LENGTH_SHORT).show();
-            }
-        }
-
         //Inicializar arreglo de competencias
         competenciasList = new ArrayList<>();
 
-        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?estado=Jalisco");
+
 
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
@@ -122,10 +107,55 @@ public class home extends AppCompatActivity {
     }
 
     public void estado(){
-
+        bandera=1;
+        Toast.makeText(home.this, "Ver Competencias por Estado", Toast.LENGTH_SHORT).show();
+        Localizacion();
+        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?estado="+Localizacion);
+        Toast.makeText(getApplicationContext(), ""+NombreCiudad, Toast.LENGTH_SHORT).show();
     }
     public void Pais(){
+        bandera=2;
+        Toast.makeText(home.this, "Ver Competencias por Pais", Toast.LENGTH_SHORT).show();
+        Localizacion2();
+        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?pais="+Localizacion);
+        Toast.makeText(getApplicationContext(), ""+NombreCiudad, Toast.LENGTH_SHORT).show();
+    }
 
+    public void Localizacion(){
+        //Localizacion GPS para buscar el nombre de la ciudad
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1000);
+        } else {
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            try {
+                String city = hereLocation(location.getLatitude(), location.getLongitude());
+                NombreCiudad.setText(city);
+                Localizacion = city;
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(home.this, "No funciona", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    public void Localizacion2(){
+        //Localizacion GPS para buscar el nombre de la ciudad
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1000);
+        } else {
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            try {
+                String city = hereLocation(location.getLatitude(), location.getLongitude());
+                NombreCiudad.setText(city);
+                Localizacion = city;
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(home.this, "No funciona", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -162,21 +192,42 @@ public class home extends AppCompatActivity {
 
     private String hereLocation(double lat, double lon){
         String cityName = "";
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        List<Address> addresses;
-        try{
-            addresses = geocoder.getFromLocation(lat, lon, 20);
-            if(addresses.size() > 0){
-                for(Address adr: addresses){
+        if(bandera==1){
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            List<Address> addresses;
+            try{
+                addresses = geocoder.getFromLocation(lat, lon, 20);
+                if(addresses.size() > 0){
+                    for(Address adr: addresses){
+                        if(adr.getAdminArea() != null && adr.getAdminArea().length() > 0){
+                            cityName = adr.getAdminArea();
+                        }
+                        break;
+                    }
+                }
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        if(bandera==2){
+
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            List<Address> addresses;
+            try{
+                addresses = geocoder.getFromLocation(lat, lon, 20);
+                if(addresses.size() > 0){
+                    for(Address adr: addresses){
                         if(adr.getCountryName() != null && adr.getCountryName().length() > 0){
                             cityName = adr.getCountryName();
                         }
                         break;
+                    }
                 }
+            }catch(IOException e){
+                e.printStackTrace();
             }
-        }catch(IOException e){
-            e.printStackTrace();
         }
+
         return cityName;
     }
     private void home(){
@@ -249,6 +300,11 @@ public class home extends AppCompatActivity {
     private void launchCompetenciaView(String id) {
         Intent intent = new Intent(home.this, carrera_vista1.class);
         intent.putExtra("id", id);
+        startActivity(intent);
+    }
+
+    public void reFrescar(){
+        Intent intent = getIntent();
         startActivity(intent);
     }
 }
