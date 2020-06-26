@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,10 +48,6 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
     @Override
     public void onBindViewHolder(@NonNull inscripcionesForaneoAdapter.ViewHolderInscripciones viewHolderInscripciones, int position) {
         viewHolderInscripciones.asignarDatos(inscripcionesList.get(position), position);
-        if (contForaneos <= 5)
-            viewHolderInscripciones.spForaneo.setOnItemSelectedListener(this);
-        else
-            viewHolderInscripciones.spForaneo.setEnabled(false);
     }
 
     @Override
@@ -77,7 +73,7 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
 
     class ViewHolderInscripciones extends RecyclerView.ViewHolder {
         TextView txtNombreInscripcion, txtMinEdad, txtMaxEdad;
-        Spinner spForaneo;
+        ListView lvForaneo;
         Usuario usuario = Usuario.getUsuarioInstance();
 
         public ViewHolderInscripciones(View vistaInscripcion) {
@@ -85,7 +81,7 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
             txtNombreInscripcion = (TextView)vistaInscripcion.findViewById(R.id.tvNombreInscripcionForaneo);
             txtMinEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMinEdadInscripcionForaneo);
             txtMaxEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMaxEdadInscripcionForaneo);
-            spForaneo = (Spinner)vistaInscripcion.findViewById(R.id.spCantidadBoletosForaneo);
+            lvForaneo = (ListView) vistaInscripcion.findViewById(R.id.lvForaneos);
         }
 
         public void asignarDatos(Inscripciones inscripciones, final int posicion) {
@@ -103,7 +99,7 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
                             if (response.equals("[]"))
                                 Toast.makeText(ctx, "No Has añadido usuarios foráneos", Toast.LENGTH_SHORT).show();
                             else
-                                llenarSpinner(response, inscripciones);
+                                llenarListView(response, inscripciones);
                         }
                     },
                     new Response.ErrorListener() {
@@ -115,7 +111,7 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
             Volley.newRequestQueue(ctx).add(stringRequest);
         }
 
-        private void llenarSpinner(String response, Inscripciones inscripciones) {
+        private void llenarListView(String response, Inscripciones inscripciones) {
             ArrayList<String> listaParaSp = new ArrayList<>();
             try {
                 JSONArray jsonArray = new JSONArray(response);
@@ -128,7 +124,7 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
                     }
                 }
                 ArrayAdapter<String> foraneoArrayAdapter = new ArrayAdapter<>(ctx, android.R.layout.simple_dropdown_item_1line, listaParaSp);
-                spForaneo.setAdapter(foraneoArrayAdapter);
+                lvForaneo.setAdapter(foraneoArrayAdapter);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

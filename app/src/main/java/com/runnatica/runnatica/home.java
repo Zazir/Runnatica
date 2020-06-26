@@ -67,8 +67,6 @@ public class home extends AppCompatActivity {
         //Inicializar arreglo de competencias
         competenciasList = new ArrayList<>();
 
-
-
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
         MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -91,6 +89,7 @@ public class home extends AppCompatActivity {
                 return true;
             }
         });
+
         Estado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,14 +109,14 @@ public class home extends AppCompatActivity {
         bandera=1;
         Toast.makeText(home.this, "Ver Competencias por Estado", Toast.LENGTH_SHORT).show();
         Localizacion();
-        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?estado="+Localizacion);
+        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?estado=Jalisco");
         Toast.makeText(getApplicationContext(), ""+NombreCiudad, Toast.LENGTH_SHORT).show();
     }
     public void Pais(){
         bandera=2;
         Toast.makeText(home.this, "Ver Competencias por Pais", Toast.LENGTH_SHORT).show();
         Localizacion2();
-        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?pais="+Localizacion);
+        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?pais=Mexico");
         Toast.makeText(getApplicationContext(), ""+NombreCiudad, Toast.LENGTH_SHORT).show();
     }
 
