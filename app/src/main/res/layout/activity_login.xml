@@ -58,14 +58,21 @@
         android:layout_centerHorizontal="true"
         android:inputType="textPassword"/>
 
+    <RadioButton
+        android:id="@+id/radioSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mantener sesion activa"
+        android:layout_marginTop="1500dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"/>
+
     <Button
         android:id="@+id/btnEntrar"
         android:layout_width="294dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="56dp"
         android:layout_marginTop="383dp"
+        android:layout_centerHorizontal="true"
         android:background="@color/grisBoton"
         android:text="Entrar"
         android:textSize="20sp" />
@@ -74,9 +81,7 @@
         android:id="@+id/btnRegistrarse"
         android:layout_width="293dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="57dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="447dp"
         android:background="@color/grisBoton"
         android:text="Registrase"
