@@ -109,6 +109,6 @@ public class TarjetaConekta extends Fragment implements Token.CreateToken{
         plantillaPDF.addParagraph("Ubicación del evento");
         plantillaPDF.addParagraph("Nomre del organizador");
         plantillaPDF.cerrarDocumento();
-        plantillaPDF.sendPDF(getActivity());
+        plantillaPDF.sendMail();
     }
 }

@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,10 +33,14 @@ public class InscripcionForaneo extends AppCompatActivity {
 
     private Button btnCrearForaneos, btnInscribir;
     private RecyclerView rvInscripcionesForaneos;
+    private TextView txtForaneosSeleccionados;
 
     private String id_competencia;
     private List<Inscripciones> inscripcionesList = new ArrayList<>();
     private inscripcionesForaneoAdapter inscripcionesAdapter;
+
+    private String[] ids_foraneos = new String[6];
+    private int posIDS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,7 @@ public class InscripcionForaneo extends AppCompatActivity {
         setContentView(R.layout.activity_inscripcion_foraneo);
         btnCrearForaneos = (Button)findViewById(R.id.btnPasarACrearForaneo);
         btnInscribir = (Button)findViewById(R.id.btnPagarInscripciones);
+        txtForaneosSeleccionados = (TextView)findViewById(R.id.tvUsuariosForaneos);
         rvInscripcionesForaneos = (RecyclerView)findViewById(R.id.rvInscripcionesForaneos);
         rvInscripcionesForaneos.setHasFixedSize(true);
         rvInscripcionesForaneos.setLayoutManager(new LinearLayoutManager(this));
@@ -112,7 +120,28 @@ public class InscripcionForaneo extends AppCompatActivity {
 
                             //Creamos instancia del adapter
                             inscripcionesAdapter = new inscripcionesForaneoAdapter(InscripcionForaneo.this, inscripcionesList);
-                            inscripcionesAdapter.notifyDataSetChanged();
+
+                            inscripcionesAdapter.setOnItemSelected(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    if (posIDS <= 5){
+                                        Log.d("Contador IDS", posIDS+"");
+                                        Log.d("Tamaño arreglo", ids_foraneos.length+"");
+                                        ids_foraneos[posIDS] = parent.getItemAtPosition(position).toString();
+                                        Log.d("Array ids", ids_foraneos[posIDS]+"");
+                                        txtForaneosSeleccionados.setText((ids_foraneos[posIDS])+"");
+                                        posIDS++;
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Ya no puedes inscribir más usuarios", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+
                             rvInscripcionesForaneos.setAdapter(inscripcionesAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();

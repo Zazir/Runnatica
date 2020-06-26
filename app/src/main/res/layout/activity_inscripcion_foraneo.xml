@@ -19,13 +19,29 @@
             android:gravity="center"
             android:text="¿Quieres inscribir foráneos?"
             android:textColor="@android:color/background_light"
-            android:textSize="25dp"></TextView>
+            android:textSize="25dp"/>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kk"
+        android:text="Inscribirás a:"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tvUsuariosForaneos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll"
+        android:text="Nadie"
+        android:textSize="18sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/kk"
+        android:layout_below="@+id/tvUsuariosForaneos"
         android:layout_above="@+id/kkta"
         android:orientation="vertical">
 

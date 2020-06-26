@@ -30,8 +30,8 @@ import java.util.List;
 public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcionesForaneoAdapter.ViewHolderInscripciones> implements AdapterView.OnItemSelectedListener {
     private Context ctx;
     private List<Inscripciones> inscripcionesList;
+    private static AdapterView.OnItemSelectedListener ItemSelectedListenerClick;
     private int contForaneos = 0;
-    private String foraneoSeleccionado;
 
     public inscripcionesForaneoAdapter(Context ctx, List<Inscripciones> inscripcionesList) {
         this.ctx = ctx;
@@ -59,16 +59,15 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
         return inscripcionesList.size();
     }
 
-    public String getForaneoSeleccionado() {
-        return foraneoSeleccionado;
+    public static void setOnItemSelected(AdapterView.OnItemSelectedListener itemSelectedListener) {
+        ItemSelectedListenerClick = itemSelectedListener;
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(ctx, "Seleccionaste "+parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT ).show();
-        //idForaneo += ;
-        //contForaneos++;
-        foraneoSeleccionado = parent.getItemAtPosition(position).toString();
+        if (ItemSelectedListenerClick != null) {
+            ItemSelectedListenerClick.onItemSelected(parent, view, position, id);
+        }
     }
 
     @Override

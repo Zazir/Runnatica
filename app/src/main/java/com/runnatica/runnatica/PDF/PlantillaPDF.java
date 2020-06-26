@@ -1,12 +1,9 @@
 package com.runnatica.runnatica.PDF;
 
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -55,6 +52,7 @@ public class PlantillaPDF {
     private Context context;
 
     public File archivoPDF;
+    public FileProvider archivoPDFN;
     private Document documento;
     private PdfWriter pdfWriter;
     private Paragraph parrafo;
@@ -122,7 +120,7 @@ public class PlantillaPDF {
         parrafo.add(childParagraph);
     }
 
-    public void sendPDF(Activity activity) {
+    /*public void sendPDF(Activity activity) {
         if (archivoPDF.exists()) {
         sendMail();
 
@@ -136,10 +134,10 @@ public class PlantillaPDF {
             }
         }else
             Toast.makeText(activity.getApplicationContext(), "No se pudo encontrar el archivo pdf", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
 
-    private void sendMail() {
+    public void sendMail() {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -173,7 +171,7 @@ public class PlantillaPDF {
                 mimeMultipart.addBodyPart(adjunto);
 
                 message.setSubject("Runnatica Inscrición");
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("chocosogamer@gmail.com"));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(usuario.getCorreo()));
                 message.setContent(mimeMultipart, "text/html; charset=utf-8");
 
                 Transport.send(message);

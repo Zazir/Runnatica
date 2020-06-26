@@ -1,7 +1,9 @@
 package com.runnatica.runnatica;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,20 +35,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class carrera_vista1 extends AppCompatActivity {
-    ImageView imgCompetencia;
-    TextView txtNomCompe, txtOrganizador, txtFechaCompe, txtHoraCompe,
+    private ImageView imgCompetencia;
+    private TextView txtNomCompe, txtOrganizador, txtFechaCompe, txtHoraCompe,
             txtLugarCompe, txtPrecioCompe, txtDescripcionCompe, txtRegistrarse,
             txtComentario;
-    Button btnInscripcion, btnEnviarComentario;
-    Spinner spCategorias;
-    RecyclerView ForoRecycler;
+    private Button btnInscripcion, btnEnviarComentario;
+    private Spinner spCategorias, spFiltro;
+    private RecyclerView ForoRecycler;
 
     private List<Comentarios> comentariosList = new ArrayList<>();
     private Usuario user = Usuario.getUsuarioInstance();
     private String id_competencia;
+    private String id_organizador;
+
     private comentariosAdapter adaptador;
+
     private String monto;
     private String categoria;
+    private String dominio;
 
     @Override
     protected void onDestroy() {
@@ -59,6 +65,7 @@ public class carrera_vista1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrera_vista1);
         spCategorias = (Spinner)findViewById(R.id.spRespuestaCategoria);
+        spFiltro = (Spinner)findViewById(R.id.spForo);
         imgCompetencia = (ImageView)findViewById(R.id.ivFotoCompetencia);
         txtNomCompe = (TextView)findViewById(R.id.tvNombreCompetencia);
         txtOrganizador = (TextView)findViewById(R.id.tvNombreOrganizador);
@@ -75,13 +82,13 @@ public class carrera_vista1 extends AppCompatActivity {
         ForoRecycler.setHasFixedSize(true);
         ForoRecycler.setLayoutManager(new LinearLayoutManager(this));
 
+        dominio = getString(R.string.ip);
         getLastViewData();
 
         cargarInfoCarrera("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencia.php?idCompe=" + id_competencia);
 
-        cargarComentarios("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerComentarios.php?id_compentencia=" + id_competencia);
-
-        cargarSpinner();
+        cargarSpinnerComentar();
+        cargarSpinnerComentarios();
 
         btnInscripcion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +124,7 @@ public class carrera_vista1 extends AppCompatActivity {
         finish();
     }
 
-    private void cargarSpinner() {
+    private void cargarSpinnerComentar() {
         ArrayAdapter<CharSequence> opcionesSpCat = ArrayAdapter.createFromResource(this, R.array.categorias, android.R.layout.simple_spinner_item);
         spCategorias.setAdapter(opcionesSpCat);
 
@@ -125,6 +132,24 @@ public class carrera_vista1 extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 categoria = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void cargarSpinnerComentarios() {
+        ArrayAdapter<CharSequence> opcionesSpCat = ArrayAdapter.createFromResource(this, R.array.filtroCategorias, android.R.layout.simple_spinner_item);
+        spFiltro.setAdapter(opcionesSpCat);
+
+        spFiltro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                cargarComentarios("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerComentarios.php?id_compentencia=" + id_competencia +
+                        "&tipo_comentario=" + parent.getItemAtPosition(position).toString());
             }
 
             @Override
@@ -143,8 +168,9 @@ public class carrera_vista1 extends AppCompatActivity {
                             JSONArray jsonArray = new JSONArray(response);
                             JSONObject respuesta = jsonArray.getJSONObject(0);
                             Glide.with(carrera_vista1.this).load(respuesta.optString("foto")).into(imgCompetencia);
+                            id_organizador = respuesta.optString("id_usuario");
                             txtNomCompe.setText(respuesta.optString("nom_comp"));
-                            txtOrganizador.setText(respuesta.optString("id_usuario"));
+                            txtOrganizador.setText(respuesta.optString("organizador"));
                             txtFechaCompe.setText(respuesta.optString("fecha"));
                             txtHoraCompe.setText(respuesta.optString("hora") + " horas");
                             txtLugarCompe.setText(respuesta.optString("coordenadas"));
@@ -170,10 +196,6 @@ public class carrera_vista1 extends AppCompatActivity {
         id_competencia = extra.getString("id");
     }
 
-    private void ReCapcha(){
-
-    }
-
     private void comentarForo(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
@@ -188,13 +210,15 @@ public class carrera_vista1 extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(this, "Hubo un error con el servidor", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(carrera_vista1.this, "Hubo un error con el servidor", Toast.LENGTH_SHORT).show();
                     }
                 });
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
     private void cargarComentarios(String URL) {
+        comentariosList.clear();
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override
@@ -210,6 +234,7 @@ public class carrera_vista1 extends AppCompatActivity {
 
                                 //Añadir valores a los correspondientes textview
                                 comentariosList.add(new Comentarios(
+                                        comentario.getString("id_foro"),
                                         comentario.getString("mensaje"),
                                         comentario.getString("nombre"),
                                         comentario.getString("tipo_mensaje")
@@ -218,7 +243,17 @@ public class carrera_vista1 extends AppCompatActivity {
 
                             //Creamos instancia del adapter
                             adaptador = new comentariosAdapter(carrera_vista1.this, comentariosList);
-                            adaptador.notifyDataSetChanged();
+
+                            comentariosAdapter.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (id_organizador.equals(""+user.getId())) {
+                                        eliminarComentario(dominio + "agregarComentario.php?id_comentario=" +
+                                                comentariosList.get(ForoRecycler.getChildAdapterPosition(v)).getId_foro());
+                                    }
+                                }
+                            });
+
                             ForoRecycler.setAdapter(adaptador);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -232,5 +267,40 @@ public class carrera_vista1 extends AppCompatActivity {
         });
 
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void eliminarComentario(final String URL) {
+        AlertDialog.Builder alertaComentario = new AlertDialog.Builder(this);
+        alertaComentario.setTitle("Eliminar comentario");
+        alertaComentario.setMessage("Esta acción es irreversible");
+        alertaComentario.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                StringRequest request = new StringRequest(Request.Method.GET, URL,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                if (response.equals("Exito"))
+                                    Toast.makeText(carrera_vista1.this, "Operación exitosa", Toast.LENGTH_SHORT).show();
+                                else if (response.equals("Error"))
+                                    Toast.makeText(carrera_vista1.this, "Vuelve a intentarlo en un poco de tiempo", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(carrera_vista1.this, "Hubo un error con el servidor", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                Volley.newRequestQueue(getApplicationContext()).add(request);
+            }
+        });
+        alertaComentario.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        alertaComentario.show();
     }
 }

@@ -7,7 +7,17 @@
     <string name="ip">https://runnatica.000webhostapp.com/WebServiceRunnatica/</string>
 
     <string-array name="categorias">
-        <item>Selecciona categoria</item>
+        <item>General</item>
+        <item>Precios</item>
+        <item>Ruta</item>
+        <item>Organizador</item>
+        <item>Ubicacion</item>
+        <item>Fecha</item>
+        <item>Kits</item>
+    </string-array>
+
+    <string-array name="filtroCategorias">
+        <item>Filtrar</item>
         <item>General</item>
         <item>Precios</item>
         <item>Ruta</item>

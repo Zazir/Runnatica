@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -171,7 +170,7 @@ public class pagarInscripciones extends AppCompatActivity {
         plantillaPDF.addParagraph("Ubicación del evento");
         plantillaPDF.addParagraph("Nomre del organizador");
         plantillaPDF.cerrarDocumento();
-        plantillaPDF.sendPDF(this);
+        plantillaPDF.sendMail();
     }
 
     public boolean validarPermisos() {

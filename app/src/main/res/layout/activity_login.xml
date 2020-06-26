@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/Correo"
         android:layout_centerHorizontal="true"
-        />
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/btnEntrar"

@@ -70,9 +70,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolderCompeten
                     imgCompetencia.setBackground(null);
                     Glide.with(mCtx).load(pojoCompetencia.getImageCompetencia()).into(imgCompetencia);
                 }catch (IllegalArgumentException ex){
+                    Log.i("Glide-Error", ""+ex);
                     Log.i("Glide-tag", String.valueOf(pojoCompetencia.getImageCompetencia()));
                 }
-            //}
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

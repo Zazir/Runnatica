@@ -12,10 +12,11 @@ import com.runnatica.runnatica.poho.Comentarios;
 
 import java.util.List;
 
-public class comentariosAdapter extends RecyclerView.Adapter<comentariosAdapter.ViewHolderComentario> {
+public class comentariosAdapter extends RecyclerView.Adapter<comentariosAdapter.ViewHolderComentario> implements View.OnClickListener{
 
     private Context ctx;
     private List<Comentarios> comentariosList;
+    private static View.OnClickListener listenerClick;
 
     public comentariosAdapter(Context ctx, List<Comentarios> comentariosList) {
         this.ctx = ctx;
@@ -26,6 +27,7 @@ public class comentariosAdapter extends RecyclerView.Adapter<comentariosAdapter.
     @Override
     public comentariosAdapter.ViewHolderComentario onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = View.inflate(parent.getContext(), R.layout.recyclerview_comentarios, null);
+        view.setOnClickListener(this);
         return new ViewHolderComentario(view);
     }
 
@@ -37,6 +39,17 @@ public class comentariosAdapter extends RecyclerView.Adapter<comentariosAdapter.
     @Override
     public int getItemCount() {
         return comentariosList.size();
+    }
+
+    public static void setOnClickListener(View.OnClickListener listener) {
+        listenerClick = listener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (listenerClick != null) {
+            listenerClick.onClick(v);
+        }
     }
 
     class ViewHolderComentario extends RecyclerView.ViewHolder {
