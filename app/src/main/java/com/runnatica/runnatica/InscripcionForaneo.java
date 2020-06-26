@@ -2,6 +2,7 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,11 +13,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.safetynet.SafetyNet;
+import com.google.android.gms.safetynet.SafetyNetApi;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.runnatica.runnatica.adapter.inscripcionesForaneoAdapter;
 import com.runnatica.runnatica.poho.Inscripciones;
 
@@ -25,7 +33,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InscripcionForaneo extends AppCompatActivity {
 
@@ -41,6 +51,12 @@ public class InscripcionForaneo extends AppCompatActivity {
 
     private String[] ids_foraneos = new String[6];
     private int posIDS = 1;
+
+    private static final String TAG = "JORGE";
+
+    public static final String SITE_KEY = "6LfiMKkZAAAAAIIpYcZWdXd7TaRoya7OBKhi8EeQ";
+    public static final String SITE_SECRET_KEY = "6LfiMKkZAAAAADbV7pR01TxTXQcZSZMDqx_8SCCM";
+    String userResponseToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +103,41 @@ public class InscripcionForaneo extends AppCompatActivity {
     }
 
     private void CrearInscripcion() {
-        Intent intent = new Intent(InscripcionForaneo.this, pagarInscripciones.class);
-        intent.putExtra("monto", monto);
-        intent.putExtra("ID_COMPENTENCIA", id_competencia);
-        startActivity(intent);
+        SafetyNet.getClient(this).verifyWithRecaptcha(SITE_KEY)
+                .addOnSuccessListener(this,
+                        new OnSuccessListener<SafetyNetApi.RecaptchaTokenResponse>()
+                        {
+                            @Override
+                            public void onSuccess(SafetyNetApi.RecaptchaTokenResponse response)
+                            {
+
+                                userResponseToken = response.getTokenResult();
+
+                                if (!userResponseToken.isEmpty())
+                                {
+                                    sendRequest();
+                                }
+                            }
+                        })
+                .addOnFailureListener(this, new OnFailureListener()
+                {
+                    @Override
+                    public void onFailure(@NonNull Exception e)
+                    {
+                        if (e instanceof ApiException)
+                        {
+                            ApiException apiException = (ApiException) e;
+                            int statusCode = apiException.getStatusCode();
+
+                            Log.e(TAG, "ERROR 1: " + CommonStatusCodes.getStatusCodeString(statusCode));
+                        }
+                        else
+                        {
+                            Log.e(TAG, "ERROR 2: " + e.getMessage());
+                        }
+                    }
+                });
+
     }
 
     private void cargarInscripciones(String URL) {
@@ -155,5 +202,59 @@ public class InscripcionForaneo extends AppCompatActivity {
                     }
                 });
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+    public void sendRequest()
+    {
+        String url = "https://www.google.com/recaptcha/api/siteverify";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        try
+                        {
+                            JSONObject obj = new JSONObject(response);
+
+                            if (obj.getString("success").equals("true"))
+                            {
+                                Log.e(TAG, "EXITO");
+                                moveNewActivity();
+                            }
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Log.e(TAG, "ERROR 3");
+                        Toast.makeText(InscripcionForaneo.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError
+            {
+                Map<String, String> params = new HashMap<>();
+                params.put("secret", SITE_SECRET_KEY);
+                params.put("response", userResponseToken);
+                return params;
+            }
+        };
+
+        Controlador_Captcha.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+    public void moveNewActivity(){
+        Intent intent = new Intent(InscripcionForaneo.this, pagarInscripciones.class);
+        intent.putExtra("monto", monto);
+        intent.putExtra("ID_COMPENTENCIA", id_competencia);
+        startActivity(intent);
     }
 }
