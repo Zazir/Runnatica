@@ -53,6 +53,12 @@ public class crear_competencia extends AppCompatActivity {
     private DatePickerDialog picker;
     private String fecha;
 
+    int imagen=0;
+    private int requestCode;
+    private int resultCode;
+    @Nullable
+    private Intent data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,10 +84,19 @@ public class crear_competencia extends AppCompatActivity {
         Guardar = (Button) findViewById(R.id.btnGuardarCompetencia);
         txtFecha = (TextView)findViewById(R.id.tvFechaPicker);
 
+
         btnImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Guardar imagen
+                CargarImagen();
+                imagen = 1;
+            }
+        });
+        Aval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Guardar la imagen del aval
                 CargarImagen();
             }
         });
@@ -218,12 +233,12 @@ public class crear_competencia extends AppCompatActivity {
         }
     }
 
-    private Boolean Validaciones() {
+        private Boolean Validaciones() {
         Boolean siguiente = false;
 
         if (Nombre.getText().toString().length() <= 0) {
-            Nombre.setError("Debes de poner el nombre de la inscripcion");
-        } else if (Precio.getText().toString().length() <= 0) {
+            Nombre.setError("Debes de poner el nombre de la competencia");
+        }else if (Precio.getText().toString().length() <= 0) {
             Precio.setError("Debes de poner el el precio de la inscripcion");
         }
         else if(GradosUbicacion.getText().toString().length() <= 0) {
@@ -243,6 +258,9 @@ public class crear_competencia extends AppCompatActivity {
         }
         else if(Descripcion.getText().toString().length() <= 0) {
             Descripcion.setError("Debes de poner la inscripción de la Competencia");
+        }
+        else if(imagen == 0){
+            btnImagen.setError("Debes seleccionar una imagen");
         }
         else if(SiReembolso.isChecked()== false && NoReembolso.isChecked() == false){
             Toast.makeText(getApplicationContext(), "Verifica el Reembolso", Toast.LENGTH_SHORT).show();
