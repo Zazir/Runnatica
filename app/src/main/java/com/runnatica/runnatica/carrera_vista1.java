@@ -118,6 +118,7 @@ public class carrera_vista1 extends AppCompatActivity {
 
     private void CrearInscripcion() {
         Intent intent = new Intent(carrera_vista1.this, InscripcionesCompetidor.class);
+        intent.putExtra("NOMBRE_COMPETENCIA", txtNomCompe.getText());
         intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia);
         startActivity(intent);

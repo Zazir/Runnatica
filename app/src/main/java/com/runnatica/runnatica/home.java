@@ -247,6 +247,7 @@ public class home extends AppCompatActivity {
     }
 
     private void CargarCompetencias(String URL) {
+        competenciasList.clear();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override

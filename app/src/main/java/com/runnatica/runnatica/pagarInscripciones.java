@@ -90,6 +90,7 @@ public class pagarInscripciones extends AppCompatActivity {
         Bundle extra = pagarInscripciones.this.getIntent().getExtras();
         id_competencia = extra.getString("ID_COMPENTENCIA");
         monto = extra.getString("monto");
+
     }
 
     // --------------------------> PAYPAL INTEGRATION <------------------------------- //
