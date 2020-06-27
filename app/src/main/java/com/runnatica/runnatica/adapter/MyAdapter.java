@@ -65,7 +65,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolderCompeten
             txtNombreCompetencias.setText(pojoCompetencia.getNombreCompetencia());
             txtDescripcionCompetencia.setText(pojoCompetencia.getDescripcionCompetencia());
             txtPrecioCompetencia.setText(pojoCompetencia.getPrecioCompetencia());
-            //if (!pojoCompetencia.getImageCompetencia().equals("null")){
                 try {
                     imgCompetencia.setBackground(null);
                     Glide.with(mCtx).load(pojoCompetencia.getImageCompetencia()).into(imgCompetencia);
