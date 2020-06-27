@@ -78,7 +78,6 @@ public class crear_competencia extends AppCompatActivity {
         btnImagen = (Button) findViewById(R.id.btnImagenCompetencia);
         btnDate = (Button)findViewById(R.id.btnSeleccionarFecha);
         img = (ImageView)findViewById(R.id.imgCompetencia);
-        GradosUbicacion = (EditText)findViewById(R.id.etGradosUbicacion);
         Ciudad = (EditText)findViewById(R.id.etCiudadCompetencia);
         Colonia = (EditText)findViewById(R.id.etColoniaCompetencia);
         Pais = (Spinner) findViewById(R.id.spPaisCompetencia);
@@ -155,7 +154,7 @@ public class crear_competencia extends AppCompatActivity {
         Informacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Informacion();
             }
         });
 
@@ -168,7 +167,7 @@ public class crear_competencia extends AppCompatActivity {
                             "Id_usuario=" + usuario.getId() +
                             "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
                             "&Aval=Aval" +
-                            "&Coordenadas=" + GradosUbicacion.getText().toString().replaceAll(" ", "%20")+
+                            "&Coordenadas=95959595959" +
                             "&Nombre_competencia=" + Nombre.getText().toString().replaceAll(" ", "%20")+
                             "&Pais=" + pais +
                             "&Colonia=" +Colonia.getText().toString().replaceAll(" ", "%20")+
@@ -325,9 +324,6 @@ public class crear_competencia extends AppCompatActivity {
             Nombre.setError("Debes de poner el nombre de la competencia");
         }else if (Precio.getText().toString().length() <= 0) {
             Precio.setError("Debes de poner el el precio de la inscripcion");
-        }
-        else if(GradosUbicacion.getText().toString().length() <= 0) {
-            GradosUbicacion.setError("Debes de poner los grados de Google Maps de la Competencia");
         }
         else if(hora.length() <= 0) {
             btnHora.setBackgroundColor(600);

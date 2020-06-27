@@ -118,7 +118,7 @@ public class InscripcionForaneo extends AppCompatActivity {
         intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia);
         intent.putExtra("CANT_FORANEOS", contForaneos);
-        intent.putExtra("NOMBRECOMPENTENCIA", NombreCompetencia);
+        intent.putExtra("NOMBRE_COMPETENCIA", NombreCompetencia);
         intent.putExtra("FECHA", Fecha);
         intent.putExtra("LUGAR", Lugar);
         intent.putExtra("ORGANIZADOR", Organizador);
@@ -293,7 +293,7 @@ public class InscripcionForaneo extends AppCompatActivity {
         intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia);
         intent.putExtra("CANT_FORANEOS", contForaneos);
-        intent.putExtra("NOMBRECOMPENTENCIA", NombreCompetencia);
+        intent.putExtra("NOMBRE_COMPETENCIA", NombreCompetencia);
         intent.putExtra("FECHA", Fecha);
         intent.putExtra("LUGAR", Lugar);
         intent.putExtra("ORGANIZADOR", Organizador);

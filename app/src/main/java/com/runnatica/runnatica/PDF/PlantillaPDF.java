@@ -43,7 +43,7 @@ public class PlantillaPDF {
 
 
     //Datos para enviar correo
-    private String correo = "alexlopezoficial1@gmail.com";
+    private String correo = "runnaticapp@gmail.com";
     private String contraseña = "Lotoloto2125";
     private Session session;
 
