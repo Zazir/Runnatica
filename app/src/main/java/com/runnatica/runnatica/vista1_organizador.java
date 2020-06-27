@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.github.mikephil.charting.charts.BarChart;
+
 public class vista1_organizador extends AppCompatActivity {
+    BarChart graficaBarras;
 
     Button ListaInscritos, FotosResultados;
 
@@ -17,6 +20,7 @@ public class vista1_organizador extends AppCompatActivity {
 
         ListaInscritos = (Button)findViewById(R.id.btnListaInscritos);
         FotosResultados = (Button)findViewById(R.id.btnFotosResultados);
+        graficaBarras = findViewById(R.id.graficaBarras);
 
         ListaInscritos.setOnClickListener(new View.OnClickListener() {
             @Override

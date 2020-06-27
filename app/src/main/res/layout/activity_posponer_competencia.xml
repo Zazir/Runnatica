@@ -126,9 +126,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="78dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:background="@drawable/barra_verde"
-        />
+        android:minHeight="@android:dimen/thumbnail_height"
+        ></LinearLayout>
 
 </RelativeLayout>

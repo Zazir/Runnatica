@@ -12,10 +12,9 @@
         android:background="@drawable/barra_verde">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Aviso de Privacidad"
             android:textColor="@android:color/background_light"
             android:textSize="40dp"></TextView>
@@ -72,10 +71,13 @@ El Responsable se reserva el derecho de efectuar en cualquier momento modificaci
     
 
     <LinearLayout
-        android:layout_width="495dp"
+        android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:layout_marginTop="570dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:background="@drawable/barra_verde"
+        android:minHeight="@android:dimen/thumbnail_height"
         ></LinearLayout>
 
 </RelativeLayout>

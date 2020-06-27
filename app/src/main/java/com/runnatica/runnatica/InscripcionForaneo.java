@@ -98,6 +98,8 @@ public class InscripcionForaneo extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "No puedes inscribir a más de 5 foráneos", Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 
     private void getLastViewData() {
@@ -108,6 +110,7 @@ public class InscripcionForaneo extends AppCompatActivity {
         Fecha = extra.getString("FECHA");
         Lugar = extra.getString("LUGAR");
         Organizador = extra.getString("ORGANIZADOR");
+        //Toast.makeText(getApplicationContext(), ""+NombreCompetencia, Toast.LENGTH_SHORT).show();
     }
 
     private void aAgregarForaneos() {
@@ -124,6 +127,8 @@ public class InscripcionForaneo extends AppCompatActivity {
     }
 
     private void CrearInscripcion() {
+
+        //Toast.makeText(this, ""+NombreCompetencia, Toast.LENGTH_SHORT).show();
         SafetyNet.getClient(this).verifyWithRecaptcha(SITE_KEY)
                 .addOnSuccessListener(this,
                         new OnSuccessListener<SafetyNetApi.RecaptchaTokenResponse>()

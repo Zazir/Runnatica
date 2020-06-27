@@ -92,10 +92,13 @@
         ></Button>
 
     <LinearLayout
-        android:layout_width="495dp"
+        android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:layout_marginTop="570dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:background="@drawable/barra_verde"
+        android:minHeight="@android:dimen/thumbnail_height"
         ></LinearLayout>
 
 

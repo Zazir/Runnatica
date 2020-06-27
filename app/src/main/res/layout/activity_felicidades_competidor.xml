@@ -24,44 +24,41 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Te has inscrito a:"
+        android:text="Te has inscrito a la Competencia"
         android:gravity="center"
         android:layout_marginTop="250dp"
         android:textSize="30dp"
         android:textColor="@android:color/background_dark"
         ></TextView>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nombre de la Competencia"
-        android:gravity="center"
-        android:layout_marginTop="310dp"
-        android:textSize="30dp"
-        android:textColor="@android:color/background_dark"
-        ></TextView>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Inscripcion:"
-        android:layout_marginTop="380dp"
-        android:textSize="30dp"
-        android:textColor="@android:color/background_dark"
-        ></TextView>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="PDF"
-        android:layout_marginTop="450dp"
-        android:textSize="30dp"
-        android:textColor="@android:color/background_dark"
-        ></TextView>
 
     <LinearLayout
-        android:layout_width="495dp"
+        android:layout_width="162dp"
+        android:layout_height="154dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="336dp"
+        android:layout_marginEnd="96dp"
+        android:background="@drawable/bien"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:layout_marginTop="570dp"
-        android:background="@drawable/barra_verde">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/barra_verde"
+        android:minHeight="@android:dimen/thumbnail_height">
+
+        <TextView
+            android:id="@+id/alHome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Ir al Inicio"
+            android:gravity="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="30dp"
+            ></TextView>
     </LinearLayout>
 
 </RelativeLayout>

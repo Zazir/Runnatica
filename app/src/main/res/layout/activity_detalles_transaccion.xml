@@ -5,13 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DetallesTransaccion">
+    tools:context=".DetallesTransaccion"
+    android:background="@drawable/barra_verde"
+    >
 
     <TextView
         android:id="@+id/tvid"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/background_dark"
+        android:textSize="35dp"
         android:hint="id"></TextView>
 
     <TextView
@@ -19,6 +23,8 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/background_dark"
+        android:textSize="35dp"
         android:hint="Estatus"></TextView>
 
     <TextView
@@ -26,12 +32,16 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/background_dark"
+        android:textSize="35dp"
         android:hint="Monto"></TextView>
 
     <Button
         android:id="@+id/btnContinuar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Continuar"/>
+        android:text="Continuar" />
+
+
 
 </LinearLayout>

@@ -113,7 +113,7 @@ public class home extends AppCompatActivity {
         Localizacion();
         competenciasList.clear();
         CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?estado=Jalisco");
-        Toast.makeText(getApplicationContext(), ""+NombreCiudad, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Ver Carreras Por Estado", Toast.LENGTH_SHORT).show();
     }
     public void Pais(){
         bandera=2;
@@ -121,7 +121,7 @@ public class home extends AppCompatActivity {
         Localizacion2();
         competenciasList.clear();
         CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?pais=Mexico");
-        Toast.makeText(getApplicationContext(), ""+NombreCiudad, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Ver Carreras Por Pais", Toast.LENGTH_SHORT).show();
     }
 
     public void Localizacion(){

@@ -40,6 +40,8 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class pagarInscripciones extends AppCompatActivity {
+
+
     private Button paypal, conekta;
     PlantillaPDF plantillaPDF = new PlantillaPDF(pagarInscripciones.this);;
 
@@ -64,6 +66,7 @@ public class pagarInscripciones extends AppCompatActivity {
         paypal.setEnabled(false);
 
         getLastViewData();
+
 
         if (validarPermisos()) {
             paypal.setEnabled(true);
@@ -180,11 +183,11 @@ public class pagarInscripciones extends AppCompatActivity {
 
         plantillaPDF.abrirArchivo();
         plantillaPDF.addMetadata("Carrera", "Inscripcion", "Runnatica");
-        plantillaPDF.addHeaders(NombreCompetencia, "Marca", Fecha1);
+        plantillaPDF.addHeaders(NombreCompetencia.toString(), "Marca", Fecha1.toString());
         plantillaPDF.addParagraph("Código QR");
         plantillaPDF.addParagraph(usuario.getNombre());
-        plantillaPDF.addParagraph(Lugar);
-        plantillaPDF.addParagraph(Organizador);
+        plantillaPDF.addParagraph(Lugar.toString());
+        plantillaPDF.addParagraph(Organizador.toString());
         plantillaPDF.cerrarDocumento();
         plantillaPDF.sendMail();
     }

@@ -19,7 +19,7 @@
             android:gravity="center"
             android:text="Inscripcion Competidor"
             android:textColor="@android:color/background_light"
-            android:textSize="35dp"></TextView>
+            android:textSize="30dp"></TextView>
     </LinearLayout>
 
 
@@ -33,10 +33,12 @@
     <LinearLayout
         android:id="@+id/kk"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="78dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        android:background="@drawable/barra_verde">
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/barra_verde"
+        android:minHeight="@android:dimen/thumbnail_height">
 
         <Button
             android:id="@+id/btnSegundoPaso"
