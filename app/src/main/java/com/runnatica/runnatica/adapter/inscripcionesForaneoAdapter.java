@@ -27,10 +27,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcionesForaneoAdapter.ViewHolderInscripciones> implements AdapterView.OnItemSelectedListener {
+public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcionesForaneoAdapter.ViewHolderInscripciones>
+        implements ListView.OnItemClickListener {
     private Context ctx;
     private List<Inscripciones> inscripcionesList;
-    private static AdapterView.OnItemSelectedListener ItemSelectedListenerClick;
+    private ListView.OnItemClickListener listener;
+    ListView lvForaneo;
     private int contForaneos = 0;
 
     public inscripcionesForaneoAdapter(Context ctx, List<Inscripciones> inscripcionesList) {
@@ -42,6 +44,7 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
     @Override
     public inscripcionesForaneoAdapter.ViewHolderInscripciones onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = View.inflate(parent.getContext(), R.layout.recyclerview_inscripciones_foraneo, null);
+        //lvForaneo.setOnItemClickListener(this);
         return new ViewHolderInscripciones(view);
     }
 
@@ -55,25 +58,20 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
         return inscripcionesList.size();
     }
 
-    public static void setOnItemSelected(AdapterView.OnItemSelectedListener itemSelectedListener) {
-        ItemSelectedListenerClick = itemSelectedListener;
+    public void setOnItemClickListener(ListView.OnItemClickListener listener1) {
+        listener = listener1;
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (ItemSelectedListenerClick != null) {
-            ItemSelectedListenerClick.onItemSelected(parent, view, position, id);
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (listener != null) {
+            listener.onItemClick(parent, view, position, id);
         }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     class ViewHolderInscripciones extends RecyclerView.ViewHolder {
         TextView txtNombreInscripcion, txtMinEdad, txtMaxEdad;
-        ListView lvForaneo;
+
         Usuario usuario = Usuario.getUsuarioInstance();
 
         public ViewHolderInscripciones(View vistaInscripcion) {
@@ -123,7 +121,7 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
                         listaParaSp.add(foraneo.optInt("id_foraneo") + " : " + foraneo.optString("nombre"));
                     }
                 }
-                ArrayAdapter<String> foraneoArrayAdapter = new ArrayAdapter<>(ctx, android.R.layout.simple_dropdown_item_1line, listaParaSp);
+                ArrayAdapter<String> foraneoArrayAdapter = new ArrayAdapter<>(ctx, android.R.layout.simple_list_item_1, listaParaSp);
                 lvForaneo.setAdapter(foraneoArrayAdapter);
             } catch (JSONException e) {
                 e.printStackTrace();

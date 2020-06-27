@@ -54,6 +54,7 @@ public class pagarInscripciones extends AppCompatActivity {
     Usuario usuario = Usuario.getUsuarioInstance();
 
     private String monto = "";
+    private int multiplicar = 0;
     private String id_competencia, NombreCompetencia, Fecha1, Lugar, Organizador;
 
     @Override
@@ -93,15 +94,26 @@ public class pagarInscripciones extends AppCompatActivity {
         Bundle extra = pagarInscripciones.this.getIntent().getExtras();
         id_competencia = extra.getString("ID_COMPENTENCIA");
         monto = extra.getString("monto");
+        multiplicar = extra.getInt("CANT_FORANEOS");
         NombreCompetencia = extra.getString("NOMBRE_COMPETENCIA");
         Fecha1 = extra.getString("FECHA");
         Lugar = extra.getString("LUGAR");
         Organizador = extra.getString("ORGANIZADOR");
+
+        Toast.makeText(this, ""+multiplicar, Toast.LENGTH_SHORT).show();
     }
 
     // --------------------------> PAYPAL INTEGRATION <------------------------------- //
     private void hacerPago() {
-        if (monto == null) {
+        if (multiplicar > 0 && monto != null) {
+            int total = Integer.valueOf(monto) * (multiplicar+1);
+            PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(total), "MXN", "Prueba", PayPalPayment.PAYMENT_INTENT_SALE);
+
+            Intent intent = new Intent(this, PaymentActivity.class);
+            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+            intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
+            startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+        } else if (monto == null) {
             Toast.makeText(this, "Hubo un error al cargar la información de la competencia, vuelve a seleccionar la competenca", Toast.LENGTH_SHORT).show();
         }else {
             PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(monto)), "MXN", "Prueba", PayPalPayment.PAYMENT_INTENT_SALE);

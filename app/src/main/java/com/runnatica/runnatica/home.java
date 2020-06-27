@@ -64,6 +64,8 @@ public class home extends AppCompatActivity {
         Estado = (Button)findViewById(R.id.btnEstado);
         Pais = (Button)findViewById(R.id.btnPais);
 
+        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?estado=Jalisco");
+
         //Inicializar arreglo de competencias
         competenciasList = new ArrayList<>();
 
@@ -109,6 +111,7 @@ public class home extends AppCompatActivity {
         bandera=1;
         Toast.makeText(home.this, "Ver Competencias por Estado", Toast.LENGTH_SHORT).show();
         Localizacion();
+        competenciasList.clear();
         CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?estado=Jalisco");
         Toast.makeText(getApplicationContext(), "Ver Carreras Por Estado", Toast.LENGTH_SHORT).show();
     }
@@ -116,6 +119,7 @@ public class home extends AppCompatActivity {
         bandera=2;
         Toast.makeText(home.this, "Ver Competencias por Pais", Toast.LENGTH_SHORT).show();
         Localizacion2();
+        competenciasList.clear();
         CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?pais=Mexico");
         Toast.makeText(getApplicationContext(), "Ver Carreras Por Pais", Toast.LENGTH_SHORT).show();
     }
@@ -247,7 +251,7 @@ public class home extends AppCompatActivity {
     }
 
     private void CargarCompetencias(String URL) {
-        competenciasList.clear();
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override

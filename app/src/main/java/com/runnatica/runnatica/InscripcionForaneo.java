@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,13 +45,15 @@ public class InscripcionForaneo extends AppCompatActivity {
     private Button btnCrearForaneos, btnInscribir;
     private RecyclerView rvInscripcionesForaneos;
     private TextView txtForaneosSeleccionados;
+    private EditText cantidad;
 
     private String id_competencia, NombreCompetencia, Fecha, Lugar, Organizador;
     private List<Inscripciones> inscripcionesList = new ArrayList<>();
     private inscripcionesForaneoAdapter inscripcionesAdapter;
 
-    private String[] ids_foraneos = new String[6];
-    private int posIDS = 1;
+    private String[] ids_foraneos = new String[5];
+    private int posIDS = 0;
+    private int contForaneos = 0;
 
     private static final String TAG = "JORGE";
 
@@ -65,6 +68,7 @@ public class InscripcionForaneo extends AppCompatActivity {
         btnCrearForaneos = (Button)findViewById(R.id.btnPasarACrearForaneo);
         btnInscribir = (Button)findViewById(R.id.btnPagarInscripciones);
         txtForaneosSeleccionados = (TextView)findViewById(R.id.tvUsuariosForaneos);
+        cantidad = (EditText)findViewById(R.id.etForaneos);
         rvInscripcionesForaneos = (RecyclerView)findViewById(R.id.rvInscripcionesForaneos);
         rvInscripcionesForaneos.setHasFixedSize(true);
         rvInscripcionesForaneos.setLayoutManager(new LinearLayoutManager(this));
@@ -83,7 +87,15 @@ public class InscripcionForaneo extends AppCompatActivity {
         btnInscribir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CrearInscripcion();
+                try {
+                    contForaneos = Integer.parseInt(cantidad.getText().toString());
+                }catch (Exception e){
+                    cantidad.setError("Tiene que ser un número");
+                }
+                if (contForaneos <= 5) {
+                    CrearInscripcion();
+                }else
+                    Toast.makeText(getApplicationContext(), "No puedes inscribir a más de 5 foráneos", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -103,12 +115,13 @@ public class InscripcionForaneo extends AppCompatActivity {
 
     private void aAgregarForaneos() {
         Intent intent = new Intent(InscripcionForaneo.this, agregarForaneo.class);
-        intent.putExtra("monto", monto.toString());
-        intent.putExtra("ID_COMPENTENCIA", id_competencia.toString());
-        intent.putExtra("NOMBRE_COMPENTENCIA", NombreCompetencia.toString());
-        intent.putExtra("FECHA", Fecha.toString());
-        intent.putExtra("LUGAR", Lugar.toString());
-        intent.putExtra("ORGANIZADOR", Organizador.toString());
+        intent.putExtra("monto", monto);
+        intent.putExtra("ID_COMPENTENCIA", id_competencia);
+        intent.putExtra("CANT_FORANEOS", contForaneos);
+        intent.putExtra("NOMBRECOMPENTENCIA", NombreCompetencia);
+        intent.putExtra("FECHA", Fecha);
+        intent.putExtra("LUGAR", Lugar);
+        intent.putExtra("ORGANIZADOR", Organizador);
         startActivity(intent);
         finish();
     }
@@ -181,9 +194,9 @@ public class InscripcionForaneo extends AppCompatActivity {
                             //Creamos instancia del adapter
                             inscripcionesAdapter = new inscripcionesForaneoAdapter(InscripcionForaneo.this, inscripcionesList);
 
-                            inscripcionesAdapter.setOnItemSelected(new AdapterView.OnItemSelectedListener() {
+                            inscripcionesAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     if (posIDS <= 5){
                                         Log.d("Contador IDS", posIDS+"");
                                         Log.d("Tamaño arreglo", ids_foraneos.length+"");
@@ -195,12 +208,22 @@ public class InscripcionForaneo extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "Ya no puedes inscribir más usuarios", Toast.LENGTH_SHORT).show();
                                     }
                                 }
-
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
-
-                                }
                             });
+                            /*inscripcionesAdapter.setOnItemClick(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    if (posIDS <= 5){
+                                        Log.d("Contador IDS", posIDS+"");
+                                        Log.d("Tamaño arreglo", ids_foraneos.length+"");
+                                        ids_foraneos[posIDS] = parent.getItemAtPosition(position).toString();
+                                        Log.d("Array ids", ids_foraneos[posIDS]+"");
+                                        txtForaneosSeleccionados.setText((ids_foraneos[posIDS])+"");
+                                        posIDS++;
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Ya no puedes inscribir más usuarios", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });*/
 
                             rvInscripcionesForaneos.setAdapter(inscripcionesAdapter);
                         } catch (JSONException e) {
@@ -216,6 +239,7 @@ public class InscripcionForaneo extends AppCompatActivity {
                 });
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
     public void sendRequest()
     {
         String url = "https://www.google.com/recaptcha/api/siteverify";
@@ -267,11 +291,12 @@ public class InscripcionForaneo extends AppCompatActivity {
     public void moveNewActivity(){
         Intent intent = new Intent(InscripcionForaneo.this, pagarInscripciones.class);
         intent.putExtra("monto", monto);
-        intent.putExtra("ID_COMPENTENCIA", id_competencia.toString());
-        intent.putExtra("NOMBRE_COMPENTENCIA", NombreCompetencia.toString());
-        intent.putExtra("FECHA", Fecha.toString());
-        intent.putExtra("LUGAR", Lugar.toString());
-        intent.putExtra("ORGANIZADOR", Organizador.toString());
+        intent.putExtra("ID_COMPENTENCIA", id_competencia);
+        intent.putExtra("CANT_FORANEOS", contForaneos);
+        intent.putExtra("NOMBRECOMPENTENCIA", NombreCompetencia);
+        intent.putExtra("FECHA", Fecha);
+        intent.putExtra("LUGAR", Lugar);
+        intent.putExtra("ORGANIZADOR", Organizador);
         startActivity(intent);
     }
 }
