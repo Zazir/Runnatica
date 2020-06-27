@@ -148,7 +148,7 @@ public class Editar_perfil extends AppCompatActivity {
 
     private void actualizarPerfil(String URL) {
         progreso = new ProgressDialog(Editar_perfil.this);
-        progreso.setMessage("Subiendo imagen...");
+        progreso.setMessage("Cargando...");
         progreso.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -183,8 +183,8 @@ public class Editar_perfil extends AppCompatActivity {
                 String ciudad = CiudadEditar.getText().toString();
                 String estado = EstadoEditar.getText().toString();
                 String pais = PaisEditar.getText().toString();
-                String Foto = getStringImage(bitmap);
-                String NombreImg = System.currentTimeMillis()/1000+"";
+                /*String Foto = getStringImage(bitmap);
+                String NombreImg = System.currentTimeMillis()/1000+"";*/
 
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("id_usuario", id_user);
@@ -195,8 +195,8 @@ public class Editar_perfil extends AppCompatActivity {
                 parametros.put("ciudad", ciudad);
                 parametros.put("estado", estado);
                 parametros.put("pais", pais);
-                parametros.put("foto", Foto);
-                parametros.put("nombreFoto", NombreImg);
+                /*parametros.put("foto", Foto);
+                parametros.put("nombreFoto", NombreImg);*/
 
                 return parametros;
             }

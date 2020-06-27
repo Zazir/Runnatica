@@ -23,7 +23,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="510dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll"
         android:layout_marginTop="60dp">
 
         <RelativeLayout
@@ -147,7 +148,7 @@
                 android:id="@+id/ivFotoPerfilUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="192dp"
-                android:layout_below="@+id/tvFotografia"></ImageView>
+                android:layout_below="@+id/tvFotografia"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -159,11 +160,11 @@
     </ScrollView>
 
     <LinearLayout
-        android:layout_width="495dp"
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:layout_marginTop="470dp"
-        android:background="@drawable/barra_verde"
-        >
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/barra_verde">
         <TextView
             android:id="@+id/tvEditarUsuario"
             android:layout_width="match_parent"
@@ -172,7 +173,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@android:color/background_light"
-            android:textSize="40dp"></TextView>
+            android:textSize="40dp"/>
 
     </LinearLayout>
 
