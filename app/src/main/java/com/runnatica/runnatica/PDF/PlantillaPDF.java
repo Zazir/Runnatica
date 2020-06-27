@@ -1,6 +1,7 @@
 package com.runnatica.runnatica.PDF;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v4.content.FileProvider;
@@ -8,8 +9,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -17,6 +20,7 @@ import com.runnatica.runnatica.poho.Usuario;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -98,6 +102,18 @@ public class PlantillaPDF {
             documento.add(parrafo);
         }catch (Exception e){
             Log.e("Create pdf document", "Unable to create document: " + e.toString());
+        }
+    }
+
+    public void addImage(Bitmap bitmap) {
+        try {
+
+            Image image = Image.getInstance("");
+            documento.add(image);
+        }
+        catch(IOException | DocumentException ex)
+        {
+            return;
         }
     }
 

@@ -120,23 +120,22 @@
                 android:text="Seleccionar fecha"/>
 
             <TextView
+                android:id="@+id/tvHoraCompetencia"
                 android:layout_width="74dp"
                 android:layout_height="52dp"
                 android:layout_marginLeft="290dp"
                 android:layout_marginTop="310dp"
                 android:text="Hora"
                 android:textColor="@android:color/background_dark"
-                android:textSize="20dp"></TextView>
+                android:textSize="20dp"/>
 
-            <EditText
-                android:id="@+id/etHoraCompetencia"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="290dp"
-                android:layout_marginTop="325dp"
-                android:numeric="integer"
-                android:inputType="number"
-                ></EditText>
+            <Button
+                android:id="@+id/btnHoraCompetencia"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="230dp"
+                android:layout_marginTop="330dp"
+                android:text="Seleccionar hora" />
 
             <TextView
                 android:layout_width="wrap_content"

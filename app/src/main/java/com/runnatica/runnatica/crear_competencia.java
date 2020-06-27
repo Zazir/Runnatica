@@ -2,6 +2,7 @@ package com.runnatica.runnatica;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -37,9 +39,9 @@ import java.util.Map;
 
 public class crear_competencia extends AppCompatActivity {
 
-    private TextView txtFecha;
-    private EditText Nombre, Precio, Hora, GradosUbicacion, Ciudad, Colonia, Calle, Descripcion;
-    private Button Informacion, btnImagen, btnDate, Aval, Guardar;
+    private TextView txtFecha, txtHora;
+    private EditText Nombre, Precio, GradosUbicacion, Ciudad, Colonia, Calle, Descripcion;
+    private Button Informacion, btnImagen, btnDate, Aval, Guardar, btnHora;
     private Spinner Pais, Estado;
     private RadioButton SiReembolso, NoReembolso;
     private ImageView img;
@@ -51,7 +53,9 @@ public class crear_competencia extends AppCompatActivity {
 
     private Calendar calendar;
     private DatePickerDialog picker;
+    private TimePickerDialog timePicker;
     private String fecha;
+    private String hora;
 
     int imagen=0;
     private int requestCode;
@@ -67,7 +71,7 @@ public class crear_competencia extends AppCompatActivity {
         Nombre=(EditText)findViewById(R.id.etNombreCompetencia);
         Precio = (EditText)findViewById(R.id.etPrecioCompetencia);
         Informacion = (Button)findViewById(R.id.btnInformacionPrecio);
-        Hora = (EditText)findViewById(R.id.etHoraCompetencia);
+        btnHora = (Button) findViewById(R.id.btnHoraCompetencia);
         btnImagen = (Button) findViewById(R.id.btnImagenCompetencia);
         btnDate = (Button)findViewById(R.id.btnSeleccionarFecha);
         img = (ImageView)findViewById(R.id.imgCompetencia);
@@ -83,7 +87,9 @@ public class crear_competencia extends AppCompatActivity {
         NoReembolso = (RadioButton) findViewById(R.id.rbNoReembolso);
         Guardar = (Button) findViewById(R.id.btnGuardarCompetencia);
         txtFecha = (TextView)findViewById(R.id.tvFechaPicker);
+        txtHora = (TextView)findViewById(R.id.tvHoraCompetencia);
 
+        Toast.makeText(this, usuario.getId()+"", Toast.LENGTH_SHORT).show();
 
         btnImagen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +104,25 @@ public class crear_competencia extends AppCompatActivity {
             public void onClick(View view) {
                 //Guardar la imagen del aval
                 CargarImagen();
+            }
+        });
+
+        btnHora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar = Calendar.getInstance();
+                int horas = calendar.get(Calendar.HOUR_OF_DAY);
+                int minuto = calendar.get(Calendar.MINUTE);
+
+                timePicker = new TimePickerDialog(crear_competencia.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        hora = hourOfDay + ":" + minute;
+                        txtHora.setText(hora);
+                    }
+                }, horas, minuto, true);
+
+                timePicker.show();
             }
         });
 
@@ -150,13 +175,13 @@ public class crear_competencia extends AppCompatActivity {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {//resibimos el parametro, el metodo de peticion
             @Override
-            public void onResponse(String response) {//Operacion exitosa a travez del web service
+            public void onResponse(String response) {
                 progreso.dismiss();
                 if (response.equals("NO")) {
                     Toast.makeText(getApplicationContext(), "Hoy ya creaste una competencia", Toast.LENGTH_SHORT).show();
-                }else if (response.equals("error al crear el competencia")){//mensaje desde el web service, si el respose es igual a "error al crear competencia"
+                }else if (response.equals("error al crear el competencia")){
                     Toast.makeText(getApplicationContext(), "Hubo un error al crear la competencia", Toast.LENGTH_SHORT).show();
-                } else if (Integer.parseInt(response) >= 0){//si la respuesta es mayor o iguala cero (ya que retornamos el id de la competenbcia) si creamos una competenbcia va a ser mayopr a cero
+                } else if (Integer.parseInt(response) >= 0){
                     alCrearInscripcion(response);
                 }
             }
@@ -182,7 +207,7 @@ public class crear_competencia extends AppCompatActivity {
                 String CalleS = Calle.getText().toString();
                 String CiudadS = Ciudad.getText().toString();
                 String Fecha = fecha;
-                String HoraS = Hora.getText().toString();
+                String HoraS = hora;
                 String Estado = "X";
                 String Reembolso = "X";
                 String PrecioS = Precio.getText().toString();
@@ -245,8 +270,8 @@ public class crear_competencia extends AppCompatActivity {
         else if(GradosUbicacion.getText().toString().length() <= 0) {
             GradosUbicacion.setError("Debes de poner los grados de Google Maps de la Competencia");
         }
-        else if(Hora.getText().toString().length() <= 0) {
-            Hora.setError("Debes de poner la hora de la Competencia");
+        else if(hora.length() <= 0) {
+            btnHora.setBackgroundColor(600);
         }
         else if(Ciudad.getText().toString().length() <= 0) {
             Ciudad.setError("Debes de poner la Ciudad en donde se realizara la Competencia");

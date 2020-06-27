@@ -111,7 +111,6 @@ public class Login extends AppCompatActivity {
                         user.setFechaNacimiento(jsonobject.optInt("f_nacimiento"));
                         user.setCorreo(jsonobject.optString("correo"));
                         user.setNombre(jsonobject.optString("nombre"));
-                        //guardarEstado();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
