@@ -147,6 +147,13 @@ public class crear_competencia extends AppCompatActivity {
             }
         });
 
+        Informacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         Guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -299,6 +306,11 @@ public class crear_competencia extends AppCompatActivity {
     private void alCrearInscripcion(String id) {
         Intent next = new Intent(this, crear_inscripcion.class);
         next.putExtra("ID_COMPETENCIA", id);
+        startActivity(next);
+    }
+
+    private void Informacion(){
+        Intent next = new Intent(this, Informacion.class);
         startActivity(next);
     }
 

@@ -22,7 +22,8 @@
         android:roundIcon="@mipmap/ic_index"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".reCaptcha"></activity>
+        <activity android:name=".Informacion"></activity>
+        <activity android:name=".reCaptcha" />
         <activity android:name=".informacion_inscrito" />
         <activity android:name=".lista_inscritos" />
         <activity android:name=".Subir_Resultados" />
