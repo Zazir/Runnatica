@@ -199,7 +199,7 @@
                 android:fontFamily="sans-serif"
                 android:text="Runnatica"
                 android:textColor="#FFFFFF"
-                android:textSize="80dp"
+                android:textSize="70dp"
                 android:visibility="visible" />
 
             <TextView

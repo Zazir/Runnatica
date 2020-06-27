@@ -60,6 +60,16 @@
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
 
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/graficaBarras"
+                android:layout_width="359dp"
+                android:layout_height="227dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+
+                android:layout_marginTop="146dp"
+                android:layout_marginEnd="0dp" />
+
             <TextView
                 android:layout_width="279dp"
                 android:layout_height="42dp"

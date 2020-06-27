@@ -86,6 +86,8 @@ public class InscripcionForaneo extends AppCompatActivity {
                 CrearInscripcion();
             }
         });
+
+
     }
 
     private void getLastViewData() {
@@ -96,21 +98,24 @@ public class InscripcionForaneo extends AppCompatActivity {
         Fecha = extra.getString("FECHA");
         Lugar = extra.getString("LUGAR");
         Organizador = extra.getString("ORGANIZADOR");
+        //Toast.makeText(getApplicationContext(), ""+NombreCompetencia, Toast.LENGTH_SHORT).show();
     }
 
     private void aAgregarForaneos() {
         Intent intent = new Intent(InscripcionForaneo.this, agregarForaneo.class);
-        intent.putExtra("monto", monto);
-        intent.putExtra("ID_COMPENTENCIA", id_competencia);
-        intent.putExtra("NOMBRECOMPENTENCIA", NombreCompetencia);
-        intent.putExtra("FECHA", Fecha);
-        intent.putExtra("LUGAR", Lugar);
-        intent.putExtra("ORGANIZADOR", Organizador);
+        intent.putExtra("monto", monto.toString());
+        intent.putExtra("ID_COMPENTENCIA", id_competencia.toString());
+        intent.putExtra("NOMBRE_COMPENTENCIA", NombreCompetencia.toString());
+        intent.putExtra("FECHA", Fecha.toString());
+        intent.putExtra("LUGAR", Lugar.toString());
+        intent.putExtra("ORGANIZADOR", Organizador.toString());
         startActivity(intent);
         finish();
     }
 
     private void CrearInscripcion() {
+
+        //Toast.makeText(this, ""+NombreCompetencia, Toast.LENGTH_SHORT).show();
         SafetyNet.getClient(this).verifyWithRecaptcha(SITE_KEY)
                 .addOnSuccessListener(this,
                         new OnSuccessListener<SafetyNetApi.RecaptchaTokenResponse>()
@@ -262,11 +267,11 @@ public class InscripcionForaneo extends AppCompatActivity {
     public void moveNewActivity(){
         Intent intent = new Intent(InscripcionForaneo.this, pagarInscripciones.class);
         intent.putExtra("monto", monto);
-        intent.putExtra("ID_COMPENTENCIA", id_competencia);
-        intent.putExtra("NOMBRECOMPENTENCIA", NombreCompetencia);
-        intent.putExtra("FECHA", Fecha);
-        intent.putExtra("LUGAR", Lugar);
-        intent.putExtra("ORGANIZADOR", Organizador);
+        intent.putExtra("ID_COMPENTENCIA", id_competencia.toString());
+        intent.putExtra("NOMBRE_COMPENTENCIA", NombreCompetencia.toString());
+        intent.putExtra("FECHA", Fecha.toString());
+        intent.putExtra("LUGAR", Lugar.toString());
+        intent.putExtra("ORGANIZADOR", Organizador.toString());
         startActivity(intent);
     }
 }

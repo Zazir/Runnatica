@@ -218,11 +218,10 @@
 
             <Button
                 android:id="@+id/btnIncribirse"
-                android:layout_width="362dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_alignEnd="@id/ivResultados"
                 android:layout_gravity="center"
-                android:layout_marginLeft="120dp"
                 android:background="@null"
                 android:text="Inscribirse"
                 android:textColor="@android:color/background_light"
@@ -233,18 +232,26 @@
     <LinearLayout
         android:layout_width="495dp"
         android:layout_height="78dp"
-        android:layout_marginTop="570dp"
-        android:background="@drawable/barra_verde">
+        android:layout_marginTop="570dp">
 
         <TextView
             android:id="@+id/tvRegistrarse"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Registrarse"
+            android:text=""
             android:textColor="@android:color/background_light"
             android:textSize="40dp"></TextView>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/barra_verde"
+        android:minHeight="@android:dimen/thumbnail_height"
+        ></LinearLayout>
 
 </RelativeLayout>

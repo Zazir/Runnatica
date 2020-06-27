@@ -110,14 +110,14 @@ public class home extends AppCompatActivity {
         Toast.makeText(home.this, "Ver Competencias por Estado", Toast.LENGTH_SHORT).show();
         Localizacion();
         CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?estado=Jalisco");
-        Toast.makeText(getApplicationContext(), ""+NombreCiudad, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Ver Carreras Por Estado", Toast.LENGTH_SHORT).show();
     }
     public void Pais(){
         bandera=2;
         Toast.makeText(home.this, "Ver Competencias por Pais", Toast.LENGTH_SHORT).show();
         Localizacion2();
         CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?pais=Mexico");
-        Toast.makeText(getApplicationContext(), ""+NombreCiudad, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Ver Carreras Por Pais", Toast.LENGTH_SHORT).show();
     }
 
     public void Localizacion(){
