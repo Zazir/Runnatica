@@ -56,6 +56,7 @@ public class crear_competencia extends AppCompatActivity {
     private TimePickerDialog timePicker;
     private String fecha;
     private String hora;
+    private String Reembolso;
 
     int imagen=0;
     private int requestCode;
@@ -208,7 +209,7 @@ public class crear_competencia extends AppCompatActivity {
                 String CiudadS = Ciudad.getText().toString();
                 String Fecha = fecha;
                 String HoraS = hora;
-                String Estado = "X";
+                String Estado = "Jalisco";
                 String Reembolso = "X";
                 String PrecioS = Precio.getText().toString();
 
