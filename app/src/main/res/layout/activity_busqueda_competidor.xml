@@ -7,6 +7,7 @@
     tools:context=".busqueda_competidor">
 
     <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:background="@drawable/barra_verde">
@@ -17,14 +18,15 @@
             android:text="Buscar/Filtrar"
             android:gravity="center"
             android:textColor="@android:color/background_light"
-            android:textSize="40dp"></TextView>
+            android:textSize="40dp"/>
     </LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/ll"
+        android:layout_above="@+id/bottomNavigation"
         android:layout_marginBottom="0dp">
 
         <RelativeLayout
@@ -32,141 +34,119 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="266dp"
+                android:id="@+id/xx"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="61dp"
-                android:layout_marginEnd="94dp"
-                android:text="Fecha:"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="Por fecha"
                 android:textColor="@android:color/background_dark"
-                android:textSize="35dp">
+                android:textSize="35sp"/>
 
-            </TextView>
-
-            <TextView
+            <Button
+                android:id="@+id/btnFiltroFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="110dp"
-                android:text="Día"
-                android:textColor="@android:color/background_dark"
-                android:textSize="35dp"></TextView>
-
-            <Spinner
-                android:layout_width="103dp"
-                android:layout_height="51dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="170dp">
-            </Spinner>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="110dp"
-                android:text="Mes"
-                android:textColor="@android:color/background_dark"
-                android:textSize="35dp"></TextView>
-            <Spinner
-                android:layout_width="103dp"
-                android:layout_height="51dp"
-                android:layout_marginLeft="140dp"
-                android:layout_marginTop="170dp">
-            </Spinner>
-
-            <TextView
-                android:layout_width="94dp"
-                android:layout_height="54dp"
-                android:layout_marginLeft="270dp"
-                android:layout_marginTop="110dp"
-                android:text="Año"
-                android:textColor="@android:color/background_dark"
-                android:textSize="35dp"></TextView>
-
-            <Spinner
-                android:layout_width="131dp"
-                android:layout_height="49dp"
-                android:layout_marginLeft="260dp"
-                android:layout_marginTop="170dp"></Spinner>
+                android:text="Seleccionar fecha"
+                android:layout_below="@+id/xx"
+                android:layout_centerHorizontal="true"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="240dp"
-                android:text="Lugar:"
+                android:layout_marginTop="140dp"
+                android:text="Por lugar"
                 android:textColor="@android:color/background_dark"
-                android:textSize="35dp"></TextView>
+                android:textSize="35dp"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
-                android:layout_marginTop="300dp"
+                android:layout_marginTop="220dp"
                 android:text="Pais"
                 android:textColor="@android:color/background_dark"
-                android:textSize="35dp"></TextView>
+                android:textSize="35dp"/>
+
+            <Button
+                android:id="@+id/btnBuscarPais"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="220dp"
+                android:text="B"/>
 
             <Spinner
+                android:id="@+id/spFiltroPais"
                 android:layout_width="169dp"
                 android:layout_height="48dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="350dp"></Spinner>
+                android:layout_marginTop="270dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
-                android:layout_marginLeft="225dp"
-                android:layout_marginTop="300dp"
+                android:layout_marginLeft="190dp"
+                android:layout_marginTop="220dp"
                 android:text="Estado"
                 android:textColor="@android:color/background_dark"
-                android:textSize="35dp"></TextView>
+                android:textSize="35dp"/>
+
+            <Button
+                android:id="@+id/btnBuscarEstado"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="300dp"
+                android:layout_marginTop="220dp"
+                android:text="B"/>
 
             <Spinner
+                android:id="@+id/spFiltroEstado"
                 android:layout_width="168dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="220dp"
-                android:layout_marginTop="350dp"></Spinner>
+                android:layout_marginLeft="190dp"
+                android:layout_marginTop="270dp"/>
 
             <TextView
+                android:id="@+id/km"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="420dp"
+                android:layout_marginTop="330dp"
                 android:text="Kilometros"
                 android:textColor="@android:color/background_dark"
-                android:textSize="35dp"></TextView>
+                android:textSize="35dp"/>
 
             <EditText
-                android:id="@+id/BuscarKilometros"
+                android:id="@+id/etBuscarKilometros"
                 android:layout_width="201dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="480dp"
+                android:layout_below="@+id/km"
                 android:numeric="integer"
-                android:inputType="number"
-                ></EditText>
+                android:inputType="number"/>
 
             <Button
+                android:id="@+id/btnBuscarKm"
                 android:layout_width="264dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="65dp"
-                android:layout_marginTop="580dp"
+                android:layout_below="@+id/etBuscarKilometros"
                 android:text="Buscar"
+                android:layout_centerHorizontal="true"
                 android:textColor="@android:color/background_light"
                 android:textSize="20dp"
-                android:background="@color/verdeRun"
-                ></Button>
+                android:background="@color/verdeRun"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="750dp"
-                ></TextView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvFiltroCompetencias"
+                android:layout_width="match_parent"
+                android:layout_height="600dp"
+                android:layout_below="@+id/btnBuscarKm"/>
+
         </RelativeLayout>
+
     </ScrollView>
-
-
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottomNavigation"

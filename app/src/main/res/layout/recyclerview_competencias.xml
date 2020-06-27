@@ -18,7 +18,7 @@
         card_view:cardUseCompatPadding="true">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -33,7 +33,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="119dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_weight="2"
                 android:orientation="vertical">
