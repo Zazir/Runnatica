@@ -12,6 +12,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -57,12 +59,12 @@ public class crear_competencia extends AppCompatActivity {
     private String fecha;
     private String hora;
     private String Reembolso;
+    private String Foto;
 
     int imagen=0;
     private int requestCode;
     private int resultCode;
-    @Nullable
-    private Intent data;
+    private String path = "xxx", estado, pais;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,9 @@ public class crear_competencia extends AppCompatActivity {
 
         Toast.makeText(this, usuario.getId()+"", Toast.LENGTH_SHORT).show();
 
+        cargarSpinnerEstado();
+        cargarSpinnerPais();
+
         btnImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +109,7 @@ public class crear_competencia extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Guardar la imagen del aval
-                CargarImagen();
+
             }
         });
 
@@ -151,7 +156,23 @@ public class crear_competencia extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(Validaciones()){
-                    SubirCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
+                    //subirImagenCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
+                    SubirCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?" +
+                            "Id_usuario=" + usuario.getId() +
+                            "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
+                            "&Aval=Aval" +
+                            "&Coordenadas=" + GradosUbicacion.getText().toString().replaceAll(" ", "%20")+
+                            "&Nombre_competencia=" + Nombre.getText().toString().replaceAll(" ", "%20")+
+                            "&Pais=" + pais +
+                            "&Colonia=" +Colonia.getText().toString().replaceAll(" ", "%20")+
+                            "&Calle=" +Calle.getText().toString().replaceAll(" ", "%20")+
+                            "&Ciudad=" +Ciudad.getText().toString().replaceAll(" ", "%20")+
+                            "&Fecha=" +fecha+
+                            "&Hora=" +hora+
+                            "&Estado=" + estado +
+                            "&Reembolso=N" +
+                            "&Precio=" +Precio.getText().toString()+
+                            "&path="+path);
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
                 }
@@ -160,21 +181,55 @@ public class crear_competencia extends AppCompatActivity {
 
     }
 
-    private String getStringImage(Bitmap btm) {// se recive el parametro
-        ByteArrayOutputStream array = new ByteArrayOutputStream(); //Declaramos el objeto que le da el formato de texto a la imagen
-        btm.compress(Bitmap.CompressFormat.JPEG, 100, array);//Comprimimos el bitmap de la imagen
-        byte[] imgBytes = array.toByteArray();//creamos un arreglo de bites
-        String encodeImg = Base64.encodeToString(imgBytes, Base64.DEFAULT);//Creamos un sting el cual guarda la imagen codificada de forma de cadena de texto
+    private void cargarSpinnerEstado() {
+        ArrayAdapter<CharSequence> opcionesSpCat = ArrayAdapter.createFromResource(this, R.array.estados, android.R.layout.simple_spinner_item);
+        Estado.setAdapter(opcionesSpCat);
 
-        return encodeImg;//retornamos el sting que es la imagen codificada
+        Estado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                estado = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
-    private void SubirCompetencia(String URL) {//recibimos la url
-        progreso = new ProgressDialog(crear_competencia.this);//creas dialogo de proceso
-        progreso.setMessage("Creando competencia...");//el mensaje
+    private void cargarSpinnerPais() {
+        ArrayAdapter<CharSequence> opcionesSpCat = ArrayAdapter.createFromResource(this, R.array.paises, android.R.layout.simple_spinner_item);
+        Pais.setAdapter(opcionesSpCat);
+
+        Pais.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                pais = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private String getStringImage(Bitmap btm) {
+        ByteArrayOutputStream array = new ByteArrayOutputStream();
+        btm.compress(Bitmap.CompressFormat.JPEG, 100, array);
+        byte[] imgBytes = array.toByteArray();
+        String encodeImg = Base64.encodeToString(imgBytes, Base64.DEFAULT);
+
+        return encodeImg;
+    }
+
+    private void SubirCompetencia(String URL) {
+        progreso = new ProgressDialog(crear_competencia.this);
+        progreso.setMessage("Creando competencia...");
         progreso.show();//se lanza
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {//resibimos el parametro, el metodo de peticion
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progreso.dismiss();
@@ -192,62 +247,58 @@ public class crear_competencia extends AppCompatActivity {
                 progreso.dismiss();
                 Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                String id_user = ""+usuario.getId();
-                String Foto = getStringImage(bitmap);
-                String NombreImg = System.currentTimeMillis()/1000+"";
-                String DescripcionCompe = Descripcion.getText().toString();
-                String Aval = "X";
-                String Coordenadas = GradosUbicacion.getText().toString();
-                String NomCompetencia = Nombre.getText().toString();
-                String Pais = "Mexico";
-                String ColoniaS = Colonia.getText().toString();
-                String CalleS = Calle.getText().toString();
-                String CiudadS = Ciudad.getText().toString();
-                String Fecha = fecha;
-                String HoraS = hora;
-                String Estado = "Jalisco";
-                String Reembolso = "X";
-                String PrecioS = Precio.getText().toString();
-
-                Map<String, String> parametros = new HashMap<>();//nombre que recibes
-                parametros.put("Id_usuario", id_user);
-                parametros.put("Foto", Foto);
-                parametros.put("NombreFoto", NombreImg);
-                parametros.put("Descripcion", DescripcionCompe);
-                parametros.put("Aval", Aval);
-                parametros.put("Coordenadas", Coordenadas);
-                parametros.put("Nombre_competencia", NomCompetencia);
-                parametros.put("Pais", Pais);
-                parametros.put("Colonia", ColoniaS);
-                parametros.put("Calle", CalleS);
-                parametros.put("Ciudad", CiudadS);
-                parametros.put("Fecha", Fecha);
-                parametros.put("Hora", HoraS);
-                parametros.put("Estado", Estado);
-                parametros.put("Reembolso", Reembolso);
-                parametros.put("Precio", PrecioS);
-
-                return parametros; //retornamos los parametros enlazados
-            }
-        };
+        });
         RequestQueue requestQueue = Volley.newRequestQueue(this);//creamos la peticion hacemos la peticion
         requestQueue.add(stringRequest);//hacemos la peticion
     }
 
+    private void subirImagenCompetencia(String URL) {
+        progreso = new ProgressDialog(crear_competencia.this);
+        progreso.setMessage("Creando competencia...");
+        progreso.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progreso.dismiss();
+                        path = response;
+                        Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
+                        //SubirCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
+                    }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Foto = getStringImage(bitmap);
+
+                Map<String, String> parametros = new HashMap<>();//nombre que recibes
+                parametros.put("Foto", Foto);
+                parametros.put("NombreFoto", System.currentTimeMillis()/1000+"");
+
+                return parametros;
+            }
+        };;
+
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
     private void CargarImagen() {//funcion de tipo void para hacer un proceso
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);//Intent se inicalisa (action pick formato para buscar en la galeria) y entrar imagenes
-        intent.setType("image/");//el tipo de archivo que va a buscar va a ser imagen.
-        startActivityForResult(intent.createChooser(intent, "Seleccione la aplicación"), 10);//inicia la actividad y recibe el intent (createChooser muestra las opciones para mostrtar imagenes)
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/");
+        startActivityForResult(intent.createChooser(intent, "Seleccione la aplicación"), 10);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {//metodo que se manda llamar una vez que se selecciono una imagen
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK){//si el usuario ya selecciono la imagen
+        if (resultCode == RESULT_OK){
             Uri path = data.getData();//valor que te devuelve el metodo sobrecargado (el data es la imagen de la galeria)
             img.setImageURI(path);//poner la imagen que busco
 
