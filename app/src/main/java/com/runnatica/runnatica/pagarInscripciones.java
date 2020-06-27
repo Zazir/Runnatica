@@ -66,6 +66,7 @@ public class pagarInscripciones extends AppCompatActivity {
         paypal.setEnabled(false);
 
         getLastViewData();
+        Toast.makeText(pagarInscripciones.this, ""+NombreCompetencia, Toast.LENGTH_SHORT).show();
 
 
         if (validarPermisos()) {
@@ -183,11 +184,11 @@ public class pagarInscripciones extends AppCompatActivity {
 
         plantillaPDF.abrirArchivo();
         plantillaPDF.addMetadata("Carrera", "Inscripcion", "Runnatica");
-        plantillaPDF.addHeaders(NombreCompetencia.toString(), "Marca", Fecha1.toString());
+        plantillaPDF.addHeaders(NombreCompetencia.toString(), "Marca", Fecha1);
         plantillaPDF.addParagraph("Código QR");
         plantillaPDF.addParagraph(usuario.getNombre());
-        plantillaPDF.addParagraph(Lugar.toString());
-        plantillaPDF.addParagraph(Organizador.toString());
+        plantillaPDF.addParagraph(Lugar);
+        plantillaPDF.addParagraph(Organizador);
         plantillaPDF.cerrarDocumento();
         plantillaPDF.sendMail();
     }
