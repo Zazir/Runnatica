@@ -24,7 +24,7 @@ public class agregarForaneo extends AppCompatActivity {
     private String sexo;
     private Usuario usuario = Usuario.getUsuarioInstance();
     private String monto = "";
-    private String id_competencia;
+    private String id_competencia, NombreCompetencia, Fecha, Lugar, Organizador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +65,10 @@ public class agregarForaneo extends AppCompatActivity {
         Intent intent = new Intent(agregarForaneo.this, InscripcionForaneo.class);
         intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia);
+        intent.putExtra("NOMBRECOMPENTENCIA", NombreCompetencia);
+        intent.putExtra("FECHA", Fecha);
+        intent.putExtra("LUGAR", Lugar);
+        intent.putExtra("ORGANIZADOR", Organizador);
         startActivity(intent);
         finish();
     }
@@ -73,7 +77,10 @@ public class agregarForaneo extends AppCompatActivity {
         Bundle extra = agregarForaneo.this.getIntent().getExtras();
         id_competencia = extra.getString("ID_COMPENTENCIA");
         monto = extra.getString("monto");
-
+        NombreCompetencia = extra.getString("NOMBRE_COMPETENCIA");
+        Fecha = extra.getString("FECHA");
+        Lugar = extra.getString("LUGAR");
+        Organizador = extra.getString("ORGANIZADOR");
         Toast.makeText(this, id_competencia, Toast.LENGTH_SHORT).show();
     }
 

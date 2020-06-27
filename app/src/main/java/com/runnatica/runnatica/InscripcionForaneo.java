@@ -45,7 +45,7 @@ public class InscripcionForaneo extends AppCompatActivity {
     private RecyclerView rvInscripcionesForaneos;
     private TextView txtForaneosSeleccionados;
 
-    private String id_competencia;
+    private String id_competencia, NombreCompetencia, Fecha, Lugar, Organizador;
     private List<Inscripciones> inscripcionesList = new ArrayList<>();
     private inscripcionesForaneoAdapter inscripcionesAdapter;
 
@@ -92,12 +92,20 @@ public class InscripcionForaneo extends AppCompatActivity {
         Bundle extra = InscripcionForaneo.this.getIntent().getExtras();
         id_competencia = extra.getString("ID_COMPENTENCIA");
         monto = extra.getString("monto");
+        NombreCompetencia = extra.getString("NOMBRE_COMPETENCIA");
+        Fecha = extra.getString("FECHA");
+        Lugar = extra.getString("LUGAR");
+        Organizador = extra.getString("ORGANIZADOR");
     }
 
     private void aAgregarForaneos() {
         Intent intent = new Intent(InscripcionForaneo.this, agregarForaneo.class);
         intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia);
+        intent.putExtra("NOMBRECOMPENTENCIA", NombreCompetencia);
+        intent.putExtra("FECHA", Fecha);
+        intent.putExtra("LUGAR", Lugar);
+        intent.putExtra("ORGANIZADOR", Organizador);
         startActivity(intent);
         finish();
     }
@@ -255,6 +263,10 @@ public class InscripcionForaneo extends AppCompatActivity {
         Intent intent = new Intent(InscripcionForaneo.this, pagarInscripciones.class);
         intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia);
+        intent.putExtra("NOMBRECOMPENTENCIA", NombreCompetencia);
+        intent.putExtra("FECHA", Fecha);
+        intent.putExtra("LUGAR", Lugar);
+        intent.putExtra("ORGANIZADOR", Organizador);
         startActivity(intent);
     }
 }

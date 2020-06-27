@@ -28,7 +28,7 @@ public class InscripcionesCompetidor extends AppCompatActivity {
     private RecyclerView rvInscripciones;
     private Button btnNext;
     private List<Inscripciones> inscripcionesList = new ArrayList<>();
-    private String id_competencia, monto;
+    private String id_competencia, monto, NombreCompetencia, Fecha, Lugar, Organizador;
     private inscripcionesUsuarioAdapter inscripcionesAdapter;
 
     @Override
@@ -57,12 +57,20 @@ public class InscripcionesCompetidor extends AppCompatActivity {
         Bundle extra = InscripcionesCompetidor.this.getIntent().getExtras();
         id_competencia = extra.getString("ID_COMPENTENCIA");
         monto = extra.getString("monto");
+        NombreCompetencia = extra.getString("NOMBRE_COMPETENCIA");
+        Fecha = extra.getString("FECHA");
+        Lugar = extra.getString("LUGAR");
+        Organizador = extra.getString("ORGANIZADOR");
     }
 
     private void CrearInscripcion() {
         Intent intent = new Intent(InscripcionesCompetidor.this, InscripcionForaneo.class);
         intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia);
+        intent.putExtra("NOMBRECOMPENTENCIA", NombreCompetencia);
+        intent.putExtra("FECHA", Fecha);
+        intent.putExtra("LUGAR", Lugar);
+        intent.putExtra("ORGANIZADOR", Organizador);
         startActivity(intent);
     }
 
