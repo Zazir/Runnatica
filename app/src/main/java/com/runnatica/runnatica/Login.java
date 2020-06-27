@@ -98,26 +98,31 @@ public class Login extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
-                try {
-                    JSONArray jsonarray = new JSONArray(response);
-                    JSONObject jsonobject;
-                    if (response.equals("[]")){
-                        Toast.makeText(getApplicationContext(), "Error en las credenciales", Toast.LENGTH_SHORT).show();
-                        return;
-                    }else {
+                if (response.length() <= 1) {
+                    Toast.makeText(getApplicationContext(), "Error en las credenciales", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if (response.matches("borrado")) {
+                    Toast.makeText(getApplicationContext(), "Tu usuario se borró por no subir los resultados de las competencias", Toast.LENGTH_LONG).show();
+                    return;
+                } else {
+                    try {
+                        JSONArray jsonarray = new JSONArray(response);
+                        JSONObject jsonobject;
+
                         jsonobject = jsonarray.getJSONObject(0);
                         user.setId(Integer.parseInt(jsonobject.getString("id_usuarios")));
                         user.setTipoUsuario(jsonobject.optString("tipo_usr"));
                         user.setFechaNacimiento(jsonobject.optInt("f_nacimiento"));
                         user.setCorreo(jsonobject.optString("correo"));
                         user.setNombre(jsonobject.optString("nombre"));
+
+                        alHome();
+                        finish();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
 
-                alHome();
-                finish();
             }
         }, new Response.ErrorListener() {
             @Override
