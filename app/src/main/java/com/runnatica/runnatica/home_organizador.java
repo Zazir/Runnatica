@@ -1,10 +1,10 @@
 package com.runnatica.runnatica;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -99,7 +99,8 @@ public class home_organizador extends AppCompatActivity {
                                 @Override
                                 public void OnItemClick(int position) {
                                     String idS = new String("" + competenciasList.get(position).getId());
-                                    launchCompetenciaView(idS);
+                                    int price = Integer.parseInt(competenciasList.get(position).getPrecioCompetencia());
+                                    launchCompetenciaView(idS, price);
                                 }
                             });
                             recyclerView.setAdapter(adapter);
@@ -117,9 +118,10 @@ public class home_organizador extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-    private void launchCompetenciaView(String id) {
+    private void launchCompetenciaView(String id, int Precio) {
         Intent intent = new Intent(home_organizador.this, vista1_organizador.class);
         intent.putExtra("id", id);
+        intent.putExtra("precio", Precio);
         startActivity(intent);
     }
 

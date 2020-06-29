@@ -31,10 +31,11 @@ public class vista1_organizador extends AppCompatActivity {
     int TamanoLista = 0;
     List<String> ListaFechas;
     Button ListaInscritos, FotosResultados;
-    TextView txtVendidasUsuarios, txtTotalUsuarios, txtVendidosForaneos, txtTotalForaneos;
+    TextView txtVendidasUsuarios, txtTotalUsuarios, txtVendidosForaneos, txtTotalForaneos, txtIngresoTotal;
 
     private String id_competencia;
     private StringRequest request;
+    private int precio, vendidosUsuario, vendidosForaneo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +47,9 @@ public class vista1_organizador extends AppCompatActivity {
         graficaBarras = findViewById(R.id.graficaBarras);
         txtTotalUsuarios = (TextView)findViewById(R.id.tvTotalInscripciones);
         txtVendidasUsuarios = (TextView)findViewById(R.id.tvInscripcionesVendidas);
-        //txtVendidosForaneos = (TextView)findViewById(R.id.tvInscripcionesVendidas);
-        //txtTotalForaneos = (TextView)findViewById(R.id.tvInscripcionesVendidas);
+        txtVendidosForaneos = (TextView)findViewById(R.id.tvForaneasVendidas);
+        txtTotalForaneos = (TextView)findViewById(R.id.tvTotalForaneos);
+        txtIngresoTotal = (TextView)findViewById(R.id.ingreso);
         getLastViewData();
 
         ListaFechas = new ArrayList<>();
@@ -79,10 +81,10 @@ public class vista1_organizador extends AppCompatActivity {
     private void getLastViewData() {
         Bundle extra = vista1_organizador.this.getIntent().getExtras();
         id_competencia = extra.getString("id");
+        precio = extra.getInt("precio");
 
         consultarTotalInscripciones();
         consultarInscritos();
-        consultarForaneosInscritos();
     }
 
     private void ObtenerTabla(String url) {
@@ -98,7 +100,7 @@ public class vista1_organizador extends AppCompatActivity {
 
                                 JSONObject Valor = Arreglo.getJSONObject(a);
                                 ListaFechas.add(Valor.getString("f_inscripciones"));
-                                TamañoLista++;
+                                TamanoLista++;
                             }
                             LlenarTabla();
                         } catch (JSONException e) {
@@ -160,12 +162,16 @@ public class vista1_organizador extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         txtVendidasUsuarios.setText(response);
+                        try {
+                            vendidosUsuario = Integer.parseInt(response);
+                        }catch (Exception e) {}
+                        consultarForaneosInscritos();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Toast.makeText(vista1_organizador.this, "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
                     }
                 });
         Volley.newRequestQueue(this).add(request);
@@ -177,13 +183,18 @@ public class vista1_organizador extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //txtVendidosForaneos.setText(response);
+                        txtVendidosForaneos.setText(response);
+                        try {
+                            vendidosForaneo = Integer.parseInt(response);
+                        }catch (Exception e) {}
+                        int TotalGanancia = (precio * vendidosForaneo) + (precio * vendidosUsuario);
+                        txtIngresoTotal.setText(String.valueOf(TotalGanancia));
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Toast.makeText(vista1_organizador.this, "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
                     }
                 });
         Volley.newRequestQueue(this).add(request);
@@ -200,7 +211,7 @@ public class vista1_organizador extends AppCompatActivity {
                             JSONObject totalInscripciones = res.getJSONObject(0);
 
                             txtTotalUsuarios.setText(totalInscripciones.optString("Total_usuarios"));
-                            //txtTotalForaneos.setText(totalInscripciones.optString("Total_foraneos"));
+                            txtTotalForaneos.setText(totalInscripciones.optString("Total_foraneos"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -211,7 +222,7 @@ public class vista1_organizador extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Toast.makeText(vista1_organizador.this, "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
                     }
                 });
         Volley.newRequestQueue(this).add(request);
