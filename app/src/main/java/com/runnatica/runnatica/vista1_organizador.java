@@ -56,7 +56,7 @@ public class vista1_organizador extends AppCompatActivity {
         ListaInscritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ListaInscritos();
             }
         });
 
