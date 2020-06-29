@@ -47,7 +47,6 @@ public class crear_competencia extends AppCompatActivity {
     private Spinner Pais, Estado;
     private RadioButton SiReembolso, NoReembolso;
     private ImageView img;
-    private String cadenaVacia;
     private Usuario usuario = Usuario.getUsuarioInstance();
 
     private Bitmap bitmap;
@@ -59,11 +58,8 @@ public class crear_competencia extends AppCompatActivity {
     private String fecha;
     private String hora;
     private String Reembolso;
-    private String Foto;
 
     int imagen=0;
-    private int requestCode;
-    private int resultCode;
     private String path = "xxx", estado, pais;
 
     @Override
@@ -161,7 +157,8 @@ public class crear_competencia extends AppCompatActivity {
         Guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Validaciones()){
+                subirImagenCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
+                /*if(Validaciones()){
                     //subirImagenCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
                     SubirCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?" +
                             "Id_usuario=" + usuario.getId() +
@@ -181,7 +178,7 @@ public class crear_competencia extends AppCompatActivity {
                             "&path="+path);
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
 
@@ -221,15 +218,6 @@ public class crear_competencia extends AppCompatActivity {
         });
     }
 
-    private String getStringImage(Bitmap btm) {
-        ByteArrayOutputStream array = new ByteArrayOutputStream();
-        btm.compress(Bitmap.CompressFormat.JPEG, 100, array);
-        byte[] imgBytes = array.toByteArray();
-        String encodeImg = Base64.encodeToString(imgBytes, Base64.DEFAULT);
-
-        return encodeImg;
-    }
-
     private void SubirCompetencia(String URL) {
         progreso = new ProgressDialog(crear_competencia.this);
         progreso.setMessage("Creando competencia...");
@@ -260,25 +248,42 @@ public class crear_competencia extends AppCompatActivity {
 
     private void subirImagenCompetencia(String URL) {
         progreso = new ProgressDialog(crear_competencia.this);
-        progreso.setMessage("Creando competencia...");
+        progreso.setMessage("Guardando Imagen...");
         progreso.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        progreso.dismiss();
+                        progreso.hide();
                         path = response;
-                        Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                         //SubirCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progreso.hide();
                         Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
                     }
-        }) {
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                String imagen = getStringImage(bitmap);
+                String nombreFoto = (System.currentTimeMillis()/1000)+"";
+
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("Foto", imagen);
+                parametros.put("NombreFoto", nombreFoto);
+
+                return parametros;
+            }
+        };
+
+        /*{
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
@@ -290,9 +295,18 @@ public class crear_competencia extends AppCompatActivity {
 
                 return parametros;
             }
-        };;
+        };*/
 
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private String getStringImage(Bitmap bitmap) {
+        ByteArrayOutputStream array = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, array);
+        byte[] imgBytes = array.toByteArray();
+        String encodeImg = Base64.encodeToString(imgBytes, Base64.DEFAULT);
+
+        return encodeImg;
     }
 
     private void CargarImagen() {//funcion de tipo void para hacer un proceso
@@ -309,7 +323,7 @@ public class crear_competencia extends AppCompatActivity {
             img.setImageURI(path);//poner la imagen que busco
 
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), path);//metodo para convetir la imagen a bitmap, el path es la imagen que obtuviste del metodo sobrecargado
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), path);
                 img.setImageBitmap(bitmap);//Se obtiene el bipmap
             } catch (IOException e) {
                 e.printStackTrace();

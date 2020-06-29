@@ -12,6 +12,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -53,8 +54,9 @@ public class pagarInscripciones extends AppCompatActivity {
     final String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
     Usuario usuario = Usuario.getUsuarioInstance();
 
-    private String monto = "";
-    private int multiplicar = 0;
+    private String monto;
+    private int total;
+    private String ids_foraneos;
     private String id_competencia, NombreCompetencia, Fecha1, Lugar, Organizador;
 
     @Override
@@ -66,7 +68,7 @@ public class pagarInscripciones extends AppCompatActivity {
         paypal.setEnabled(false);
 
         getLastViewData();
-        Toast.makeText(pagarInscripciones.this, ""+NombreCompetencia, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(pagarInscripciones.this, ""+NombreCompetencia, Toast.LENGTH_SHORT).show();
 
 
         if (validarPermisos()) {
@@ -95,35 +97,35 @@ public class pagarInscripciones extends AppCompatActivity {
         Bundle extra = pagarInscripciones.this.getIntent().getExtras();
         id_competencia = extra.getString("ID_COMPENTENCIA");
         monto = extra.getString("monto");
-        multiplicar = extra.getInt("CANT_FORANEOS");
+        ids_foraneos = extra.getString("CANT_FORANEOS");
         NombreCompetencia = extra.getString("NOMBRE_COMPETENCIA");
         Fecha1 = extra.getString("FECHA");
         Lugar = extra.getString("LUGAR");
         Organizador = extra.getString("ORGANIZADOR");
 
-        Toast.makeText(this, ""+multiplicar, Toast.LENGTH_SHORT).show();
+        ids_foraneos = ids_foraneos.trim();
+        Toast.makeText(this, ids_foraneos, Toast.LENGTH_SHORT).show();
+        Log.i("ids_foraneos", "Estas son las ids: "+ids_foraneos);
+        total = ids_foraneos.split(" ").length;
+        Toast.makeText(this, total+"", Toast.LENGTH_SHORT).show();
+        Log.i("Cantidad_seleccionados", total+"Total");
     }
 
     // --------------------------> PAYPAL INTEGRATION <------------------------------- //
     private void hacerPago() {
-        if (multiplicar > 0 && monto != null) {
-            int total = Integer.valueOf(monto) * (multiplicar+1);
-            PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(total), "MXN", "Prueba", PayPalPayment.PAYMENT_INTENT_SALE);
-
-            Intent intent = new Intent(this, PaymentActivity.class);
-            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-            intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
-            startActivityForResult(intent, PAYPAL_REQUEST_CODE);
-        } else if (monto == null) {
+        if (monto == null) {
             Toast.makeText(this, "Hubo un error al cargar la información de la competencia, vuelve a seleccionar la competenca", Toast.LENGTH_SHORT).show();
-        }else {
-            PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(monto)), "MXN", "Prueba", PayPalPayment.PAYMENT_INTENT_SALE);
-
-            Intent intent = new Intent(this, PaymentActivity.class);
-            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-            intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
-            startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+        } else if (ids_foraneos.length() < 1) {
+            total = Integer.parseInt(monto);
+        }else if (ids_foraneos.length() > 1){
+            total = Integer.parseInt(monto) * (this.total+1);
         }
+        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(total), "MXN", NombreCompetencia, PayPalPayment.PAYMENT_INTENT_SALE);
+
+        Intent intent = new Intent(this, PaymentActivity.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
+        startActivityForResult(intent, PAYPAL_REQUEST_CODE);
     }
 
     @Override
@@ -134,6 +136,12 @@ public class pagarInscripciones extends AppCompatActivity {
                 reflejarInscripcion("https://runnatica.000webhostapp.com/WebServiceRunnatica/inscribirUsuario.php?" +
                         "id_usuario="+ usuario.getId() +
                         "&id_competencia=" + id_competencia);
+
+                inscribirForaneos("https://runnatica.000webhostapp.com/WebServiceRunnatica/inscribirForaneo.php?" +
+                    "id_usuario=" + usuario.getId() +
+                    "&id_competencia=" + id_competencia+
+                    "&id_foraneo=" + ids_foraneos.replaceAll(" ", "%20"));
+
                 crearPDF(currentDate);
                 PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
                 if (confirmation != null){
@@ -159,6 +167,22 @@ public class pagarInscripciones extends AppCompatActivity {
      * servicio de paypal está en "ok" o cuando conekta...
      * */
     private void reflejarInscripcion(String URL) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //Hacer algo en la respuesta
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Error de conexión al servidor", Toast.LENGTH_SHORT).show();
+            }
+        });
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void inscribirForaneos(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override

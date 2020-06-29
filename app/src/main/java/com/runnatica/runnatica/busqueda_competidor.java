@@ -172,7 +172,7 @@ public class busqueda_competidor extends AppCompatActivity {
         spEstado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                estado = parent.getItemAtPosition(position).toString();
+                estado = parent.getItemAtPosition(position).toString().replaceAll(" ", "%20");
             }
 
             @Override
@@ -189,7 +189,7 @@ public class busqueda_competidor extends AppCompatActivity {
         spPais.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                pais = parent.getItemAtPosition(position).toString();
+                pais = parent.getItemAtPosition(position).toString().replaceAll(" ", "%20");
             }
 
             @Override

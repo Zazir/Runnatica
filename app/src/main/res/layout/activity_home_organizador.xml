@@ -19,7 +19,7 @@
             android:gravity="center"
             android:text="Tus competencias activas"
             android:textColor="@android:color/background_light"
-            android:textSize="40dp"></TextView>
+            android:textSize="40dp"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

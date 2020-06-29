@@ -3,6 +3,7 @@ package com.runnatica.runnatica.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,12 +29,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcionesForaneoAdapter.ViewHolderInscripciones>
-        implements ListView.OnItemClickListener {
+    implements AdapterView.OnItemSelectedListener{
     private Context ctx;
     private List<Inscripciones> inscripcionesList;
-    private ListView.OnItemClickListener listener;
-    ListView lvForaneo;
-    private int contForaneos = 0;
+    private AdapterView.OnItemClickListener listener;
+    private int contForaneosSeleccionados = 0;
+    //public String[] idsForaneos = new String[5];
+    public String idsForaneos = "";
 
     public inscripcionesForaneoAdapter(Context ctx, List<Inscripciones> inscripcionesList) {
         this.ctx = ctx;
@@ -44,7 +46,7 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
     @Override
     public inscripcionesForaneoAdapter.ViewHolderInscripciones onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = View.inflate(parent.getContext(), R.layout.recyclerview_inscripciones_foraneo, null);
-        //lvForaneo.setOnItemClickListener(this);
+        //view.setOnItemClickListener(this);
         return new ViewHolderInscripciones(view);
     }
 
@@ -58,19 +60,25 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
         return inscripcionesList.size();
     }
 
-    public void setOnItemClickListener(ListView.OnItemClickListener listener1) {
-        listener = listener1;
+    public void setOnItemClick(AdapterView.OnItemClickListener itemSelectedListener) {
+        listener = itemSelectedListener;
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (listener != null) {
             listener.onItemClick(parent, view, position, id);
         }
     }
 
-    class ViewHolderInscripciones extends RecyclerView.ViewHolder {
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    class ViewHolderInscripciones extends RecyclerView.ViewHolder implements AdapterView.OnItemClickListener {
         TextView txtNombreInscripcion, txtMinEdad, txtMaxEdad;
+        ListView lvForaneo;
 
         Usuario usuario = Usuario.getUsuarioInstance();
 
@@ -80,12 +88,48 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
             txtMinEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMinEdadInscripcionForaneo);
             txtMaxEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMaxEdadInscripcionForaneo);
             lvForaneo = (ListView) vistaInscripcion.findViewById(R.id.lvForaneos);
+
+            lvForaneo.setOnItemClickListener(this);
+        }
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            String[] idTemp = parent.getItemAtPosition(position).toString().split(" ");
+            String idTemporalPulsado = idTemp[0];
+
+            if (contForaneosSeleccionados <= 4){
+
+                idsForaneos = idsForaneos.concat(idTemporalPulsado + " ");
+                Log.i("Cadena_a_enviar", idsForaneos);
+                Toast.makeText(ctx, "Has seleccionado a: " + idTemp[2], Toast.LENGTH_SHORT).show();
+                contForaneosSeleccionados++;
+            }
+
+            /*if (idsForaneos[0] == null){
+                    Log.i("contador_foraneos", ""+contForaneosSeleccionados);
+                    idsForaneos[0] = idTemporalPulsado;
+                    Log.i("primer_guardado", idsForaneos[0]);
+                    contForaneosSeleccionados++; //contForaneosSeleccionados siempre será 1 a inicio
+            }else if (contForaneosSeleccionados <= 4) {
+                Log.i("contador_foraneos", contForaneosSeleccionados+"");
+
+                for (int i = 0 ; i > contForaneosSeleccionados ; i++) {
+                    Log.i("posicion_i", i+"");
+                    if (idTemporalPulsado.equals(idsForaneos[i])) {
+                        Toast.makeText(ctx, "Ya elegiste a ese usuario", Toast.LENGTH_SHORT).show();
+                    }else {
+                        idsForaneos[contForaneosSeleccionados] = idTemporalPulsado;
+                        contForaneosSeleccionados++;
+                    }
+                }
+            }*/
         }
 
         public void asignarDatos(Inscripciones inscripciones, final int posicion) {
             txtNombreInscripcion.setText(inscripciones.getNombreInscripcion());
             txtMinEdad.setText("Edad mínima "+inscripciones.getEdadMinina() + " años");
             txtMaxEdad.setText("Edad máxima "+inscripciones.getEdadMaxima() + " años");
+
             ConsultarDatosSpinner("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerForaneos.php?id_usuario=" + usuario.getId(), inscripciones);
         }
 
@@ -123,6 +167,7 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
                 }
                 ArrayAdapter<String> foraneoArrayAdapter = new ArrayAdapter<>(ctx, android.R.layout.simple_list_item_1, listaParaSp);
                 lvForaneo.setAdapter(foraneoArrayAdapter);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

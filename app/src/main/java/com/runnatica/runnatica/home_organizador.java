@@ -31,6 +31,7 @@ public class home_organizador extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     private Usuario user = Usuario.getUsuarioInstance();
+    private int[] id;
 
     BottomNavigationView MenuOrganizador;
     @Override
@@ -80,6 +81,7 @@ public class home_organizador extends AppCompatActivity {
                             for (int i = 0; i < array.length(); i++) {
                                 //Obtenemos los objetos tipo competencias del array
                                 JSONObject competencia = array.getJSONObject(i);
+                                id = new int[array.length()];
 
                                 //Crear y añadir objeto de tipo Competencias a una Lista
                                 competenciasList.add(new Competencias(
@@ -89,12 +91,16 @@ public class home_organizador extends AppCompatActivity {
                                         competencia.getString("precio"),
                                         competencia.getString("foto")
                                 ));
+                                id[i] = competenciasList.get(i).getId();
                             }
 
                             //Creamos instancia del adapter
                             adapter = new MyAdapter(home_organizador.this, competenciasList, new MyAdapter.OnItemClickListener() {
                                 @Override
-                                public void OnItemClick(int position) {}
+                                public void OnItemClick(int position) {
+                                    String idS = new String("" + competenciasList.get(position).getId());
+                                    launchCompetenciaView(idS);
+                                }
                             });
                             recyclerView.setAdapter(adapter);
                         } catch (JSONException e) {
@@ -110,6 +116,13 @@ public class home_organizador extends AppCompatActivity {
                 });
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
+    private void launchCompetenciaView(String id) {
+        Intent intent = new Intent(home_organizador.this, vista1_organizador.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
+    }
+
 
     private void homeOrganizador(){
         Intent next = new Intent(this, home_organizador.class);
