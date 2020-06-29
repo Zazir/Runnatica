@@ -13,6 +13,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
 import org.json.JSONArray;
@@ -40,6 +42,7 @@ public class vista1_organizador extends AppCompatActivity {
         FotosResultados = (Button)findViewById(R.id.btnFotosResultados);
         graficaBarras = findViewById(R.id.graficaBarras);
 
+        ListaFechas = new ArrayList<>();
         ObtenerTabla("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerDatosTabla.php?id_competencia=68");
 
         ListaInscritos.setOnClickListener(new View.OnClickListener() {
@@ -48,8 +51,6 @@ public class vista1_organizador extends AppCompatActivity {
 
             }
         });
-
-        LlenarTabla();
 
         FotosResultados.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,20 +67,18 @@ public class vista1_organizador extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                    /*[{"f_inscripciones":"2020-06-29"},{"f_inscripciones":"2020-06-29"},{"f_inscripciones":"2020-06-29"},{"f_inscripciones":"2020-06-29"},{"f_inscripciones":"2020-06-29"},{"f_inscripciones":"2020-06-29"},{"f_inscripciones":"2020-06-30"}]
 
-                     */
                         try {
                             JSONArray Arreglo = new JSONArray(response);
                             for(int a= 0; a < Arreglo.length();a++){
 
                                 JSONObject Valor = Arreglo.getJSONObject(a);
-                                ListaFechas.add(Valor.optString("f_inscripciones"));
+                                ListaFechas.add(Valor.getString("f_inscripciones"));
                                 TamañoLista++;
 
                             }
 
-                            //aqui poner llenar tabla si no se puede
+                            LlenarTabla();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -106,17 +105,21 @@ public class vista1_organizador extends AppCompatActivity {
         for(int b = 0 ; b <= TamañoLista; b++){
 
 
-            if(ListaFechas.get(b) == ListaFechas.get(b++)){
-                temp = ListaFechas.get(b);
+            if(ListaFechas.get(b).equals(ListaFechas.get(b++))){
+                //temp = ListaFechas.get(b);
                 Contador++;
             }else{
-
-                entradas.add(new BarEntry(Float.parseFloat(temp),Contador));
+                entradas.add(new BarEntry(10,Contador));
                 Contador = 0;
             }
 
         }
 
+        BarDataSet datos = new BarDataSet(entradas, "Grafico de ganancias");
+        BarData data = new BarData(datos);
+        data.setBarWidth(0.9f);
+
+        graficaBarras.setData(data);
     }
 
     void ListaInscritos(){
