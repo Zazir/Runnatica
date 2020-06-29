@@ -6,19 +6,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class informacion_inscrito extends AppCompatActivity {
-
-    Button Atras;
+    private Button Atras;
+    private TextView txtNombre, txtCorreo, txtF_inscrito;
 
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_inscrito);
+        txtNombre = (TextView)findViewById(R.id.tvNombreinscrito);
+        txtCorreo = (TextView)findViewById(R.id.tvCorreoInscrito);
+        txtF_inscrito = (TextView)findViewById(R.id.tvFechaInscripcion);
 
         Atras = findViewById(R.id.btnAtras);
 
+        getLastViewData();
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,5 +36,13 @@ public class informacion_inscrito extends AppCompatActivity {
     void atras(){
         Intent next = new Intent(this, vista1_organizador.class);
         startActivity(next);
+    }
+
+    private void getLastViewData() {
+        Bundle extra = informacion_inscrito.this.getIntent().getExtras();
+        txtNombre.setText(extra.getString("NOMBRE"));
+        txtCorreo.setText(extra.getString("CORREO"));
+        txtF_inscrito.setText(extra.getString("F_INSCRIPCION"));
+        //id_competencia = extra.getString("id");
     }
 }

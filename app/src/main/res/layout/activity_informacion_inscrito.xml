@@ -26,15 +26,16 @@
 
 
     <TextView
+        android:id="@+id/tvNombreinscrito"
         android:layout_width="match_parent"
         android:layout_height="94dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="64dp"
+        android:layout_alignParentTop="true"
         android:layout_marginEnd="0dp"
+        android:layout_marginTop="64dp"
         android:text="Nombre del Usuario Competidor"
         android:textColor="@android:color/background_dark"
-        android:textSize="35dp"></TextView>
+        android:textSize="35dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,18 +46,19 @@
         android:layout_marginEnd="278dp"
         android:text="Correo:"
         android:textColor="@android:color/background_dark"
-        android:textSize="25dp"></TextView>
+        android:textSize="25dp"/>
 
     <TextView
+        android:id="@+id/tvCorreoInscrito"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="202dp"
+        android:layout_alignParentTop="true"
         android:layout_marginEnd="0dp"
+        android:layout_marginTop="202dp"
         android:text="Correo del usuario competidor"
         android:textColor="@android:color/background_dark"
-        android:textSize="20dp"></TextView>
+        android:textSize="20dp"/>
 
     <TextView
         android:layout_width="274dp"
@@ -67,18 +69,19 @@
         android:layout_marginEnd="83dp"
         android:text="Fecha de Inscripción:"
         android:textColor="@android:color/background_dark"
-        android:textSize="25dp"></TextView>
+        android:textSize="25dp"/>
 
     <TextView
+        android:id="@+id/tvFechaInscripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="270dp"
+        android:layout_alignParentTop="true"
         android:layout_marginEnd="1dp"
+        android:layout_marginTop="270dp"
         android:text="4 - 04 - 2019"
         android:textColor="@android:color/background_dark"
-        android:textSize="20dp"></TextView>
+        android:textSize="20dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -88,14 +91,15 @@
         android:layout_alignParentStart="true"
         android:background="@drawable/barra_verde"
         android:minHeight="@android:dimen/thumbnail_height">
-        <TextView
+        <Button
             android:id="@+id/btnAtras"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="Atras"
             android:textColor="@android:color/background_light"
-            android:textSize="25dp"></TextView>
+            android:background="#80000000"
+            android:textSize="25dp"/>
 
     </LinearLayout>
 

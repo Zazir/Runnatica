@@ -3,8 +3,10 @@ package com.runnatica.runnatica;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,12 +28,13 @@ import java.util.List;
 
 public class vista1_organizador extends AppCompatActivity {
     BarChart graficaBarras;
-
-    int TamañoLista = 0;
-
+    int TamanoLista = 0;
     List<String> ListaFechas;
-
     Button ListaInscritos, FotosResultados;
+    TextView txtVendidasUsuarios, txtTotalUsuarios, txtVendidosForaneos, txtTotalForaneos;
+
+    private String id_competencia;
+    private StringRequest request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +44,19 @@ public class vista1_organizador extends AppCompatActivity {
         ListaInscritos = (Button)findViewById(R.id.btnListaInscritos);
         FotosResultados = (Button)findViewById(R.id.btnFotosResultados);
         graficaBarras = findViewById(R.id.graficaBarras);
+        txtTotalUsuarios = (TextView)findViewById(R.id.tvTotalInscripciones);
+        txtVendidasUsuarios = (TextView)findViewById(R.id.tvInscripcionesVendidas);
+        //txtVendidosForaneos = (TextView)findViewById(R.id.tvInscripcionesVendidas);
+        //txtTotalForaneos = (TextView)findViewById(R.id.tvInscripcionesVendidas);
+        getLastViewData();
 
         ListaFechas = new ArrayList<>();
-        ObtenerTabla("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerDatosTabla.php?id_competencia=68");
+        ObtenerTabla("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerDatosTabla.php?id_competencia="+id_competencia);
 
         ListaInscritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ListaInscritos();
             }
         });
 
@@ -59,6 +67,15 @@ public class vista1_organizador extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getLastViewData() {
+        Bundle extra = vista1_organizador.this.getIntent().getExtras();
+        id_competencia = extra.getString("id");
+
+        consultarTotalInscripciones();
+        consultarInscritos();
+        consultarForaneosInscritos();
     }
 
     private void ObtenerTabla(String url) {
@@ -74,7 +91,7 @@ public class vista1_organizador extends AppCompatActivity {
 
                                 JSONObject Valor = Arreglo.getJSONObject(a);
                                 ListaFechas.add(Valor.getString("f_inscripciones"));
-                                TamañoLista++;
+                                TamanoLista++;
 
                             }
 
@@ -101,15 +118,17 @@ public class vista1_organizador extends AppCompatActivity {
         List<BarEntry> entradas = new ArrayList<>();
         int Contador = 0;
         String temp = "";
+        Log.i("lista_size", String.valueOf(TamanoLista));
 
-        for(int b = 0 ; b <= TamañoLista; b++){
-
+        for(int b = 0 ; b < TamanoLista; b++){
 
             if(ListaFechas.get(b).equals(ListaFechas.get(b++))){
+                //Log.i("fecha", ListaFechas.get(b));
                 //temp = ListaFechas.get(b);
                 Contador++;
+                Log.i("Contador", String.valueOf(Contador));
             }else{
-                entradas.add(new BarEntry(10,Contador));
+                entradas.add(new BarEntry(10f,Contador));
                 Contador = 0;
             }
 
@@ -122,8 +141,73 @@ public class vista1_organizador extends AppCompatActivity {
         graficaBarras.setData(data);
     }
 
-    void ListaInscritos(){
+    private void consultarInscritos() {
+        String URL = "https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=1";
+        request = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        txtVendidasUsuarios.setText(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void consultarForaneosInscritos() {
+        String URL = "https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=2";
+        request = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //txtVendidosForaneos.setText(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void consultarTotalInscripciones() {
+        String URL = "https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=3";
+        request = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray res = new JSONArray(response);
+                            JSONObject totalInscripciones = res.getJSONObject(0);
+
+                            txtTotalUsuarios.setText(totalInscripciones.optString("Total_usuarios"));
+                            //txtTotalForaneos.setText(totalInscripciones.optString("Total_foraneos"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        //txtTotalUsuarios.setText();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void ListaInscritos(){
         Intent next = new Intent(this, lista_inscritos.class);
+        next.putExtra("id_competencia", id_competencia);
         startActivity(next);
     }
     void FotosResultados(){
