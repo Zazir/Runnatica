@@ -52,6 +52,11 @@ public class vista1_organizador extends AppCompatActivity {
             }
         });
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
         FotosResultados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
