@@ -157,8 +157,8 @@ public class crear_competencia extends AppCompatActivity {
         Guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                subirImagenCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
-                /*if(Validaciones()){
+                //subirImagenCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
+                if(Validaciones()){
                     //subirImagenCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
                     SubirCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?" +
                             "Id_usuario=" + usuario.getId() +
@@ -178,7 +178,7 @@ public class crear_competencia extends AppCompatActivity {
                             "&path="+path);
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
-                }*/
+                }
             }
         });
 
