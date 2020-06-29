@@ -108,41 +108,11 @@
                 android:layout_marginLeft="190dp"
                 android:layout_marginTop="270dp"/>
 
-            <TextView
-                android:id="@+id/km"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="330dp"
-                android:text="Kilometros"
-                android:textColor="@android:color/background_dark"
-                android:textSize="35dp"/>
-
-            <EditText
-                android:id="@+id/etBuscarKilometros"
-                android:layout_width="201dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_below="@+id/km"
-                android:numeric="integer"
-                android:inputType="number"/>
-
-            <Button
-                android:id="@+id/btnBuscarKm"
-                android:layout_width="264dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/etBuscarKilometros"
-                android:text="Buscar"
-                android:layout_centerHorizontal="true"
-                android:textColor="@android:color/background_light"
-                android:textSize="20dp"
-                android:background="@color/verdeRun"/>
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvFiltroCompetencias"
                 android:layout_width="match_parent"
                 android:layout_height="600dp"
-                android:layout_below="@+id/btnBuscarKm"/>
+                android:layout_below="@+id/spFiltroPais"/>
 
         </RelativeLayout>
 

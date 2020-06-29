@@ -58,12 +58,10 @@ public class busqueda_competidor extends AppCompatActivity {
         setContentView(R.layout.activity_busqueda_competidor);
 
         btnfecha = (Button)findViewById(R.id.btnFiltroFecha);
-        btnKm = (Button)findViewById(R.id.btnBuscarKm);
         btnEstado = (Button)findViewById(R.id.btnBuscarEstado);
         btnPais = (Button)findViewById(R.id.btnBuscarPais);
         spPais = (Spinner) findViewById(R.id.spFiltroPais);
         spEstado = (Spinner)findViewById(R.id.spFiltroEstado);
-        txtKM = (EditText) findViewById(R.id.etBuscarKilometros);
         LaFecha = (TextView)findViewById(R.id.xx);
         rvFiltro = (RecyclerView) findViewById(R.id.rvFiltroCompetencias);
         rvFiltro.setHasFixedSize(true);
@@ -97,7 +95,7 @@ public class busqueda_competidor extends AppCompatActivity {
             }
         });
 
-        btnKm.setOnClickListener(new View.OnClickListener() {
+        /*btnKm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -106,9 +104,8 @@ public class busqueda_competidor extends AppCompatActivity {
                 }catch (NumberFormatException e){
                     txtKM.setError("Este dato tiene que ser un número");
                 }
-
             }
-        });
+        });*/
 
         btnfecha.setOnClickListener(new View.OnClickListener() {
             @Override
