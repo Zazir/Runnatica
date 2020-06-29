@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class informacion_inscrito extends AppCompatActivity {
     private Button Atras;
-    private TextView txtNombre, txtCorreo, txtF_inscrito;
+    private TextView txtNombre, txtCorreo, txtF_inscrito, txtF_nacimiento;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -20,6 +20,7 @@ public class informacion_inscrito extends AppCompatActivity {
         txtNombre = (TextView)findViewById(R.id.tvNombreinscrito);
         txtCorreo = (TextView)findViewById(R.id.tvCorreoInscrito);
         txtF_inscrito = (TextView)findViewById(R.id.tvFechaInscripcion);
+        txtF_nacimiento = (TextView)findViewById(R.id.tvNacimientoUsuario);
 
         Atras = findViewById(R.id.btnAtras);
 
@@ -43,6 +44,7 @@ public class informacion_inscrito extends AppCompatActivity {
         txtNombre.setText(extra.getString("NOMBRE"));
         txtCorreo.setText(extra.getString("CORREO"));
         txtF_inscrito.setText(extra.getString("F_INSCRIPCION"));
+        txtF_nacimiento.setText(extra.getString("F_NACIMIENTO"));
         //id_competencia = extra.getString("id");
     }
 }
