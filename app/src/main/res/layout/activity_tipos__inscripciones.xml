@@ -12,18 +12,18 @@
         android:background="@drawable/barra_verde">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="59dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Tipo de Inscripciones"
             android:textColor="@android:color/background_light"
-            android:textSize="40dp"></TextView>
+            android:textSize="30dp"></TextView>
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="508dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -32,21 +32,20 @@
                 android:id="@+id/tvNombreCategoria"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Categoria Juvenil"
-                android:layout_marginTop="70dp"
                 android:layout_marginLeft="15dp"
-                android:textSize="25dp"
+                android:layout_marginTop="70dp"
+                android:text="Categoria Juvenil"
                 android:textColor="@android:color/background_dark"
-                ></TextView>
+                android:textSize="25dp"></TextView>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edad Min:"
-                android:layout_marginTop="105dp"
                 android:layout_marginLeft="15dp"
-                android:textSize="20dp"
+                android:layout_marginTop="105dp"
+                android:text="Edad Min:"
                 android:textColor="@android:color/background_dark"
-                ></TextView>
+                android:textSize="20dp"></TextView>
 
             <TextView
                 android:id="@+id/tvEdadMinima"
@@ -66,15 +65,15 @@
                 android:text="Años"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"></TextView>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edad Min:"
-                android:layout_marginTop="135dp"
                 android:layout_marginLeft="15dp"
-                android:textSize="20dp"
+                android:layout_marginTop="135dp"
+                android:text="Edad Min:"
                 android:textColor="@android:color/background_dark"
-                ></TextView>
+                android:textSize="20dp"></TextView>
 
             <TextView
                 android:id="@+id/tvEdadMaxima"
@@ -85,6 +84,7 @@
                 android:text="20"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"></TextView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -93,20 +93,20 @@
                 android:text="Años"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"></TextView>
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="165dp"
                 android:layout_marginEnd="2dp"
                 android:background="@drawable/barra_negra"></ImageView>
-
         </RelativeLayout>
     </ScrollView>
 
     <Button
         android:layout_width="173dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="620dp"
+        android:layout_marginTop="510dp"
         android:background="@color/grisBoton"
         android:layout_marginLeft="20dp"
         android:text="Guardar"
@@ -116,7 +116,7 @@
     <Button
         android:layout_width="173dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="620dp"
+        android:layout_marginTop="510dp"
         android:background="@color/grisBoton"
         android:layout_marginLeft="220dp"
         android:text="Agregar"
@@ -125,13 +125,13 @@
         ></Button>
 
     <LinearLayout
-        android:background="@drawable/barra_verde"
         android:layout_width="match_parent"
-        android:layout_height="57dp"
-        android:layout_alignParentTop="true"
+        android:layout_height="78dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="675dp"
-        android:layout_marginEnd="0dp"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/barra_verde"
+        android:minHeight="@android:dimen/thumbnail_height"
         ></LinearLayout>
 
 </RelativeLayout>

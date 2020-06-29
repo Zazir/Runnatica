@@ -53,6 +53,14 @@ public class vista1_organizador extends AppCompatActivity {
         ListaFechas = new ArrayList<>();
         ObtenerTabla("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerDatosTabla.php?id_competencia="+id_competencia);
 
+
+        /*List<BarEntry> entradas = new ArrayList<>();
+        entradas.add(new BarEntry(0f,2));
+        entradas.add(new BarEntry(0f,2));
+        entradas.add(new BarEntry(0f,2));*/
+
+
+
         ListaInscritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +74,6 @@ public class vista1_organizador extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void getLastViewData() {
@@ -91,17 +98,12 @@ public class vista1_organizador extends AppCompatActivity {
 
                                 JSONObject Valor = Arreglo.getJSONObject(a);
                                 ListaFechas.add(Valor.getString("f_inscripciones"));
-                                TamanoLista++;
-
+                                TamañoLista++;
                             }
-
                             LlenarTabla();
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -120,7 +122,7 @@ public class vista1_organizador extends AppCompatActivity {
         String temp = "";
         Log.i("lista_size", String.valueOf(TamanoLista));
 
-        for(int b = 0 ; b < TamanoLista; b++){
+        /*for(int b = 0 ; b <= TamañoLista; b++){
 
             if(ListaFechas.get(b).equals(ListaFechas.get(b++))){
                 //Log.i("fecha", ListaFechas.get(b));
@@ -132,13 +134,23 @@ public class vista1_organizador extends AppCompatActivity {
                 Contador = 0;
             }
 
-        }
 
-        BarDataSet datos = new BarDataSet(entradas, "Grafico de ganancias");
+        }*/
+
+        entradas.add(new BarEntry(1,2));
+        entradas.add(new BarEntry(5,3));
+        entradas.add(new BarEntry(6,5));
+
+        BarDataSet datos = new BarDataSet(entradas, "Grafica de Barras");
         BarData data = new BarData(datos);
-        data.setBarWidth(0.9f);
 
+
+        data.setBarWidth(0.9f);
         graficaBarras.setData(data);
+
+        graficaBarras.setFitBars(true);
+
+        graficaBarras.invalidate();
     }
 
     private void consultarInscritos() {
