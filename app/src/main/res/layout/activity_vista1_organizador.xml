@@ -50,13 +50,13 @@
                 ></TextView>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="308dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="111dp"
-                android:layout_marginEnd="135dp"
-                android:text="Resumen de ventas:"
+                android:layout_marginEnd="52dp"
+                android:text="Resumen de Inscritos:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
 
