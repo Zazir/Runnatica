@@ -66,9 +66,7 @@ public class vista1_organizador extends AppCompatActivity {
 
             }
         });
-
     }
-
     private void ObtenerTabla(String url) {
 
         StringRequest Datos = new StringRequest(Request.Method.GET, url,
@@ -83,16 +81,11 @@ public class vista1_organizador extends AppCompatActivity {
                                 JSONObject Valor = Arreglo.getJSONObject(a);
                                 ListaFechas.add(Valor.getString("f_inscripciones"));
                                 TamañoLista++;
-
                             }
-
                             LlenarTabla();
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 },
                 new Response.ErrorListener() {

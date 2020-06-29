@@ -32,7 +32,6 @@ public class ajustes_competidor extends AppCompatActivity {
         arrayList.add("Notificaciones");
         arrayList.add("Crear Una Competencia");
         arrayList.add("Centro de Ayuda");
-        arrayList.add("Ubicación");
         arrayList.add("Aviso de Privacidad");
         arrayList.add("Administrador de Competencia");
         arrayList.add("Cerrar Sesión");
@@ -75,22 +74,17 @@ public class ajustes_competidor extends AppCompatActivity {
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
                 if(i == 4){
-                    Ubicacion();
-                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
-                }
-                if(i == 5){
                     AvisoPrivacidad();
                     Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
-                if(i == 6){
+                if(i == 5){
                     AdministrarCarrera();
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
-                if(i == 7){
+                if(i == 6){
                     CerrarSesion();
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }

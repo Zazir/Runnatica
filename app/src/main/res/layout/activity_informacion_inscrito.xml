@@ -70,12 +70,35 @@
         android:textSize="25dp"></TextView>
 
     <TextView
+        android:layout_width="274dp"
+        android:layout_height="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="306dp"
+        android:layout_marginEnd="87dp"
+        android:text="Fecha de Nacimiento:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"></TextView>
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="270dp"
         android:layout_marginEnd="1dp"
+        android:text="4 - 04 - 2019"
+        android:textColor="@android:color/background_dark"
+        android:textSize="20dp"></TextView>
+
+    <TextView
+        android:id="@+id/tvNacimientoUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="344dp"
+        android:layout_marginEnd="-1dp"
         android:text="4 - 04 - 2019"
         android:textColor="@android:color/background_dark"
         android:textSize="20dp"></TextView>

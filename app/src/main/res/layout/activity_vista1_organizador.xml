@@ -127,16 +127,61 @@
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="459dp"
+                android:layout_marginEnd="79dp"
+                android:text="Inscripciones Foraneas Vendidas:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <TextView
+                android:id="@+id/tvForaneasVendidasMin"
+                android:layout_width="49dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="535dp"
+                android:layout_marginEnd="278dp"
+                android:text="50"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="532dp"
+                android:layout_marginEnd="255dp"
+                android:text="/"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"></TextView>
+
+            <TextView
+                android:id="@+id/tvForaneosVendidasMax"
+                android:layout_width="49dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="535dp"
+                android:layout_marginEnd="196dp"
+                android:text="500"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
             <Button
                 android:id="@+id/btnListaInscritos"
                 android:layout_width="331dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="468dp"
-                android:layout_marginEnd="17dp"
-                android:text="Lista de Inscritos"
-                ></Button>
+                android:layout_marginTop="621dp"
+                android:layout_marginEnd="16dp"
+                android:text="Lista de Inscritos"></Button>
 
             <Button
                 android:id="@+id/btnFotosResultados"
@@ -144,10 +189,15 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="525dp"
+                android:layout_marginTop="680dp"
                 android:layout_marginEnd="15dp"
-                android:text="Subir Fotos de Resultados"
-                ></Button>
+                android:text="Subir Fotos de Resultados"></Button>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="732dp"
+                android:layout_marginEnd="-1dp"></TextView>
 
 
         </RelativeLayout>
