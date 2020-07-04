@@ -1,7 +1,9 @@
 package com.runnatica.runnatica;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -82,10 +84,11 @@ public class carrera_vista1 extends AppCompatActivity {
         ForoRecycler.setHasFixedSize(true);
         ForoRecycler.setLayoutManager(new LinearLayoutManager(this));
 
+        obtenerPreferencias();
         dominio = getString(R.string.ip);
         getLastViewData();
 
-        cargarInfoCarrera("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencia.php?idCompe=" + id_competencia);
+        cargarInfoCarrera(dominio + "obtenerCompetencia.php?idCompe=" + id_competencia);
 
         cargarSpinnerComentar();
         cargarSpinnerComentarios();
@@ -100,7 +103,7 @@ public class carrera_vista1 extends AppCompatActivity {
         btnEnviarComentario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                comentarForo("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarComentario.php?" +
+                comentarForo(dominio + "agregarComentario.php?" +
                         "id_usuario="+ user.getId() +
                         "&id_competencia=" + id_competencia +
                         "&mensaje="+txtComentario.getText().toString().replaceAll(" ", "%20") +
@@ -114,6 +117,15 @@ public class carrera_vista1 extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void obtenerPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+
+        user.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
+        user.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
+        user.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
+        user.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
     }
 
     private void CrearInscripcion() {
@@ -152,7 +164,7 @@ public class carrera_vista1 extends AppCompatActivity {
         spFiltro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cargarComentarios("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerComentarios.php?id_compentencia=" + id_competencia +
+                cargarComentarios(dominio + "obtenerComentarios.php?id_compentencia=" + id_competencia +
                         "&tipo_comentario=" + parent.getItemAtPosition(position).toString());
             }
 

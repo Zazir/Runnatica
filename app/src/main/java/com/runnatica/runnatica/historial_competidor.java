@@ -1,6 +1,8 @@
 package com.runnatica.runnatica;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -30,7 +32,7 @@ public class historial_competidor extends AppCompatActivity {
     private List<Competencias> competenciasList;
     private RecyclerView recyclerView;
     private MyAdapter adapter;
-    private Usuario user = Usuario.getUsuarioInstance();
+    private Usuario usuario = Usuario.getUsuarioInstance();
 
     BottomNavigationView MenuUsuario;
 
@@ -68,7 +70,16 @@ public class historial_competidor extends AppCompatActivity {
         competenciasList = new ArrayList<>();
 
         String dominio = getString(R.string.ip);
-        cargarHistorialCompetencias(dominio+"obtenerCompetencias.php?id_usuario="+user.getId());
+        cargarHistorialCompetencias(dominio+"obtenerCompetencias.php?id_usuario="+usuario.getId());
+    }
+
+    private void obtenerPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+
+        usuario.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
+        usuario.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
+        usuario.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
+        usuario.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
     }
 
     private void cargarHistorialCompetencias(String URL) {

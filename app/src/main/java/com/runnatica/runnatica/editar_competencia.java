@@ -1,6 +1,8 @@
 package com.runnatica.runnatica;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,7 +30,7 @@ public class editar_competencia extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     private int[] id;
-    private Usuario user = Usuario.getUsuarioInstance();
+    private Usuario usuario = Usuario.getUsuarioInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,16 @@ public class editar_competencia extends AppCompatActivity {
         competenciasList = new ArrayList<>();
 
         String dominio = getString(R.string.ip);
-        cargarCometenciasEditar(dominio+"obtenerCompetencias.php?id_usuarioA="+user.getId());
+        cargarCometenciasEditar(dominio+"obtenerCompetencias.php?id_usuarioA="+usuario.getId());
+    }
+
+    private void obtenerPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+
+        usuario.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
+        usuario.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
+        usuario.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
+        usuario.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
     }
 
     private void cargarCometenciasEditar(String URL) {

@@ -52,10 +52,14 @@ public class busqueda_competidor extends AppCompatActivity {
     private int[] id;
     private String fecha;
 
+    private String dominio;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busqueda_competidor);
+
+        dominio = getString(R.string.ip);
 
         btnfecha = (Button)findViewById(R.id.btnFiltroFecha);
         btnEstado = (Button)findViewById(R.id.btnBuscarEstado);
@@ -100,7 +104,7 @@ public class busqueda_competidor extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     int kilometros = Integer.parseInt(txtKM.getText().toString());
-                    CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/filtroCompetencias.php?kilometros=" + kilometros);
+                    CargarCompetencias(dominio + "filtroCompetencias.php?kilometros=" + kilometros);
                 }catch (NumberFormatException e){
                     txtKM.setError("Este dato tiene que ser un número");
                 }
@@ -120,7 +124,7 @@ public class busqueda_competidor extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         fecha = year + "-" + (month+1) + "-" + dayOfMonth;
                         LaFecha.setText(fecha);
-                        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/filtroCompetencias.php?fecha=" + fecha);
+                        CargarCompetencias(dominio + "filtroCompetencias.php?fecha=" + fecha);
 
                     }
                 }, ano, mes, dia);
@@ -133,14 +137,14 @@ public class busqueda_competidor extends AppCompatActivity {
         btnEstado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/filtroCompetencias.php?estado=" + estado);
+                CargarCompetencias(dominio + "filtroCompetencias.php?estado=" + estado);
             }
         });
 
         btnPais.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/filtroCompetencias.php?pais=" + pais);
+                CargarCompetencias(dominio + "filtroCompetencias.php?pais=" + pais);
             }
         });
     }

@@ -28,7 +28,6 @@ import java.util.List;
 
 public class vista1_organizador extends AppCompatActivity {
     BarChart graficaBarras;
-    int TamanoLista = 0;
     List<String> ListaFechas;
     Button ListaInscritos, FotosResultados;
     TextView txtVendidasUsuarios, txtTotalUsuarios, txtVendidosForaneos, txtTotalForaneos, txtIngresoTotal;
@@ -36,6 +35,8 @@ public class vista1_organizador extends AppCompatActivity {
     private String id_competencia;
     private StringRequest request;
     private int precio, vendidosUsuario, vendidosForaneo;
+
+    private String dominio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +53,10 @@ public class vista1_organizador extends AppCompatActivity {
         txtIngresoTotal = (TextView)findViewById(R.id.ingreso);
         getLastViewData();
 
+        dominio = getString(R.string.ip);
+
         ListaFechas = new ArrayList<>();
-        ObtenerTabla("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerDatosTabla.php?id_competencia="+id_competencia);
-
-
-        /*List<BarEntry> entradas = new ArrayList<>();
-        entradas.add(new BarEntry(0f,2));
-        entradas.add(new BarEntry(0f,2));
-        entradas.add(new BarEntry(0f,2));*/
-
+        ObtenerTabla(dominio + "obtenerDatosTabla.php?id_competencia="+id_competencia);
 
 
         ListaInscritos.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +96,6 @@ public class vista1_organizador extends AppCompatActivity {
 
                                 JSONObject Valor = Arreglo.getJSONObject(a);
                                 ListaFechas.add(Valor.getString("f_inscripciones"));
-                                TamanoLista++;
                             }
                             LlenarTabla();
                         } catch (JSONException e) {
@@ -121,27 +116,31 @@ public class vista1_organizador extends AppCompatActivity {
     private void LlenarTabla(){
         List<BarEntry> entradas = new ArrayList<>();
         int Contador = 0;
-        String temp = "";
-        Log.i("lista_size", String.valueOf(TamanoLista));
+        String temp = ListaFechas.get(0);
+        //Hashtable<String, Integer> fechasRepetidas = new Hashtable<>();
 
-        /*for(int b = 0 ; b <= TamañoLista; b++){
+        /*fechasRepetidas.put(ListaFechas.get(0), Contador);
 
-            if(ListaFechas.get(b).equals(ListaFechas.get(b++))){
-                //Log.i("fecha", ListaFechas.get(b));
-                //temp = ListaFechas.get(b);
-                Contador++;
-                Log.i("Contador", String.valueOf(Contador));
-            }else{
-                entradas.add(new BarEntry(10f,Contador));
-                Contador = 0;
+        for (int i=0 ; i <= TamanoLista ; i++) {
+            if (fechasRepetidas.containsKey(ListaFechas.get(i)) == ) {
+
             }
-
-
         }*/
 
-        entradas.add(new BarEntry(1,2));
-        entradas.add(new BarEntry(5,3));
-        entradas.add(new BarEntry(6,5));
+        for(int b = 0 ; b < ListaFechas.size() ; b++){
+            Log.i("Lista_valor", ListaFechas.get(b));
+            Log.i("Lista_tempora", temp);
+
+            if(temp.equals(ListaFechas.get(b))){
+                Contador++;
+            }else{
+                entradas.add(new BarEntry(10f,Contador));
+                temp = ListaFechas.get(b);
+                Contador = 0;
+            }
+        }
+        Log.i("Ultima_barra", String.valueOf(Contador));
+        entradas.add(new BarEntry(2,Contador));
 
         BarDataSet datos = new BarDataSet(entradas, "Grafica de Barras");
         BarData data = new BarData(datos);
@@ -156,7 +155,7 @@ public class vista1_organizador extends AppCompatActivity {
     }
 
     private void consultarInscritos() {
-        String URL = "https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=1";
+        String URL = dominio + "obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=1";
         request = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override
@@ -178,7 +177,7 @@ public class vista1_organizador extends AppCompatActivity {
     }
 
     private void consultarForaneosInscritos() {
-        String URL = "https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=2";
+        String URL = dominio + "obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=2";
         request = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override
@@ -201,7 +200,7 @@ public class vista1_organizador extends AppCompatActivity {
     }
 
     private void consultarTotalInscripciones() {
-        String URL = "https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=3";
+        String URL = dominio + "obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=3";
         request = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override

@@ -1,6 +1,8 @@
 package com.runnatica.runnatica;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -41,6 +43,7 @@ public class home_organizador extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rvAdministradorCompetencias);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        obtenerPreferencias();
 
         MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
 
@@ -66,6 +69,15 @@ public class home_organizador extends AppCompatActivity {
 
         String dominio = getString(R.string.ip);
         cargarAdministradorCompetencias(dominio+"obtenerCompetencias.php?id_usuarioA="+user.getId());
+    }
+
+    private void obtenerPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+
+        user.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
+        user.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
+        user.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
+        user.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
     }
 
     private void cargarAdministradorCompetencias(String URL) {

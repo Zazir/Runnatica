@@ -34,13 +34,15 @@ public class registro_usuario extends AppCompatActivity {
     TextView Condiciones;
     private String flagTerminos = "0";
     private String genero = "";
-    //private String fechaDeNacimiento = "";
+    private String dominio;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
+
+        dominio = getString(R.string.ip);
 
         //Enlaces de elementos por id's
         Hombre = (Button)findViewById(R.id.btnHombre);
@@ -67,7 +69,7 @@ public class registro_usuario extends AppCompatActivity {
                     flagTerminos = "1";
                 }
                 if (Validaciones())
-                SubirUsuario("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarUsuario.php?" +
+                SubirUsuario(dominio + "agregarUsuario.php?" +
                         "NombreYApellido=" + Nombre.getText().toString().replaceAll(" ", "%20") +
                         "&Email=" + Correo.getText().toString() +
                         "&Contrasena=" + Contrasena.getText().toString() +

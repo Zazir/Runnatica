@@ -3,6 +3,7 @@ package com.runnatica.runnatica;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -29,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.runnatica.runnatica.adapter.MyAdapter;
 import com.runnatica.runnatica.poho.Competencias;
+import com.runnatica.runnatica.poho.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,11 +52,16 @@ public class home extends AppCompatActivity {
     private int[] id;
     int bandera;
     String Localizacion;
+    private String dominio;
+
+    private Usuario user = Usuario.getUsuarioInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        obtenerPreferencias();
 
         //Enlaces de elementos por id's
         recyclerView = (RecyclerView) findViewById(R.id.rcvCompetencia);
@@ -64,7 +71,11 @@ public class home extends AppCompatActivity {
         Estado = (Button)findViewById(R.id.btnEstado);
         Pais = (Button)findViewById(R.id.btnPais);
 
-        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?estado=Jalisco");
+        dominio = getString(R.string.ip);
+
+        Toast.makeText(this, user.getId()+"", Toast.LENGTH_SHORT).show();
+
+        CargarCompetencias(dominio + "obtenerCompetencias.php?estado=Jalisco");
 
         //Inicializar arreglo de competencias
         competenciasList = new ArrayList<>();
@@ -107,12 +118,21 @@ public class home extends AppCompatActivity {
         });
     }
 
+    private void obtenerPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+
+        user.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
+        user.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
+        user.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
+        user.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
+    }
+
     public void estado(){
         bandera=1;
         Toast.makeText(home.this, "Ver Competencias por Estado", Toast.LENGTH_SHORT).show();
         Localizacion();
         competenciasList.clear();
-        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?estado=Jalisco");
+        CargarCompetencias(dominio + "obtenerCompetencias.php?estado=Jalisco");
         Toast.makeText(getApplicationContext(), "Ver Carreras Por Estado", Toast.LENGTH_SHORT).show();
     }
     public void Pais(){
@@ -120,7 +140,7 @@ public class home extends AppCompatActivity {
         Toast.makeText(home.this, "Ver Competencias por Pais", Toast.LENGTH_SHORT).show();
         Localizacion2();
         competenciasList.clear();
-        CargarCompetencias("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerCompetencias.php?pais=Mexico");
+        CargarCompetencias(dominio + "obtenerCompetencias.php?pais=Mexico");
         Toast.makeText(getApplicationContext(), "Ver Carreras Por Pais", Toast.LENGTH_SHORT).show();
     }
 

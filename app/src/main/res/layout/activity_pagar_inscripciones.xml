@@ -17,7 +17,7 @@
             android:gravity="center"
             android:text="Metodo de Pago"
             android:textColor="@android:color/background_light"
-            android:textSize="35dp"></TextView>
+            android:textSize="35dp"/>
     </LinearLayout>
 
     <Button
@@ -30,12 +30,20 @@
         android:layout_marginEnd="2dp"
         android:text="Pagar con Paypal" />
 
-    <Button
-        android:id="@+id/btnConekta"
+    <FrameLayout
+        android:id="@+id/wallet_button_holder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="480dp"
         android:layout_below="@+id/btnPaypal"
-        android:text="Pagar con tarjeta" />
+        android:layout_centerHorizontal="true"/>
+    
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="requestFullWallet"
+        android:text="Confirmar" />
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="78dp"
@@ -43,6 +51,5 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:background="@drawable/barra_verde"
-        android:minHeight="@android:dimen/thumbnail_height"
-        ></LinearLayout>
+        android:minHeight="@android:dimen/thumbnail_height"/>
 </RelativeLayout>

@@ -3,7 +3,9 @@ package com.runnatica.runnatica;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -59,6 +61,10 @@ public class crear_competencia extends AppCompatActivity {
     private String hora;
     private String Reembolso;
 
+    private String dominio;
+
+
+
     int imagen=0;
     private String path = "xxx", estado, pais;
 
@@ -66,6 +72,9 @@ public class crear_competencia extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_competencia);
+
+        dominio = getString(R.string.ip);
+        obtenerPreferencias();
 
         Nombre=(EditText)findViewById(R.id.etNombreCompetencia);
         Precio = (EditText)findViewById(R.id.etPrecioCompetencia);
@@ -157,31 +166,25 @@ public class crear_competencia extends AppCompatActivity {
         Guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //subirImagenCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
-                if(Validaciones()){
+                //subirImagenCompetencia("http://192.168.137.1:811/WebServiceRunnatica/agregarCompetencia.php?");
+                if (Validaciones()){
                     //subirImagenCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
-                    SubirCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?" +
-                            "Id_usuario=" + usuario.getId() +
-                            "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
-                            "&Aval=Aval" +
-                            "&Coordenadas=95959595959" +
-                            "&Nombre_competencia=" + Nombre.getText().toString().replaceAll(" ", "%20")+
-                            "&Pais=" + pais +
-                            "&Colonia=" +Colonia.getText().toString().replaceAll(" ", "%20")+
-                            "&Calle=" +Calle.getText().toString().replaceAll(" ", "%20")+
-                            "&Ciudad=" +Ciudad.getText().toString().replaceAll(" ", "%20")+
-                            "&Fecha=" +fecha+
-                            "&Hora=" +hora+
-                            "&Estado=" + estado +
-                            "&Reembolso=N" +
-                            "&Precio=" +Precio.getText().toString()+
-                            "&path="+path);
+                    subirImagenCompetencia(dominio + "uploadImg.php?");
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
+    }
+
+    private void obtenerPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+
+        usuario.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
+        usuario.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
+        usuario.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
+        usuario.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
     }
 
     private void cargarSpinnerEstado() {
@@ -221,7 +224,7 @@ public class crear_competencia extends AppCompatActivity {
     private void SubirCompetencia(String URL) {
         progreso = new ProgressDialog(crear_competencia.this);
         progreso.setMessage("Creando competencia...");
-        progreso.show();//se lanza
+        progreso.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
@@ -257,14 +260,28 @@ public class crear_competencia extends AppCompatActivity {
                     public void onResponse(String response) {
                         progreso.hide();
                         path = response;
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-                        //SubirCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
+                        SubirCompetencia(dominio + "agregarCompetencia.php?" +
+                                "Id_usuario=" + usuario.getId() +
+                                "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
+                                "&Aval=Aval" +
+                                "&Coordenadas=95959595959" +
+                                "&Nombre_competencia=" + Nombre.getText().toString().replaceAll(" ", "%20")+
+                                "&Pais=" + pais +
+                                "&Colonia=" +Colonia.getText().toString().replaceAll(" ", "%20")+
+                                "&Calle=" +Calle.getText().toString().replaceAll(" ", "%20")+
+                                "&Ciudad=" +Ciudad.getText().toString().replaceAll(" ", "%20")+
+                                "&Fecha=" +fecha+
+                                "&Hora=" +hora+
+                                "&Estado=" + estado +
+                                "&Reembolso=N" +
+                                "&Precio=" +Precio.getText().toString()+
+                                "&path="+path);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        progreso.hide();
+                        progreso.dismiss();
                         Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
                     }
         })
@@ -283,20 +300,6 @@ public class crear_competencia extends AppCompatActivity {
             }
         };
 
-        /*{
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Foto = getStringImage(bitmap);
-
-                Map<String, String> parametros = new HashMap<>();//nombre que recibes
-                parametros.put("Foto", Foto);
-                parametros.put("NombreFoto", System.currentTimeMillis()/1000+"");
-
-                return parametros;
-            }
-        };*/
-
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
@@ -304,14 +307,13 @@ public class crear_competencia extends AppCompatActivity {
         ByteArrayOutputStream array = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, array);
         byte[] imgBytes = array.toByteArray();
-        String encodeImg = Base64.encodeToString(imgBytes, Base64.DEFAULT);
 
-        return encodeImg;
+        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 
     private void CargarImagen() {//funcion de tipo void para hacer un proceso
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/");
+        intent.setType("image/*");
         startActivityForResult(intent.createChooser(intent, "Seleccione la aplicación"), 10);
     }
 

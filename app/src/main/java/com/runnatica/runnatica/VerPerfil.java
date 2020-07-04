@@ -26,6 +26,7 @@ public class VerPerfil extends AppCompatActivity {
     private ImageView imgUsuario;
     private TextView NombreUsuario, CorreoUsuario, SexoUsuario, FechaNacimientoUsuario, CiudadUsuario, EstadoUsuario, PaisUsuario, EditarPerfil;
     private Usuario usuario = Usuario.getUsuarioInstance();
+    private String dominio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,8 @@ public class VerPerfil extends AppCompatActivity {
         EditarPerfil = (TextView)findViewById(R.id.tvEditarUsuario);
         imgUsuario = (ImageView)findViewById(R.id.ivFotoPerfilUsuario);
 
+        dominio = getString(R.string.ip);
+
         EditarPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +52,7 @@ public class VerPerfil extends AppCompatActivity {
             }
         });
 
-        CargarInfoUsuario("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerUsuario.php?id_usuario=" + usuario.getId());
+        CargarInfoUsuario(dominio + "obtenerUsuario.php?id_usuario=" + usuario.getId());
     }
 
     private void CargarInfoUsuario(String URL) {

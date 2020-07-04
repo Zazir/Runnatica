@@ -36,6 +36,8 @@ public class Subir_Resultados extends AppCompatActivity {
     private Bitmap bitmap;
     private ProgressDialog progreso;
 
+    private String dominio;
+
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -47,6 +49,7 @@ public class Subir_Resultados extends AppCompatActivity {
         btnImagen = (Button)findViewById(R.id.btnSeleccioarResultados);
         btnSubirResultados = (Button)findViewById(R.id.btnSubirResultados);
 
+        dominio = getString(R.string.ip);
 
         btnImagen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +61,7 @@ public class Subir_Resultados extends AppCompatActivity {
         btnSubirResultados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SubirImagen("https://runnatica.000webhostapp.com/WebServiceRunnatica/actualizarCompetencia.php?");
+                SubirImagen(dominio + "actualizarCompetencia.php?");
             }
         });
 

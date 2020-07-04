@@ -2,7 +2,6 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -15,13 +14,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.runnatica.runnatica.Fragmentos.TarjetaConekta;
 
 public class crear_inscripcion extends AppCompatActivity{
     private EditText Nombre, CantidadNormal, CantidadForaneos, DesdeAnos, HastaAnos;
     private Button CrearInscripcion, btnFinalizarInscripciones;
     private TextView txtcantidadInscripciones;
-    private TarjetaConekta fragmentTarjeta;
 
     private String idCompetencia;
     private int contInscripciones = 0;
@@ -30,7 +27,6 @@ public class crear_inscripcion extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_inscripcion);
-        fragmentTarjeta = new TarjetaConekta();
 
         Nombre = (EditText) findViewById(R.id.etNombreInscripcion);
         CantidadNormal = (EditText) findViewById(R.id.etCantidadNormal);
@@ -78,11 +74,6 @@ public class crear_inscripcion extends AppCompatActivity{
     private void idCompetenciaFromLastView() {
         Bundle bundle = crear_inscripcion.this.getIntent().getExtras();
         idCompetencia = bundle.getString("ID_COMPETENCIA");
-    }
-
-    private void funcionPendejaInnecesaria() {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().add(R.id.contenedorTarjeta, fragmentTarjeta);
-        transaction.commit();
     }
 
     private void crearInscripcion(String URL) {

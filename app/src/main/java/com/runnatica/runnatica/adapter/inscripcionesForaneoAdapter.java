@@ -105,22 +105,22 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
                 contForaneosSeleccionados++;
             }
 
-            /*if (idsForaneos[0] == null){
+            /*if (idsForaneos.equals("")) {
+
                     Log.i("contador_foraneos", ""+contForaneosSeleccionados);
-                    idsForaneos[0] = idTemporalPulsado;
-                    Log.i("primer_guardado", idsForaneos[0]);
+                    idsForaneos = idTemporalPulsado;
+                    Log.i("primer_guardado", idsForaneos);
                     contForaneosSeleccionados++; //contForaneosSeleccionados siempre será 1 a inicio
+
             }else if (contForaneosSeleccionados <= 4) {
                 Log.i("contador_foraneos", contForaneosSeleccionados+"");
+                Pattern patron = Pattern.compile("."+idTemporalPulsado+".");
 
-                for (int i = 0 ; i > contForaneosSeleccionados ; i++) {
-                    Log.i("posicion_i", i+"");
-                    if (idTemporalPulsado.equals(idsForaneos[i])) {
-                        Toast.makeText(ctx, "Ya elegiste a ese usuario", Toast.LENGTH_SHORT).show();
-                    }else {
-                        idsForaneos[contForaneosSeleccionados] = idTemporalPulsado;
-                        contForaneosSeleccionados++;
-                    }
+                if (patron.matcher(idsForaneos).matches()) {
+                    Toast.makeText(ctx, "Ya elegiste a ese usuario", Toast.LENGTH_SHORT).show();
+                }else {
+                    idsForaneos = idsForaneos.concat(idTemporalPulsado + " ");
+                    contForaneosSeleccionados++;
                 }
             }*/
         }

@@ -1,5 +1,6 @@
 package com.runnatica.runnatica;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -32,12 +33,10 @@ public class Login extends AppCompatActivity {
     private JsonRequest jrq;
     private Usuario user = Usuario.getUsuarioInstance();
     private boolean flagRadio;
-    private static final String ID_PREFERENCES_SESSION = "com.runnatica.runnatica";
-    private static final String ESTADO_SESSION = "estado.boton";
-    private static final String ID_USUARIO_SESSION = "id.usuario.session";
-    private static final String NOMBRE_USUARIO_SESSION = "nombre.usuario.session";
-    private static final String CORREO_SESSION = "correo.session";
-    private static final String NACIMIENTO_USUARIO_SESSION = "fecha.nacimiento.session";
+    public static final String ID_USUARIO_SESSION = "id.usuario.session";
+    public static final String NOMBRE_USUARIO_SESSION = "nombre.usuario.session";
+    public static final String CORREO_SESSION = "correo.session";
+    public static final String NACIMIENTO_USUARIO_SESSION = "fecha.nacimiento.session";
 
 
     @Override
@@ -45,17 +44,15 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        /*if (obtenerEstado()
-                && user.getId() != 0
-                && user.getNombre() != null
-                && user.getFechaNacimiento() != 0
-                && user.getCorreo() != null) {
+        obtenerPreferencias();
+
+        if (user.getId() != 0 && user.getCorreo() != "No_mail") {
             alHome();
             finish();
-            Toast.makeText(getApplicationContext(), "Boton en true", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Preferencias guardadas", Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(getApplicationContext(), "Boton en false", Toast.LENGTH_SHORT).show();
-        }*/
+            Toast.makeText(getApplicationContext(), "Preferencias no guardadas", Toast.LENGTH_SHORT).show();
+        }
 
         Entrar = (Button) findViewById(R.id.btnEntrar);
         Registro= (Button) findViewById(R.id.btnRegistrarse);
@@ -92,7 +89,8 @@ public class Login extends AppCompatActivity {
     }
 
     private void iniciarSesion() {
-        String url = "https://runnatica.000webhostapp.com/WebServiceRunnatica/sesion.php?user="+Usuariotxt.getText().toString()+"&pwd="+Contrasenatxt.getText().toString();
+        String dominio = getString(R.string.ip);
+        String url = dominio + "sesion.php?user="+Usuariotxt.getText().toString()+"&pwd="+Contrasenatxt.getText().toString();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -116,6 +114,7 @@ public class Login extends AppCompatActivity {
                         user.setCorreo(jsonobject.optString("correo"));
                         user.setNombre(jsonobject.optString("nombre"));
 
+                        guardarPreferencias();
                         alHome();
                         finish();
                     } catch (JSONException e) {
@@ -139,17 +138,24 @@ public class Login extends AppCompatActivity {
         startActivity(next);
     }
 
-    private void guardarEstado() {
-        SharedPreferences preferences = getSharedPreferences(ID_PREFERENCES_SESSION, MODE_PRIVATE);
-        preferences.edit().putBoolean(ESTADO_SESSION, rbSesion.isChecked()).apply();
-        preferences.edit().putInt(ID_USUARIO_SESSION, user.getId()).apply();
-        preferences.edit().putString(NOMBRE_USUARIO_SESSION, user.getNombre()).apply();
-        preferences.edit().putString(CORREO_SESSION, user.getCorreo()).apply();
-        preferences.edit().putInt(NACIMIENTO_USUARIO_SESSION, user.getFechaNacimiento()).apply();
+    private void guardarPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putInt(ID_USUARIO_SESSION, user.getId());
+        editor.putString(NOMBRE_USUARIO_SESSION, user.getNombre());
+        editor.putString(CORREO_SESSION, user.getCorreo());
+        editor.putInt(NACIMIENTO_USUARIO_SESSION, user.getFechaNacimiento());
+
+        editor.commit();
     }
 
-    private boolean obtenerEstado() {
-        SharedPreferences preferences = getSharedPreferences(ID_PREFERENCES_SESSION, MODE_PRIVATE);
-        return preferences.getBoolean(ESTADO_SESSION, false);
+    private void obtenerPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+
+        user.setId(preferences.getInt(ID_USUARIO_SESSION, 0));
+        user.setNombre(preferences.getString(NOMBRE_USUARIO_SESSION, "No_name"));
+        user.setCorreo(preferences.getString(CORREO_SESSION, "No_mail"));
+        user.setFechaNacimiento(preferences.getInt(NACIMIENTO_USUARIO_SESSION, 0));
     }
 }

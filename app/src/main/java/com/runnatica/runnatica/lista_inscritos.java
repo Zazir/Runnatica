@@ -34,6 +34,7 @@ public class lista_inscritos extends AppCompatActivity {
     private inscritosAdapter inscritosAdaptador;
 
     private String id_competencia;
+    private String dominio;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -45,10 +46,12 @@ public class lista_inscritos extends AppCompatActivity {
         rvInscritos.setLayoutManager(new LinearLayoutManager(this));
         Atras = (Button)findViewById(R.id.btnBack);
 
+        dominio = getString(R.string.ip);
+
         usuariosInscritosList = new ArrayList<>();
 
         getLastViewData();
-        cargarUsuariosInscritos("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerUsuariosInscritos.php?id_competencia="+id_competencia);
+        cargarUsuariosInscritos(dominio + "obtenerUsuariosInscritos.php?id_competencia="+id_competencia);
 
         Atras.setOnClickListener(new View.OnClickListener() {
             @Override

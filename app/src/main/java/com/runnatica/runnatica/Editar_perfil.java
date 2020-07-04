@@ -1,7 +1,9 @@
 package com.runnatica.runnatica;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -63,6 +65,7 @@ public class Editar_perfil extends AppCompatActivity {
         btnGuardar = (Button)findViewById(R.id.btnGuardar);
         img = (ImageView)findViewById(R.id.imgFotoPerfil);
 
+        obtenerPreferencias();
         dominio = getString(R.string.ip);
 
         EditarContrasena.setOnClickListener(new View.OnClickListener() {
@@ -94,8 +97,7 @@ public class Editar_perfil extends AppCompatActivity {
             public void onClick(View view) {
                 if(validaciones()){
                     fechaNacimiento = DiaEditar.getText().toString() + MesEditar.getText().toString() + AnoEditar.getText().toString();
-                    actualizarPerfil(dominio + "actualizarPerfil.php?");
-
+                    actualizarFotoPerfil(dominio + "uploadImg.php?");
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
                 };
@@ -109,6 +111,16 @@ public class Editar_perfil extends AppCompatActivity {
             }
         });
     }
+
+    private void obtenerPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+
+        usuario.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
+        usuario.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
+        usuario.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
+        usuario.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
+    }
+
     private void EditarContrasena(){
         Intent next = new Intent(this, EditarContrasena.class);
         startActivity(next);
@@ -151,7 +163,7 @@ public class Editar_perfil extends AppCompatActivity {
         progreso.setMessage("Cargando...");
         progreso.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progreso.dismiss();
@@ -173,36 +185,57 @@ public class Editar_perfil extends AppCompatActivity {
                 progreso.dismiss();
                 Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
             }
-        }) {
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void actualizarFotoPerfil(String URL) {
+        progreso = new ProgressDialog(Editar_perfil.this);
+        progreso.setMessage("Cargando...");
+        progreso.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progreso.hide();
+                        actualizarPerfil(dominio + "actualizarPerfil.php?" +
+                            "id_usuario=" + usuario.getId() +
+                            "&nombre=" + NombreEditar.getText().toString().replaceAll(" ", "%20") +
+                            "&correo=" + CorreoEditar.getText().toString() +
+                            "&sexo=" + genero +
+                            "&f_nacimiento=" + fechaNacimiento +
+                            "&ciudad=" + CiudadEditar.getText().toString().replaceAll(" ", "%20") +
+                            "&estado=" + EstadoEditar.getText().toString().replaceAll(" ", "%20") +
+                            "&pais=" + PaisEditar.getText().toString().replaceAll(" ", "%20") +
+                            "&urlFoto="+response);
+                        Toast.makeText(getApplicationContext(), "Perfil actualizado" + response, Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progreso.dismiss();
+                        Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                String id_user = ""+usuario.getId();
-                String nombre = NombreEditar.getText().toString();
-                String correo = CorreoEditar.getText().toString();
-                String ciudad = CiudadEditar.getText().toString();
-                String estado = EstadoEditar.getText().toString();
-                String pais = PaisEditar.getText().toString();
-                /*String Foto = getStringImage(bitmap);
-                String NombreImg = System.currentTimeMillis()/1000+"";*/
+                String imagen = getStringImage(bitmap);
+                String nombreFoto = (System.currentTimeMillis()/1000)+"";
 
                 Map<String, String> parametros = new HashMap<>();
-                parametros.put("id_usuario", id_user);
-                parametros.put("nombre", nombre);
-                parametros.put("correo", correo);
-                parametros.put("sexo", genero);
-                parametros.put("f_nacimiento", fechaNacimiento);
-                parametros.put("ciudad", ciudad);
-                parametros.put("estado", estado);
-                parametros.put("pais", pais);
-                /*parametros.put("foto", Foto);
-                parametros.put("nombreFoto", NombreImg);*/
+                parametros.put("Foto", imagen);
+                parametros.put("NombreFoto", nombreFoto);
 
                 return parametros;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+
+        Volley.newRequestQueue(this).add(stringRequest);
     }
 
     private void CargarImagen() {

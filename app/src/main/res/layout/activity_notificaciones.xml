@@ -28,7 +28,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="61dp"
         android:layout_marginEnd="32dp"
-        ></Switch>
+        android:onClick="onclick"/>
 
     <TextView
         android:layout_width="wrap_content"
