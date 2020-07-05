@@ -104,11 +104,9 @@
         android:background="@drawable/barra_verde"
         android:minHeight="@android:dimen/thumbnail_height">
         <Button
-            android:id="@+id/btnAtras"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Atras"
             android:textColor="@android:color/background_light"
             android:background="#80000000"
             android:textSize="25dp"/>

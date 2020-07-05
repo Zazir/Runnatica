@@ -45,7 +45,6 @@ public class vista1_organizador extends AppCompatActivity {
 
         ListaInscritos = (Button)findViewById(R.id.btnListaInscritos);
         FotosResultados = (Button)findViewById(R.id.btnFotosResultados);
-        graficaBarras = findViewById(R.id.graficaBarras);
         txtTotalUsuarios = (TextView)findViewById(R.id.tvTotalInscripciones);
         txtVendidasUsuarios = (TextView)findViewById(R.id.tvInscripcionesVendidas);
         txtVendidosForaneos = (TextView)findViewById(R.id.tvForaneasVendidas);
@@ -138,20 +137,21 @@ public class vista1_organizador extends AppCompatActivity {
                 temp = ListaFechas.get(b);
                 Contador = 0;
             }
+<<<<<<< Updated upstream
         }
         Log.i("Ultima_barra", String.valueOf(Contador));
         entradas.add(new BarEntry(2,Contador));
+=======
+        }*/
+
+        /*entradas.add(new BarEntry(1,2));
+        entradas.add(new BarEntry(5,3));
+        entradas.add(new BarEntry(6,5));*/
+>>>>>>> Stashed changes
 
         BarDataSet datos = new BarDataSet(entradas, "Grafica de Barras");
         BarData data = new BarData(datos);
 
-
-        data.setBarWidth(0.9f);
-        graficaBarras.setData(data);
-
-        graficaBarras.setFitBars(true);
-
-        graficaBarras.invalidate();
     }
 
     private void consultarInscritos() {

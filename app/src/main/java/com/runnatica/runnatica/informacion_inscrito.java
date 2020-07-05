@@ -22,7 +22,6 @@ public class informacion_inscrito extends AppCompatActivity {
         txtF_inscrito = (TextView)findViewById(R.id.tvFechaInscripcion);
         txtF_nacimiento = (TextView)findViewById(R.id.tvNacimientoUsuario);
 
-        Atras = findViewById(R.id.btnAtras);
 
         getLastViewData();
 

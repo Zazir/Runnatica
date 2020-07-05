@@ -49,34 +49,14 @@
                 android:textSize="35dp"
                 ></TextView>
 
-            <TextView
-                android:layout_width="308dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="111dp"
-                android:layout_marginEnd="52dp"
-                android:text="Resumen de Inscritos:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25dp"></TextView>
-
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/graficaBarras"
-                android:layout_width="359dp"
-                android:layout_height="227dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-
-                android:layout_marginTop="146dp"
-                android:layout_marginEnd="0dp" />
 
             <TextView
                 android:layout_width="279dp"
                 android:layout_height="42dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="376dp"
-                android:layout_marginEnd="80dp"
+                android:layout_marginTop="106dp"
+                android:layout_marginEnd="79dp"
                 android:text="Inscripciones Vendidas:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
@@ -87,22 +67,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="416dp"
-                android:layout_marginEnd="276dp"
+                android:layout_marginTop="146dp"
+                android:layout_marginEnd="275dp"
                 android:text="50"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="413dp"
-                android:layout_marginEnd="255dp"
-                android:text="/"
-                android:textColor="@android:color/background_dark"
-                android:textSize="30dp"></TextView>
 
             <TextView
                 android:id="@+id/tvTotalInscripciones"
@@ -110,20 +79,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="417dp"
-                android:layout_marginEnd="192dp"
+                android:layout_marginTop="147dp"
+                android:layout_marginEnd="191dp"
                 android:text="500"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25dp"></TextView>
-
-            <TextView
-                android:layout_width="279dp"
-                android:layout_height="42dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="376dp"
-                android:layout_marginEnd="80dp"
-                android:text="Inscripciones Vendidas:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
 
@@ -132,8 +90,19 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="459dp"
-                android:layout_marginEnd="79dp"
+                android:layout_marginTop="143dp"
+                android:layout_marginEnd="253dp"
+                android:text="/"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="189dp"
+                android:layout_marginEnd="78dp"
                 android:text="Inscripciones Foraneas Vendidas:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
@@ -144,34 +113,35 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="535dp"
-                android:layout_marginEnd="278dp"
+                android:layout_marginTop="263dp"
+                android:layout_marginEnd="275dp"
                 android:text="50"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="532dp"
-                android:layout_marginEnd="255dp"
-                android:text="/"
-                android:textColor="@android:color/background_dark"
-                android:textSize="30dp"></TextView>
-
-            <TextView
-                android:id="@+id/tvTotalForaneos"
+                android:id="@+id/tvForaneosVendidasMax"
                 android:layout_width="49dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="535dp"
-                android:layout_marginEnd="196dp"
-                android:text="500"
+                android:layout_marginTop="263dp"
+                android:layout_marginEnd="223dp"
+                android:text="/"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
+
+            <TextView
+                android:id="@+id/tvTotalForaneos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="260dp"
+                android:layout_marginEnd="190dp"
+                android:text="500"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"></TextView>
 
             <Button
                 android:id="@+id/btnListaInscritos"
@@ -179,8 +149,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="621dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="322dp"
+                android:layout_marginEnd="19dp"
                 android:text="Lista de Inscritos"></Button>
 
             <Button
@@ -189,8 +159,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="680dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginTop="381dp"
+                android:layout_marginEnd="18dp"
                 android:text="Subir Fotos de Resultados"></Button>
 
             <TextView

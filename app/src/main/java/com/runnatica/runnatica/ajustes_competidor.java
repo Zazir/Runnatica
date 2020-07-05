@@ -29,7 +29,6 @@ public class ajustes_competidor extends AppCompatActivity {
 
         final ArrayList<String> arrayList=new ArrayList<>();
         arrayList.add("Perfil Competidor");
-        arrayList.add("Notificaciones");
         arrayList.add("Crear Una Competencia");
         arrayList.add("Centro de Ayuda");
         arrayList.add("Aviso de Privacidad");
@@ -62,26 +61,22 @@ public class ajustes_competidor extends AppCompatActivity {
                     Perfil();
                 }
                 if(i == 1){
-                    Notificaciones();
-                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
-                }
-                if(i == 2){
                     CrearCompetencia();
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
-                if(i == 3){
+                if(i == 2){
                     Ayuda();
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
-                if(i == 4){
+                if(i == 3){
                     AvisoPrivacidad();
                     Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
-                if(i == 5){
+                if(i == 4){
                     AdministrarCarrera();
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
-                if(i == 6){
+                if(i == 5){
                     CerrarSesion();
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
