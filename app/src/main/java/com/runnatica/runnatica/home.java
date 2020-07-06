@@ -17,8 +17,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,13 +68,12 @@ public class home extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         NombreCiudad = (TextView) findViewById(R.id.tvNombreCiudad);
-        Estado = (Button)findViewById(R.id.btnEstado);
-        Pais = (Button)findViewById(R.id.btnPais);
 
         dominio = getString(R.string.ip);
 
         Toast.makeText(this, user.getId()+"", Toast.LENGTH_SHORT).show();
 
+        Localizacion();
         CargarCompetencias(dominio + "obtenerCompetencias.php?estado=Jalisco");
 
         //Inicializar arreglo de competencias
@@ -82,12 +81,16 @@ public class home extends AppCompatActivity {
 
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
+        Menu menu = MenuUsuario.getMenu();
+        MenuItem menuItem= menu.getItem(0);
+        menuItem.setChecked(true);
+
         MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 if (menuItem.getItemId() == R.id.menu_home) {
-                    home();
+
                 }
                 if (menuItem.getItemId() == R.id.menu_busqueda) {
                     Busqueda();
@@ -103,19 +106,6 @@ public class home extends AppCompatActivity {
             }
         });
 
-        Estado.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                estado();
-            }
-        });
-
-        Pais.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Pais();
-            }
-        });
     }
 
     private void obtenerPreferencias() {
@@ -127,42 +117,8 @@ public class home extends AppCompatActivity {
         user.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
     }
 
-    public void estado(){
-        bandera=1;
-        Toast.makeText(home.this, "Ver Competencias por Estado", Toast.LENGTH_SHORT).show();
-        Localizacion();
-        competenciasList.clear();
-        CargarCompetencias(dominio + "obtenerCompetencias.php?estado=Jalisco");
-        Toast.makeText(getApplicationContext(), "Ver Carreras Por Estado", Toast.LENGTH_SHORT).show();
-    }
-    public void Pais(){
-        bandera=2;
-        Toast.makeText(home.this, "Ver Competencias por Pais", Toast.LENGTH_SHORT).show();
-        Localizacion2();
-        competenciasList.clear();
-        CargarCompetencias(dominio + "obtenerCompetencias.php?pais=Mexico");
-        Toast.makeText(getApplicationContext(), "Ver Carreras Por Pais", Toast.LENGTH_SHORT).show();
-    }
 
     public void Localizacion(){
-        //Localizacion GPS para buscar el nombre de la ciudad
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1000);
-        } else {
-            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            try {
-                String city = hereLocation(location.getLatitude(), location.getLongitude());
-                NombreCiudad.setText(city);
-                Localizacion = city;
-            } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(home.this, "No funciona", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-    public void Localizacion2(){
         //Localizacion GPS para buscar el nombre de la ciudad
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -215,42 +171,21 @@ public class home extends AppCompatActivity {
 
     private String hereLocation(double lat, double lon){
         String cityName = "";
-        if(bandera==1){
-            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-            List<Address> addresses;
-            try{
-                addresses = geocoder.getFromLocation(lat, lon, 20);
-                if(addresses.size() > 0){
-                    for(Address adr: addresses){
-                        if(adr.getAdminArea() != null && adr.getAdminArea().length() > 0){
-                            cityName = adr.getAdminArea();
-                        }
-                        break;
-                    }
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses;
+        try{
+            addresses = geocoder.getFromLocation(lat, lon, 20);
+            if(addresses.size() > 0){
+               for(Address adr: addresses){
+                   if(adr.getAdminArea() != null && adr.getAdminArea().length() > 0){
+                        cityName = adr.getAdminArea();
+                   }
+                    break;
                 }
+             }
             }catch(IOException e){
                 e.printStackTrace();
             }
-        }
-        if(bandera==2){
-
-            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-            List<Address> addresses;
-            try{
-                addresses = geocoder.getFromLocation(lat, lon, 20);
-                if(addresses.size() > 0){
-                    for(Address adr: addresses){
-                        if(adr.getCountryName() != null && adr.getCountryName().length() > 0){
-                            cityName = adr.getCountryName();
-                        }
-                        break;
-                    }
-                }
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-        }
-
         return cityName;
     }
     private void home(){

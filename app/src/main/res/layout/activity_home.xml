@@ -15,34 +15,12 @@
             <TextView
                 android:id="@+id/tvNombreCiudad"
                 android:layout_width="match_parent"
-                android:layout_height="109dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
                 android:background="@color/verdeRun"
-                android:text="Nombre de Ciudad"
-                android:textColor="@android:color/background_light"
-                android:textSize="40dp"/>
-
-
-            <Button
-                android:id="@+id/btnEstado"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="55dp"
-                android:layout_marginEnd="210dp"
                 android:text="Estado"
-                ></Button>
-
-            <Button
-                android:id="@+id/btnPais"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="55dp"
-                android:layout_marginEnd="7dp"
-                android:text="Pais"
-                ></Button>
+                android:textColor="@android:color/background_light"
+                android:textSize="40dp" />
 
         </RelativeLayout>
 

@@ -50,4 +50,5 @@ public class LoginRepository {
             setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
         }
         return result;
-    }
+    }
+}

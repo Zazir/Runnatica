@@ -9,6 +9,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -46,6 +47,10 @@ public class home_organizador extends AppCompatActivity {
         obtenerPreferencias();
 
         MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
+
+        Menu menu = MenuOrganizador.getMenu();
+        MenuItem menuItem= menu.getItem(0);
+        menuItem.setChecked(true);
 
         MenuOrganizador.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

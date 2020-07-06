@@ -24,7 +24,16 @@
         android:roundIcon="@mipmap/ic_index"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Informacion"></activity>
+        <activity android:name=".verificar_correo"></activity>
+        <activity
+            android:name=".ui.login.verificar_correo"
+            android:label="@string/title_activity_verificar_correo" />
+        <activity android:name=".registro_basico" />
+        <activity
+            android:name=".homeDrawer"
+            android:label="@string/title_activity_home_drawer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Informacion" />
         <activity android:name=".reCaptcha" />
         <activity android:name=".informacion_inscrito" />
         <activity android:name=".lista_inscritos" />
@@ -87,7 +96,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

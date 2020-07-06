@@ -1,11 +1,14 @@
 package com.runnatica.runnatica;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.Calendar;
 import java.util.regex.Pattern;
 
 public class registro_usuario extends AppCompatActivity {
@@ -28,13 +32,16 @@ public class registro_usuario extends AppCompatActivity {
                     ".{8,}" +               //Mínimo 8 caracteres
                     "$");
 
-    Button Hombre, Mujer, Foto, Registrarse;
-    EditText Nombre, Correo, Contrasena, contrasena2, Ciudad, Estado, Pais, Dia, Mesedt, Ano;
+    Button Hombre, Mujer, Foto, Registrarse, Fecha;
+    EditText Nombre, Ciudad, Estado, Pais;
     CheckBox Terminos;
-    TextView Condiciones;
-    private String flagTerminos = "0";
+    TextView Condiciones, MostrarFecha;
+    int flagTerminos = 0, flagFecha = 0;
     private String genero = "";
-    private String dominio;
+    private String dominio, Correo, Contrasena;
+    private String FechaNacimiento;
+    private Calendar calendar;
+    private DatePickerDialog picker;
 
 
     @Override
@@ -51,30 +58,24 @@ public class registro_usuario extends AppCompatActivity {
         Registrarse = (Button)findViewById(R.id.btnRegistrarse);
         Terminos = (CheckBox)findViewById(R.id.checkTerminos);
         Nombre = (EditText)findViewById(R.id.etNombre);
-        Correo = (EditText)findViewById(R.id.etCorreo);
-        Contrasena = (EditText)findViewById(R.id.etContrasena);
-        contrasena2 = (EditText)findViewById(R.id.etContrasenaseguridad);
-        Dia = (EditText)findViewById(R.id.etDia);
-        Mesedt = (EditText)findViewById(R.id.Mes);
-        Ano = (EditText)findViewById(R.id.etAno);
+        Fecha = (Button) findViewById(R.id.btnSeleccionNacimiento);
+        MostrarFecha = (TextView) findViewById(R.id.tvMostrarFecha);
         Condiciones = (TextView)findViewById(R.id.tvCondiciones);
         Ciudad = (EditText)findViewById(R.id.etCiudad);
         Estado = (EditText)findViewById(R.id.etEstado);
         Pais = (EditText)findViewById(R.id.etPais);
+        getLastViewData();
 
         Registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Terminos.equals(1)){
-                    flagTerminos = "1";
-                }
                 if (Validaciones())
                 SubirUsuario(dominio + "agregarUsuario.php?" +
                         "NombreYApellido=" + Nombre.getText().toString().replaceAll(" ", "%20") +
-                        "&Email=" + Correo.getText().toString() +
-                        "&Contrasena=" + Contrasena.getText().toString() +
+                        "&Email=" + Correo +
+                        "&Contrasena=" + Contrasena +
                         "&Sexo=" + genero +
-                        "&FechaNacimiento=" + fechaNacimiento() +
+                        "&FechaNacimiento=" + FechaNacimiento +
                         "&Telefono=0" +
                         "&Terminos=" + flagTerminos +
                         "&Ciudad=" + Ciudad.getText().toString().replaceAll(" ", "%20") +
@@ -87,11 +88,43 @@ public class registro_usuario extends AppCompatActivity {
             }
         });
 
+        Terminos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flagTerminos = 1;
+                Toast.makeText(registro_usuario.this, "Aceptaste los Terminos y condiciones" , Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Fecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendar = Calendar.getInstance();
+                int dia = calendar.get(Calendar.DAY_OF_MONTH);
+                int mes = calendar.get(Calendar.MONTH);
+                int ano = calendar.get(Calendar.YEAR);
+
+                picker = new DatePickerDialog(registro_usuario.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        FechaNacimiento = year + "-" + (month+1) + "-" + dayOfMonth;
+                        MostrarFecha.setText(FechaNacimiento);
+                        flagFecha = 1;
+                    }
+                }, ano, mes, dia);
+
+                picker.show();
+
+            }
+        });
+
         Hombre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 genero = "Hombre";
                 Toast.makeText(getApplicationContext(), "Eres un atlético " + genero, Toast.LENGTH_SHORT).show();
+                Mujer.setBackgroundColor(Color.GRAY);
+                Hombre.setBackgroundColor(Color.RED);
             }
         });
 
@@ -100,6 +133,8 @@ public class registro_usuario extends AppCompatActivity {
             public void onClick(View v) {
                 genero = "Mujer";
                 Toast.makeText(getApplicationContext(), "Eres una " + genero + " muy fit", Toast.LENGTH_SHORT).show();
+                Hombre.setBackgroundColor(Color.GRAY);
+                Mujer.setBackgroundColor(Color.RED);
             }
         });
 
@@ -134,31 +169,18 @@ public class registro_usuario extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private String fechaNacimiento() {
-        String date;
-        return date = Dia.getText().toString() + Mesedt.getText().toString() + Ano.getText().toString();
-    }
-
     private Boolean Validaciones() {
         Boolean siguiente = false;
 
         if (Nombre.getText().toString().length() <= 0){
             Nombre.setError("Debes poner tu nombre");
-        }/*else if (!Patterns.EMAIL_ADDRESS.matcher(Correo.getText().toString()).matches()){
-            Correo.setError("Ese no es un correo válido");
-        }*/else if (!PASSWORD_PATTERN.matcher(Contrasena.getText().toString()).matches()){
-            Contrasena.setError("La contraseña es debil");
         }else if (genero.length() == 0){
             Toast.makeText(this, "Selecciona tu sexo", Toast.LENGTH_SHORT).show();
-        }else if (Dia.getText().toString().length() != 2){
-            Dia.setError("Formato del día: DD");
-        }else if (Mesedt.getText().toString().length() != 2){
-            Mesedt.setError("Formato del mes: MM");
-        }else if (Ano.getText().toString().length() != 4){
-            Ano.setError("Formato del año: YYYY");
-        }/*else if (flagTerminos == "0"){
-            Toast.makeText(this, "Tienes que aceptar los términos y condiciones para acceder", Toast.LENGTH_SHORT).show();
-        }*/else if (Ciudad.getText().toString().length() <= 0) {
+        }else if (flagTerminos == 0){
+            Terminos.setError("Debes de Aceptar terminos y condiciones ");
+        }else if (flagFecha == 0){
+             Fecha.setError("Debes de seleccionar una fecha");
+        }else if (Ciudad.getText().toString().length() <= 0) {
             Ciudad.setError("Agrega tu ciudad");
         }else if (Estado.getText().toString().length() <= 0){
             Estado.setError("Agrega tu estado");
@@ -168,8 +190,13 @@ public class registro_usuario extends AppCompatActivity {
 
         return siguiente;
     }
+    private void getLastViewData() {
+        Bundle extra = registro_usuario.this.getIntent().getExtras();
+        Correo = extra.getString("Correo");
+        Contrasena = extra.getString("Contrasena");
+    }
 
-    private void alHome() {
+    private void alHome(){
         Intent next = new Intent(this, home.class);
         startActivity(next);
     }

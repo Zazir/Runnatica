@@ -137,19 +137,16 @@ public class vista1_organizador extends AppCompatActivity {
                 temp = ListaFechas.get(b);
                 Contador = 0;
             }
-<<<<<<< Updated upstream
         }
         Log.i("Ultima_barra", String.valueOf(Contador));
         entradas.add(new BarEntry(2,Contador));
-=======
-        }*/
+
 
         /*entradas.add(new BarEntry(1,2));
         entradas.add(new BarEntry(5,3));
         entradas.add(new BarEntry(6,5));*/
->>>>>>> Stashed changes
 
-        BarDataSet datos = new BarDataSet(entradas, "Grafica de Barras");
+    BarDataSet datos = new BarDataSet(entradas, "Grafica de Barras");
         BarData data = new BarData(datos);
 
     }

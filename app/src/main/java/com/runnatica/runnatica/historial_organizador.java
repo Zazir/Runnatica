@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -42,6 +43,10 @@ public class historial_organizador extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
+
+        Menu menu = MenuOrganizador.getMenu();
+        MenuItem menuItem= menu.getItem(1);
+        menuItem.setChecked(true);
 
         MenuOrganizador.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

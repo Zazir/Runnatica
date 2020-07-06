@@ -5,22 +5,22 @@
         <item
             android:id="@+id/menu_home"
             android:title="Home"
-            android:icon="@mipmap/ic_home2"
+            android:icon="@drawable/ic_home"
          ></item>
         <item
             android:id="@+id/menu_busqueda"
             android:title="Busqueda"
-            android:icon="@mipmap/ic_busqueda"
+            android:icon="@drawable/ic_busqueda"
         ></item>
         <item
             android:id="@+id/menu_historial"
             android:title="Historial"
-            android:icon="@mipmap/ic_historial"
+            android:icon="@drawable/ic_historial"
         ></item>
         <item
             android:id="@+id/menu_ajustes"
             android:title="Ajustes"
-            android:icon="@mipmap/ic_ajustes"
+            android:icon="@drawable/ic_ajustes"
         ></item>
 
 </menu>
