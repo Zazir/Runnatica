@@ -33,6 +33,7 @@
         android:nextFocusDown="@id/tvNombreCiudad" />
 
     <android.support.design.widget.BottomNavigationView
+
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="78dp"

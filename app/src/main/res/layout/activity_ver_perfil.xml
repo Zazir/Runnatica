@@ -150,31 +150,34 @@
                 android:layout_height="192dp"
                 android:layout_below="@+id/tvFotografia"/>
 
+            <Button
+                android:id="@+id/btnEditarUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_below="@+id/ivFotoPerfilUsuario"
+                android:text="Editar Perfil"
+                android:textSize="25dp"
+                ></Button>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="850dp"
+                android:layout_marginTop="900dp"
                 ></TextView>
 
         </RelativeLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/ll"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="78dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/barra_verde">
-        <TextView
-            android:id="@+id/tvEditarUsuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Editar Perfil"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="@android:color/background_light"
-            android:textSize="40dp"/>
-
-    </LinearLayout>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/barra_verde"
+        android:minHeight="@android:dimen/thumbnail_height"
+        app:itemTextColor="@android:color/background_dark"
+        app:menu="@menu/main_menu"/>
 
 </RelativeLayout>

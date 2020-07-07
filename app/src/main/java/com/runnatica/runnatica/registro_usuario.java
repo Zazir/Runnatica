@@ -177,7 +177,7 @@ public class registro_usuario extends AppCompatActivity {
         }else if (genero.length() == 0){
             Toast.makeText(this, "Selecciona tu sexo", Toast.LENGTH_SHORT).show();
         }else if (flagTerminos == 0){
-            Terminos.setError("Debes de Aceptar terminos y condiciones ");
+            Terminos.setError("Debes de Aceptar terminos y condiciones");
         }else if (flagFecha == 0){
              Fecha.setError("Debes de seleccionar una fecha");
         }else if (Ciudad.getText().toString().length() <= 0) {

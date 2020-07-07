@@ -46,6 +46,7 @@ public class verificar_correo extends AppCompatActivity {
         Siguiente = (Button)findViewById(R.id.btnVerificar);
         CodigoConfirmacion = (EditText)findViewById(R.id.etCodigoConfirmacion);
         txtCorreo = (TextView)findViewById(R.id.txtCorreo);
+
         getLastViewData();
         txtCorreo.setText(Correo);
         context = this;
@@ -60,6 +61,7 @@ public class verificar_correo extends AppCompatActivity {
                 correo();
             }
         });
+
         Siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

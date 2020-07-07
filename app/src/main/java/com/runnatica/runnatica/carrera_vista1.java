@@ -5,10 +5,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class carrera_vista1 extends AppCompatActivity {
+    BottomNavigationView MenuUsuario;
     private ImageView imgCompetencia;
     private TextView txtNomCompe, txtOrganizador, txtFechaCompe, txtHoraCompe,
             txtLugarCompe, txtPrecioCompe, txtDescripcionCompe, txtRegistrarse,
@@ -77,12 +82,39 @@ public class carrera_vista1 extends AppCompatActivity {
         txtPrecioCompe = (TextView)findViewById(R.id.tvPrecioCompetencia);
         txtDescripcionCompe = (TextView)findViewById(R.id.tvDescripcion);
         btnInscripcion = (Button)findViewById(R.id.btnIncribirse);
-        txtRegistrarse = (TextView)findViewById(R.id.tvRegistrarse);
         txtComentario = (TextView)findViewById(R.id.etRespuestaForo);
         btnEnviarComentario = (Button)findViewById(R.id.btnEnviarForo);
         ForoRecycler = (RecyclerView)findViewById(R.id.rvForo);
         ForoRecycler.setHasFixedSize(true);
         ForoRecycler.setLayoutManager(new LinearLayoutManager(this));
+        MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+
+        //Posicionar el icono del menu
+        Menu menu = MenuUsuario.getMenu();
+        MenuItem menuItem= menu.getItem(0);
+        menuItem.setChecked(true);
+        //
+        MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    home();
+                }
+                if (menuItem.getItemId() == R.id.menu_busqueda) {
+                    Busqueda();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    Historial();
+                }
+                if (menuItem.getItemId() == R.id.menu_ajustes) {
+                    Ajustes();
+                }
+
+                return true;
+            }
+        });
+
 
         obtenerPreferencias();
         dominio = getString(R.string.ip);
@@ -318,5 +350,21 @@ public class carrera_vista1 extends AppCompatActivity {
         });
 
         alertaComentario.show();
+    }
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
+    }
+    private void Busqueda(){
+        Intent next = new Intent(this, busqueda_competidor.class);
+        startActivity(next);
+    }
+    private void Historial(){
+        Intent next = new Intent(this, historial_competidor.class);
+        startActivity(next);
+    }
+    private void Ajustes(){
+        Intent next = new Intent(this, ajustes_competidor.class);
+        startActivity(next);
     }
 }

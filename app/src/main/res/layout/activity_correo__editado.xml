@@ -1,9 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Correo_Editado">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/BarraSuperior"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde"
+        android:orientation="horizontal">
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tvBienvenido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¡Bienvenido!"
+        android:gravity="center"
+        android:layout_marginTop="120dp"
+        android:textSize="50dp"
+        android:textColor="@android:color/background_dark"
+        ></TextView>
+    <TextView
+        android:id="@+id/tvMostrarCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Correo"
+        android:gravity="center"
+        android:layout_below="@+id/tvBienvenido"
+        android:textSize="30dp"
+        android:textColor="@android:color/background_dark"
+        ></TextView>
+    <TextView
+        android:id="@+id/tvTextoCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Te has inscrito a la Competencia"
+        android:gravity="center"
+        android:layout_below="@+id/tvMostrarCorreo"
+        android:textSize="30dp"
+        android:textColor="@android:color/background_dark"
+        ></TextView>
+
+    <LinearLayout
+        android:id="@+id/ivBienvenido"
+        android:layout_width="162dp"
+        android:layout_height="154dp"
+        android:layout_below="@+id/tvTextoCorreo"
+        android:layout_marginLeft="95dp"
+        android:background="@drawable/bien"
+        android:orientation="horizontal"></LinearLayout>
+    <Button
+        android:id="@+id/btnAdelante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivBienvenido"
+        android:layout_marginTop="10dp"
+        android:text="Siguiente"
+        ></Button>
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/barra_verde"
+        android:minHeight="@android:dimen/thumbnail_height"
+        app:itemTextColor="@android:color/background_dark"
+        app:menu="@menu/main_menu"/>
+
+</RelativeLayout>

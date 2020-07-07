@@ -48,12 +48,12 @@ public class EditarContrasena extends AppCompatActivity {
         if (ContrasenaActual.getText().toString().length() <= 0){
             ContrasenaActual.setError("Debes poner tu nombre");
         }else if (!PASSWORD_PATTERN.matcher(ContrasenaNueva.getText().toString()).matches()){
-            ContrasenaNueva.setError("La contraseña es debil");
-        }else if (!PASSWORD_PATTERN.matcher(RepetirContrasena.getText().toString()).matches()){
-            RepetirContrasena.setError("La contraseña es debil");
-        }else if(RepetirContrasena.getText() != ContrasenaNueva.getText()){
-            RepetirContrasena.setError("No se parecen las Contraseñas");
-        }else siguiente = true;
+            ContrasenaNueva.setError("Usa 8 Caracteres, 1 Letra Mayuscula y 1 Numero como minimo");
+        }else if(ContrasenaNueva.getText().toString().equals(RepetirContrasena.getText().toString())){
+            siguiente = true;
+        }else{
+            RepetirContrasena.setError("Contraseñas Diferentes");
+        }
 
         return siguiente;
     }

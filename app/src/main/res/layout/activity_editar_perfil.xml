@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 
-
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Editar_perfil">
 
     <LinearLayout
+        android:id="@+id/llEditar"
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:background="@drawable/barra_verde">
@@ -26,20 +27,139 @@
     <ScrollView
         android:layout_width="469dp"
         android:layout_height="613dp"
-        android:layout_marginTop="30dp">
+        android:layout_below="@+id/llEditar"
+        android:layout_above="@+id/bottomNavigation"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/txtEditarCorreo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Editar Correo"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"
+                ></TextView>
+
+            <Button
+                android:id="@+id/btnEditarCorreo"
+                android:layout_width="215dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtEditarCorreo"
+                android:text="Editar Correo"
+                android:textColor="@android:color/background_dark"
+                android:textSize="15dp"
+                ></Button>
+            <TextView
+                android:id="@+id/txtEditarContrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Editar Contraseña"
+                android:layout_below="@+id/btnEditarCorreo"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"
+                ></TextView>
+
+            <Button
+                android:id="@+id/btnEditarContrasena"
+                android:layout_width="215dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtEditarContrasena"
+                android:text="Editar Contraseña"
+                android:textColor="@android:color/background_dark"
+                android:textSize="15dp"
+                ></Button>
+            <TextView
+                android:id="@+id/txtFechaN"
+                android:layout_width="346dp"
+                android:layout_height="39dp"
+                android:layout_below="@+id/btnHombreEditar"
+                android:layout_marginEnd="41dp"
+                android:text="Fecha de Nacimiento:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25sp" />
+
+
+            <Button
+                android:id="@+id/btnSeleccionNacimiento"
+                android:layout_width="166dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtFechaN"
+                android:layout_marginEnd="191dp"
+                android:background="@color/grisBoton"
+                android:text="Seleccionar Fecha"
+                android:textColor="@android:color/background_dark"
+                android:textSize="15sp"></Button>
+
+            <TextView
+                android:id="@+id/tvMostrarFechaEditar"
+                android:layout_width="146dp"
+                android:layout_height="48dp"
+                android:layout_below="@+id/txtFechaN"
+                android:layout_marginLeft="200dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/Ciudad"
+                android:layout_width="117dp"
+                android:layout_height="33dp"
+                android:layout_below="@+id/tvResidencia"
+                android:layout_marginEnd="243dp"
+                android:text="Ciudad:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/tvEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etCiudadEditar"
+                android:text="Estado:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/tvPais"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etEstadoEditar"
+                android:text="Pais:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25sp" />
+
+
+            <EditText
+                android:id="@+id/etCiudadEditar"
+                android:layout_width="241dp"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_below="@+id/Ciudad" />
+
+            <EditText
+                android:id="@+id/etEstadoEditar"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvEstado"
+                android:inputType="text"
+                />
+
+            <EditText
+                android:id="@+id/etPaisEditar"
+                android:layout_width="241dp"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_below="@+id/tvPais" />
+
             <Button
                 android:id="@+id/btnMujerEditar"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="423dp"
-                android:layout_marginEnd="127dp"
+                android:layout_below="@+id/txtSexo"
+                android:layout_marginLeft="110dp"
                 android:background="@color/grisBoton"
                 android:text="Mujer"
                 android:textColor="@android:color/background_dark"
@@ -49,311 +169,107 @@
                 android:id="@+id/btnHombreEditar"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="423dp"
+                android:layout_below="@+id/txtSexo"
                 android:layout_marginEnd="263dp"
                 android:background="@color/grisBoton"
                 android:text="Hombre"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20sp" />
 
+            <Button
+                android:id="@+id/btnGuardar"
+                android:layout_width="259dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnFotoEditar"
+                android:layout_marginLeft="45dp"
+                android:background="@color/grisBoton"
+                android:layout_marginTop="20dp"
+                android:text="Guardar"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btnFotoEditar"
                 android:layout_width="159dp"
                 android:layout_height="31dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="750dp"
-                android:layout_marginEnd="214dp"
+                android:layout_below="@+id/tvFoto"
                 android:background="@color/grisBoton"
                 android:text="Seleccionar"
                 android:textColor="@android:color/background_dark"
                 android:textSize="14sp" />
 
-            <Button
-                android:id="@+id/btnEditarContrasena"
-                android:layout_width="327dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="273dp"
-                android:layout_marginEnd="62dp"
-                android:background="@color/grisBoton"
-                android:text="Editar Contraseña"
-                android:textColor="@android:color/background_dark"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/etDiaEditar"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="542dp"
-                android:layout_marginEnd="305dp"
-                android:inputType="number"
-                android:numeric="integer" />
-
-            <EditText
-                android:id="@+id/etCiudadEditar"
-                android:layout_width="128dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="652dp"
-                android:layout_marginEnd="274dp" />
-
-            <EditText
-                android:id="@+id/etEstadoEditar"
-                android:layout_width="128dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="655dp"
-                android:layout_marginEnd="135dp" />
-
-            <EditText
-                android:id="@+id/etPaisEditar"
-                android:layout_width="121dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="652dp"
-                android:layout_marginEnd="7dp" />
-
-            <EditText
-                android:id="@+id/etAnoEditar"
-                android:layout_width="105dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="542dp"
-                android:layout_marginEnd="85dp"
-                android:inputType="number"
-                android:numeric="integer" />
-
-            <EditText
-                android:id="@+id/etNombreEditar"
-                android:layout_width="355dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="117dp"
-                android:layout_marginEnd="37dp" />
-
-            <EditText
-                android:id="@+id/etCorreoEditar"
-                android:layout_width="355dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="189dp"
-                android:layout_marginEnd="37dp" />
-
-            <EditText
-                android:id="@+id/etMesEditar"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="542dp"
-                android:layout_marginEnd="199dp"
-                android:inputType="number"
-                android:numeric="integer" />
-
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/txtnombre"
                 android:layout_width="346dp"
                 android:layout_height="39dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="473dp"
-                android:layout_marginEnd="41dp"
-                android:text="Fecha de Nacimiento:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
-
-            <TextView
-                android:layout_width="57dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="513dp"
-                android:layout_marginEnd="306dp"
-                android:text="Dia:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/CiudadEditar"
-                android:layout_width="96dp"
-                android:layout_height="58dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="617dp"
-                android:layout_marginEnd="264dp"
-                android:text="Ciudad:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="617dp"
-                android:layout_marginEnd="148dp"
-                android:text="Estado:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="618dp"
-                android:layout_marginEnd="50dp"
-                android:text="Pais:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="57dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="522dp"
-                android:layout_marginEnd="116dp"
-                android:text="Año:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
-
-            <TextView
-                android:layout_width="346dp"
-                android:layout_height="39dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="88dp"
-                android:layout_marginEnd="46dp"
+                android:layout_below="@+id/btnEditarContrasena"
                 android:text="Nombre y Apellido:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
-            <TextView
-                android:layout_width="346dp"
-                android:layout_height="39dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="158dp"
-                android:layout_marginEnd="46dp"
-                android:text="Correo Electronico:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
 
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="346dp"
-                android:layout_height="39dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="229dp"
-                android:layout_marginEnd="45dp"
-                android:text="Contraseña:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="57dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="522dp"
-                android:layout_marginEnd="215dp"
-                android:text="Mes:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="753dp"
-                android:layout_marginEnd="145dp"
+                android:layout_below="@+id/tvFoto"
+                android:layout_marginLeft="170dp"
                 android:text="Archivo"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp" />
 
+
             <TextView
-                android:id="@+id/tvRecidencia"
+                android:id="@+id/tvResidencia"
                 android:layout_width="346dp"
                 android:layout_height="39dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="585dp"
-                android:layout_marginEnd="37dp"
+                android:layout_below="@+id/btnSeleccionNacimiento"
                 android:text="Lugar de Residencia:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/textView8"
-                android:layout_width="302dp"
+                android:id="@+id/tvFoto"
+                android:layout_width="129dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="702dp"
-                android:layout_marginEnd="58dp"
+                android:layout_below="@+id/etPaisEditar"
                 android:text="Foto:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/txtSexo"
                 android:layout_width="346dp"
                 android:layout_height="39dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="386dp"
+                android:layout_below="@+id/etNombreEditar"
                 android:layout_marginEnd="41dp"
                 android:text="Sexo:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
 
-            <Button
-                android:id="@+id/btnGuardar"
-                android:layout_width="258dp"
+            <EditText
+                android:id="@+id/etNombreEditar"
+                android:layout_width="355dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="806dp"
-                android:layout_marginEnd="54dp"
-                android:text="Guardar"/>
+                android:layout_below="@+id/txtnombre"
+                android:layout_marginEnd="37dp"
+                android:inputType="text"
+                />
+
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="1000dp"/>
-
-            <ImageView
-                android:id="@+id/imgFotoPerfil"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="900dp"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="900dp"
+                ></TextView>
 
 
         </RelativeLayout>
 
     </ScrollView>
 
-    <LinearLayout
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="78dp"
         android:layout_alignParentBottom="true"
@@ -361,7 +277,8 @@
         android:layout_alignParentStart="true"
         android:background="@drawable/barra_verde"
         android:minHeight="@android:dimen/thumbnail_height"
-        ></LinearLayout>
+        app:itemTextColor="@android:color/background_dark"
+        app:menu="@menu/main_menu"/>
 
 </RelativeLayout>
 

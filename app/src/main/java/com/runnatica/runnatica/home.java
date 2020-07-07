@@ -81,9 +81,11 @@ public class home extends AppCompatActivity {
 
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
+        //Posicionar el icono del menu
         Menu menu = MenuUsuario.getMenu();
         MenuItem menuItem= menu.getItem(0);
         menuItem.setChecked(true);
+        //
 
         MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

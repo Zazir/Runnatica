@@ -1,9 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditarCorreo">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/llEditarCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Editar Correo"
+            android:textColor="@android:color/background_light"
+            android:textSize="40dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvIntroduceCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llEditarCorreo"
+        android:text="Introduce el nuevo correo:"
+        android:gravity="center"
+        android:textSize="20dp"
+        ></TextView>
+
+    <EditText
+        android:id="@+id/etCorreoNuevo"
+        android:layout_width="276dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvIntroduceCorreo"
+        android:layout_marginLeft="43dp"
+        android:gravity="center"
+        ></EditText>
+
+    <Button
+        android:id="@+id/btnVerificarCorreo"
+        android:layout_width="271dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etCorreoNuevo"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="20dp"
+        android:text="Verificar Correo"
+        ></Button>
+
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/barra_verde"
+        android:minHeight="@android:dimen/thumbnail_height"
+        app:itemTextColor="@android:color/background_dark"
+        app:menu="@menu/main_menu"/>
+
+</RelativeLayout>

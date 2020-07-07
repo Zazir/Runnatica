@@ -24,7 +24,10 @@
         android:roundIcon="@mipmap/ic_index"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".verificar_correo"></activity>
+        <activity android:name=".Correo_Editado"></activity>
+        <activity android:name=".Verificar_CorreoNuevo" />
+        <activity android:name=".EditarCorreo" />
+        <activity android:name=".verificar_correo" />
         <activity
             android:name=".ui.login.verificar_correo"
             android:label="@string/title_activity_verificar_correo" />

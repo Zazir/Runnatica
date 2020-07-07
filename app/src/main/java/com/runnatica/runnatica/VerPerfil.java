@@ -2,8 +2,13 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,9 +29,11 @@ import org.json.JSONObject;
 public class VerPerfil extends AppCompatActivity {
 
     private ImageView imgUsuario;
-    private TextView NombreUsuario, CorreoUsuario, SexoUsuario, FechaNacimientoUsuario, CiudadUsuario, EstadoUsuario, PaisUsuario, EditarPerfil;
+    private TextView NombreUsuario, CorreoUsuario, SexoUsuario, FechaNacimientoUsuario, CiudadUsuario, EstadoUsuario, PaisUsuario;
     private Usuario usuario = Usuario.getUsuarioInstance();
     private String dominio;
+    private Button EditarPerfil;
+    BottomNavigationView MenuUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +47,36 @@ public class VerPerfil extends AppCompatActivity {
         CiudadUsuario = (TextView)findViewById(R.id.tvCiudadUsuario);
         EstadoUsuario = (TextView)findViewById(R.id.tvEstadoUsuario);
         PaisUsuario = (TextView)findViewById(R.id.tvPaisUsuario);
-        EditarPerfil = (TextView)findViewById(R.id.tvEditarUsuario);
+        EditarPerfil = (Button) findViewById(R.id.btnEditarUsuario);
         imgUsuario = (ImageView)findViewById(R.id.ivFotoPerfilUsuario);
+        MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+
+        //Posicionar el icono del menu
+        Menu menu = MenuUsuario.getMenu();
+        MenuItem menuItem= menu.getItem(3);
+        menuItem.setChecked(true);
+        //
+
+        MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    home();
+                }
+                if (menuItem.getItemId() == R.id.menu_busqueda) {
+                    Busqueda();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    Historial();
+                }
+                if (menuItem.getItemId() == R.id.menu_ajustes) {
+                    Ajustes();
+                }
+
+                return true;
+            }
+        });
 
         dominio = getString(R.string.ip);
 
@@ -91,6 +126,22 @@ public class VerPerfil extends AppCompatActivity {
                     }
                 });
         Volley.newRequestQueue(this).add(request);
+    }
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
+    }
+    private void Busqueda(){
+        Intent next = new Intent(this, busqueda_competidor.class);
+        startActivity(next);
+    }
+    private void Historial(){
+        Intent next = new Intent(this, historial_competidor.class);
+        startActivity(next);
+    }
+    private void Ajustes(){
+        Intent next = new Intent(this, ajustes_competidor.class);
+        startActivity(next);
     }
 
     private void EditarPerfil(){

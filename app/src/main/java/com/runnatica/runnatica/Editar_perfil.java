@@ -1,20 +1,28 @@
 package com.runnatica.runnatica;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,19 +36,27 @@ import com.runnatica.runnatica.poho.Usuario;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Editar_perfil extends AppCompatActivity {
 
-    Button MujerEditar, HombreEditar, btnFotoEditar, EditarContrasena, btnGuardar;
+    Button MujerEditar, HombreEditar, btnFotoEditar, EditarContrasena, btnGuardar, btnFechaNacimiento;
     EditText DiaEditar, CiudadEditar, EstadoEditar, PaisEditar, AnoEditar, NombreEditar, CorreoEditar, MesEditar;
+    TextView MostrarFecha;
     ImageView img;
+    BottomNavigationView MenuUsuario;
     private String genero = "";
-    private String fechaNacimiento;
+    private String FechaNacimiento;
 
     private Bitmap bitmap;
     private ProgressDialog progreso;
+
+    private Calendar calendar;
+    private DatePickerDialog picker;
+
+    int flagFecha = 0;
 
     private String dominio;
     private Usuario usuario = Usuario.getUsuarioInstance();
@@ -51,19 +67,69 @@ public class Editar_perfil extends AppCompatActivity {
         setContentView(R.layout.activity_editar_perfil);
 
         MujerEditar = (Button)findViewById(R.id.btnMujerEditar);
+        MostrarFecha = (TextView)findViewById(R.id.tvMostrarFechaEditar) ;
         HombreEditar = (Button)findViewById(R.id.btnHombreEditar);
         btnFotoEditar = (Button)findViewById(R.id.btnFotoEditar);
         EditarContrasena = (Button)findViewById(R.id.btnEditarContrasena);
-        DiaEditar = (EditText) findViewById(R.id.etDiaEditar);
+        btnFechaNacimiento = (Button)findViewById(R.id.btnSeleccionNacimiento);
+        //DiaEditar = (EditText) findViewById(R.id.etDiaEditar);
         CiudadEditar = (EditText) findViewById(R.id.etCiudadEditar);
         EstadoEditar = (EditText) findViewById(R.id.etEstadoEditar);
         PaisEditar = (EditText) findViewById(R.id.etPaisEditar);
-        AnoEditar = (EditText) findViewById(R.id.etAnoEditar);
+        //AnoEditar = (EditText) findViewById(R.id.etAnoEditar);
         NombreEditar = (EditText) findViewById(R.id.etNombreEditar);
-        CorreoEditar = (EditText) findViewById(R.id.etCorreoEditar);
-        MesEditar = (EditText) findViewById(R.id.etMesEditar);
+        //CorreoEditar = (EditText) findViewById(R.id.etCorreoEditar);
+        //MesEditar = (EditText) findViewById(R.id.etMesEditar);
         btnGuardar = (Button)findViewById(R.id.btnGuardar);
-        img = (ImageView)findViewById(R.id.imgFotoPerfil);
+        //img = (ImageView)findViewById(R.id.imgFotoPerfil);
+        MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+
+        //Posicionar el icono del menu
+        Menu menu = MenuUsuario.getMenu();
+        MenuItem menuItem= menu.getItem(3);
+        menuItem.setChecked(true);
+        //
+        btnFechaNacimiento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendar = Calendar.getInstance();
+                int dia = calendar.get(Calendar.DAY_OF_MONTH);
+                int mes = calendar.get(Calendar.MONTH);
+                int ano = calendar.get(Calendar.YEAR);
+
+                picker = new DatePickerDialog(Editar_perfil.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        FechaNacimiento = year + "-" + (month+1) + "-" + dayOfMonth;
+                        MostrarFecha.setText(FechaNacimiento);
+                        flagFecha = 1;
+                    }
+                }, ano, mes, dia);
+
+                picker.show();
+
+            }
+        });
+        MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    home();
+                }
+                if (menuItem.getItemId() == R.id.menu_busqueda) {
+                    Busqueda();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    Historial();
+                }
+                if (menuItem.getItemId() == R.id.menu_ajustes) {
+                    Ajustes();
+                }
+
+                return true;
+            }
+        });
 
         obtenerPreferencias();
         dominio = getString(R.string.ip);
@@ -75,19 +141,23 @@ public class Editar_perfil extends AppCompatActivity {
             }
         });
 
-        MujerEditar.setOnClickListener(new View.OnClickListener() {
+        HombreEditar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                genero = "Mujer";
-                Toast.makeText(getApplicationContext(), "Eres una " + genero + " muy fit", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                genero = "Hombre";
+                Toast.makeText(getApplicationContext(), "Eres un atlético " + genero, Toast.LENGTH_SHORT).show();
+                MujerEditar.setBackgroundColor(Color.GRAY);
+                HombreEditar.setBackgroundColor(Color.RED);
             }
         });
 
-        HombreEditar.setOnClickListener(new View.OnClickListener() {
+        MujerEditar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                genero = "Hombre";
-                Toast.makeText(getApplicationContext(), "Eres un atlético " + genero, Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                genero = "Mujer";
+                Toast.makeText(getApplicationContext(), "Eres una " + genero + " muy fit", Toast.LENGTH_SHORT).show();
+                HombreEditar.setBackgroundColor(Color.GRAY);
+                MujerEditar.setBackgroundColor(Color.RED);
             }
         });
 
@@ -96,7 +166,6 @@ public class Editar_perfil extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(validaciones()){
-                    fechaNacimiento = DiaEditar.getText().toString() + MesEditar.getText().toString() + AnoEditar.getText().toString();
                     actualizarFotoPerfil(dominio + "uploadImg.php?");
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
@@ -132,12 +201,8 @@ public class Editar_perfil extends AppCompatActivity {
             NombreEditar.setError("Debes de poner un nombre");
         }else if(CorreoEditar.getText().toString().length() <= 0) {
             CorreoEditar.setError("Debes de poner un correo");
-        }else if (DiaEditar.getText().toString().length() <= 0 || DiaEditar.getText().toString().length() >= 3) {
-            DiaEditar.setError("Ingresa un Dia Valido");
-        }else if (MesEditar.getText().toString().length() <= 0 || MesEditar.getText().toString().length() >= 3) {
-            MesEditar.setError("Ingresa un Mes Valido");
-        }else if (MesEditar.getText().toString().length() <= 0 || MesEditar.getText().toString().length() >= 5) {
-            MesEditar.setError("Ingresa un Año Valido");
+        }else if(flagFecha == 0) {
+            btnFechaNacimiento.setError("Debes seleccionar una Fecha");
         }else if(CiudadEditar.getText().toString().length() <= 0) {
             CiudadEditar.setError("Debes de poner una ciudad");
         }else if(EstadoEditar.getText().toString().length() <= 0) {
@@ -205,7 +270,7 @@ public class Editar_perfil extends AppCompatActivity {
                             "&nombre=" + NombreEditar.getText().toString().replaceAll(" ", "%20") +
                             "&correo=" + CorreoEditar.getText().toString() +
                             "&sexo=" + genero +
-                            "&f_nacimiento=" + fechaNacimiento +
+                            "&f_nacimiento=" + FechaNacimiento +
                             "&ciudad=" + CiudadEditar.getText().toString().replaceAll(" ", "%20") +
                             "&estado=" + EstadoEditar.getText().toString().replaceAll(" ", "%20") +
                             "&pais=" + PaisEditar.getText().toString().replaceAll(" ", "%20") +
@@ -258,5 +323,21 @@ public class Editar_perfil extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
+    }
+    private void Busqueda(){
+        Intent next = new Intent(this, busqueda_competidor.class);
+        startActivity(next);
+    }
+    private void Historial(){
+        Intent next = new Intent(this, historial_competidor.class);
+        startActivity(next);
+    }
+    private void Ajustes(){
+        Intent next = new Intent(this, ajustes_competidor.class);
+        startActivity(next);
     }
 }
