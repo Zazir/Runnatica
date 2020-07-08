@@ -18,6 +18,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.support.design.widget.BottomNavigationView;
+import android.view.Menu;
+import android.view.MenuItem;
+
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -49,7 +53,9 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
 
 
     private Button paypal;
-    PlantillaPDF plantillaPDF = new PlantillaPDF(pagarInscripciones.this);;
+    PlantillaPDF plantillaPDF = new PlantillaPDF(pagarInscripciones.this);
+
+    BottomNavigationView MenuUsuario;
 
     private static final int PAYPAL_REQUEST_CODE = 7171;
     private static PayPalConfiguration config = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)//Seleccionado el modo sandbox
@@ -117,6 +123,37 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
                         .build()).build();*/
 
         dominio = getString(R.string.ip);
+
+        MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+
+//Posicionar el icono del menu
+        Menu menu = MenuUsuario.getMenu();
+        MenuItem menuItem= menu.getItem(3);
+        menuItem.setChecked(true);
+        //
+
+
+        MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    home();
+                }
+                if (menuItem.getItemId() == R.id.menu_busqueda) {
+                    Busqueda();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    Historial();
+                }
+                if (menuItem.getItemId() == R.id.menu_ajustes) {
+                    Ajustes();
+                }
+
+                return true;
+            }
+        });
+
 
         setContentView(R.layout.activity_pagar_inscripciones);
 
@@ -538,4 +575,21 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
 
         return card;
     }*/
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
+    }
+    private void Busqueda(){
+        Intent next = new Intent(this, busqueda_competidor.class);
+        startActivity(next);
+    }
+    private void Historial(){
+        Intent next = new Intent(this, historial_competidor.class);
+        startActivity(next);
+    }
+    private void Ajustes(){
+        Intent next = new Intent(this, ajustes_competidor.class);
+        startActivity(next);
+    }
+
 }

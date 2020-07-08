@@ -2,8 +2,12 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,6 +35,8 @@ public class vista1_organizador extends AppCompatActivity {
     List<String> ListaFechas;
     Button ListaInscritos, FotosResultados;
     TextView txtVendidasUsuarios, txtTotalUsuarios, txtVendidosForaneos, txtTotalForaneos, txtIngresoTotal;
+    BottomNavigationView MenuOrganizador;
+
 
     private String id_competencia;
     private StringRequest request;
@@ -51,6 +57,31 @@ public class vista1_organizador extends AppCompatActivity {
         txtTotalForaneos = (TextView)findViewById(R.id.tvTotalForaneos);
         txtIngresoTotal = (TextView)findViewById(R.id.ingreso);
         getLastViewData();
+
+        MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
+
+        Menu menu = MenuOrganizador.getMenu();
+        MenuItem menuItem= menu.getItem(2);
+        menuItem.setChecked(true);
+
+        MenuOrganizador.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    homeOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    historialOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_ajustes) {
+                    ajuestesOrganizador();
+                }
+
+                return true;
+            }
+        });
+
 
         dominio = getString(R.string.ip);
 
@@ -231,6 +262,18 @@ public class vista1_organizador extends AppCompatActivity {
     }
     void FotosResultados(){
         Intent next = new Intent(this, Subir_Resultados.class);
+        startActivity(next);
+    }
+    private void homeOrganizador(){
+        Intent next = new Intent(this, home_organizador.class);
+        startActivity(next);
+    }
+    private void historialOrganizador(){
+        Intent next = new Intent(this, historial_organizador.class);
+        startActivity(next);
+    }
+    private void ajuestesOrganizador(){
+        Intent next = new Intent(this, ajustes_organizador.class);
         startActivity(next);
     }
 }

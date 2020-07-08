@@ -95,22 +95,17 @@
         android:textColor="@android:color/background_dark"
         android:textSize="20dp"/>
 
-    <LinearLayout
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/MenuOrganizador"
         android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/barra_verde"
-        android:minHeight="@android:dimen/thumbnail_height">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textColor="@android:color/background_light"
-            android:background="#80000000"
-            android:textSize="25dp"/>
-
-    </LinearLayout>
+        android:minHeight="@android:dimen/thumbnail_height"
+        app:itemTextColor="@android:color/background_dark"
+        app:menu="@menu/main"
+        ></android.support.design.widget.BottomNavigationView>
 
 </RelativeLayout>

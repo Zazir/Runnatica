@@ -68,9 +68,10 @@ El Responsable se reserva el derecho de efectuar en cualquier momento modificaci
 
         </RelativeLayout>
     </ScrollView>
-    
 
-    <LinearLayout
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="78dp"
         android:layout_alignParentBottom="true"
@@ -78,6 +79,7 @@ El Responsable se reserva el derecho de efectuar en cualquier momento modificaci
         android:layout_alignParentStart="true"
         android:background="@drawable/barra_verde"
         android:minHeight="@android:dimen/thumbnail_height"
-        ></LinearLayout>
+        app:itemTextColor="@android:color/background_dark"
+        app:menu="@menu/main_menu"/>
 
 </RelativeLayout>

@@ -111,8 +111,9 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvFiltroCompetencias"
                 android:layout_width="match_parent"
-                android:layout_height="600dp"
-                android:layout_below="@+id/spFiltroPais"/>
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spFiltroPais"
+                android:layout_marginTop="0dp" />
 
         </RelativeLayout>
 
@@ -129,5 +130,6 @@
         android:minHeight="@android:dimen/thumbnail_height"
         app:itemTextColor="@android:color/background_dark"
         app:menu="@menu/main_menu"/>
+
 
 </RelativeLayout>

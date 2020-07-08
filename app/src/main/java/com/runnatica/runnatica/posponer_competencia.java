@@ -3,8 +3,13 @@ package com.runnatica.runnatica;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -28,6 +33,8 @@ public class posponer_competencia extends AppCompatActivity {
 
     private String id_competencia;
 
+    BottomNavigationView MenuOrganizador;
+
     private Calendar calendar = Calendar.getInstance();
     int dia = calendar.get(Calendar.DAY_OF_MONTH);
     int mes = calendar.get(Calendar.MONTH);
@@ -48,6 +55,30 @@ public class posponer_competencia extends AppCompatActivity {
         Hora = (EditText)findViewById(R.id.etHora);
         txtFecha = (TextView)findViewById(R.id.tvFechaActual);
         txtFechaPosponer = (TextView)findViewById(R.id.tvFechaPosponer);
+
+        MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
+
+        Menu menu = MenuOrganizador.getMenu();
+        MenuItem menuItem= menu.getItem(2);
+        menuItem.setChecked(true);
+
+        MenuOrganizador.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    homeOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    historialOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_ajustes) {
+                    ajuestesOrganizador();
+                }
+
+                return true;
+            }
+        });
 
         getLastViewData();
 
@@ -180,5 +211,17 @@ public class posponer_competencia extends AppCompatActivity {
         });
 
         alerta.show();
+    }
+    private void homeOrganizador(){
+        Intent next = new Intent(this, home_organizador.class);
+        startActivity(next);
+    }
+    private void historialOrganizador(){
+        Intent next = new Intent(this, historial_organizador.class);
+        startActivity(next);
+    }
+    private void ajuestesOrganizador(){
+        Intent next = new Intent(this, ajustes_organizador.class);
+        startActivity(next);
     }
 }

@@ -7,9 +7,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Switch;
 
@@ -19,11 +23,42 @@ public class Notificaciones extends AppCompatActivity {
     private final static String CHANEL_ID = "NOTIFICATION";
     private final static int NOTIFICATION_ID = 0;
 
+    BottomNavigationView MenuUsuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notificaciones);
         swNotifications = (Switch)findViewById(R.id.swNotificaciones);
+        MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+
+//Posicionar el icono del menu
+        Menu menu = MenuUsuario.getMenu();
+        MenuItem menuItem= menu.getItem(3);
+        menuItem.setChecked(true);
+        //
+
+
+        MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    home();
+                }
+                if (menuItem.getItemId() == R.id.menu_busqueda) {
+                    Busqueda();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    Historial();
+                }
+                if (menuItem.getItemId() == R.id.menu_ajustes) {
+                    Ajustes();
+                }
+
+                return true;
+            }
+        });
 
 
     }
@@ -64,5 +99,21 @@ public class Notificaciones extends AppCompatActivity {
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
         notificationManagerCompat.notify(NOTIFICATION_ID, notificationBuilder.build());
+    }
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
+    }
+    private void Busqueda(){
+        Intent next = new Intent(this, busqueda_competidor.class);
+        startActivity(next);
+    }
+    private void Historial(){
+        Intent next = new Intent(this, historial_competidor.class);
+        startActivity(next);
+    }
+    private void Ajustes(){
+        Intent next = new Intent(this, ajustes_competidor.class);
+        startActivity(next);
     }
 }

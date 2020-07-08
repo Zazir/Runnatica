@@ -42,6 +42,7 @@
             <TextView
                 android:id="@+id/tvNombreCompetencia"
                 android:layout_width="match_parent"
+                android:gravity="center"
                 android:layout_height="137dp"
                 android:layout_below="@+id/ivFotoCompetencia"
                 android:text="Medio Maraton de la Ciudad De Mexico"

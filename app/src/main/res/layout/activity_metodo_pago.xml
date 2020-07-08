@@ -49,7 +49,8 @@
             android:textSize="20dp"></Button>
     </LinearLayout>
 
-    <LinearLayout
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="78dp"
         android:layout_alignParentBottom="true"
@@ -57,6 +58,7 @@
         android:layout_alignParentStart="true"
         android:background="@drawable/barra_verde"
         android:minHeight="@android:dimen/thumbnail_height"
-        ></LinearLayout>
+        app:itemTextColor="@android:color/background_dark"
+        app:menu="@menu/main_menu"/>
 
 </RelativeLayout>

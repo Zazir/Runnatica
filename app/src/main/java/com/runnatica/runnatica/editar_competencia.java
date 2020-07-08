@@ -3,10 +3,14 @@ package com.runnatica.runnatica;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,6 +36,8 @@ public class editar_competencia extends AppCompatActivity {
     private int[] id;
     private Usuario usuario = Usuario.getUsuarioInstance();
 
+    BottomNavigationView MenuOrganizador2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,31 @@ public class editar_competencia extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rvEditarCompetencias);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        MenuOrganizador2= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
+
+        Menu menu = MenuOrganizador2.getMenu();
+        MenuItem menuItem= menu.getItem(2);
+        menuItem.setChecked(true);
+
+        MenuOrganizador2.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    homeOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    historialOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_ajustes) {
+                    ajuestesOrganizador();
+                }
+
+                return true;
+            }
+        });
+
 
         //Inicializar arreglo de competencias
         competenciasList = new ArrayList<>();
@@ -109,5 +140,18 @@ public class editar_competencia extends AppCompatActivity {
         Intent intent = new Intent(editar_competencia.this, posponer_competencia.class);
         intent.putExtra("id", idS);
         startActivity(intent);
+    }
+
+    private void homeOrganizador(){
+        Intent next = new Intent(this, home_organizador.class);
+        startActivity(next);
+    }
+    private void historialOrganizador(){
+        Intent next = new Intent(this, historial_organizador.class);
+        startActivity(next);
+    }
+    private void ajuestesOrganizador(){
+        Intent next = new Intent(this, ajustes_organizador.class);
+        startActivity(next);
     }
 }

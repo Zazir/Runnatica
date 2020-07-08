@@ -143,12 +143,6 @@ public class carrera_vista1 extends AppCompatActivity {
             }
         });
 
-        txtRegistrarse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     private void obtenerPreferencias() {

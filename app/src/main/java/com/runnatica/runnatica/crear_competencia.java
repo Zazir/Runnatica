@@ -10,9 +10,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,13 +23,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -35,11 +36,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.runnatica.runnatica.poho.Usuario;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 public class crear_competencia extends AppCompatActivity {
 
@@ -47,7 +45,6 @@ public class crear_competencia extends AppCompatActivity {
     private EditText Nombre, Precio, GradosUbicacion, Ciudad, Colonia, Calle, Descripcion;
     private Button Informacion, btnImagen, btnDate, Aval, Guardar, btnHora;
     private Spinner Pais, Estado;
-    private RadioButton SiReembolso, NoReembolso;
     private ImageView img;
     private Usuario usuario = Usuario.getUsuarioInstance();
 
@@ -65,7 +62,11 @@ public class crear_competencia extends AppCompatActivity {
 
 
 
-    int imagen=0;
+    BottomNavigationView MenuUsuario;
+
+
+
+    int imagen=0, dia, mes, ano;
     private String path = "xxx", estado, pais;
 
     @Override
@@ -90,25 +91,53 @@ public class crear_competencia extends AppCompatActivity {
         Calle = (EditText)findViewById(R.id.etCalleCompetencia);
         Aval = (Button) findViewById(R.id.btnAvalCompetencia);
         Descripcion = (EditText)findViewById(R.id.etDescripcionCompetencia);
-        SiReembolso = (RadioButton) findViewById(R.id.rbSiReembolso);
-        NoReembolso = (RadioButton) findViewById(R.id.rbNoReembolso);
         Guardar = (Button) findViewById(R.id.btnGuardarCompetencia);
         txtFecha = (TextView)findViewById(R.id.tvFechaPicker);
         txtHora = (TextView)findViewById(R.id.tvHoraCompetencia);
 
-        Toast.makeText(this, usuario.getId()+"", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, usuario.getId()+"", Toast.LENGTH_SHORT).show();
 
         cargarSpinnerEstado();
         cargarSpinnerPais();
 
-        btnImagen.setOnClickListener(new View.OnClickListener() {
+        MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+
+//Posicionar el icono del menu
+        Menu menu = MenuUsuario.getMenu();
+        MenuItem menuItem= menu.getItem(3);
+        menuItem.setChecked(true);
+        //
+
+
+        MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    home();
+                }
+                if (menuItem.getItemId() == R.id.menu_busqueda) {
+                    Busqueda();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    Historial();
+                }
+                if (menuItem.getItemId() == R.id.menu_ajustes) {
+                    Ajustes();
+                }
+
+                return true;
+            }
+        });
+
+        /*btnImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Guardar imagen
                 CargarImagen();
                 imagen = 1;
             }
-        });
+        });*/
         Aval.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,6 +161,7 @@ public class crear_competencia extends AppCompatActivity {
                     }
                 }, horas, minuto, true);
 
+
                 timePicker.show();
             }
         });
@@ -140,9 +170,10 @@ public class crear_competencia extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 calendar = Calendar.getInstance();
-                int dia = calendar.get(Calendar.DAY_OF_MONTH);
-                int mes = calendar.get(Calendar.MONTH);
-                int ano = calendar.get(Calendar.YEAR);
+                dia = calendar.get(Calendar.DAY_OF_MONTH);
+                mes = calendar.get(Calendar.MONTH);
+                ano = calendar.get(Calendar.YEAR);
+
 
                 picker = new DatePickerDialog(crear_competencia.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -152,6 +183,7 @@ public class crear_competencia extends AppCompatActivity {
                     }
                 }, ano, mes, dia);
 
+                picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 picker.show();
             }
         });
@@ -166,10 +198,11 @@ public class crear_competencia extends AppCompatActivity {
         Guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //subirImagenCompetencia("http://192.168.137.1:811/WebServiceRunnatica/agregarCompetencia.php?");
+                subirImagenCompetencia("http://192.168.137.1:811/WebServiceRunnatica/agregarCompetencia.php?");
                 if (Validaciones()){
+
                     //subirImagenCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
-                    subirImagenCompetencia(dominio + "uploadImg.php?");
+                    //subirImagenCompetencia(dominio + "uploadImg.php?");
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
                 }
@@ -250,16 +283,16 @@ public class crear_competencia extends AppCompatActivity {
     }
 
     private void subirImagenCompetencia(String URL) {
-        progreso = new ProgressDialog(crear_competencia.this);
+        /*progreso = new ProgressDialog(crear_competencia.this);
         progreso.setMessage("Guardando Imagen...");
-        progreso.show();
+        progreso.show();*/
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        progreso.hide();
-                        path = response;
+                        /*progreso.hide();
+                        path = response;*/
                         SubirCompetencia(dominio + "agregarCompetencia.php?" +
                                 "Id_usuario=" + usuario.getId() +
                                 "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
@@ -281,12 +314,12 @@ public class crear_competencia extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        progreso.dismiss();
+                        //progreso.dismiss();
                         Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
                     }
         })
         {
-            @Override
+            /*@Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 String imagen = getStringImage(bitmap);
@@ -297,25 +330,25 @@ public class crear_competencia extends AppCompatActivity {
                 parametros.put("NombreFoto", nombreFoto);
 
                 return parametros;
-            }
+            }*/
         };
 
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-    private String getStringImage(Bitmap bitmap) {
+    /*private String getStringImage(Bitmap bitmap) {
         ByteArrayOutputStream array = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, array);
         byte[] imgBytes = array.toByteArray();
 
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
-    }
+    }*/
 
-    private void CargarImagen() {//funcion de tipo void para hacer un proceso
+    /*private void CargarImagen() {//funcion de tipo void para hacer un proceso
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         startActivityForResult(intent.createChooser(intent, "Seleccione la aplicación"), 10);
-    }
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -356,12 +389,9 @@ public class crear_competencia extends AppCompatActivity {
         else if(Descripcion.getText().toString().length() <= 0) {
             Descripcion.setError("Debes de poner la inscripción de la Competencia");
         }
-        else if(imagen == 0){
+        /*else if(imagen == 0){
             btnImagen.setError("Debes seleccionar una imagen");
-        }
-        else if(SiReembolso.isChecked()== false && NoReembolso.isChecked() == false){
-            Toast.makeText(getApplicationContext(), "Verifica el Reembolso", Toast.LENGTH_SHORT).show();
-        }else siguiente = true;
+        }*/else siguiente = true;
 
         return siguiente;
     }
@@ -374,6 +404,22 @@ public class crear_competencia extends AppCompatActivity {
 
     private void Informacion(){
         Intent next = new Intent(this, Informacion.class);
+        startActivity(next);
+    }
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
+    }
+    private void Busqueda(){
+        Intent next = new Intent(this, busqueda_competidor.class);
+        startActivity(next);
+    }
+    private void Historial(){
+        Intent next = new Intent(this, historial_competidor.class);
+        startActivity(next);
+    }
+    private void Ajustes(){
+        Intent next = new Intent(this, ajustes_competidor.class);
         startActivity(next);
     }
 
