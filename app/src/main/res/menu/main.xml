@@ -16,4 +16,9 @@
         android:title="Ajustes"
         android:icon="@drawable/ic_ajustes"
         ></item>
+    <item
+        android:id="@+id/menu_regresar"
+        android:title="regresar"
+        android:icon="@drawable/ic_regresar"
+        ></item>
 </menu>

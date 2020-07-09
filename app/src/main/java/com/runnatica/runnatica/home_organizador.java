@@ -65,6 +65,9 @@ public class home_organizador extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.menu_ajustes) {
                     ajuestesOrganizador();
                 }
+                if (menuItem.getItemId() == R.id.menu_regresar) {
+                    home();
+                }
 
                 return true;
             }
@@ -155,5 +158,10 @@ public class home_organizador extends AppCompatActivity {
         Intent next = new Intent(this, ajustes_organizador.class);
         startActivity(next);
     }
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
+    }
+
 }
 

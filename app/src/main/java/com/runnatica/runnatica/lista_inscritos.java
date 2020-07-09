@@ -3,11 +3,13 @@ package com.runnatica.runnatica;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,7 +29,7 @@ import java.util.List;
 
 public class lista_inscritos extends AppCompatActivity {
 
-    private Button Atras;
+    BottomNavigationView MenuOrganizador;
 
     private List<UsuariosInscritos> usuariosInscritosList;
     private RecyclerView rvInscritos;
@@ -44,7 +46,7 @@ public class lista_inscritos extends AppCompatActivity {
         rvInscritos = (RecyclerView) findViewById(R.id.rvInscritos);
         rvInscritos.setHasFixedSize(true);
         rvInscritos.setLayoutManager(new LinearLayoutManager(this));
-        Atras = (Button)findViewById(R.id.btnBack);
+        MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
 
         dominio = getString(R.string.ip);
 
@@ -52,13 +54,33 @@ public class lista_inscritos extends AppCompatActivity {
 
         getLastViewData();
         cargarUsuariosInscritos(dominio + "obtenerUsuariosInscritos.php?id_competencia="+id_competencia);
+        Menu menu = MenuOrganizador.getMenu();
+        MenuItem menuItem= menu.getItem(3);
+        menuItem.setChecked(true);
 
-        Atras.setOnClickListener(new View.OnClickListener() {
+        MenuOrganizador.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                atras();
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    homeOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    historialOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_ajustes) {
+                    ajuestesOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_regresar) {
+                    home();
+                }
+
+
+                return true;
             }
         });
+
+
     }
 
     private void cargarUsuariosInscritos(String URL) {
@@ -122,8 +144,21 @@ public class lista_inscritos extends AppCompatActivity {
         id_competencia = extra.getString("id_competencia");
     }
 
-    void atras(){
-        Intent next = new Intent(this, vista1_organizador.class);
+    private void homeOrganizador(){
+        Intent next = new Intent(this, home_organizador.class);
         startActivity(next);
     }
+    private void historialOrganizador(){
+        Intent next = new Intent(this, historial_organizador.class);
+        startActivity(next);
+    }
+    private void ajuestesOrganizador(){
+        Intent next = new Intent(this, ajustes_organizador.class);
+        startActivity(next);
+    }
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
+    }
+
 }

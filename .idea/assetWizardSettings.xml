@@ -343,7 +343,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/settings/baseline_settings_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/arrow_back/baseline_arrow_back_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -353,7 +353,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_ajustes" />
+                            <entry key="outputName" value="ic_regresar" />
                             <entry key="sourceFile" value="C:\Runnatica\Runnatica" />
                           </map>
                         </option>

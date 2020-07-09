@@ -65,6 +65,9 @@ public class editar_competencia extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.menu_ajustes) {
                     ajuestesOrganizador();
                 }
+                if (menuItem.getItemId() == R.id.menu_regresar) {
+                    home();
+                }
 
                 return true;
             }
@@ -152,6 +155,10 @@ public class editar_competencia extends AppCompatActivity {
     }
     private void ajuestesOrganizador(){
         Intent next = new Intent(this, ajustes_organizador.class);
+        startActivity(next);
+    }
+    private void home(){
+        Intent next = new Intent(this, home.class);
         startActivity(next);
     }
 }

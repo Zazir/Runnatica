@@ -75,19 +75,12 @@
                 android:layout_below="@+id/tvNombreOrganizador"
                 android:background="@drawable/calendario"></ImageView>
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="15dp"
-                android:layout_below="@+id/tvFechaCompetencia"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/reloj"></ImageView>
 
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
-                android:layout_below="@+id/tvHoraCompetencia"
+                android:layout_below="@+id/tvFechaCompetencia"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/lugar"></ImageView>
 
@@ -110,17 +103,6 @@
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
 
-            <TextView
-                android:id="@+id/tvHoraCompetencia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hora "
-                android:layout_below="@+id/tvFechaCompetencia"
-                android:layout_marginTop="25dp"
-                android:layout_marginLeft="80dp"
-                android:textSize="25dp"
-                android:textColor="@android:color/background_dark"
-                ></TextView>
 
             <TextView
                 android:id="@+id/tvLugarCompetencia"
@@ -129,7 +111,7 @@
                 android:text="Lugar"
                 android:layout_marginTop="25dp"
                 android:layout_marginLeft="80dp"
-                android:layout_below="@+id/tvHoraCompetencia"
+                android:layout_below="@+id/tvFechaCompetencia"
                 android:textSize="25dp"
                 android:textColor="@android:color/background_dark"
                 ></TextView>

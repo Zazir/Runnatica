@@ -7,9 +7,13 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,10 +35,11 @@ import java.util.Random;
 
 public class Subir_Resultados extends AppCompatActivity {
 
-    Button Atras,btnImagen, btnSubirResultados;
+    Button btnImagen, btnSubirResultados;
     private ImageView img;
     private Bitmap bitmap;
     private ProgressDialog progreso;
+    BottomNavigationView MenuOrganizador;
 
     private String dominio;
 
@@ -45,9 +50,35 @@ public class Subir_Resultados extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subir__resultados);
 
-        Atras = (Button)findViewById(R.id.btnAtras);
         btnImagen = (Button)findViewById(R.id.btnSeleccioarResultados);
         btnSubirResultados = (Button)findViewById(R.id.btnSubirResultados);
+
+        MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
+
+        Menu menu = MenuOrganizador.getMenu();
+        MenuItem menuItem= menu.getItem(2);
+        menuItem.setChecked(true);
+
+        MenuOrganizador.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    homeOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    historialOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_ajustes) {
+                    ajuestesOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_regresar) {
+                    home();
+                }
+
+                return true;
+            }
+        });
 
         dominio = getString(R.string.ip);
 
@@ -65,12 +96,7 @@ public class Subir_Resultados extends AppCompatActivity {
             }
         });
 
-        Atras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                atras();
-            }
-        });
+
     }
 
     private String getStringImage(Bitmap btm) {// se recive el parametro
@@ -142,10 +168,21 @@ public class Subir_Resultados extends AppCompatActivity {
             }
         }
     }
-
-
-    void atras(){
-        Intent next = new Intent(this, vista1_organizador.class);
+    private void homeOrganizador(){
+        Intent next = new Intent(this, home_organizador.class);
         startActivity(next);
     }
+    private void historialOrganizador(){
+        Intent next = new Intent(this, historial_organizador.class);
+        startActivity(next);
+    }
+    private void ajuestesOrganizador(){
+        Intent next = new Intent(this, ajustes_organizador.class);
+        startActivity(next);
+    }
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
+    }
+
 }

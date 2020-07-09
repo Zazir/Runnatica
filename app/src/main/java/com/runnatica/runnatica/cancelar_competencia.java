@@ -40,4 +40,5 @@ public class cancelar_competencia extends AppCompatActivity {
         //Poner codigo para cancelar la competencia
 
     }
+
 }
