@@ -211,13 +211,12 @@ public class carrera_vista1 extends AppCompatActivity {
                             JSONObject respuesta = jsonArray.getJSONObject(0);
                             Glide.with(carrera_vista1.this).load(respuesta.optString("foto")).into(imgCompetencia);
                             id_organizador = respuesta.optString("id_usuario");
-                            txtNomCompe.setText(respuesta.optString("nom_comp"));
-                            txtOrganizador.setText(respuesta.optString("organizador"));
-                            txtFechaCompe.setText(respuesta.optString("fecha"));
-                            txtHoraCompe.setText(respuesta.optString("hora") + " horas");
-                            txtLugarCompe.setText(respuesta.optString("coordenadas"));
-                            txtPrecioCompe.setText("$" + respuesta.optString("precio"));
                             monto = respuesta.optString("precio");
+                            txtNomCompe.setText(respuesta.optString("nom_comp"));
+                            txtOrganizador.setText(respuesta.optString("nombre"));
+                            txtFechaCompe.setText(respuesta.optString("fecha"));
+                            txtLugarCompe.setText(respuesta.optString("ciudad")+", "+respuesta.optString("colonia")+", "+respuesta.optString("calle"));
+                            txtPrecioCompe.setText("$" + respuesta.optString("precio"));
                             txtDescripcionCompe.setText(respuesta.optString("descripcion"));
                         } catch (JSONException e) {
                             e.printStackTrace();
