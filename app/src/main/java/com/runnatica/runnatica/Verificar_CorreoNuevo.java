@@ -3,6 +3,7 @@ package com.runnatica.runnatica;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.runnatica.runnatica.poho.Usuario;
 
 import java.util.Properties;
 
@@ -42,6 +45,7 @@ public class Verificar_CorreoNuevo extends AppCompatActivity {
     Context context = null;
     EditText  msg;
     String rec, subject, textMessage;
+    private Usuario usuario = Usuario.getUsuarioInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,10 @@ public class Verificar_CorreoNuevo extends AppCompatActivity {
         Siguiente = (Button)findViewById(R.id.btnVerificar);
         CodigoConfirmacion = (EditText)findViewById(R.id.etCodigoConfirmacion);
         txtCorreo = (TextView)findViewById(R.id.txtCorreo);
+
         getLastViewData();
+        obtenerPreferencias();
+
         txtCorreo.setText(Correo);
         if(bandera == 0){
             bandera = 1;
@@ -104,14 +111,26 @@ public class Verificar_CorreoNuevo extends AppCompatActivity {
             }
         });
     }
+
+    private void obtenerPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+
+        usuario.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
+        usuario.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
+        usuario.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
+        usuario.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
+    }
+
     private void getLastViewData() {
         Bundle extra = Verificar_CorreoNuevo.this.getIntent().getExtras();
         Correo = extra.getString("Correo");
     }
+
     private int CodigoRandom(){
         int numero = (int) (Math.random() * 9999) + 1;
         return numero;
     }
+
     public void correo(){
         Codigo = CodigoRandom();
         rec = Correo;
@@ -136,6 +155,7 @@ public class Verificar_CorreoNuevo extends AppCompatActivity {
        RetreiveFeedTask task = new RetreiveFeedTask();
         task.execute();
     }
+
     class RetreiveFeedTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -162,6 +182,7 @@ public class Verificar_CorreoNuevo extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Codigo Enviado a: " + Correo, Toast.LENGTH_LONG).show();
         }
     }
+
     private boolean Validaciones(){
         Boolean siguiente = false;
         if(CodigoConfirmacion.getText().toString().equals(String.valueOf(Codigo))){

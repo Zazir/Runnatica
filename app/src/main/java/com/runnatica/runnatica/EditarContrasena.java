@@ -1,6 +1,8 @@
 package com.runnatica.runnatica;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,6 +13,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.runnatica.runnatica.poho.Usuario;
 
 import java.util.regex.Pattern;
 
@@ -26,6 +35,8 @@ public class EditarContrasena extends AppCompatActivity {
     Button CambiarContraseña;
     EditText ContrasenaActual, ContrasenaNueva, RepetirContrasena;
     BottomNavigationView MenuUsuario;
+    private String dominio;
+    private Usuario usuario = Usuario.getUsuarioInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +48,9 @@ public class EditarContrasena extends AppCompatActivity {
         ContrasenaNueva = (EditText)findViewById(R.id.etRepeticionContrasena);
         RepetirContrasena = (EditText)findViewById(R.id.etRepeticionContrasena);
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+
+        obtenerPreferencias();
+        dominio = getString(R.string.ip);
 
 //Posicionar el icono del menu
         Menu menu = MenuUsuario.getMenu();
@@ -66,12 +80,14 @@ public class EditarContrasena extends AppCompatActivity {
             }
         });
 
-
         CambiarContraseña.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(Validaciones()){
-
+                    cambiarContrasena(dominio + "actualizarPerfil.php?"+
+                            "id_usuario=" + usuario.getId() +
+                            "&antigua_contra=" + ContrasenaActual.getText().toString().replaceAll(" ", "%20") +
+                            "&nueva_contra=" + ContrasenaNueva.getText().toString().replaceAll(" ", "%20"));
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
                 }
@@ -79,6 +95,16 @@ public class EditarContrasena extends AppCompatActivity {
         });
 
     }
+
+    private void obtenerPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+
+        usuario.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
+        usuario.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
+        usuario.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
+        usuario.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
+    }
+
     private Boolean Validaciones() {
         Boolean siguiente = false;
         if (ContrasenaActual.getText().toString().length() <= 0){
@@ -93,6 +119,7 @@ public class EditarContrasena extends AppCompatActivity {
 
         return siguiente;
     }
+
     private void home(){
         Intent next = new Intent(this, home.class);
         startActivity(next);
@@ -108,5 +135,27 @@ public class EditarContrasena extends AppCompatActivity {
     private void Ajustes(){
         Intent next = new Intent(this, ajustes_competidor.class);
         startActivity(next);
+    }
+
+    private void cambiarContrasena(String URL) {
+        StringRequest request = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(EditarContrasena.this, response, Toast.LENGTH_SHORT).show();
+                        if (response.equals("Contraseña actualizada con éxito")) {
+                            ContrasenaActual.setText("");
+                            ContrasenaNueva.setText("");
+                            RepetirContrasena.setText("");
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(EditarContrasena.this, "Verifica tu conexión", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(request);
     }
 }

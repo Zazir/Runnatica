@@ -27,29 +27,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/llEditarCorreo"
-        android:text="Introduce el nuevo correo:"
+        android:text="Introduce el nuevo correo"
         android:gravity="center"
-        android:textSize="20dp"
-        ></TextView>
+        android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/etCorreoNuevo"
         android:layout_width="276dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvIntroduceCorreo"
-        android:layout_marginLeft="43dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/contra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etCorreoNuevo"
+        android:text="Confirma tu contraseña"
         android:gravity="center"
-        ></EditText>
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/confirmContrasena"
+        android:layout_width="276dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contra"
+        android:layout_centerHorizontal="true"/>
 
     <Button
         android:id="@+id/btnVerificarCorreo"
         android:layout_width="271dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etCorreoNuevo"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="20dp"
-        android:text="Verificar Correo"
-        ></Button>
+        android:layout_below="@+id/confirmContrasena"
+        android:layout_centerHorizontal="true"
+        android:text="Verificar Correo"/>
 
 
 

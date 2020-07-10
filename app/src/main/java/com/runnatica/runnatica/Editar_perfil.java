@@ -42,8 +42,8 @@ import java.util.Map;
 
 public class Editar_perfil extends AppCompatActivity {
 
-    Button MujerEditar, HombreEditar, btnFotoEditar, EditarContrasena, btnGuardar, btnFechaNacimiento;
-    EditText DiaEditar, CiudadEditar, EstadoEditar, PaisEditar, AnoEditar, NombreEditar, CorreoEditar, MesEditar;
+    Button MujerEditar, HombreEditar, btnFotoEditar, EditarContrasena, btnGuardar, btnFechaNacimiento, btnEditarCorreo;
+    EditText CiudadEditar, EstadoEditar, PaisEditar, NombreEditar;
     TextView MostrarFecha;
     ImageView img;
     BottomNavigationView MenuUsuario;
@@ -71,15 +71,12 @@ public class Editar_perfil extends AppCompatActivity {
         HombreEditar = (Button)findViewById(R.id.btnHombreEditar);
         btnFotoEditar = (Button)findViewById(R.id.btnFotoEditar);
         EditarContrasena = (Button)findViewById(R.id.btnEditarContrasena);
+        btnEditarCorreo = (Button)findViewById(R.id.btnEditarCorreo);
         btnFechaNacimiento = (Button)findViewById(R.id.btnSeleccionNacimiento);
-        //DiaEditar = (EditText) findViewById(R.id.etDiaEditar);
         CiudadEditar = (EditText) findViewById(R.id.etCiudadEditar);
         EstadoEditar = (EditText) findViewById(R.id.etEstadoEditar);
         PaisEditar = (EditText) findViewById(R.id.etPaisEditar);
-        //AnoEditar = (EditText) findViewById(R.id.etAnoEditar);
         NombreEditar = (EditText) findViewById(R.id.etNombreEditar);
-        //CorreoEditar = (EditText) findViewById(R.id.etCorreoEditar);
-        //MesEditar = (EditText) findViewById(R.id.etMesEditar);
         btnGuardar = (Button)findViewById(R.id.btnGuardar);
         //img = (ImageView)findViewById(R.id.imgFotoPerfil);
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
@@ -100,8 +97,8 @@ public class Editar_perfil extends AppCompatActivity {
                 picker = new DatePickerDialog(Editar_perfil.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        FechaNacimiento = year + "-" + (month+1) + "-" + dayOfMonth;
-                        MostrarFecha.setText(FechaNacimiento);
+                        FechaNacimiento = ""+dayOfMonth+(month+1)+year;
+                        MostrarFecha.setText(year + "-" + (month+1) + "-" + dayOfMonth);
                         flagFecha = 1;
                     }
                 }, ano, mes, dia);
@@ -137,7 +134,7 @@ public class Editar_perfil extends AppCompatActivity {
         EditarContrasena.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditarContrasena();
+                goToEditarContrasena();
             }
         });
 
@@ -166,10 +163,25 @@ public class Editar_perfil extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(validaciones()){
-                    actualizarFotoPerfil(dominio + "uploadImg.php?");
+                    actualizarPerfil(dominio + "actualizarPerfil.php?" +
+                            "id_usuario=" + usuario.getId() +
+                            "&nombre=" + NombreEditar.getText().toString().replaceAll(" ", "%20") +
+                            "&sexo=" + genero +
+                            "&f_nacimiento=" + FechaNacimiento +
+                            "&ciudad=" + CiudadEditar.getText().toString().replaceAll(" ", "%20") +
+                            "&estado=" + EstadoEditar.getText().toString().replaceAll(" ", "%20") +
+                            "&pais=" + PaisEditar.getText().toString().replaceAll(" ", "%20"));
+                    //actualizarFotoPerfil(dominio + "uploadImg.php?");
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
                 };
+            }
+        });
+
+        btnEditarCorreo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToEditarCorreo();
             }
         });
 
@@ -190,7 +202,12 @@ public class Editar_perfil extends AppCompatActivity {
         usuario.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
     }
 
-    private void EditarContrasena(){
+    private void goToEditarCorreo() {
+        Intent next = new Intent(this, EditarCorreo.class);
+        startActivity(next);
+    }
+
+    private void goToEditarContrasena(){
         Intent next = new Intent(this, EditarContrasena.class);
         startActivity(next);
     }
@@ -199,8 +216,6 @@ public class Editar_perfil extends AppCompatActivity {
         Boolean siguiente = false;
         if (NombreEditar.getText().toString().length() <= 0) {
             NombreEditar.setError("Debes de poner un nombre");
-        }else if(CorreoEditar.getText().toString().length() <= 0) {
-            CorreoEditar.setError("Debes de poner un correo");
         }else if(flagFecha == 0) {
             btnFechaNacimiento.setError("Debes seleccionar una Fecha");
         }else if(CiudadEditar.getText().toString().length() <= 0) {
@@ -234,11 +249,10 @@ public class Editar_perfil extends AppCompatActivity {
                 progreso.dismiss();
                 if (response.equals("Exito")){
                     NombreEditar.setText("");
-                    CorreoEditar.setText("");
                     CiudadEditar.setText("");
                     EstadoEditar.setText("");
                     PaisEditar.setText("");
-                    img.setImageResource(android.R.color.transparent);
+                    //img.setImageResource(android.R.color.transparent);
                     Toast.makeText(getApplicationContext(), "Perfil actualizado con éxito", Toast.LENGTH_SHORT).show();
                 } else if (response.equals("Error")){
                     Toast.makeText(getApplicationContext(), "Algo salió mal, vuelve a intentarlo", Toast.LENGTH_SHORT).show();
@@ -265,16 +279,6 @@ public class Editar_perfil extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         progreso.hide();
-                        actualizarPerfil(dominio + "actualizarPerfil.php?" +
-                            "id_usuario=" + usuario.getId() +
-                            "&nombre=" + NombreEditar.getText().toString().replaceAll(" ", "%20") +
-                            "&correo=" + CorreoEditar.getText().toString() +
-                            "&sexo=" + genero +
-                            "&f_nacimiento=" + FechaNacimiento +
-                            "&ciudad=" + CiudadEditar.getText().toString().replaceAll(" ", "%20") +
-                            "&estado=" + EstadoEditar.getText().toString().replaceAll(" ", "%20") +
-                            "&pais=" + PaisEditar.getText().toString().replaceAll(" ", "%20") +
-                            "&urlFoto="+response);
                         Toast.makeText(getApplicationContext(), "Perfil actualizado" + response, Toast.LENGTH_SHORT).show();
                     }
                 },

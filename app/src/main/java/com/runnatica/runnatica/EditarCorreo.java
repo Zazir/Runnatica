@@ -1,6 +1,8 @@
 package com.runnatica.runnatica;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -13,14 +15,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.runnatica.runnatica.poho.Usuario;
+
 
 public class EditarCorreo extends AppCompatActivity {
 
     BottomNavigationView MenuUsuario;
-    EditText CorreoNuevo;
+    EditText CorreoNuevo, confirmarContrasena;
     Button VerificarCorreo;
 
-
+    private Usuario usuario = Usuario.getUsuarioInstance();
 
 
     @Override
@@ -29,6 +38,7 @@ public class EditarCorreo extends AppCompatActivity {
         setContentView(R.layout.activity_editar_correo);
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         CorreoNuevo = (EditText)findViewById(R.id.etCorreoNuevo);
+        confirmarContrasena = (EditText)findViewById(R.id.confirmContrasena);
         VerificarCorreo = (Button)findViewById(R.id.btnVerificarCorreo);
 
         //Posicionar el icono del menu
@@ -36,6 +46,8 @@ public class EditarCorreo extends AppCompatActivity {
         MenuItem menuItem= menu.getItem(3);
         menuItem.setChecked(true);
         //
+
+        obtenerPreferencias();
 
         MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -62,10 +74,17 @@ public class EditarCorreo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(Validaciones()){
-                    Intent intent = new Intent(EditarCorreo.this, Verificar_CorreoNuevo.class);
-                    intent.putExtra("Correo", CorreoNuevo.getText().toString());
-                    startActivity(intent);
-                    finish();
+                    /*Intent intent = new Intent(EditarCorreo.this, Verificar_CorreoNuevo.class);
+                    intent.putExtra("Correo", CorreoNuevo.getText().toString());*/
+                    //COPIA Y PEGA ESTAS 5 LÍNEAS DE CÓDIGO A DONDE DEBERÍA DE IR
+                    String dominio = getString(R.string.ip);
+                    cambiarCorreo(dominio + "actualizarPerfil.php?" +
+                            "id_usuario=" + usuario.getId() +
+                            "&correo=" + CorreoNuevo.getText().toString() + //En la otra clase reemplaza CorreoNuevo.getText().toString() por >>Correo<<
+                            "&contrasena=" + confirmarContrasena.getText().toString().replaceAll(" ", "%20"));
+                    //HASTA AQUÍ
+                    /*startActivity(intent);
+                    finish();*/
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica el Correo", Toast.LENGTH_SHORT).show();
                 }
@@ -73,6 +92,16 @@ public class EditarCorreo extends AppCompatActivity {
         });
 
     }
+
+    private void obtenerPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+
+        usuario.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
+        usuario.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
+        usuario.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
+        usuario.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
+    }
+
     private void home(){
         Intent next = new Intent(this, home.class);
         startActivity(next);
@@ -98,4 +127,27 @@ public class EditarCorreo extends AppCompatActivity {
         }
         return siguiente;
     }
+
+    //COPIA Y PEGA ESTE MÉTODO A DONDE DEBERÍA DE IR
+    private void cambiarCorreo(String URL) {
+        StringRequest request = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                        if (response.equals("Contraseña actualizada con éxito")) {
+                            CorreoNuevo.setText("");
+                            confirmarContrasena.setText("");
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Verifica tu conexión", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(request);
+    }
+    //HASTA AQUÏ
 }

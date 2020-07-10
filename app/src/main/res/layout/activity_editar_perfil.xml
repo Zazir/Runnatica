@@ -35,43 +35,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/txtEditarCorreo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Editar Correo"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25dp"
-                ></TextView>
-
             <Button
                 android:id="@+id/btnEditarCorreo"
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtEditarCorreo"
                 android:text="Editar Correo"
                 android:textColor="@android:color/background_dark"
-                android:textSize="15dp"
-                ></Button>
-            <TextView
-                android:id="@+id/txtEditarContrasena"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Editar Contraseña"
-                android:layout_below="@+id/btnEditarCorreo"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25dp"
-                ></TextView>
+                android:textSize="15dp"/>
 
             <Button
                 android:id="@+id/btnEditarContrasena"
                 android:layout_width="215dp"
+                android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtEditarContrasena"
+                android:layout_below="@+id/btnEditarCorreo"
                 android:text="Editar Contraseña"
                 android:textColor="@android:color/background_dark"
-                android:textSize="15dp"
-                ></Button>
+                android:textSize="15dp"/>
             <TextView
                 android:id="@+id/txtFechaN"
                 android:layout_width="346dp"
