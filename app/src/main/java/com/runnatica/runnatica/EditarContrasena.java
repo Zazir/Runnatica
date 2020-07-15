@@ -45,7 +45,7 @@ public class EditarContrasena extends AppCompatActivity {
 
         CambiarContraseña = (Button)findViewById(R.id.btnCambiarContrasena);
         ContrasenaActual = (EditText) findViewById(R.id.etContrasenaActual);
-        ContrasenaNueva = (EditText)findViewById(R.id.etRepeticionContrasena);
+        ContrasenaNueva = (EditText)findViewById(R.id.etNuevaContrasena);
         RepetirContrasena = (EditText)findViewById(R.id.etRepeticionContrasena);
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
@@ -157,5 +157,10 @@ public class EditarContrasena extends AppCompatActivity {
                     }
                 });
         Volley.newRequestQueue(this).add(request);
+    }
+
+    private void Regresar(){
+        Intent next = new Intent(this, VerPerfil.class);
+        startActivity(next);
     }
 }
