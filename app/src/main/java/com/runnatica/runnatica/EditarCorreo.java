@@ -30,11 +30,14 @@ public class EditarCorreo extends AppCompatActivity {
     Button VerificarCorreo;
 
     private Usuario usuario = Usuario.getUsuarioInstance();
+    private String dominio;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+         dominio = getString(R.string.ip);
+
         setContentView(R.layout.activity_editar_correo);
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         CorreoNuevo = (EditText)findViewById(R.id.etCorreoNuevo);
@@ -73,18 +76,10 @@ public class EditarCorreo extends AppCompatActivity {
         VerificarCorreo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Validaciones()){
-                    /*Intent intent = new Intent(EditarCorreo.this, Verificar_CorreoNuevo.class);
-                    intent.putExtra("Correo", CorreoNuevo.getText().toString());*/
-                    //COPIA Y PEGA ESTAS 5 LÍNEAS DE CÓDIGO A DONDE DEBERÍA DE IR
-                    String dominio = getString(R.string.ip);
-                    cambiarCorreo(dominio + "actualizarPerfil.php?" +
-                            "id_usuario=" + usuario.getId() +
-                            "&correo=" + CorreoNuevo.getText().toString() + //En la otra clase reemplaza CorreoNuevo.getText().toString() por >>Correo<<
+                if(true){
+                    verificarContrasena(dominio+ "actualizarPerfil.php?" + "id_usuario=" + usuario.getId()+
                             "&contrasena=" + confirmarContrasena.getText().toString().replaceAll(" ", "%20"));
-                    //HASTA AQUÍ
-                    /*startActivity(intent);
-                    finish();*/
+
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica el Correo", Toast.LENGTH_SHORT).show();
                 }
@@ -120,6 +115,7 @@ public class EditarCorreo extends AppCompatActivity {
     }
     private boolean Validaciones(){
         Boolean siguiente = false;
+
         if (!Patterns.EMAIL_ADDRESS.matcher(CorreoNuevo.getText().toString()).matches()){
             CorreoNuevo.setError("Ese no es un correo válido");
         }else{
@@ -128,16 +124,22 @@ public class EditarCorreo extends AppCompatActivity {
         return siguiente;
     }
 
-    //COPIA Y PEGA ESTE MÉTODO A DONDE DEBERÍA DE IR
-    private void cambiarCorreo(String URL) {
+
+    private void verificarContrasena(String URL){
         StringRequest request = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-                        if (response.equals("Contraseña actualizada con éxito")) {
-                            CorreoNuevo.setText("");
-                            confirmarContrasena.setText("");
+                        if (response.equals("Correcto")) {
+
+                            Intent intent = new Intent(EditarCorreo.this, Verificar_CorreoNuevo.class);
+                            intent.putExtra("Correo", CorreoNuevo.getText().toString());
+                            startActivity(intent);
+                            finish();
+
+                        }else if(response.equals("Incorrecto")){
+                            Toast.makeText(getApplicationContext(), "Contraseña Incorrecta, Vuelve a Intentar", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -149,5 +151,4 @@ public class EditarCorreo extends AppCompatActivity {
                 });
         Volley.newRequestQueue(this).add(request);
     }
-    //HASTA AQUÏ
 }

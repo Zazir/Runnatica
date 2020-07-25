@@ -10,18 +10,8 @@
         android:id="@+id/llInscribirse"
         android:layout_width="match_parent"
         android:layout_height="59dp"
-        android:background="@drawable/barra_verde">
-
-        <Button
-            android:id="@+id/btnIncribirse"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignEnd="@id/ivResultados"
-            android:layout_gravity="center"
-            android:background="@null"
-            android:text="Boton para Inscribirse"
-            android:textColor="@android:color/background_light"
-            android:textSize="25dp"></Button>
+        android:background="@drawable/barra_verde"
+        android:orientation="horizontal">
     </LinearLayout>
 
     <ScrollView
@@ -231,6 +221,16 @@
                 android:layout_height="282dp"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/txtTablaResultados"></ImageView>
+
+            <Button
+                android:id="@+id/btnIncribirse"
+                android:layout_width="match_parent"
+                android:layout_height="69dp"
+                android:layout_below="@+id/ivResultados"
+                android:layout_marginTop="30dp"
+                android:text="Registrase"
+                android:textSize="25dp"
+                ></Button>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

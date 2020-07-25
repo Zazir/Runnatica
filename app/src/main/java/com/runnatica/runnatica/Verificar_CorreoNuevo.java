@@ -17,6 +17,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.runnatica.runnatica.poho.Usuario;
 
 import java.util.Properties;
@@ -210,10 +215,34 @@ public class Verificar_CorreoNuevo extends AppCompatActivity {
         startActivity(next);
     }
     private void Siguiente(){
+
+        String dominio = getString(R.string.ip);
+        cambiarCorreo(dominio + "actualizarPerfil.php?" +
+                "id_usuario=" + usuario.getId() +
+                "&correo=" + Correo
+        );
         Toast.makeText(getApplicationContext(), "Codigo Correcto", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(Verificar_CorreoNuevo.this, registro_usuario.class);
+        Intent intent = new Intent(Verificar_CorreoNuevo.this, Correo_Editado.class);
         intent.putExtra("Correo", Correo);
         startActivity(intent);
         finish();
     }
+
+    private void cambiarCorreo(String URL) {
+        StringRequest request = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Verifica tu conexión", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(request);
+    }
+
 }

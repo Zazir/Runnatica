@@ -147,5 +147,6 @@ public class VerPerfil extends AppCompatActivity {
     private void EditarPerfil(){
         Intent next = new Intent(this, Editar_perfil.class);
         startActivity(next);
+        finish();
     }
 }
