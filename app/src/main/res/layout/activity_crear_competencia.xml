@@ -41,6 +41,13 @@
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
 
+            <Button
+                android:id="@+id/btnSeleccionarLugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seleccionar lugar"
+                android:layout_alignParentEnd="true"/>
+
             <TextView
                 android:id="@+id/txtNombreCompetencia"
                 android:layout_width="wrap_content"
@@ -70,6 +77,7 @@
                 android:text="Precio de la Competencia"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"></TextView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="58dp"
@@ -343,7 +351,7 @@
     </ScrollView>
 
 
-    <android.support.design.widget.BottomNavigationView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="78dp"

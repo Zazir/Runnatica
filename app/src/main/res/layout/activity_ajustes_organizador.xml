@@ -27,7 +27,7 @@
         android:layout_marginTop="64dp"
         android:layout_marginEnd="0dp"/>
 
-    <android.support.design.widget.BottomNavigationView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/MenuOrganizador"
         android:layout_width="match_parent"
         android:layout_height="78dp"
@@ -38,6 +38,6 @@
         android:minHeight="@android:dimen/thumbnail_height"
         app:itemTextColor="@android:color/background_dark"
         app:menu="@menu/main"
-        ></android.support.design.widget.BottomNavigationView>
+        ></com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </RelativeLayout>

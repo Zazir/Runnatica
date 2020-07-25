@@ -1,6 +1,6 @@
 package com.runnatica.runnatica;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MetodoPago extends AppCompatActivity {

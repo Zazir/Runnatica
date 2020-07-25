@@ -10,10 +10,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,16 +30,22 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.runnatica.runnatica.Fragmentos.mapCompetencia;
 import com.runnatica.runnatica.poho.Usuario;
 
 import java.io.IOException;
 import java.util.Calendar;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class crear_competencia extends AppCompatActivity {
 
     private TextView txtFecha, txtHora;
     private EditText Nombre, Precio, GradosUbicacion, Ciudad, Colonia, Calle, Descripcion;
-    private Button Informacion, btnImagen, btnDate, Aval, Guardar, btnHora;
+    private Button Informacion, btnImagen, btnDate, Aval, Guardar, btnHora, btnLugar;
     private Spinner Pais, Estado;
     private ImageView img;
     private Usuario usuario = Usuario.getUsuarioInstance();
@@ -94,6 +96,7 @@ public class crear_competencia extends AppCompatActivity {
         Guardar = (Button) findViewById(R.id.btnGuardarCompetencia);
         txtFecha = (TextView)findViewById(R.id.tvFechaPicker);
         txtHora = (TextView)findViewById(R.id.tvHoraCompetencia);
+        btnLugar = (Button)findViewById(R.id.btnSeleccionarLugar);
 
         //Toast.makeText(this, usuario.getId()+"", Toast.LENGTH_SHORT).show();
 
@@ -102,12 +105,10 @@ public class crear_competencia extends AppCompatActivity {
 
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
-//Posicionar el icono del menu
         Menu menu = MenuUsuario.getMenu();
         MenuItem menuItem= menu.getItem(3);
         menuItem.setChecked(true);
         //
-
 
         MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -208,6 +209,20 @@ public class crear_competencia extends AppCompatActivity {
             }
         });
 
+        btnLugar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mapa();
+            }
+        });
+    }
+
+    private void mapa() {
+        Intent intent = new Intent(crear_competencia.this, mapCompetencia.class);
+        intent.putExtra("Latitud", "0.0");
+        intent.putExtra("Longitud", "0.0");
+        intent.putExtra("nombre_competencia", "");
+        startActivity(intent);
     }
 
     private void obtenerPreferencias() {

@@ -33,7 +33,7 @@
         android:textColor="@android:color/background_dark"
         ></TextView>
 
-    <android.support.design.widget.BottomNavigationView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="78dp"

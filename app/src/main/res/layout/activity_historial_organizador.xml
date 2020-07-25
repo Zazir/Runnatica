@@ -24,14 +24,14 @@
             android:textSize="25sp"></TextView>
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHistorialCompetenciasOrganizador"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/MenuOrganizador"
         android:layout_below="@+id/mmda"/>
 
-    <android.support.design.widget.BottomNavigationView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/MenuOrganizador"
         android:layout_width="match_parent"
         android:layout_height="78dp"
@@ -42,7 +42,7 @@
         android:minHeight="@android:dimen/thumbnail_height"
         app:itemTextColor="@android:color/background_dark"
         app:menu="@menu/main"
-        ></android.support.design.widget.BottomNavigationView>
+        ></com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </RelativeLayout>

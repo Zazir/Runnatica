@@ -5,12 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +23,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.paypal.android.sdk.payments.PayPalService;
+import com.runnatica.runnatica.Fragmentos.mapCompetencia;
 import com.runnatica.runnatica.adapter.comentariosAdapter;
 import com.runnatica.runnatica.poho.Comentarios;
 import com.runnatica.runnatica.poho.Usuario;
@@ -40,9 +37,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class carrera_vista1 extends AppCompatActivity {
     BottomNavigationView MenuUsuario;
-    private ImageView imgCompetencia;
+    private ImageView imgCompetencia, imgMapa;
     private TextView txtNomCompe, txtOrganizador, txtFechaCompe, txtHoraCompe,
             txtLugarCompe, txtPrecioCompe, txtDescripcionCompe, txtRegistrarse,
             txtComentario;
@@ -60,6 +63,7 @@ public class carrera_vista1 extends AppCompatActivity {
     private String monto;
     private String categoria;
     private String dominio;
+    private String coordenadas, nombreCompe;
 
     @Override
     protected void onDestroy() {
@@ -84,6 +88,7 @@ public class carrera_vista1 extends AppCompatActivity {
         btnInscripcion = (Button)findViewById(R.id.btnIncribirse);
         txtComentario = (TextView)findViewById(R.id.etRespuestaForo);
         btnEnviarComentario = (Button)findViewById(R.id.btnEnviarForo);
+        imgMapa = (ImageView)findViewById(R.id.imgglobo);
         ForoRecycler = (RecyclerView)findViewById(R.id.rvForo);
         ForoRecycler.setHasFixedSize(true);
         ForoRecycler.setLayoutManager(new LinearLayoutManager(this));
@@ -143,6 +148,12 @@ public class carrera_vista1 extends AppCompatActivity {
             }
         });
 
+        imgMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Mapa();
+            }
+        });
     }
 
     private void obtenerPreferencias() {
@@ -212,6 +223,8 @@ public class carrera_vista1 extends AppCompatActivity {
                             Glide.with(carrera_vista1.this).load(respuesta.optString("foto")).into(imgCompetencia);
                             id_organizador = respuesta.optString("id_usuario");
                             monto = respuesta.optString("precio");
+                            coordenadas = respuesta.optString("coordenadas");
+                            nombreCompe = respuesta.optString("nom_comp");
                             txtNomCompe.setText(respuesta.optString("nom_comp"));
                             txtOrganizador.setText(respuesta.optString("nombre"));
                             txtFechaCompe.setText(respuesta.optString("fecha"));
@@ -344,20 +357,44 @@ public class carrera_vista1 extends AppCompatActivity {
 
         alertaComentario.show();
     }
+
     private void home(){
         Intent next = new Intent(this, home.class);
         startActivity(next);
     }
+
     private void Busqueda(){
         Intent next = new Intent(this, busqueda_competidor.class);
         startActivity(next);
     }
+
     private void Historial(){
         Intent next = new Intent(this, historial_competidor.class);
         startActivity(next);
     }
+
     private void Ajustes(){
         Intent next = new Intent(this, ajustes_competidor.class);
         startActivity(next);
+    }
+
+    private void Mapa() {
+        Log.i("Coordenadas Completas", "Cordenadas: "+coordenadas);
+
+        String cor1, cor2;
+        String[] corde;
+        corde = coordenadas.split(" ");
+
+        cor1 = corde[0];
+        cor2 = corde[1];
+
+        Log.i("Coordenadas", "Latitud: "+cor1);
+        Log.i("Coordenadas", "Longitud: "+cor2);
+
+        Intent intent = new Intent(carrera_vista1.this, mapCompetencia.class);
+        intent.putExtra("Latitud", cor1);
+        intent.putExtra("Longitud", cor2);
+        intent.putExtra("nombre_competencia", nombreCompe);
+        startActivity(intent);
     }
 }

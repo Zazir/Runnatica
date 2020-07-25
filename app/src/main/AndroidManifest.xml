@@ -2,19 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.runnatica.runnatica">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -24,58 +16,161 @@
         android:roundIcon="@mipmap/ic_index"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Correo_Editado"></activity>
-        <activity android:name=".Verificar_CorreoNuevo" android:screenOrientation="portrait"/>
-        <activity android:name=".EditarCorreo" android:screenOrientation="portrait"/>
-        <activity android:name=".verificar_correo" android:screenOrientation="portrait"/>
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <activity
+            android:name=".Fragmentos.mapCompetencia"
+            android:label="@string/title_activity_map_competencia"></activity>
+
+        <activity android:name=".Correo_Editado" />
+        <activity
+            android:name=".Verificar_CorreoNuevo"
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".EditarCorreo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".verificar_correo"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.verificar_correo"
-            android:label="@string/title_activity_verificar_correo" android:screenOrientation="portrait"/>
-        <activity android:name=".registro_basico" android:screenOrientation="portrait"/>
+            android:label="@string/title_activity_verificar_correo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".registro_basico"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".homeDrawer"
             android:label="@string/title_activity_home_drawer"
-            android:theme="@style/AppTheme.NoActionBar" android:screenOrientation="portrait"/>
-        <activity android:name=".Informacion" android:screenOrientation="portrait"/>
-        <activity android:name=".reCaptcha" android:screenOrientation="portrait"/>
-        <activity android:name=".informacion_inscrito" android:screenOrientation="portrait"/>
-        <activity android:name=".lista_inscritos" android:screenOrientation="portrait"/>
-        <activity android:name=".Subir_Resultados" android:screenOrientation="portrait"/>
-        <activity android:name=".vista1_organizador" android:screenOrientation="portrait"/>
-        <activity android:name=".pagarInscripciones" android:screenOrientation="portrait"/>
-        <activity android:name=".agregarForaneo" android:screenOrientation="portrait"/>
-        <activity android:name=".editar_competencia2" android:screenOrientation="portrait"/>
-        <activity android:name=".borrar_competencia" android:screenOrientation="portrait"/>
-        <activity android:name=".cancelar_competencia" android:screenOrientation="portrait"/>
-        <activity android:name=".posponer_competencia" android:screenOrientation="portrait"/>
-        <activity android:name=".editar_competencia" android:screenOrientation="portrait"/>
-        <activity android:name=".ajustes_organizador" android:screenOrientation="portrait"/>
-        <activity android:name=".historial_organizador" android:screenOrientation="portrait"/>
-        <activity android:name=".home_organizador" android:screenOrientation="portrait"/>
-        <activity android:name=".Centrodeayuda" android:screenOrientation="portrait"/>
-        <activity android:name=".EditarContrasena" android:screenOrientation="portrait"/>
-        <activity android:name=".VerPerfil" android:screenOrientation="portrait"/>
-        <activity android:name=".FelicidadesCompetidor" android:screenOrientation="portrait"/>
-        <activity android:name=".MetodoPago" android:screenOrientation="portrait"/>
-        <activity android:name=".InscripcionForaneo" android:screenOrientation="portrait"/>
-        <activity android:name=".InscripcionesCompetidor" android:screenOrientation="portrait"/>
-        <activity android:name=".AvisoPrivacidad" android:screenOrientation="portrait"/>
-        <activity android:name=".Cerrar_sesion" android:screenOrientation="portrait"/>
-        <activity android:name=".Ubicacion" android:screenOrientation="portrait"/>
-        <activity android:name=".Notificaciones" android:screenOrientation="portrait"/>
-        <activity android:name=".Editar_perfil" android:screenOrientation="portrait"/>
-        <activity android:name=".DetallesTransaccion" android:screenOrientation="portrait"/>
-        <activity android:name=".Donaciones" android:screenOrientation="portrait"/>
-        <activity android:name=".Felicidades_Inscripcion" android:screenOrientation="portrait"/>
-        <activity android:name=".Tipos_Inscripciones" android:screenOrientation="portrait"/>
-        <activity android:name=".crear_inscripcion" android:screenOrientation="portrait"/>
-        <activity android:name=".crear_competencia" android:screenOrientation="portrait"/>
-        <activity android:name=".ajustes_competidor" android:screenOrientation="portrait"/>
-        <activity android:name=".historial_competidor" android:screenOrientation="portrait"/>
-        <activity android:name=".busqueda_competidor" android:screenOrientation="portrait"/>
-        <activity android:name=".carrera_vista1" android:screenOrientation="portrait"/>
-        <activity android:name=".home" android:screenOrientation="portrait"/>
-        <activity android:name=".terminosycondiciones" android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Informacion"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".reCaptcha"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".informacion_inscrito"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".lista_inscritos"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Subir_Resultados"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".vista1_organizador"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pagarInscripciones"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".agregarForaneo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".editar_competencia2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".borrar_competencia"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".cancelar_competencia"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".posponer_competencia"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".editar_competencia"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ajustes_organizador"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".historial_organizador"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home_organizador"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Centrodeayuda"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditarContrasena"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VerPerfil"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FelicidadesCompetidor"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MetodoPago"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".InscripcionForaneo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".InscripcionesCompetidor"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AvisoPrivacidad"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Cerrar_sesion"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ubicacion"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Notificaciones"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Editar_perfil"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DetallesTransaccion"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Donaciones"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Felicidades_Inscripcion"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Tipos_Inscripciones"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".crear_inscripcion"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".crear_competencia"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ajustes_competidor"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".historial_competidor"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".busqueda_competidor"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".carrera_vista1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".terminosycondiciones"
+            android:screenOrientation="portrait" />
         <activity android:name=".logo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -83,11 +178,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".registro_usuario" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".registro_usuario"
+            android:screenOrientation="portrait" />
         <activity android:name=".Login" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="$[applicationId].provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -96,16 +203,16 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
         <service
             android:name=".FetchAddressIntentService"
             android:exported="false" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

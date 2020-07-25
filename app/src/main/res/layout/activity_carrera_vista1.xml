@@ -75,20 +75,28 @@
                 android:layout_below="@+id/tvNombreOrganizador"
                 android:background="@drawable/calendario"></ImageView>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mapa"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/imgglobo"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"/>
 
             <ImageView
+                android:id="@+id/imgglobo"
                 android:layout_width="48dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
                 android:layout_below="@+id/tvFechaCompetencia"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/lugar"></ImageView>
+                android:layout_marginTop="10dp"
+                android:background="@drawable/lugar"/>
 
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="22dp"
                 android:layout_below="@+id/tvLugarCompetencia"
                 android:background="@drawable/boleto"></ImageView>
 
@@ -170,7 +178,7 @@
                 android:layout_below="@+id/tvDescripcion"
                 />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvForo"
                 android:layout_width="373dp"
                 android:layout_height="278dp"
@@ -232,7 +240,7 @@
         </RelativeLayout>
     </ScrollView>
 
-    <android.support.design.widget.BottomNavigationView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="78dp"

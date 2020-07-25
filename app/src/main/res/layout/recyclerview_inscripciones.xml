@@ -6,7 +6,7 @@
     xmlns:cardView="http://schemas.android.com/tools"
     android:orientation="horizontal">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/cardview_light_background"
@@ -68,5 +68,5 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
