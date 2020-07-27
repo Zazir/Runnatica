@@ -39,10 +39,7 @@
         <activity
             android:name=".verificar_correo"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.login.verificar_correo"
-            android:label="@string/title_activity_verificar_correo"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".registro_basico"
             android:screenOrientation="portrait" />
@@ -206,6 +203,7 @@
         <service
             android:name=".FetchAddressIntentService"
             android:exported="false" />
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
     </application>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />

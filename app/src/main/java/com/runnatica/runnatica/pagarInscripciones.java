@@ -11,17 +11,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import android.view.Menu;
-import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -30,6 +27,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.mercadopago.android.px.core.MercadoPagoCheckout;
+import com.mercadopago.android.px.model.Payment;
+import com.mercadopago.android.px.model.exceptions.MercadoPagoError;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -38,12 +39,28 @@ import com.paypal.android.sdk.payments.PaymentConfirmation;
 import com.runnatica.runnatica.Config.PaypalConfig;
 import com.runnatica.runnatica.PDF.PlantillaPDF;
 import com.runnatica.runnatica.poho.Usuario;
+import com.runnatica.runnatica.repositorio.mercadopago.models.ExcludedPaymentType;
+import com.runnatica.runnatica.repositorio.mercadopago.models.Item;
+import com.runnatica.runnatica.repositorio.mercadopago.models.PagoDetalles;
+import com.runnatica.runnatica.repositorio.mercadopago.models.Payer;
+import com.runnatica.runnatica.repositorio.mercadopago.models.PaymentMethods;
+import com.runnatica.runnatica.repositorio.mercadopago.models.ResponsePago;
+import com.runnatica.runnatica.repositorio.mercadopago.retrofit.RetrofitApi;
+import com.runnatica.runnatica.repositorio.mercadopago.retrofit.RetrofitClient;
 
 import org.json.JSONException;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -52,7 +69,9 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         GoogleApiClient.OnConnectionFailedListener {
 
 
-    private Button paypal;
+
+
+    private Button paypal, MercadoPago;
     PlantillaPDF plantillaPDF = new PlantillaPDF(pagarInscripciones.this);
 
     BottomNavigationView MenuUsuario;
@@ -85,9 +104,22 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
 
     private String dominio;
 
+    //MercadoPago
+    private Retrofit retrofit;
+    private RetrofitApi retrofitApi;
+    private Disposable disposable;
+    private static final String PUBLIC_KEY = "TEST-fda95f10-45da-49ec-89c3-f9d8ef10ad73"; //reemplazar por su public key
+    //
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        //MercadoPago
+        retrofit = RetrofitClient.getInstance();
+        retrofitApi = retrofit.create(RetrofitApi.class);
+        //MercadopAGO
 
         /*WalletFragmentInitParams startParams;
         WalletFragmentInitParams.Builder startParamsBuilder = WalletFragmentInitParams.newBuilder()
@@ -124,42 +156,13 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
 
         dominio = getString(R.string.ip);
 
-        MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
-
-//Posicionar el icono del menu
-        Menu menu = MenuUsuario.getMenu();
-        MenuItem menuItem= menu.getItem(3);
-        menuItem.setChecked(true);
-        //
-
-
-        MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-                if (menuItem.getItemId() == R.id.menu_home) {
-                    home();
-                }
-                if (menuItem.getItemId() == R.id.menu_busqueda) {
-                    Busqueda();
-                }
-                if (menuItem.getItemId() == R.id.menu_historial) {
-                    Historial();
-                }
-                if (menuItem.getItemId() == R.id.menu_ajustes) {
-                    Ajustes();
-                }
-
-                return true;
-            }
-        });
-
 
         setContentView(R.layout.activity_pagar_inscripciones);
 
         obtenerPreferencias();
 
         paypal = (Button)findViewById(R.id.btnPaypal);
+        MercadoPago = (Button) findViewById(R.id.btnMercadoPago);
         //mWalletFragment = (SupportWalletFragment)getSupportFragmentManager().findFragmentByTag(WALLET_FRAGMENT_ID);
         paypal.setEnabled(false);
 
@@ -183,8 +186,76 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
             public void onClick(View v) {
                 hacerPago();
             }
+        });MercadoPago.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                generarPago();
+            }
         });
     }
+
+    private void generarPago() {
+        List<Item> list = new ArrayList<>();//lista con datos de la venta
+        Item item = new Item();
+        item.setUnitPrice(150.50); //precio unitario de producto
+        item.setTitle("Aura Club Pagos"); //titulo de la venta del producto
+        item.setQuantity(1); //cantidad de productos a vender
+        item.setDescription("Wiskey Red Label 750Ml"); //descripcion del producto
+        item.setCurrencyId("MXN"); //moneda de pais del precio
+        list.add(item); //agregamos los detalles a la lista
+
+        Payer payer = new Payer(); //objeto con los datos de usuario comprador
+        payer.setEmail("prueba@prueba.com"); //email del usuario comprador
+
+
+        List<ExcludedPaymentType> list1 = new ArrayList<>();//lista con datos de la venta
+        ExcludedPaymentType itempay = new ExcludedPaymentType();
+        itempay.setId("prepaid_card"); //EXCLUIR MEDIOS DE PAGO
+        itempay.setId("atm"); //EXCLUIR MEDIOS DE PAGO
+        list1.add(itempay); //agregamos los detalles a la lista
+
+
+
+        PaymentMethods methods = new PaymentMethods();
+        methods.setExcludedPaymentTypes(list1); //precio unitario de producto
+
+
+
+        PagoDetalles pagoDetalles = new PagoDetalles(); //generamos el objeto para enviar a mercado pago
+        pagoDetalles.setPayer(payer);
+        pagoDetalles.setItems(list);
+        pagoDetalles.setmPayment_methods(methods);
+
+
+
+
+
+        disposable = retrofitApi.obtenerDatosPago(pagoDetalles).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<ResponsePago>() {
+                    @Override
+                    public void onNext(ResponsePago responsePago) {
+                        //una vez generada el id de compra lo mandamos a mercado pago y se genera la ventana de tarjetas
+                        new MercadoPagoCheckout.Builder(PUBLIC_KEY, responsePago.getId())
+                                .build()
+                                .startPayment(getApplication(), 12);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("aca","error = " + e.getMessage());
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+    }
+
+
+
 
     private void obtenerPreferencias() {
         SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
@@ -253,6 +324,44 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //MercadoPago
+        if(requestCode == 12){
+            if (resultCode == MercadoPagoCheckout.PAYMENT_RESULT_CODE) {
+                final Payment payment = (Payment) data.getSerializableExtra(MercadoPagoCheckout.EXTRA_PAYMENT_RESULT);//payment almacena los datos de la compra
+
+                if(payment.getPaymentStatus().equals("approved")){
+
+                    //compra aprobada
+                    Toast.makeText(this, "Pago Realizado", Toast.LENGTH_SHORT).show();
+
+                }  else if(payment.getPaymentStatus().equals("pending")){
+                    Toast.makeText(this, "Pago en espera de OXXO", Toast.LENGTH_SHORT).show();
+                } else{
+                    //compra no aprobada
+                    Toast.makeText(this, "Fallo Pago", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+            else if (resultCode == RESULT_CANCELED) {
+
+                if (data != null && data.getExtras() != null
+                        && data.getExtras().containsKey(MercadoPagoCheckout.EXTRA_ERROR)) {
+                    //error en algun paso de mercado pago
+                    final MercadoPagoError mercadoPagoError =
+                            (MercadoPagoError) data.getSerializableExtra(MercadoPagoCheckout.EXTRA_ERROR);
+                    //el objeto mercadoPagoError contiene todos los datos de porque no se genero la venta
+
+                } else {
+                    //compra cancelada
+
+                }
+            }
+
+
+        }
+
+        //MercadoPago
+
         if(requestCode == PAYPAL_REQUEST_CODE){
             if (resultCode == RESULT_OK){
                 //Petición al WS para mostrar en bd la inscripción

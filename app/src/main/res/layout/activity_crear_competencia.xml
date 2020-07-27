@@ -334,16 +334,33 @@
                 android:id="@+id/etDescripcionCompetencia"
                 android:layout_width="369dp"
                 android:layout_height="129dp"
-                android:layout_marginLeft="20dp"
                 android:layout_below="@+id/txtDescripcion"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="-2dp"
                 android:textColor="@android:color/background_dark"></EditText>
+            <TextView
+                android:id="@+id/txtCordenadas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Coordenadas"
+                android:layout_below="@+id/etDescripcionCompetencia"
+                android:textSize="25dp"
+                android:textColor="@android:color/background_dark"
+                ></TextView>
+
+            <EditText
+                android:id="@+id/etCoordenadas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtCordenadas"
+                ></EditText>
 
             <Button
                 android:id="@+id/btnGuardarCompetencia"
                 android:layout_width="310dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
-                android:layout_below="@+id/etDescripcionCompetencia"
+                android:layout_below="@+id/etCoordenadas"
                 android:background="@color/grisBoton"
                 android:text="Siguiente"></Button>
 

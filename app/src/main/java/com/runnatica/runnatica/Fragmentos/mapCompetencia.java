@@ -73,28 +73,28 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
     }
 
     @Override
-    public void onMapLongClick(LatLng latLng) {
-        Log.i("Coords selected", latLng.latitude+"");
-        Log.i("Coords selected", latLng.longitude+"");
+    public void onMapLongClick(LatLng latLng) {//Es el metodo para recibir la longitud y la latitud LatLng
+        Log.i("Coords selected", latLng.latitude+"");//Aqui mostramos en la consola la latitud
+        Log.i("Coords selected", latLng.longitude+"");//Aqui Mostramos en la consola la longitud
 
-        if (marker != null) {
-            mMap.clear();
+        if (marker != null) {// Validacion si existe un marcador
+            mMap.clear();// Aqui eliminamos los marcadores
             marker = new MarkerOptions();
         }
 
-        mMap.addMarker(marker.position(latLng).title("Aquí iniciará la carrera"));
+        mMap.addMarker(marker.position(latLng).title(latLng.latitude + ","+latLng.longitude));//Añadimos el marcador
         String coords = latLng.latitude + " " + latLng.longitude;
-        Log.i("Coords to send", coords);
-        regresarCoordenadas(coords);
+        Log.i("Coords to send", coords);//Mostramos las coordenadas
+        //regresarCoordenadas(coords);
     }
 
-    private void createMark(GoogleMap googleMap) {
-        LatLng startCom = new LatLng(Latitud, Longitud);
+    private void createMark(GoogleMap googleMap) {//Metodo que se activa cuando se accede desde la vista de la competncia 1
+        LatLng startCom = new LatLng(Latitud, Longitud);// Creamos el objeto para crear latitud y longitud
         googleMap.addMarker(new MarkerOptions().position(startCom)
-                .title("Inicio de "+Competencia_nombre));
+                .title("Inicio de "+Competencia_nombre));//Agregamos un marcador al mapa
         float zoom = 16;
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startCom, zoom));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startCom, zoom));//Movemos el mapa a la latitud y longitud que tiene la carrera
     }
 
     private void regresarCoordenadas(String Coordenadas) {

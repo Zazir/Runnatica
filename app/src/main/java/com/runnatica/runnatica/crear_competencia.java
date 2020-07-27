@@ -24,6 +24,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -37,14 +41,10 @@ import com.runnatica.runnatica.poho.Usuario;
 import java.io.IOException;
 import java.util.Calendar;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 public class crear_competencia extends AppCompatActivity {
 
     private TextView txtFecha, txtHora;
-    private EditText Nombre, Precio, GradosUbicacion, Ciudad, Colonia, Calle, Descripcion;
+    private EditText Nombre, Precio, GradosUbicacion, Ciudad, Colonia, Calle, Descripcion, Coordenadas;
     private Button Informacion, btnImagen, btnDate, Aval, Guardar, btnHora, btnLugar;
     private Spinner Pais, Estado;
     private ImageView img;
@@ -61,8 +61,6 @@ public class crear_competencia extends AppCompatActivity {
     private String Reembolso;
 
     private String dominio;
-
-
 
     BottomNavigationView MenuUsuario;
 
@@ -97,6 +95,7 @@ public class crear_competencia extends AppCompatActivity {
         txtFecha = (TextView)findViewById(R.id.tvFechaPicker);
         txtHora = (TextView)findViewById(R.id.tvHoraCompetencia);
         btnLugar = (Button)findViewById(R.id.btnSeleccionarLugar);
+        Coordenadas = (EditText)findViewById(R.id.etCoordenadas);
 
         //Toast.makeText(this, usuario.getId()+"", Toast.LENGTH_SHORT).show();
 
@@ -201,7 +200,23 @@ public class crear_competencia extends AppCompatActivity {
             public void onClick(View v) {
                 //subirImagenCompetencia("http://192.168.137.1:811/WebServiceRunnatica/agregarCompetencia.php?");
                 if (Validaciones()){
-                    subirImagenCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
+                    //subirImagenCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
+                    SubirCompetencia(dominio + "agregarCompetencia.php?" +
+                            "Id_usuario=" + usuario.getId() +
+                            "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
+                            "&Aval=Aval" +
+                            "&Coordenadas=" +Coordenadas.getText().toString().replaceAll(" ", "%20")+
+                            "&Nombre_competencia=" + Nombre.getText().toString().replaceAll(" ", "%20")+
+                            "&Pais=" + pais +
+                            "&Colonia=" +Colonia.getText().toString().replaceAll(" ", "%20")+
+                            "&Calle=" +Calle.getText().toString().replaceAll(" ", "%20")+
+                            "&Ciudad=" +Ciudad.getText().toString().replaceAll(" ", "%20")+
+                            "&Fecha=" +fecha+
+                            "&Hora=" +hora+
+                            "&Estado=" + estado +
+                            "&Reembolso=N" +
+                            "&Precio=" +Precio.getText().toString()+
+                            "&path="+path);
                     //subirImagenCompetencia(dominio + "uploadImg.php?");
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
