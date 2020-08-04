@@ -17,6 +17,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -36,12 +42,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class carrera_vista1 extends AppCompatActivity {
     BottomNavigationView MenuUsuario;
@@ -251,14 +251,14 @@ public class carrera_vista1 extends AppCompatActivity {
     }
 
     private void comentarForo(String URL) {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,//Una peticion para pasarle al web service el comentario
                 new Response.Listener<String>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(String response) {//Nos responde el web service
                         if (response.equals("Exito"))
-                            txtComentario.setText("");
+                            txtComentario.setText("");//Se limpia la casilla del comentario
                         else if (response.equals("Error"))
-                            Toast.makeText(carrera_vista1.this, "Vuelve a intentarlo en un poco de tiempo", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(carrera_vista1.this, "Vuelve a intentarlo en un poco de tiempo", Toast.LENGTH_SHORT).show();//Nos dice que ubo un error
                     }
                 },
                 new Response.ErrorListener() {
@@ -267,22 +267,22 @@ public class carrera_vista1 extends AppCompatActivity {
                         Toast.makeText(carrera_vista1.this, "Hubo un error con el servidor", Toast.LENGTH_SHORT).show();
                     }
                 });
-        Volley.newRequestQueue(this).add(stringRequest);
+        Volley.newRequestQueue(this).add(stringRequest);//Con eso ponemos en cola la petición
     }
 
     private void cargarComentarios(String URL) {
-        comentariosList.clear();
+        comentariosList.clear();//Limpia la lista del recicler view
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,//Aqui hacemos la peticion
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             //Hacer el string a json array object
-                            JSONArray array = new JSONArray(response);
+                            JSONArray array = new JSONArray(response);//Creamos un objeto de tipo json ARRAY el cual contiene la respuetsa
 
                             //Recorremos con un for lo que tiene el array
-                            for (int i = 0; i < array.length(); i++) {
+                            for (int i = 0; i < array.length(); i++) {//El ciclo que va a guardar en tu liosta de comentarios cada comentario uno por uno
                                 //Obtenemos los objetos tipo competencias del array
                                 JSONObject comentario = array.getJSONObject(i);
 
