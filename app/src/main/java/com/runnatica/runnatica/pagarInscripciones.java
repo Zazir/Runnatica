@@ -197,10 +197,10 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
     private void generarPago() {
         List<Item> list = new ArrayList<>();//lista con datos de la venta
         Item item = new Item();
-        item.setUnitPrice(150.50); //precio unitario de producto
-        item.setTitle("Aura Club Pagos"); //titulo de la venta del producto
+        item.setUnitPrice(Double.parseDouble(monto)); //precio unitario de producto
+        item.setTitle(Organizador); //titulo de la venta del producto
         item.setQuantity(1); //cantidad de productos a vender
-        item.setDescription("Wiskey Red Label 750Ml"); //descripcion del producto
+        item.setDescription(NombreCompetencia); //descripcion del producto
         item.setCurrencyId("MXN"); //moneda de pais del precio
         list.add(item); //agregamos los detalles a la lista
 
