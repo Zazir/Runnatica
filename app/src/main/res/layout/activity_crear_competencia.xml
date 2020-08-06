@@ -18,186 +18,171 @@
             android:gravity="center"
             android:text="Crear Competencia"
             android:textColor="@android:color/background_light"
-            android:textSize="30dp"></TextView>
+            android:textSize="30dp"/>
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/llCrearCompetencia"
-        android:layout_above="@+id/bottomNavigation"
-        >
+        android:layout_below="@+id/llCrearCompetencia">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/txtInformacion"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="Información Principal"
                 android:textColor="@android:color/background_dark"
-                android:textSize="25dp"></TextView>
-
-            <Button
-                android:id="@+id/btnSeleccionarLugar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Seleccionar lugar"
-                android:layout_alignParentEnd="true"/>
+                android:textSize="25sp"/>
 
             <TextView
                 android:id="@+id/txtNombreCompetencia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtInformacion"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="10dp"
                 android:text="Nombre de la Competencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="25dp"></TextView>
+                android:textSize="25sp"/>
 
             <EditText
                 android:id="@+id/etNombreCompetencia"
-                android:layout_width="381dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_below="@+id/txtNombreCompetencia"
-                android:layout_marginLeft="20dp"
-                android:textColor="@android:color/background_dark"
-                >
-            </EditText>
+                android:textColor="@android:color/background_dark"/>
 
             <TextView
                 android:id="@+id/txtPrecio"
                 android:layout_width="313dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etNombreCompetencia"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="10dp"
                 android:text="Precio de la Competencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="25dp"></TextView>
+                android:textSize="25sp"/>
 
             <TextView
+                android:id="@+id/txtSimbol"
                 android:layout_width="wrap_content"
                 android:layout_height="58dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_below="@+id/txtPrecio"
                 android:text="$"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30dp"></TextView>
+                android:textSize="30sp"/>
 
             <EditText
                 android:id="@+id/etPrecioCompetencia"
                 android:layout_width="181dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
+                android:layout_toEndOf="@+id/txtSimbol"
                 android:layout_below="@+id/txtPrecio"
                 android:numeric="integer"
-                android:inputType="number"
-                ></EditText>
+                android:inputType="number"/>
 
             <Button
                 android:id="@+id/btnInformacionPrecio"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:layout_marginLeft="235dp"
+                android:layout_toEndOf="@+id/etPrecioCompetencia"
                 android:layout_below="@+id/txtPrecio"
-                android:text="Información"></Button>
+                android:text="Información"/>
 
             <TextView
                 android:id="@+id/txtFechaCompetencia"
-                android:layout_width="362dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/etPrecioCompetencia"
                 android:text="Fecha de la Competencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="25dp"></TextView>
+                android:textSize="25sp"/>
 
             <TextView
                 android:id="@+id/tvFechaPicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_below="@+id/txtFechaCompetencia"
-                android:text="Selecciona la Fecha"
+                android:text="Seleccionar fecha"
                 android:textColor="@android:color/background_dark"
-                android:textSize="20sp"></TextView>
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/btnSeleccionarFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:padding="15dp"
+                android:backgroundTint="#ef9a9a"
                 android:layout_below="@+id/tvFechaPicker"
-                android:text="Seleccionar fecha"/>
+                android:drawableLeft="@drawable/calendar"
+                android:text=" Fecha"/>
 
             <TextView
                 android:id="@+id/tvHoraCompetencia"
-                android:layout_width="68dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtFechaCompetencia"
-                android:layout_marginLeft="250dp"
-                android:text="Hora"
+                android:layout_marginStart="190dp"
+                android:text="Seleccionar hora"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp" />
 
             <Button
                 android:id="@+id/btnHoraCompetencia"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="210dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="190dp"
                 android:layout_below="@+id/tvHoraCompetencia"
-                android:text="Seleccionar hora" />
+                android:backgroundTint="#ef9a9e"
+                android:drawableLeft="@drawable/hour"
+                android:text="hora" />
 
             <TextView
                 android:id="@+id/txtImagenEvento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btnSeleccionarFecha"
-                android:layout_marginLeft="20dp"
+                android:layout_centerHorizontal="true"
                 android:text="Imagen del Evento"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30dp"></TextView>
+                android:textSize="30dp"/>
 
             <Button
                 android:id="@+id/btnImagenCompetencia"
-                android:layout_width="234dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/txtImagenEvento"
-                android:text="Subir"></Button>
-
-            <TextView
-                android:id="@+id/tvImgNombre"
-                android:layout_width="108dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="270dp"
-                android:layout_below="@+id/txtImagenEvento"
-                android:layout_marginTop="15dp"
-                android:text="Imagen"
-                android:textSize="20dp"
-                android:textColor="@android:color/background_dark"
-                ></TextView>
+                android:text="Seleccionar"/>
 
             <ImageView
                 android:id="@+id/imgCompetencia"
-                android:layout_below="@+id/btnGuardarCompetencia"
+                android:layout_above="@+id/btnImagenCompetencia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="430dp"
-                android:layout_marginLeft="20dp"/>
+                android:layout_centerHorizontal="true"/>
 
             <TextView
                 android:id="@+id/txtDireccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvImgNombre"
-                android:layout_marginLeft="20dp"
-                android:text="Dirección"
+                android:layout_below="@+id/btnImagenCompetencia"
+                android:layout_centerHorizontal="true"
+                android:text="Lugar de la Competencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30dp"></TextView>
+                android:textSize="30dp"/>
+
             <TextView
                 android:id="@+id/txtPais"
                 android:layout_width="match_parent"
@@ -206,8 +191,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/txtDireccion"
                 android:textColor="@android:color/background_dark"
-                android:textSize="20dp"
-                ></TextView>
+                android:textSize="20dp"/>
+
             <TextView
                 android:id="@+id/txtEstado"
                 android:layout_width="match_parent"
@@ -216,8 +201,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/spPaisCompetencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="20dp"
-                ></TextView>
+                android:textSize="20dp"/>
+
             <TextView
                 android:id="@+id/txtCiudadCompetencia"
                 android:layout_width="match_parent"
@@ -226,15 +211,15 @@
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/spEstadoCompetencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="20dp"
-                ></TextView>
+                android:textSize="20dp"/>
+
             <EditText
                 android:id="@+id/etCiudadCompetencia"
                 android:layout_width="321dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/txtCiudadCompetencia"
-                ></EditText>
+                android:layout_below="@+id/txtCiudadCompetencia"/>
+
             <TextView
                 android:id="@+id/txtColoniaCompetencia"
                 android:layout_width="match_parent"
@@ -243,28 +228,29 @@
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/etCiudadCompetencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="20dp"
-                ></TextView>
+                android:textSize="20dp"/>
+
             <EditText
                 android:id="@+id/etColoniaCompetencia"
                 android:layout_width="321dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/txtColoniaCompetencia"></EditText>
+                android:layout_below="@+id/txtColoniaCompetencia"/>
 
             <Spinner
                 android:id="@+id/spPaisCompetencia"
                 android:layout_width="207dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/txtPais"
-                ></Spinner>
+                android:layout_below="@+id/txtPais"/>
+
             <Spinner
                 android:id="@+id/spEstadoCompetencia"
                 android:layout_width="207dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/txtEstado"></Spinner>
+                android:layout_below="@+id/txtEstado"/>
+
             <TextView
                 android:id="@+id/txtCalleCompetencia"
                 android:layout_width="match_parent"
@@ -273,25 +259,60 @@
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/etColoniaCompetencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="20dp"
-                ></TextView>
+                android:textSize="20dp"/>
+
             <EditText
                 android:id="@+id/etCalleCompetencia"
                 android:layout_width="321dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/txtCalleCompetencia"
-                ></EditText>
+                android:layout_below="@+id/txtCalleCompetencia"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/mapaL"
+        android:layout_below="@+id/scr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/mapCompetencia"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mapaL"
+        android:layout_above="@+id/bottomNavigation">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <Button
+                android:id="@+id/btnSeleccionarLugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Seleccionar inicio de la competencia"/>
 
             <TextView
                 android:id="@+id/txtAval"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_below="@+id/etCalleCompetencia"
+                android:layout_below="@+id/btnSeleccionarLugar"
                 android:layout_marginLeft="20dp"
                 android:text="Aval del Evento"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30dp"></TextView>
+                android:textSize="30dp"/>
 
             <Button
                 android:id="@+id/btnAvalCompetencia"
@@ -299,15 +320,7 @@
                 android:layout_height="35dp"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/txtAval"
-                android:text="Subir"></Button>
-
-            <ImageView
-                android:id="@+id/imgCompetencia2"
-                android:layout_below="@+id/imgCompetencia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="430dp"
-                android:layout_marginLeft="20dp"/>
+                android:text="Subir"/>
 
             <TextView
                 android:layout_width="108dp"
@@ -317,8 +330,7 @@
                 android:text="Documento"
                 android:textSize="15dp"
                 android:layout_marginTop="10dp"
-                android:textColor="@android:color/background_dark"
-                ></TextView>
+                android:textColor="@android:color/background_dark"/>
 
             <TextView
                 android:id="@+id/txtDescripcion"
@@ -328,7 +340,7 @@
                 android:layout_below="@+id/btnAvalCompetencia"
                 android:text="Descripcion de la Competencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="25dp"></TextView>
+                android:textSize="25dp"/>
 
             <EditText
                 android:id="@+id/etDescripcionCompetencia"
@@ -337,7 +349,8 @@
                 android:layout_below="@+id/txtDescripcion"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="-2dp"
-                android:textColor="@android:color/background_dark"></EditText>
+                android:textColor="@android:color/background_dark"/>
+
             <TextView
                 android:id="@+id/txtCordenadas"
                 android:layout_width="match_parent"
@@ -345,24 +358,23 @@
                 android:text="Coordenadas"
                 android:layout_below="@+id/etDescripcionCompetencia"
                 android:textSize="25dp"
-                android:textColor="@android:color/background_dark"
-                ></TextView>
+                android:textColor="@android:color/background_dark"/>
 
             <EditText
                 android:id="@+id/etCoordenadas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtCordenadas"
-                ></EditText>
+                android:layout_below="@+id/txtCordenadas"/>
 
             <Button
                 android:id="@+id/btnGuardarCompetencia"
                 android:layout_width="310dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/etCoordenadas"
                 android:background="@color/grisBoton"
-                android:text="Siguiente"></Button>
+                android:layout_marginEnd="20dp"
+                android:text="Siguiente"/>
 
         </RelativeLayout>
     </ScrollView>

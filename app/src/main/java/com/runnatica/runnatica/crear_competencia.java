@@ -1,15 +1,20 @@
 package com.runnatica.runnatica;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,24 +29,36 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.Fragmentos.mapCompetencia;
 import com.runnatica.runnatica.poho.Usuario;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
-public class crear_competencia extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class crear_competencia extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
     private TextView txtFecha, txtHora;
     private EditText Nombre, Precio, GradosUbicacion, Ciudad, Colonia, Calle, Descripcion, Coordenadas;
@@ -52,6 +69,9 @@ public class crear_competencia extends AppCompatActivity {
 
     private Bitmap bitmap;
     private ProgressDialog progreso;
+
+    private GoogleMap mMap;
+    private MarkerOptions marker = new MarkerOptions();
 
     private Calendar calendar;
     private DatePickerDialog picker;
@@ -72,7 +92,10 @@ public class crear_competencia extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_competencia);
+        if (googleServicesAvailable()) {
+            //Toast.makeText(this, "Estas listo", Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.activity_crear_competencia);
+        }
 
         dominio = getString(R.string.ip);
         obtenerPreferencias();
@@ -96,8 +119,8 @@ public class crear_competencia extends AppCompatActivity {
         txtHora = (TextView)findViewById(R.id.tvHoraCompetencia);
         btnLugar = (Button)findViewById(R.id.btnSeleccionarLugar);
         Coordenadas = (EditText)findViewById(R.id.etCoordenadas);
-
-        //Toast.makeText(this, usuario.getId()+"", Toast.LENGTH_SHORT).show();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapCompetencia);
+        mapFragment.getMapAsync(this);
 
         cargarSpinnerEstado();
         cargarSpinnerPais();
@@ -130,14 +153,14 @@ public class crear_competencia extends AppCompatActivity {
             }
         });
 
-        /*btnImagen.setOnClickListener(new View.OnClickListener() {
+        btnImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Guardar imagen
                 CargarImagen();
                 imagen = 1;
             }
-        });*/
+        });
         Aval.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,9 +222,9 @@ public class crear_competencia extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //subirImagenCompetencia("http://192.168.137.1:811/WebServiceRunnatica/agregarCompetencia.php?");
+                    subirImagenCompetencia("http://45.15.24.210/WebServiceRunnatica/guardarImagen.php?");
                 if (Validaciones()){
-                    //subirImagenCompetencia("https://runnatica.000webhostapp.com/WebServiceRunnatica/agregarCompetencia.php?");
-                    SubirCompetencia(dominio + "agregarCompetencia.php?" +
+                    /*SubirCompetencia(dominio + "agregarCompetencia.php?" +
                             "Id_usuario=" + usuario.getId() +
                             "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
                             "&Aval=Aval" +
@@ -216,7 +239,7 @@ public class crear_competencia extends AppCompatActivity {
                             "&Estado=" + estado +
                             "&Reembolso=N" +
                             "&Precio=" +Precio.getText().toString()+
-                            "&path="+path);
+                            "&path="+path);*/
                     //subirImagenCompetencia(dominio + "uploadImg.php?");
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
@@ -312,17 +335,18 @@ public class crear_competencia extends AppCompatActivity {
     }
 
     private void subirImagenCompetencia(String URL) {
-        /*progreso = new ProgressDialog(crear_competencia.this);
+        progreso = new ProgressDialog(crear_competencia.this);
         progreso.setMessage("Guardando Imagen...");
-        progreso.show();*/
+        progreso.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        /*progreso.hide();
-                        path = response;*/
-                        SubirCompetencia(dominio + "agregarCompetencia.php?" +
+                        progreso.hide();
+                        path = response;
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                        /*SubirCompetencia(dominio + "agregarCompetencia.php?" +
                                 "Id_usuario=" + usuario.getId() +
                                 "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
                                 "&Aval=Aval" +
@@ -337,18 +361,18 @@ public class crear_competencia extends AppCompatActivity {
                                 "&Estado=" + estado +
                                 "&Reembolso=N" +
                                 "&Precio=" +Precio.getText().toString()+
-                                "&path="+path);
+                                "&path="+path);*/
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //progreso.dismiss();
+                        progreso.dismiss();
                         Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
                     }
         })
         {
-            /*@Override
+            @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 String imagen = getStringImage(bitmap);
@@ -359,25 +383,25 @@ public class crear_competencia extends AppCompatActivity {
                 parametros.put("NombreFoto", nombreFoto);
 
                 return parametros;
-            }*/
+            }
         };
 
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-    /*private String getStringImage(Bitmap bitmap) {
+    private String getStringImage(Bitmap bitmap) {
         ByteArrayOutputStream array = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, array);
         byte[] imgBytes = array.toByteArray();
 
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
-    }*/
+    }
 
-    /*private void CargarImagen() {//funcion de tipo void para hacer un proceso
+    private void CargarImagen() {//funcion de tipo void para hacer un proceso
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         startActivityForResult(intent.createChooser(intent, "Seleccione la aplicación"), 10);
-    }*/
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -452,4 +476,44 @@ public class crear_competencia extends AppCompatActivity {
         startActivity(next);
     }
 
+    //Google maps integration
+    public boolean googleServicesAvailable() {
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+        int status = api.isGooglePlayServicesAvailable(this);
+
+        if (status == ConnectionResult.SUCCESS) {
+            return true;
+
+        }else if (api.isUserResolvableError(status)){
+            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, (Activity)getApplicationContext(), 10);
+            dialog.show();
+
+        }else {
+            Toast.makeText(this, "Error con los servicios de Google Play", Toast.LENGTH_SHORT).show();
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        Geocoder geo = new Geocoder(this);
+    }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+        Log.i("Coords selected", latLng.latitude+"");
+        Log.i("Coords selected", latLng.longitude+"");
+
+        if (marker != null) {
+            mMap.clear();
+            marker = new MarkerOptions();
+        }
+
+        mMap.addMarker(marker.position(latLng).title(latLng.latitude + ","+latLng.longitude));
+        String coords = latLng.latitude + " " + latLng.longitude;
+        Log.i("Coords to send", coords);
+    }
 }
