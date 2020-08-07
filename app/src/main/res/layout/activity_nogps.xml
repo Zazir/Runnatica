@@ -7,11 +7,34 @@
     tools:context=".Nogps">
 
     <LinearLayout
+        android:id="@+id/BarraVerde"
         android:layout_width="match_parent"
         android:layout_height="59dp"
-        android:background="@drawable/barra_verde">
+        android:background="@drawable/barra_verde"
+        android:orientation="horizontal">
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/llgps"
+        android:layout_width="191dp"
+        android:layout_height="190dp"
+        android:background="@drawable/gps"
+        android:orientation="vertical"
+        android:layout_below="@+id/BarraVerde"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="20dp"
+        ></LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Su GPS no esta activado, Activelo para poder Continuar"
+        android:layout_below="@+id/llgps"
+        android:textColor="@android:color/background_dark"
+        android:textSize="35dp"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        ></TextView>
 
     <LinearLayout
         android:layout_width="495dp"
