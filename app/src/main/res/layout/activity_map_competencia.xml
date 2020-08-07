@@ -7,13 +7,33 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Deja presionado para seleccionar"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textColor="#000"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp" />
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="250dp" />
+        android:layout_height="250dp"
+        android:layout_below="@+id/txtTitulo"/>
+
+    <Button
+        android:id="@+id/btnMandarCordenadas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aceptar"
+        android:layout_below="@+id/map"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#6d6dfd" />
 
 </RelativeLayout>
 
