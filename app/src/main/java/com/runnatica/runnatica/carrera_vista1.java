@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -35,7 +35,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.paypal.android.sdk.payments.PayPalService;
-import com.runnatica.runnatica.Fragmentos.mapCompetencia;
 import com.runnatica.runnatica.adapter.comentariosAdapter;
 import com.runnatica.runnatica.poho.Comentarios;
 import com.runnatica.runnatica.poho.Usuario;
@@ -53,9 +52,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
+public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallback {
     BottomNavigationView MenuUsuario;
-    private ImageView imgCompetencia, imgMapa;
+    private ImageView imgCompetencia;
     private TextView txtNomCompe, txtOrganizador, txtFechaCompe, txtHoraCompe,
             txtLugarCompe, txtPrecioCompe, txtDescripcionCompe, txtRegistrarse,
             txtComentario;
@@ -104,7 +103,6 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
         btnInscripcion = (Button)findViewById(R.id.btnIncribirse);
         txtComentario = (TextView)findViewById(R.id.etRespuestaForo);
         btnEnviarComentario = (Button)findViewById(R.id.btnEnviarForo);
-        imgMapa = (ImageView)findViewById(R.id.imgglobo);
         ForoRecycler = (RecyclerView)findViewById(R.id.rvForo);
         ForoRecycler.setHasFixedSize(true);
         ForoRecycler.setLayoutManager(new LinearLayoutManager(this));
@@ -163,13 +161,6 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
                         "&id_competencia=" + id_competencia +
                         "&mensaje="+txtComentario.getText().toString().replaceAll(" ", "%20") +
                         "&tipo_mensaje=" + categoria);
-            }
-        });
-
-        imgMapa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Mapa();
             }
         });
     }
@@ -249,6 +240,7 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
                             txtLugarCompe.setText(respuesta.optString("ciudad")+", "+respuesta.optString("colonia")+", "+respuesta.optString("calle"));
                             txtPrecioCompe.setText("$" + respuesta.optString("precio"));
                             txtDescripcionCompe.setText(respuesta.optString("descripcion"));
+                            createMark();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -396,26 +388,6 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
         startActivity(next);
     }
 
-    private void Mapa() {
-        Log.i("Coordenadas Completas", "Cordenadas: "+coordenadas);
-
-        String cor1, cor2;
-        String[] corde;
-        corde = coordenadas.split(" ");
-
-        cor1 = corde[0];
-        cor2 = corde[1];
-
-        Log.i("Coordenadas", "Latitud: "+cor1);
-        Log.i("Coordenadas", "Longitud: "+cor2);
-
-        Intent intent = new Intent(carrera_vista1.this, mapCompetencia.class);
-        intent.putExtra("Latitud", cor1);
-        intent.putExtra("Longitud", cor2);
-        intent.putExtra("nombre_competencia", nombreCompe);
-        startActivity(intent);
-    }
-
     //Google maps integration
     public boolean googleServicesAvailable() {
         GoogleApiAvailability api = GoogleApiAvailability.getInstance();
@@ -437,11 +409,22 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
+        mMap = googleMap;
     }
 
-    @Override
-    public void onMapLongClick(LatLng latLng) {
+    private void createMark() {//Metodo que se activa cuando se accede desde la vista de la competncia 1
+        String lat, lng;
+        String[] corde;
+        corde = coordenadas.split(",");
 
+        lat = corde[0];
+        lng = corde[1];
+
+        LatLng startCom = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));// Creamos el objeto para crear latitud y longitud
+        mMap.addMarker(new MarkerOptions().position(startCom)
+                .title("Inicio de "+nombreCompe));//Agregamos un marcador al mapa
+        float zoom = 16;
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startCom, zoom));//Movemos el mapa a la latitud y longitud que tiene la carrera
     }
 }

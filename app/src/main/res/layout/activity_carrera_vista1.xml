@@ -70,7 +70,8 @@
 
             <fragment
                 android:id="@+id/mapaFragment"
-                android:layout_width="match_parent"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="fill_parent"
                 android:layout_height="200dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginEnd="10dp"

@@ -1,15 +1,12 @@
 package com.runnatica.runnatica;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -36,14 +33,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.Fragmentos.mapCompetencia;
 import com.runnatica.runnatica.poho.Usuario;
@@ -58,7 +47,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class crear_competencia extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
+public class crear_competencia extends AppCompatActivity {
 
     private TextView txtFecha, txtHora;
     private EditText Nombre, Precio, GradosUbicacion, Ciudad, Colonia, Calle, Descripcion, Coordenadas;
@@ -69,9 +58,6 @@ public class crear_competencia extends AppCompatActivity implements OnMapReadyCa
 
     private Bitmap bitmap;
     private ProgressDialog progreso;
-
-    private GoogleMap mMap;
-    private MarkerOptions marker = new MarkerOptions();
 
     private Calendar calendar;
     private DatePickerDialog picker;
@@ -92,10 +78,7 @@ public class crear_competencia extends AppCompatActivity implements OnMapReadyCa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (googleServicesAvailable()) {
-            //Toast.makeText(this, "Estas listo", Toast.LENGTH_SHORT).show();
-            setContentView(R.layout.activity_crear_competencia);
-        }
+        setContentView(R.layout.activity_crear_competencia);
 
         dominio = getString(R.string.ip);
         obtenerPreferencias();
@@ -119,8 +102,6 @@ public class crear_competencia extends AppCompatActivity implements OnMapReadyCa
         txtHora = (TextView)findViewById(R.id.tvHoraCompetencia);
         btnLugar = (Button)findViewById(R.id.btnSeleccionarLugar);
         Coordenadas = (EditText)findViewById(R.id.etCoordenadas);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapCompetencia);
-        mapFragment.getMapAsync(this);
 
         cargarSpinnerEstado();
         cargarSpinnerPais();
@@ -345,7 +326,7 @@ public class crear_competencia extends AppCompatActivity implements OnMapReadyCa
                     public void onResponse(String response) {
                         progreso.hide();
                         path = response;
-                        Log.i("Respuesta img", response);
+                        Log.i("Respuesta_img", response);
                         if (response.equals("Error al subir")) {
                             Toast.makeText(getApplicationContext(), "La imagen no se pudo subir con éxito", Toast.LENGTH_SHORT).show();
                         } else {
@@ -478,46 +459,5 @@ public class crear_competencia extends AppCompatActivity implements OnMapReadyCa
     private void Ajustes(){
         Intent next = new Intent(this, ajustes_competidor.class);
         startActivity(next);
-    }
-
-    //Google maps integration
-    public boolean googleServicesAvailable() {
-        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
-        int status = api.isGooglePlayServicesAvailable(this);
-
-        if (status == ConnectionResult.SUCCESS) {
-            return true;
-
-        }else if (api.isUserResolvableError(status)){
-            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, (Activity)getApplicationContext(), 10);
-            dialog.show();
-
-        }else {
-            Toast.makeText(this, "Error con los servicios de Google Play", Toast.LENGTH_SHORT).show();
-        }
-
-        return false;
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        Geocoder geo = new Geocoder(this);
-    }
-
-    @Override
-    public void onMapLongClick(LatLng latLng) {
-        Log.i("Coords selected", latLng.latitude+"");
-        Log.i("Coords selected", latLng.longitude+"");
-
-        if (marker != null) {
-            mMap.clear();
-            marker = new MarkerOptions();
-        }
-
-        mMap.addMarker(marker.position(latLng).title(latLng.latitude + ","+latLng.longitude));
-        String coords = latLng.latitude + " " + latLng.longitude;
-        Log.i("Coords to send", coords);
     }
 }
