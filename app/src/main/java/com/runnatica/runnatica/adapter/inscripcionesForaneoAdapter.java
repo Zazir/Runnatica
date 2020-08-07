@@ -124,7 +124,7 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
             txtMinEdad.setText("Edad mínima "+inscripciones.getEdadMinina() + " años");
             txtMaxEdad.setText("Edad máxima "+inscripciones.getEdadMaxima() + " años");
 
-            ConsultarDatosSpinner("https://runnatica.000webhostapp.com/WebServiceRunnatica/obtenerForaneos.php?id_usuario=" + usuario.getId(), inscripciones);
+            ConsultarDatosSpinner("http://45.15.24.210/WebServiceRunnatica/obtenerForaneos.php?id_usuario=" + usuario.getId(), inscripciones);
         }
 
         private void ConsultarDatosSpinner(String URL, final Inscripciones inscripciones) {

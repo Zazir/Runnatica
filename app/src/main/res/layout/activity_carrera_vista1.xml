@@ -103,7 +103,7 @@
                 android:layout_marginTop="15dp"
                 android:text="Dia/Mes/Año"
                 android:textColor="@android:color/background_dark"
-                android:textSize="25dp"></TextView>
+                android:textSize="25dp"/>
 
 
             <TextView
@@ -112,21 +112,22 @@
                 android:layout_height="wrap_content"
                 android:text="Lugar"
                 android:layout_marginTop="25dp"
-                android:layout_marginLeft="80dp"
-                android:layout_below="@+id/tvFechaCompetencia"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/imgglobo"
+                android:layout_below="@+id/tvPrecioCompetencia"
                 android:textSize="25dp"
-                android:textColor="@android:color/background_dark"
-                ></TextView>
+                android:textColor="@android:color/background_dark"/>
 
             <TextView
                 android:id="@+id/tvPrecioCompetencia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Precio"
-                android:layout_below="@+id/mapaFragment"
-                android:layout_marginLeft="80dp"
+                android:layout_below="@+id/tvFechaCompetencia"
+                android:layout_toEndOf="@+id/imgPrecio"
                 android:textSize="25sp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="5dp"
                 android:textColor="@android:color/background_dark"/>
 
             <TextView
@@ -134,12 +135,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Descripción:"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_below="@+id/tvPrecioCompetencia"
+                android:layout_below="@+id/mapaFragment"
                 android:textSize="35dp"
-                android:textColor="@android:color/background_dark"
-                ></TextView>
+                android:textColor="@android:color/background_dark"/>
 
             <TextView
                 android:id="@+id/tvDescripcion"
@@ -232,13 +232,7 @@
                 android:layout_below="@+id/ivResultados"
                 android:layout_marginTop="30dp"
                 android:text="Registrase"
-                android:textSize="25dp"
-                ></Button>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="1800dp"
-                ></TextView>
+                android:textSize="25sp"/>
 
         </RelativeLayout>
     </ScrollView>

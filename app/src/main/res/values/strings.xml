@@ -4,7 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="ip">https://runnatica.000webhostapp.com/WebServiceRunnatica/</string>
+    <string name="ip">http://45.15.24.210/WebServiceRunnatica/</string>
 
     <string name="title_activity_home_drawer">homeDrawer</string>
 

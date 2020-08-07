@@ -1,5 +1,7 @@
 package com.runnatica.runnatica;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,18 +19,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.runnatica.runnatica.Fragmentos.mapCompetencia;
@@ -43,7 +47,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class carrera_vista1 extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
     BottomNavigationView MenuUsuario;
     private ImageView imgCompetencia, imgMapa;
     private TextView txtNomCompe, txtOrganizador, txtFechaCompe, txtHoraCompe,
@@ -65,6 +75,9 @@ public class carrera_vista1 extends AppCompatActivity {
     private String dominio;
     private String coordenadas, nombreCompe;
 
+    private GoogleMap mMap;
+    private MarkerOptions marker = new MarkerOptions();
+
     @Override
     protected void onDestroy() {
         stopService(new Intent(this, PayPalService.class));
@@ -74,7 +87,10 @@ public class carrera_vista1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_carrera_vista1);
+        if (googleServicesAvailable()) {
+            setContentView(R.layout.activity_carrera_vista1);
+        }
+
         spCategorias = (Spinner)findViewById(R.id.spRespuestaCategoria);
         spFiltro = (Spinner)findViewById(R.id.spForo);
         imgCompetencia = (ImageView)findViewById(R.id.ivFotoCompetencia);
@@ -93,6 +109,8 @@ public class carrera_vista1 extends AppCompatActivity {
         ForoRecycler.setHasFixedSize(true);
         ForoRecycler.setLayoutManager(new LinearLayoutManager(this));
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapaFragment);
+        mapFragment.getMapAsync(this);
 
         //Posicionar el icono del menu
         Menu menu = MenuUsuario.getMenu();
@@ -396,5 +414,34 @@ public class carrera_vista1 extends AppCompatActivity {
         intent.putExtra("Longitud", cor2);
         intent.putExtra("nombre_competencia", nombreCompe);
         startActivity(intent);
+    }
+
+    //Google maps integration
+    public boolean googleServicesAvailable() {
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+        int status = api.isGooglePlayServicesAvailable(this);
+
+        if (status == ConnectionResult.SUCCESS) {
+            return true;
+
+        }else if (api.isUserResolvableError(status)){
+            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, (Activity)getApplicationContext(), 10);
+            dialog.show();
+
+        }else {
+            Toast.makeText(this, "Error con los servicios de Google Play", Toast.LENGTH_SHORT).show();
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+    }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+
     }
 }
