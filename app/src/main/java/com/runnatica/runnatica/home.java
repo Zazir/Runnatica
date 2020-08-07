@@ -2,6 +2,7 @@ package com.runnatica.runnatica;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -9,10 +10,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -20,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,12 +48,12 @@ public class home extends AppCompatActivity {
     BottomNavigationView MenuUsuario;
     TextView NombreCiudad;
     Button Estado, Pais;
+    int bandera;
 
     private List<Competencias> competenciasList;
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     private int[] id;
-    int bandera;
     String Localizacion;
     private String dominio;
 
@@ -65,7 +65,6 @@ public class home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         obtenerPreferencias();
-        turnGPSOn();
 
         //Enlaces de elementos por id's
         recyclerView = (RecyclerView) findViewById(R.id.rcvCompetencia);
@@ -78,6 +77,7 @@ public class home extends AppCompatActivity {
         //Toast.makeText(this, user.getId()+"", Toast.LENGTH_SHORT).show();
 
         Localizacion();
+
         CargarCompetencias(dominio + "obtenerCompetencias.php?estado="+Localizacion);
 
         //Inicializar arreglo de competencias
@@ -138,7 +138,8 @@ public class home extends AppCompatActivity {
                 Localizacion = city;
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(home.this, "No funciona", Toast.LENGTH_SHORT).show();
+                Toast.makeText(home.this, "La aplicación no detecta el GPS", Toast.LENGTH_SHORT).show();
+                    Activargps();
             }
         }
     }
@@ -258,7 +259,6 @@ public class home extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
             }
         });
-
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
@@ -272,16 +272,30 @@ public class home extends AppCompatActivity {
         Intent intent = getIntent();
         startActivity(intent);
     }
-    private void turnGPSOn(){
-        String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-
-        if(!provider.contains("gps")){ //if gps is disabled
-            final Intent poke = new Intent();
-            poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
-            poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
-            poke.setData(Uri.parse("3"));
-            sendBroadcast(poke);
-        }
+    private void Activargps(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(home.this);
+        alertDialogBuilder
+                .setMessage("Tu GPS esta desactivado, ¿Quieres activarlo?")
+                .setCancelable(false)
+                .setPositiveButton("GPS Activado",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                Intent callGPSSettingIntent = new Intent(
+                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                home.this.startActivity(callGPSSettingIntent);
+                                bandera = 1;
+                                finishAffinity();
+                            }
+                        });
+        alertDialogBuilder.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 
 }
