@@ -18,6 +18,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -46,12 +52,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallback {
     BottomNavigationView MenuUsuario;
     private ImageView imgCompetencia;
@@ -64,7 +64,7 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
 
     private List<Comentarios> comentariosList = new ArrayList<>();
     private Usuario user = Usuario.getUsuarioInstance();
-    private String id_competencia;
+    private String id_competencia="";
     private String id_organizador;
 
     private comentariosAdapter adaptador;
@@ -135,7 +135,6 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
                 return true;
             }
         });
-
 
         obtenerPreferencias();
         dominio = getString(R.string.ip);

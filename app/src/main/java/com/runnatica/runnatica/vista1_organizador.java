@@ -2,10 +2,6 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,15 +9,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -89,7 +86,7 @@ public class vista1_organizador extends AppCompatActivity {
         dominio = getString(R.string.ip);
 
         ListaFechas = new ArrayList<>();
-        ObtenerTabla(dominio + "obtenerDatosTabla.php?id_competencia="+id_competencia);
+        //ObtenerTabla(dominio + "obtenerDatosTabla.php?id_competencia="+id_competencia);
 
 
         ListaInscritos.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +113,7 @@ public class vista1_organizador extends AppCompatActivity {
         consultarInscritos();
     }
 
-    private void ObtenerTabla(String url) {
+    /*private void ObtenerTabla(String url) {
 
         StringRequest Datos = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -144,12 +141,12 @@ public class vista1_organizador extends AppCompatActivity {
                 });
 
         Volley.newRequestQueue(vista1_organizador.this).add(Datos);
-    }
+    }*/
 
-    private void LlenarTabla(){
-        List<BarEntry> entradas = new ArrayList<>();
-        int Contador = 0;
-        String temp = ListaFechas.get(0);
+    //private void LlenarTabla(){
+        //List<BarEntry> entradas = new ArrayList<>();
+       // int Contador = 0;
+        //String temp = ListaFechas.get(0);
         //Hashtable<String, Integer> fechasRepetidas = new Hashtable<>();
 
         /*fechasRepetidas.put(ListaFechas.get(0), Contador);
@@ -160,30 +157,30 @@ public class vista1_organizador extends AppCompatActivity {
             }
         }*/
 
-        for(int b = 0 ; b < ListaFechas.size() ; b++){
-            Log.i("Lista_valor", ListaFechas.get(b));
-            Log.i("Lista_tempora", temp);
+        //for(int b = 0 ; b < ListaFechas.size() ; b++){
+            //Log.i("Lista_valor", ListaFechas.get(b));
+            //Log.i("Lista_tempora", temp);
 
-            if(temp.equals(ListaFechas.get(b))){
-                Contador++;
-            }else{
-                entradas.add(new BarEntry(10f,Contador));
-                temp = ListaFechas.get(b);
-                Contador = 0;
-            }
-        }
-        Log.i("Ultima_barra", String.valueOf(Contador));
-        entradas.add(new BarEntry(2,Contador));
+            //if(temp.equals(ListaFechas.get(b))){
+               // Contador++;
+           // }else{
+               // entradas.add(new BarEntry(10f,Contador));
+               // temp = ListaFechas.get(b);
+                //Contador = 0;
+           // }
+       // }
+        //Log.i("Ultima_barra", String.valueOf(Contador));
+        //entradas.add(new BarEntry(2,Contador));
 
 
         /*entradas.add(new BarEntry(1,2));
         entradas.add(new BarEntry(5,3));
         entradas.add(new BarEntry(6,5));*/
 
-    BarDataSet datos = new BarDataSet(entradas, "Grafica de Barras");
-        BarData data = new BarData(datos);
+   // BarDataSet datos = new BarDataSet(entradas, "Grafica de Barras");
+        //BarData data = new BarData(datos);
 
-    }
+    //}
 
     private void consultarInscritos() {
         String URL = dominio + "obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=1";

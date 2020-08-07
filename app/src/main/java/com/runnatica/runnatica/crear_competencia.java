@@ -26,6 +26,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -42,10 +46,6 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class crear_competencia extends AppCompatActivity {
 
@@ -325,27 +325,12 @@ public class crear_competencia extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         progreso.hide();
-                        path = response;
                         Log.i("Respuesta_img", response);
                         if (response.equals("Error al subir")) {
                             Toast.makeText(getApplicationContext(), "La imagen no se pudo subir con éxito", Toast.LENGTH_SHORT).show();
                         } else {
-                            SubirCompetencia(dominio + "agregarCompetencia.php?" +
-                                    "Id_usuario=" + usuario.getId() +
-                                    "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
-                                    "&Aval=Aval" +
-                                    "&Coordenadas=95959595959" +
-                                    "&Nombre_competencia=" + Nombre.getText().toString().replaceAll(" ", "%20")+
-                                    "&Pais=" + pais +
-                                    "&Colonia=" +Colonia.getText().toString().replaceAll(" ", "%20")+
-                                    "&Calle=" +Calle.getText().toString().replaceAll(" ", "%20")+
-                                    "&Ciudad=" +Ciudad.getText().toString().replaceAll(" ", "%20")+
-                                    "&Fecha=" +fecha+
-                                    "&Hora=" +hora+
-                                    "&Estado=" + estado +
-                                    "&Reembolso=N" +
-                                    "&Precio=" +Precio.getText().toString()+
-                                    "&path="+path);
+                            //Aqui recibo el URL de la Imagen
+                            path = response;
                         }
                     }
                 },

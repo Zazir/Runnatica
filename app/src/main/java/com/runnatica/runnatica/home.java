@@ -179,16 +179,16 @@ public class home extends AppCompatActivity {
         try{
             addresses = geocoder.getFromLocation(lat, lon, 20);
             if(addresses.size() > 0){
-               for(Address adr: addresses){
-                   if(adr.getAdminArea() != null && adr.getAdminArea().length() > 0){
+                for(Address adr: addresses){
+                    if(adr.getAdminArea() != null && adr.getAdminArea().length() > 0){
                         cityName = adr.getAdminArea();
-                   }
+                    }
                     break;
                 }
-             }
-            }catch(IOException e){
-                e.printStackTrace();
             }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
         return cityName;
     }
     private void home(){
@@ -269,7 +269,7 @@ public class home extends AppCompatActivity {
         startActivity(intent);
     }
     private void Nogps(){
-        Intent intent = new Intent(home.this, carrera_vista1.class);
+        Intent intent = new Intent(home.this, Nogps.class);
         startActivity(intent);
     }
 }
