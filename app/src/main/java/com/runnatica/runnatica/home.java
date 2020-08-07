@@ -9,25 +9,28 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.core.app.ActivityCompat;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.adapter.MyAdapter;
 import com.runnatica.runnatica.poho.Competencias;
 import com.runnatica.runnatica.poho.Usuario;
@@ -62,6 +65,7 @@ public class home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         obtenerPreferencias();
+        turnGPSOn();
 
         //Enlaces de elementos por id's
         recyclerView = (RecyclerView) findViewById(R.id.rcvCompetencia);
@@ -74,7 +78,7 @@ public class home extends AppCompatActivity {
         //Toast.makeText(this, user.getId()+"", Toast.LENGTH_SHORT).show();
 
         Localizacion();
-        CargarCompetencias(dominio + "obtenerCompetencias.php?estado=Jalisco");
+        CargarCompetencias(dominio + "obtenerCompetencias.php?estado="+Localizacion);
 
         //Inicializar arreglo de competencias
         competenciasList = new ArrayList<>();
@@ -268,4 +272,16 @@ public class home extends AppCompatActivity {
         Intent intent = getIntent();
         startActivity(intent);
     }
+    private void turnGPSOn(){
+        String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+
+        if(!provider.contains("gps")){ //if gps is disabled
+            final Intent poke = new Intent();
+            poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
+            poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
+            poke.setData(Uri.parse("3"));
+            sendBroadcast(poke);
+        }
+    }
+
 }

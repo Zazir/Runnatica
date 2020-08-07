@@ -197,7 +197,14 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
     private void generarPago() {
         List<Item> list = new ArrayList<>();//lista con datos de la venta
         Item item = new Item();
-        item.setUnitPrice(Double.parseDouble(monto)); //precio unitario de producto
+        if (monto == null) {
+            Toast.makeText(this, "Hubo un error al cargar la información de la competencia, vuelve a seleccionar la competenca", Toast.LENGTH_SHORT).show();
+        } else if (ids_foraneos.length() < 1) {
+            total = Integer.parseInt(monto);
+        }else if (ids_foraneos.length() > 1){
+            total = Integer.parseInt(monto) * (this.total+1);
+        }
+        item.setUnitPrice(Double.parseDouble(String.valueOf(total))); //precio unitario de producto
         item.setTitle(Organizador); //titulo de la venta del producto
         item.setQuantity(1); //cantidad de productos a vender
         item.setDescription(NombreCompetencia); //descripcion del producto
@@ -210,10 +217,8 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
 
         List<ExcludedPaymentType> list1 = new ArrayList<>();//lista con datos de la venta
         ExcludedPaymentType itempay = new ExcludedPaymentType();
-        itempay.setId("prepaid_card"); //EXCLUIR MEDIOS DE PAGO
-        itempay.setId("atm"); //EXCLUIR MEDIOS DE PAGO
+        itempay.setId("prepaid_card"); //EXCLUIR MEDIOS DE PAG
         list1.add(itempay); //agregamos los detalles a la lista
-
 
 
         PaymentMethods methods = new PaymentMethods();
@@ -283,10 +288,10 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         Organizador = extra.getString("ORGANIZADOR");
 
         ids_foraneos = ids_foraneos.trim();
-        Toast.makeText(this, ids_foraneos, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, ids_foraneos, Toast.LENGTH_SHORT).show();
         Log.i("ids_foraneos", "Estas son las ids: "+ids_foraneos);
         total = ids_foraneos.split(" ").length;
-        Toast.makeText(this, total+"", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, total+"", Toast.LENGTH_SHORT).show();
         Log.i("Cantidad_seleccionados", total+"Total");
     }
 
@@ -333,6 +338,18 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
 
                     //compra aprobada
                     Toast.makeText(this, "Pago Realizado", Toast.LENGTH_SHORT).show();
+                    //Petición al WS para mostrar en bd la inscripción
+                    reflejarInscripcion(dominio + "inscribirUsuario.php?" +
+                            "id_usuario="+ usuario.getId() +
+                            "&id_competencia=" + id_competencia);
+
+                    inscribirForaneos(dominio + "inscribirForaneo.php?" +
+                            "id_usuario=" + usuario.getId() +
+                            "&id_competencia=" + id_competencia+
+                            "&id_foraneo=" + ids_foraneos.replaceAll(" ", "%20"));
+
+                    crearPDF(currentDate);
+                    Felicidades();
 
                 }  else if(payment.getPaymentStatus().equals("pending")){
                     Toast.makeText(this, "Pago en espera de OXXO", Toast.LENGTH_SHORT).show();
@@ -699,6 +716,11 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
     private void Ajustes(){
         Intent next = new Intent(this, ajustes_competidor.class);
         startActivity(next);
+    }
+    private void Felicidades(){
+        Intent next = new Intent(this, FelicidadesCompetidor.class);
+        startActivity(next);
+        finish();
     }
 
 }

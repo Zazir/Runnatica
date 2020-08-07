@@ -4,9 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.os.StrictMode;
-import androidx.core.content.FileProvider;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -107,7 +108,6 @@ public class PlantillaPDF {
 
     public void addImage(Bitmap bitmap) {
         try {
-
             Image image = Image.getInstance("");
             documento.add(image);
         }
@@ -196,7 +196,5 @@ public class PlantillaPDF {
             Toast.makeText(context, "No se pudo enviar el email con tus datos de inscripción", Toast.LENGTH_SHORT).show();
             Log.e("Error con mail", "" + e);
         }
-
-
     }
 }
