@@ -7,10 +7,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +15,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -117,8 +118,9 @@ public class Subir_Resultados extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 progreso.dismiss();
-                if (response.equals("error al crear el competencia")){//mensaje desde el web service, si el respose es igual a "error al crear competencia"
-                    Toast.makeText(getApplicationContext(), "Hubo un error al Imagen", Toast.LENGTH_SHORT).show();
+                if (response.equals("")){//Si es diferente de nulo entonces se subio la imagen
+                    Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                    peticion(dominio + "subirImagen.php?urlimagen=" + response);
                 } else if (Integer.parseInt(response) >= 0){//si la respuesta es mayor o iguala cero (ya que retornamos el id de la competenbcia) si creamos una competenbcia va a ser mayopr a cero
 
                 }
@@ -167,6 +169,20 @@ public class Subir_Resultados extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+    private void peticion(String url){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Volley.newRequestQueue(this).add(stringRequest);
     }
     private void homeOrganizador(){
         Intent next = new Intent(this, home_organizador.class);
