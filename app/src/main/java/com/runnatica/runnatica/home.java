@@ -2,7 +2,6 @@ package com.runnatica.runnatica;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,7 +46,7 @@ public class home extends AppCompatActivity {
     BottomNavigationView MenuUsuario;
     TextView NombreCiudad;
     Button Estado, Pais;
-    int bandera;
+    int bandera = 0;
 
     private List<Competencias> competenciasList;
     private RecyclerView recyclerView;
@@ -75,7 +73,6 @@ public class home extends AppCompatActivity {
         dominio = getString(R.string.ip);
 
         //Toast.makeText(this, user.getId()+"", Toast.LENGTH_SHORT).show();
-
         Localizacion();
 
         CargarCompetencias(dominio + "obtenerCompetencias.php?estado="+Localizacion);
@@ -123,7 +120,6 @@ public class home extends AppCompatActivity {
         user.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
     }
 
-
     public void Localizacion(){
         //Localizacion GPS para buscar el nombre de la ciudad
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -138,8 +134,8 @@ public class home extends AppCompatActivity {
                 Localizacion = city;
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(home.this, "La aplicación no detecta el GPS", Toast.LENGTH_SHORT).show();
-                    Activargps();
+                Toast.makeText(home.this, "No funciona", Toast.LENGTH_SHORT).show();
+                Nogps();
             }
         }
     }
@@ -272,30 +268,8 @@ public class home extends AppCompatActivity {
         Intent intent = getIntent();
         startActivity(intent);
     }
-    private void Activargps(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(home.this);
-        alertDialogBuilder
-                .setMessage("Tu GPS esta desactivado, ¿Quieres activarlo?")
-                .setCancelable(false)
-                .setPositiveButton("GPS Activado",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int id) {
-                                Intent callGPSSettingIntent = new Intent(
-                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                home.this.startActivity(callGPSSettingIntent);
-                                bandera = 1;
-                                finishAffinity();
-                            }
-                        });
-        alertDialogBuilder.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = alertDialogBuilder.create();
-        alert.show();
+    private void Nogps(){
+        Intent intent = new Intent(home.this, carrera_vista1.class);
+        startActivity(intent);
     }
-
 }

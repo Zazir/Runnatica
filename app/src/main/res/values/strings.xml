@@ -86,4 +86,5 @@
     <string-array name="paises">
         <item>México</item>
     </string-array>
+    <string name="title_activity_no_g_p_s">NoGPS</string>
 </resources>
