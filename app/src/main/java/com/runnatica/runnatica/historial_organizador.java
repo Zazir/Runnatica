@@ -1,12 +1,7 @@
 package com.runnatica.runnatica;
 
 import android.content.Intent;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -16,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.adapter.MyAdapter;
 import com.runnatica.runnatica.poho.Competencias;
 import com.runnatica.runnatica.poho.Usuario;
@@ -26,6 +22,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class historial_organizador extends AppCompatActivity {
     private List<Competencias> competenciasList;
@@ -119,7 +120,7 @@ public class historial_organizador extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-    private void homeOrganizador(){
+    private void homeOrganizador() {
         Intent next = new Intent(this, home_organizador.class);
         startActivity(next);
     }

@@ -223,7 +223,7 @@ public class crear_competencia extends AppCompatActivity implements OnMapReadyCa
             public void onClick(View v) {
                 //subirImagenCompetencia("http://192.168.137.1:811/WebServiceRunnatica/agregarCompetencia.php?");
                     subirImagenCompetencia("http://45.15.24.210/WebServiceRunnatica/guardarImagen.php?");
-                if (Validaciones()){
+                if (true){//Validaciones()){
                     /*SubirCompetencia(dominio + "agregarCompetencia.php?" +
                             "Id_usuario=" + usuario.getId() +
                             "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
@@ -345,23 +345,27 @@ public class crear_competencia extends AppCompatActivity implements OnMapReadyCa
                     public void onResponse(String response) {
                         progreso.hide();
                         path = response;
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-                        /*SubirCompetencia(dominio + "agregarCompetencia.php?" +
-                                "Id_usuario=" + usuario.getId() +
-                                "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
-                                "&Aval=Aval" +
-                                "&Coordenadas=95959595959" +
-                                "&Nombre_competencia=" + Nombre.getText().toString().replaceAll(" ", "%20")+
-                                "&Pais=" + pais +
-                                "&Colonia=" +Colonia.getText().toString().replaceAll(" ", "%20")+
-                                "&Calle=" +Calle.getText().toString().replaceAll(" ", "%20")+
-                                "&Ciudad=" +Ciudad.getText().toString().replaceAll(" ", "%20")+
-                                "&Fecha=" +fecha+
-                                "&Hora=" +hora+
-                                "&Estado=" + estado +
-                                "&Reembolso=N" +
-                                "&Precio=" +Precio.getText().toString()+
-                                "&path="+path);*/
+                        Log.i("Respuesta img", response);
+                        if (response.equals("Error al subir")) {
+                            Toast.makeText(getApplicationContext(), "La imagen no se pudo subir con éxito", Toast.LENGTH_SHORT).show();
+                        } else {
+                            SubirCompetencia(dominio + "agregarCompetencia.php?" +
+                                    "Id_usuario=" + usuario.getId() +
+                                    "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
+                                    "&Aval=Aval" +
+                                    "&Coordenadas=95959595959" +
+                                    "&Nombre_competencia=" + Nombre.getText().toString().replaceAll(" ", "%20")+
+                                    "&Pais=" + pais +
+                                    "&Colonia=" +Colonia.getText().toString().replaceAll(" ", "%20")+
+                                    "&Calle=" +Calle.getText().toString().replaceAll(" ", "%20")+
+                                    "&Ciudad=" +Ciudad.getText().toString().replaceAll(" ", "%20")+
+                                    "&Fecha=" +fecha+
+                                    "&Hora=" +hora+
+                                    "&Estado=" + estado +
+                                    "&Reembolso=N" +
+                                    "&Precio=" +Precio.getText().toString()+
+                                    "&path="+path);
+                        }
                     }
                 },
                 new Response.ErrorListener() {

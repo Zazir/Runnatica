@@ -17,12 +17,12 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_below="@+id/llInscribirse"
-        >
+        android:layout_below="@+id/llInscribirse">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/ivFotoCompetencia"
                 android:layout_width="match_parent"
@@ -59,36 +59,40 @@
                 ></TextView>
 
             <ImageView
+                android:id="@+id/imgFecha"
                 android:layout_width="48dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
                 android:layout_below="@+id/tvNombreOrganizador"
-                android:background="@drawable/calendario"></ImageView>
+                android:background="@drawable/calendario"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mapa"
-                android:layout_marginLeft="15dp"
-                android:layout_below="@+id/imgglobo"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"/>
+            <fragment
+                android:id="@+id/mapaFragment"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_below="@+id/imgglobo" />
 
             <ImageView
                 android:id="@+id/imgglobo"
                 android:layout_width="48dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="15dp"
-                android:layout_below="@+id/tvFechaCompetencia"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/imgPrecio"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/lugar"/>
 
             <ImageView
+                android:id="@+id/imgPrecio"
                 android:layout_width="48dp"
                 android:layout_height="50dp"
+                android:layout_below="@+id/imgFecha"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="22dp"
-                android:layout_below="@+id/tvLugarCompetencia"
-                android:background="@drawable/boleto"></ImageView>
+                android:layout_marginTop="5dp"
+                android:background="@drawable/boleto" />
 
             <TextView
                 android:id="@+id/tvFechaCompetencia"
@@ -119,12 +123,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Precio"
-                android:layout_below="@+id/tvLugarCompetencia"
+                android:layout_below="@+id/mapaFragment"
                 android:layout_marginLeft="80dp"
-                android:layout_marginTop="25dp"
-                android:textSize="25dp"
-                android:textColor="@android:color/background_dark"
-                ></TextView>
+                android:textSize="25sp"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/background_dark"/>
 
             <TextView
                 android:id="@+id/txtDescripcion"

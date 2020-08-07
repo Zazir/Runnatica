@@ -98,32 +98,25 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
             String[] idTemp = parent.getItemAtPosition(position).toString().split(" ");
             String idTemporalPulsado = idTemp[0];
 
-            if (contForaneosSeleccionados <= 4){
+            if (idsForaneos.equals("")) {
 
-                idsForaneos = idsForaneos.concat(idTemporalPulsado + " ");
-                Log.i("Cadena_a_enviar", idsForaneos);
-                Toast.makeText(ctx, "Has seleccionado a: " + idTemp[2], Toast.LENGTH_SHORT).show();
-                contForaneosSeleccionados++;
-            }
-
-            /*if (idsForaneos.equals("")) {
-
-                    Log.i("contador_foraneos", ""+contForaneosSeleccionados);
-                    idsForaneos = idTemporalPulsado;
-                    Log.i("primer_guardado", idsForaneos);
+                    idsForaneos = " "+idTemporalPulsado+" ";
+                    Toast.makeText(ctx, "Has seleccionado a: " + idTemp[2], Toast.LENGTH_SHORT).show();
                     contForaneosSeleccionados++; //contForaneosSeleccionados siempre será 1 a inicio
+                    Log.i("foraneos", idsForaneos);
 
-            }else if (contForaneosSeleccionados <= 4) {
+            }else if (contForaneosSeleccionados <= 5) {
                 Log.i("contador_foraneos", contForaneosSeleccionados+"");
-                Pattern patron = Pattern.compile("."+idTemporalPulsado+".");
+                Log.i("foraneos", idsForaneos);
 
-                if (patron.matcher(idsForaneos).matches()) {
+                if (idsForaneos.contains(" "+idTemporalPulsado+" ")) {
                     Toast.makeText(ctx, "Ya elegiste a ese usuario", Toast.LENGTH_SHORT).show();
                 }else {
                     idsForaneos = idsForaneos.concat(idTemporalPulsado + " ");
                     contForaneosSeleccionados++;
+                    Toast.makeText(ctx, "Has seleccionado a: " + idTemp[2], Toast.LENGTH_SHORT).show();
                 }
-            }*/
+            }
         }
 
         public void asignarDatos(Inscripciones inscripciones, final int posicion) {
