@@ -24,7 +24,7 @@ public class VistaAdministrador extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista_administrador);
 
-        listview = (ListView)findViewById(R.id.lvAjustesCompetidor);
+        listview = (ListView)findViewById(R.id.lvOpcionesAdministrador);
 
         final ArrayList<String> arrayList=new ArrayList<>();
         arrayList.add("Asignar Usuarios a Carreras");
