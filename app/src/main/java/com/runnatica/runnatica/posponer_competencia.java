@@ -2,6 +2,7 @@ package com.runnatica.runnatica;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -23,16 +27,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 public class posponer_competencia extends AppCompatActivity {
 
-    private Button btnDate, btnPosponer, btnCancelar;
-    private EditText Hora;
+    private Button btnDate, btnPosponer, btnCancelar, btnHora;
     private TextView txtFecha, txtFechaPosponer;
 
     private String id_competencia;
+
 
     BottomNavigationView MenuOrganizador;
 
@@ -40,10 +41,12 @@ public class posponer_competencia extends AppCompatActivity {
     int dia = calendar.get(Calendar.DAY_OF_MONTH);
     int mes = calendar.get(Calendar.MONTH);
     int ano = calendar.get(Calendar.YEAR);
+
     private DatePickerDialog picker;
     private String fecha;
-
+    private TimePickerDialog timePicker;
     private String dominio;
+    private String  hora="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,7 @@ public class posponer_competencia extends AppCompatActivity {
         btnDate = (Button)findViewById(R.id.btnPosponerFecha);
         btnPosponer = (Button)findViewById(R.id.btnActualizar);
         btnCancelar = (Button)findViewById(R.id.btnActualizarC);
-        Hora = (EditText)findViewById(R.id.etHora);
+        btnHora = (Button)findViewById(R.id.btnPosponerHora);
         txtFecha = (TextView)findViewById(R.id.tvFechaActual);
         txtFechaPosponer = (TextView)findViewById(R.id.tvFechaPosponer);
 
@@ -102,6 +105,24 @@ public class posponer_competencia extends AppCompatActivity {
                 }, ano, mes, dia);
 
                 picker.show();
+            }
+        });
+        btnHora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar = Calendar.getInstance();
+                int horas = calendar.get(Calendar.HOUR_OF_DAY);
+                int minuto = calendar.get(Calendar.MINUTE);
+
+                timePicker = new TimePickerDialog(posponer_competencia.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        hora = hourOfDay + ":" + minute;
+                    }
+                }, horas, minuto, true);
+
+
+                timePicker.show();
             }
         });
 
@@ -176,7 +197,7 @@ public class posponer_competencia extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 posponerCompetencia(dominio + "actualizarCompetencia.php?" +
                         "id_competencia=" + id_competencia +
-                        "&fecha_posponer=" + fecha +
+                        "&fecha_posponer=" + fecha +" " + hora +":00"+
                         "&operacion=1");
             }
         });
