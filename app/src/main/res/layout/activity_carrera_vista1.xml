@@ -225,6 +225,7 @@
                 android:textColor="@android:color/background_dark"
                 android:textSize="35dp"
                 ></TextView>
+
             <ImageView
                 android:id="@+id/ivAval"
                 android:layout_width="match_parent"

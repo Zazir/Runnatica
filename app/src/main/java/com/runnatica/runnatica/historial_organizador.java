@@ -103,7 +103,11 @@ public class historial_organizador extends AppCompatActivity {
                             //Creamos instancia del adapter
                             adapter = new MyAdapter(historial_organizador.this, competenciasList, new MyAdapter.OnItemClickListener() {
                                 @Override
-                                public void OnItemClick(int position) {}
+                                public void OnItemClick(int position) {
+                                    String idS = new String("" + competenciasList.get(position).getId());
+                                    int price = Integer.parseInt(competenciasList.get(position).getPrecioCompetencia());
+                                    launchCompetenciaView(idS, price);
+                                }
                             });
                             recyclerView.setAdapter(adapter);
                         } catch (JSONException e) {
@@ -118,6 +122,14 @@ public class historial_organizador extends AppCompatActivity {
                     }
                 });
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void launchCompetenciaView(String id, int Precio) {
+        Intent intent = new Intent(historial_organizador.this, vista1_organizador.class);
+        intent.putExtra("id", id);
+        intent.putExtra("precio", Precio);
+        intent.putExtra("resultados", true);
+        startActivity(intent);
     }
 
     private void homeOrganizador() {

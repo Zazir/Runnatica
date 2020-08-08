@@ -4,11 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -18,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.adapter.MyAdapter;
 import com.runnatica.runnatica.poho.Competencias;
 import com.runnatica.runnatica.poho.Usuario;
@@ -28,6 +24,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class historial_competidor extends AppCompatActivity {
     private List<Competencias> competenciasList;
@@ -114,7 +115,10 @@ public class historial_competidor extends AppCompatActivity {
                             //Creamos instancia del adapter
                             adapter = new MyAdapter(historial_competidor.this, competenciasList, new MyAdapter.OnItemClickListener() {
                                 @Override
-                                public void OnItemClick(int position) {}
+                                public void OnItemClick(int position) {
+                                    String idS = new String("" + competenciasList.get(position).getId());
+                                    launchCompetenciaView(idS);
+                                }
                             });
                             recyclerView.setAdapter(adapter);
                         } catch (JSONException e) {
@@ -129,6 +133,13 @@ public class historial_competidor extends AppCompatActivity {
                     }
                 });
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void launchCompetenciaView(String id) {
+        Intent intent = new Intent(historial_competidor.this, carrera_vista1.class);
+        intent.putExtra("id", id);
+        intent.putExtra("registro", false);
+        startActivity(intent);
     }
 
     private void home(){

@@ -17,12 +17,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -41,6 +35,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class home extends AppCompatActivity {
     BottomNavigationView MenuUsuario;
@@ -240,7 +240,6 @@ public class home extends AppCompatActivity {
                             adapter = new MyAdapter(home.this, competenciasList, new MyAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(int position) {
-                                    //Log.i("Position", "el valor de la posición es: "+ competenciasList.get(position).getId());
                                     String idS = new String("" + competenciasList.get(position).getId());
                                     launchCompetenciaView(idS);
                                 }
@@ -263,13 +262,10 @@ public class home extends AppCompatActivity {
     private void launchCompetenciaView(String id) {
         Intent intent = new Intent(home.this, carrera_vista1.class);
         intent.putExtra("id", id);
+        intent.putExtra("registro", true);
         startActivity(intent);
     }
 
-    public void reFrescar(){
-        Intent intent = getIntent();
-        startActivity(intent);
-    }
     private void Nogps(){
         Intent intent = new Intent(home.this, Nogps.class);
         startActivity(intent);

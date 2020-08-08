@@ -22,7 +22,7 @@
             android:layout_marginTop="5dp"
             android:text="Resultados"
             android:textColor="@android:color/background_light"
-            android:textSize="35dp"></TextView>
+            android:textSize="35dp"/>
     </LinearLayout>
 
     <ScrollView
@@ -35,6 +35,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/kk"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
@@ -49,22 +50,10 @@
                 android:id="@+id/btnSeleccioarResultados"
                 android:layout_width="164dp"
                 android:layout_height="37dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="146dp"
-                android:layout_marginEnd="168dp"
+                android:layout_below="@+id/kk"
+                android:layout_centerHorizontal="true"
                 android:text="Seleccionar"
-                android:textColor="@android:color/background_dark"></Button>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="156dp"
-                android:layout_marginEnd="96dp"
-                android:text="Imagenes"
-                android:textColor="@android:color/background_dark"></TextView>
+                android:textColor="@android:color/background_dark"/>
 
             <TextView
                 android:id="@+id/Sugerencias"
@@ -73,7 +62,7 @@
                 android:layout_below="@id/btnSeleccioarResultados"
                 android:text="Foto con la siguiente información:"
                 android:textColor="@android:color/background_dark"
-                android:textSize="20dp"></TextView>
+                android:textSize="20dp"/>
             <TextView
                 android:id="@+id/Sugerencias2"
                 android:layout_width="match_parent"
@@ -81,8 +70,8 @@
                 android:layout_below="@id/Sugerencias"
                 android:text="- Nombre de Competidores"
                 android:textSize="20dp"
-                android:textColor="@android:color/background_dark"
-                ></TextView>
+                android:textColor="@android:color/background_dark"/>
+
             <TextView
                 android:id="@+id/Sugerencias3"
                 android:layout_width="match_parent"
@@ -90,8 +79,8 @@
                 android:layout_below="@id/Sugerencias2"
                 android:text="- Lugar de cada competidor"
                 android:textSize="20dp"
-                android:textColor="@android:color/background_dark"
-                ></TextView>
+                android:textColor="@android:color/background_dark"/>
+
             <TextView
                 android:id="@+id/Sugerencias4"
                 android:layout_width="match_parent"
@@ -99,22 +88,24 @@
                 android:layout_below="@id/Sugerencias3"
                 android:text="- Tiempo hecho en la Ruta"
                 android:textSize="20dp"
-                android:textColor="@android:color/background_dark"
-                ></TextView>
+                android:textColor="@android:color/background_dark"/>
+
             <Button
                 android:id="@+id/btnSubirResultados"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Sugerencias4"
-                android:text="Subir Fotos"
-                android:textColor="@android:color/background_dark"></Button>
+                android:text="Subir Resultados"
+                android:textColor="@android:color/background_dark"/>
 
             <ImageView
                 android:id="@+id/ivFotosResultados"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/btnSubirResultados"
-                ></ImageView>
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/btnSubirResultados"/>
 
         </RelativeLayout>
 

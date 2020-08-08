@@ -9,9 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -26,6 +23,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class vista1_organizador extends AppCompatActivity {
     BarChart graficaBarras;
@@ -82,9 +82,6 @@ public class vista1_organizador extends AppCompatActivity {
             }
         });
 
-
-        dominio = getString(R.string.ip);
-
         ListaFechas = new ArrayList<>();
         //ObtenerTabla(dominio + "obtenerDatosTabla.php?id_competencia="+id_competencia);
 
@@ -99,15 +96,25 @@ public class vista1_organizador extends AppCompatActivity {
         FotosResultados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FotosResultados();
             }
         });
     }
 
     private void getLastViewData() {
+        dominio = getString(R.string.ip);
+        boolean flag;
+
         Bundle extra = vista1_organizador.this.getIntent().getExtras();
         id_competencia = extra.getString("id");
         precio = extra.getInt("precio");
+        flag = extra.getBoolean("resultados");
+
+        if (flag) {
+            FotosResultados.setEnabled(flag);
+        }else {
+            FotosResultados.setEnabled(flag);
+        }
 
         consultarTotalInscripciones();
         consultarInscritos();
@@ -262,6 +269,7 @@ public class vista1_organizador extends AppCompatActivity {
     }
     void FotosResultados(){
         Intent next = new Intent(this, Subir_Resultados.class);
+        next.putExtra("id_competencia", id_competencia);
         startActivity(next);
     }
     private void homeOrganizador(){

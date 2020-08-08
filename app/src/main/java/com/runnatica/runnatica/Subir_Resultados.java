@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,13 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -33,7 +27,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Subir_Resultados extends AppCompatActivity {
 
@@ -44,7 +41,7 @@ public class Subir_Resultados extends AppCompatActivity {
     BottomNavigationView MenuOrganizador;
     private String path = "xxx";
 
-    private String dominio;
+    private String dominio, id_competencia;
 
 
     @SuppressLint("WrongViewCast")
@@ -55,7 +52,7 @@ public class Subir_Resultados extends AppCompatActivity {
 
         btnImagen = (Button)findViewById(R.id.btnSeleccioarResultados);
         btnSubirResultados = (Button)findViewById(R.id.btnSubirResultados);
-
+        img = (ImageView)findViewById(R.id.ivFotosResultados);
         MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
 
         Menu menu = MenuOrganizador.getMenu();
@@ -84,6 +81,7 @@ public class Subir_Resultados extends AppCompatActivity {
         });
 
         dominio = getString(R.string.ip);
+        getLastViewData();
 
         btnImagen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,11 +93,16 @@ public class Subir_Resultados extends AppCompatActivity {
         btnSubirResultados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SubirImagen(dominio + "actualizarCompetencia.php?");
+                actualizarResultadosCompetencia(dominio+"actualizarCompetencia.php?"+
+                        "PathFoto=" + path +
+                        "&id_competencia=" + id_competencia);
             }
         });
+    }
 
-
+    private void getLastViewData() {
+        Bundle extra = Subir_Resultados.this.getIntent().getExtras();
+        id_competencia = extra.getString("id_competencia");
     }
 
     private String getStringImage(Bitmap btm) {// se recive el parametro
@@ -111,46 +114,7 @@ public class Subir_Resultados extends AppCompatActivity {
         return encodeImg;//retornamos el sting que es la imagen codificada
     }
 
-    private void SubirImagen(String URL) {//recibimos la url
-        progreso = new ProgressDialog(Subir_Resultados.this);//creas dialogo de proceso
-        progreso.setMessage("Subiendo Imagen...");//el mensaje
-        progreso.show();//se lanza
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>(){
-            @Override
-            public void onResponse(String response) {
-                progreso.dismiss();
-                if (response.equals("")){//Si es diferente de nulo entonces se subio la imagen
-                    Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-                    peticion(dominio + "subirImagen.php?urlimagen=" + response);
-                } else if (Integer.parseInt(response) >= 0){//si la respuesta es mayor o iguala cero (ya que retornamos el id de la competenbcia) si creamos una competenbcia va a ser mayopr a cero
-
-                }
-            }//resibimos el parametro, el metodo de peticion
-        }, new Response.ErrorListener() {//dice si hubo un error en el web servic
-            @Override
-            public void onErrorResponse(VolleyError error) {// Cuando hay un problema en la conexion.
-                progreso.dismiss();
-                Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                String Foto = getStringImage(bitmap);
-                Map<String, String> parametros = new HashMap<>();//nombre que recibes
-                Random rand = new Random(System.currentTimeMillis());
-                String cadena="";
-                parametros.put("Foto", Foto);
-                parametros.put("NombreFoto", cadena+rand);
-                parametros.put("id_competencia", cadena+rand);
-                return parametros; //retornamos los parametros enlazados
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);//creamos la peticion hacemos la peticion
-        requestQueue.add(stringRequest);//hacemos la peticion
-
-    }
-    private void subirImagenCompetencia(String URL) {
+    private void subirImagenResultados(String URL) {
         progreso = new ProgressDialog(Subir_Resultados.this);
         progreso.setMessage("Guardando Imagen...");
         progreso.show();
@@ -160,7 +124,6 @@ public class Subir_Resultados extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         progreso.hide();
-                        Log.i("Respuesta_img", response);
                         if (response.equals("Error al subir")) {
                             Toast.makeText(getApplicationContext(), "La imagen no se pudo subir con éxito", Toast.LENGTH_SHORT).show();
                         } else {
@@ -210,25 +173,32 @@ public class Subir_Resultados extends AppCompatActivity {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), path);//metodo para convetir la imagen a bitmap, el path es la imagen que obtuviste del metodo sobrecargado
                 img.setImageBitmap(bitmap);//Se obtiene el bipmap
+                subirImagenResultados(dominio + "guardarImagen.php?");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-    private void peticion(String url){
+
+    private void actualizarResultadosCompetencia(String url){
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                if (response.equals("Resultados registrados")) {
+                    Toast.makeText(getApplicationContext(), "Se guardaron los resultados", Toast.LENGTH_SHORT).show();
+                    img.setImageResource(android.R.color.transparent);
+                }
+                else Toast.makeText(getApplicationContext(), "Hubo un problema con el servidor", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
             }
         });
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
     private void homeOrganizador(){
         Intent next = new Intent(this, home_organizador.class);
         startActivity(next);

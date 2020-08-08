@@ -18,12 +18,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -51,6 +45,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallback {
     BottomNavigationView MenuUsuario;
@@ -109,6 +109,7 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         imgAval = (ImageView)findViewById(R.id.ivAval);
         imgResultados = (ImageView)findViewById(R.id.ivResultados);
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapaFragment);
         mapFragment.getMapAsync(this);
 
@@ -234,6 +235,8 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
                             JSONArray jsonArray = new JSONArray(response);
                             JSONObject respuesta = jsonArray.getJSONObject(0);
                             Glide.with(carrera_vista1.this).load(respuesta.optString("foto")).into(imgCompetencia);
+                            Glide.with(carrera_vista1.this).load(respuesta.optString("aval")).into(imgAval);
+                            Glide.with(carrera_vista1.this).load(respuesta.optString("resultados")).into(imgResultados);
                             id_organizador = respuesta.optString("id_usuario");
                             monto = respuesta.optString("precio");
                             coordenadas = respuesta.optString("coordenadas");
@@ -260,8 +263,16 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
     }
 
     private void getLastViewData() {
+        boolean flag;
+
         Bundle extra = carrera_vista1.this.getIntent().getExtras();
         id_competencia = extra.getString("id");
+        flag = extra.getBoolean("registro");
+
+        if (flag)
+            btnInscripcion.setEnabled(flag);
+        else
+            btnInscripcion.setEnabled(flag);
     }
 
     private void comentarForo(String URL) {
