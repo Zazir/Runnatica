@@ -552,7 +552,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         plantillaPDF.addParagraph(Lugar);
         plantillaPDF.addParagraph(Organizador);
         plantillaPDF.cerrarDocumento();
-        plantillaPDF.sendMail();
+        plantillaPDF.sendMail(usuario.getCorreo());
     }
 
     public boolean validarPermisos() {

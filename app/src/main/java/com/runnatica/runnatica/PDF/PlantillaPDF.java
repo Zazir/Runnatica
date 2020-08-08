@@ -7,8 +7,6 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.core.content.FileProvider;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -36,6 +34,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
+import androidx.core.content.FileProvider;
 
 
 public class PlantillaPDF {
@@ -153,7 +153,7 @@ public class PlantillaPDF {
         }*/
 
 
-    public void sendMail() {
+    public void sendMail(String accountMail) {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -187,7 +187,7 @@ public class PlantillaPDF {
                 mimeMultipart.addBodyPart(adjunto);
 
                 message.setSubject("Runnatica Inscrición");
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(usuario.getCorreo()));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(accountMail));
                 message.setContent(mimeMultipart, "text/html; charset=utf-8");
 
                 Transport.send(message);
