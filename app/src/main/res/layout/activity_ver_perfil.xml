@@ -44,136 +44,164 @@
 
             <TextView
                 android:id="@+id/txtNom"
-                android:text="Nombre y Apellido"
+                android:text="Nombre y Apellido:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:layout_below="@+id/ivFotoPerfilUsuario"/>
+                android:layout_below="@+id/ivFotoPerfilUsuario"
+                android:background="@drawable/barra_verde"
+                />
 
             <TextView
                 android:id="@+id/tvNombreUsuario"
                 android:layout_below="@+id/txtNom"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombre del usuario" />
+                android:text="Nombre del usuario"
+                android:gravity="center"
+                />
 
             <TextView
                 android:id="@+id/txtCorreo"
-                android:text="Correo Electronico"
+                android:text="Correo Electronico:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:layout_below="@+id/tvNombreUsuario"/>
+                android:layout_below="@+id/tvNombreUsuario"
+                android:background="@drawable/barra_verde"
+                />
 
             <TextView
                 android:id="@+id/tvCorreoUsuario"
                 android:layout_below="@+id/txtCorreo"
                 android:text="Correo del usuario"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
 
             <TextView
                 android:id="@+id/txtSexo"
-                android:text="Sexo"
+                android:text="Sexo:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:layout_below="@+id/tvCorreoUsuario"/>
+                android:layout_below="@+id/tvCorreoUsuario"
+                android:background="@drawable/barra_verde"
+                />
 
             <TextView
                 android:id="@+id/tvSexoUsuario"
                 android:layout_below="@+id/txtSexo"
                 android:text="Sexo del usuario"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
 
             <TextView
                 android:id="@+id/txtNacimiento"
-                android:text="Fecha de Nacimiento"
+                android:text="Fecha de Nacimiento:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:layout_below="@+id/tvSexoUsuario"/>
+                android:layout_below="@+id/tvSexoUsuario"
+                android:background="@drawable/barra_verde"
+                />
 
             <TextView
                 android:id="@+id/tvFechaNacimientoUsuario"
                 android:layout_below="@+id/txtNacimiento"
                 android:text="Fecha de Nacimiento"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
 
             <TextView
                 android:id="@+id/txtCiudad"
-                android:text="Ciudad"
+                android:text="Ciudad:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:layout_below="@+id/tvFechaNacimientoUsuario"/>
+                android:layout_below="@+id/tvFechaNacimientoUsuario"
+                android:background="@drawable/barra_verde"
+                />
 
             <TextView
                 android:id="@+id/tvCiudadUsuario"
                 android:layout_below="@+id/txtCiudad"
                 android:text="Ciudad del usuario"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
 
             <TextView
                 android:id="@+id/txtCiuda"
-                android:text="Estado"
+                android:text="Estado:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:layout_below="@+id/tvCiudadUsuario"/>
+                android:layout_below="@+id/tvCiudadUsuario"
+                android:background="@drawable/barra_verde"
+                />
 
             <TextView
                 android:id="@+id/tvEstadoUsuario"
                 android:layout_below="@+id/txtCiuda"
                 android:text="Estado del usuario"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
 
             <TextView
                 android:id="@+id/txtPais"
-                android:text="Pais"
+                android:text="Pais:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:layout_below="@+id/tvEstadoUsuario"/>
+                android:layout_below="@+id/tvEstadoUsuario"
+                android:background="@drawable/barra_verde"
+                />
 
             <TextView
                 android:id="@+id/tvPaisUsuario"
                 android:layout_below="@+id/txtPais"
                 android:text="Pais del usuario"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
 
             <Button
                 android:id="@+id/btnEditarUsuario"

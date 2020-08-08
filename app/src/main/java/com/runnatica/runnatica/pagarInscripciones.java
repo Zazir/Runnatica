@@ -212,7 +212,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         list.add(item); //agregamos los detalles a la lista
 
         Payer payer = new Payer(); //objeto con los datos de usuario comprador
-        payer.setEmail("prueba@prueba.com"); //email del usuario comprador
+        payer.setEmail("prueba@gmail.com"); //email del usuario comprador
 
 
         List<ExcludedPaymentType> list1 = new ArrayList<>();//lista con datos de la venta
@@ -232,9 +232,6 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         pagoDetalles.setmPayment_methods(methods);
 
 
-
-
-
         disposable = retrofitApi.obtenerDatosPago(pagoDetalles).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<ResponsePago>() {
                     @Override
@@ -242,7 +239,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
                         //una vez generada el id de compra lo mandamos a mercado pago y se genera la ventana de tarjetas
                         new MercadoPagoCheckout.Builder(PUBLIC_KEY, responsePago.getId())
                                 .build()
-                                .startPayment(getApplication(), 12);
+                                .startPayment(pagarInscripciones.this, 12);
                     }
 
                     @Override
@@ -257,6 +254,118 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
                     }
                 });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //primeramente aca se borraron una linea
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //MercadoPago
+        if(requestCode == 12){
+            if (resultCode == MercadoPagoCheckout.PAYMENT_RESULT_CODE) {
+                final Payment payment = (Payment) data.getSerializableExtra(MercadoPagoCheckout.EXTRA_PAYMENT_RESULT);//payment almacena los datos de la compra
+
+                if(payment.getPaymentStatus().equals("approved")){
+
+                    //compra aprobada
+                    Toast.makeText(this, "Pago Realizado", Toast.LENGTH_SHORT).show();
+                    //Petición al WS para mostrar en bd la inscripción
+                    reflejarInscripcion(dominio + "inscribirUsuario.php?" +
+                            "id_usuario="+ usuario.getId() +
+                            "&id_competencia=" + id_competencia);
+
+                    inscribirForaneos(dominio + "inscribirForaneo.php?" +
+                            "id_usuario=" + usuario.getId() +
+                            "&id_competencia=" + id_competencia+
+                            "&id_foraneo=" + ids_foraneos.replaceAll(" ", "%20"));
+
+                    crearPDF(currentDate);
+                    Felicidades();
+
+                }  else if(payment.getPaymentStatus().equals("pending")){
+                    Toast.makeText(this, "Pago en espera de OXXO", Toast.LENGTH_SHORT).show();
+                } else{
+                    //compra no aprobada
+                    Toast.makeText(this, "Fallo Pago", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+            else if (resultCode == RESULT_CANCELED) {
+
+                if (data != null && data.getExtras() != null
+                        && data.getExtras().containsKey(MercadoPagoCheckout.EXTRA_ERROR)) {
+                    //error en algun paso de mercado pago
+                    final MercadoPagoError mercadoPagoError =
+                            (MercadoPagoError) data.getSerializableExtra(MercadoPagoCheckout.EXTRA_ERROR);
+                    //el objeto mercadoPagoError contiene todos los datos de porque no se genero la venta
+
+                } else {
+                    //compra cancelada
+
+                }
+            }
+
+
+        }
+
+        //MercadoPago
+
+        if(requestCode == PAYPAL_REQUEST_CODE){
+            if (resultCode == RESULT_OK){
+                //Petición al WS para mostrar en bd la inscripción
+                reflejarInscripcion(dominio + "inscribirUsuario.php?" +
+                        "id_usuario="+ usuario.getId() +
+                        "&id_competencia=" + id_competencia);
+
+                inscribirForaneos(dominio + "inscribirForaneo.php?" +
+                        "id_usuario=" + usuario.getId() +
+                        "&id_competencia=" + id_competencia+
+                        "&id_foraneo=" + ids_foraneos.replaceAll(" ", "%20"));
+
+                crearPDF(currentDate);
+                PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+                if (confirmation != null){
+                    try {
+                        String DetallesPago = confirmation.toJSONObject().toString(4);
+                        startActivity(new Intent(this, DetallesTransaccion.class).putExtra("PaymentDetails", DetallesPago)
+                                .putExtra("PaymentAmount", monto));
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            }else if (resultCode == Activity.RESULT_CANCELED)
+                Toast.makeText(this, "Transaccion cancelada", Toast.LENGTH_SHORT).show();
+        }else if (requestCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
+            Toast.makeText(this, "Petición inválida", Toast.LENGTH_SHORT).show();
+
+        }/*else if (requestCode == MAKED_WALLET_REQUEST_CODE) {
+            switch (resultCode) {
+                case Activity.RESULT_OK:
+                    mMaskedWallet = data.getParcelableExtra(WalletConstants.EXTRA_MASKED_WALLET);
+                    break;
+                case Activity.RESULT_CANCELED:
+                     break;
+                default:
+                    Toast.makeText(this, "Transaccion cancelada", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }else if (requestCode == FULL_WALLET_REQUEST_CODE) {
+            switch (resultCode) {
+                case Activity.RESULT_OK:
+                    mFullWallet = data.getParcelableExtra(WalletConstants.EXTRA_FULL_WALLET);
+                    Toast.makeText(this, mFullWallet.getProxyCard().getPan(), Toast.LENGTH_SHORT).show();
+                    Wallet.Payments.notifyTransactionStatus(mGoogleApiClient,
+                            generateNotifyTransactionStatusRequest(mFullWallet.getGoogleTransactionId(),
+                            NotifyTransactionStatusRequest.Status.SUCCESS));
+                    break;
+                default:
+                    Toast.makeText(this, "Ocurrió un error", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }else if (requestCode == WalletConstants.RESULT_ERROR) {
+            Toast.makeText(this, "Transaccion cancelada", Toast.LENGTH_SHORT).show();
+        }*/
     }
 
 
@@ -327,114 +436,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         startActivityForResult(intent, PAYPAL_REQUEST_CODE);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        //MercadoPago
-        if(requestCode == 12){
-            if (resultCode == MercadoPagoCheckout.PAYMENT_RESULT_CODE) {
-                final Payment payment = (Payment) data.getSerializableExtra(MercadoPagoCheckout.EXTRA_PAYMENT_RESULT);//payment almacena los datos de la compra
 
-                if(payment.getPaymentStatus().equals("approved")){
-
-                    //compra aprobada
-                    Toast.makeText(this, "Pago Realizado", Toast.LENGTH_SHORT).show();
-                    //Petición al WS para mostrar en bd la inscripción
-                    reflejarInscripcion(dominio + "inscribirUsuario.php?" +
-                            "id_usuario="+ usuario.getId() +
-                            "&id_competencia=" + id_competencia);
-
-                    inscribirForaneos(dominio + "inscribirForaneo.php?" +
-                            "id_usuario=" + usuario.getId() +
-                            "&id_competencia=" + id_competencia+
-                            "&id_foraneo=" + ids_foraneos.replaceAll(" ", "%20"));
-
-                    crearPDF(currentDate);
-                    Felicidades();
-
-                }  else if(payment.getPaymentStatus().equals("pending")){
-                    Toast.makeText(this, "Pago en espera de OXXO", Toast.LENGTH_SHORT).show();
-                } else{
-                    //compra no aprobada
-                    Toast.makeText(this, "Fallo Pago", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-            else if (resultCode == RESULT_CANCELED) {
-
-                if (data != null && data.getExtras() != null
-                        && data.getExtras().containsKey(MercadoPagoCheckout.EXTRA_ERROR)) {
-                    //error en algun paso de mercado pago
-                    final MercadoPagoError mercadoPagoError =
-                            (MercadoPagoError) data.getSerializableExtra(MercadoPagoCheckout.EXTRA_ERROR);
-                    //el objeto mercadoPagoError contiene todos los datos de porque no se genero la venta
-
-                } else {
-                    //compra cancelada
-
-                }
-            }
-
-
-        }
-
-        //MercadoPago
-
-        if(requestCode == PAYPAL_REQUEST_CODE){
-            if (resultCode == RESULT_OK){
-                //Petición al WS para mostrar en bd la inscripción
-                reflejarInscripcion(dominio + "inscribirUsuario.php?" +
-                        "id_usuario="+ usuario.getId() +
-                        "&id_competencia=" + id_competencia);
-
-                inscribirForaneos(dominio + "inscribirForaneo.php?" +
-                    "id_usuario=" + usuario.getId() +
-                    "&id_competencia=" + id_competencia+
-                    "&id_foraneo=" + ids_foraneos.replaceAll(" ", "%20"));
-
-                crearPDF(currentDate);
-                PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
-                if (confirmation != null){
-                    try {
-                        String DetallesPago = confirmation.toJSONObject().toString(4);
-                        startActivity(new Intent(this, DetallesTransaccion.class).putExtra("PaymentDetails", DetallesPago)
-                                .putExtra("PaymentAmount", monto));
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
-                }
-            }else if (resultCode == Activity.RESULT_CANCELED)
-                Toast.makeText(this, "Transaccion cancelada", Toast.LENGTH_SHORT).show();
-        }else if (requestCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
-            Toast.makeText(this, "Petición inválida", Toast.LENGTH_SHORT).show();
-
-        }/*else if (requestCode == MAKED_WALLET_REQUEST_CODE) {
-            switch (resultCode) {
-                case Activity.RESULT_OK:
-                    mMaskedWallet = data.getParcelableExtra(WalletConstants.EXTRA_MASKED_WALLET);
-                    break;
-                case Activity.RESULT_CANCELED:
-                     break;
-                default:
-                    Toast.makeText(this, "Transaccion cancelada", Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }else if (requestCode == FULL_WALLET_REQUEST_CODE) {
-            switch (resultCode) {
-                case Activity.RESULT_OK:
-                    mFullWallet = data.getParcelableExtra(WalletConstants.EXTRA_FULL_WALLET);
-                    Toast.makeText(this, mFullWallet.getProxyCard().getPan(), Toast.LENGTH_SHORT).show();
-                    Wallet.Payments.notifyTransactionStatus(mGoogleApiClient,
-                            generateNotifyTransactionStatusRequest(mFullWallet.getGoogleTransactionId(),
-                            NotifyTransactionStatusRequest.Status.SUCCESS));
-                    break;
-                default:
-                    Toast.makeText(this, "Ocurrió un error", Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }else if (requestCode == WalletConstants.RESULT_ERROR) {
-            Toast.makeText(this, "Transaccion cancelada", Toast.LENGTH_SHORT).show();
-        }*/
-    }
 
     /*public static NotifyTransactionStatusRequest generateNotifyTransactionStatusRequest(String googleTransactionId, int status) {
         return NotifyTransactionStatusRequest.newBuilder()

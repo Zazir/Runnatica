@@ -134,6 +134,7 @@ public class home extends AppCompatActivity {
                 Localizacion = city;
             } catch (Exception e) {
                 e.printStackTrace();
+                Nogps();
                 Toast.makeText(home.this, "Tu GPS esta desactivado, activelo para poder continuar", Toast.LENGTH_SHORT).show();
             }
         }
