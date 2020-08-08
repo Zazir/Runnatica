@@ -26,7 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/llCrearCompetencia"
-        android:layout_above="@+id/bottomNavigation">
+        android:layout_above="@+id/bottomNavigation"
+        android:layout_marginBottom="5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -59,7 +60,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_below="@+id/txtNombreCompetencia"
-                android:textColor="@android:color/background_dark"/>
+                android:textColor="@android:color/background_dark" />
 
             <TextView
                 android:id="@+id/txtPrecio"
@@ -278,32 +279,40 @@
                 android:text="Seleccionar inicio de la competencia"/>
 
             <TextView
+                android:id="@+id/tvCoordenadas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Coordenadas"
+                android:layout_below="@+id/btnSeleccionarLugar"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/darker_gray"
+                android:textAlignment="center"/>
+
+            <TextView
                 android:id="@+id/txtAval"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_below="@+id/btnSeleccionarLugar"
-                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvCoordenadas"
+                android:layout_centerHorizontal="true"
                 android:text="Aval del Evento"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30dp"/>
+                android:textSize="30sp"/>
+
+            <ImageView
+                android:id="@+id/imgAval"
+                android:layout_below="@id/txtAval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"/>
 
             <Button
                 android:id="@+id/btnAvalCompetencia"
                 android:layout_width="228dp"
                 android:layout_height="35dp"
-                android:layout_marginLeft="20dp"
-                android:layout_below="@+id/txtAval"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/imgAval"
                 android:text="Subir"/>
-
-            <TextView
-                android:layout_width="108dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="270dp"
-                android:layout_below="@+id/txtAval"
-                android:text="Documento"
-                android:textSize="15dp"
-                android:layout_marginTop="10dp"
-                android:textColor="@android:color/background_dark"/>
 
             <TextView
                 android:id="@+id/txtDescripcion"
@@ -323,29 +332,16 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:inputType="textMultiLine"
                 android:textColor="@android:color/background_dark"/>
 
-            <TextView
-                android:id="@+id/txtCordenadas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Coordenadas"
-                android:layout_below="@+id/etDescripcionCompetencia"
-                android:textSize="25dp"
-                android:textColor="@android:color/background_dark"/>
-
-            <EditText
-                android:id="@+id/etCoordenadas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtCordenadas"/>
 
             <Button
                 android:id="@+id/btnGuardarCompetencia"
                 android:layout_width="310dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/etCoordenadas"
+                android:layout_below="@+id/etDescripcionCompetencia"
                 android:background="@color/grisBoton"
                 android:layout_marginEnd="20dp"
                 android:text="Siguiente"/>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +22,8 @@ import com.runnatica.runnatica.poho.Usuario;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Login extends AppCompatActivity {
     RadioButton rbSesion;
@@ -99,7 +100,7 @@ public class Login extends AppCompatActivity {
                 if (response.length() <= 1) {
                     Toast.makeText(getApplicationContext(), "Error en las credenciales", Toast.LENGTH_SHORT).show();
                     return;
-                }else if (response.matches("borrado")) {
+                }else if (response.contains("borrado")) {
                     Toast.makeText(getApplicationContext(), "Tu usuario se borró por no subir los resultados de las competencias", Toast.LENGTH_LONG).show();
                     return;
                 } else {

@@ -10,6 +10,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -47,33 +49,50 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class crear_competencia extends AppCompatActivity {
+public class crear_competencia extends AppCompatActivity implements TextWatcher {
 
-    private TextView txtFecha, txtHora;
-    private EditText Nombre, Precio, GradosUbicacion, Ciudad, Colonia, Calle, Descripcion, Coordenadas;
+    // Constantes para códigos
+    public static final String NOMBRE_COMPETENCIA = "nombre.competencia.guardado";
+    public static final String PRECIO_COMPETENCIA = "precio.competencia.guardado";
+    public static final String FECHA_COMPETENCIA = "fecha.competencia.guardado";
+    public static final String HORA_COMPETENCIA = "hora.competencia.guardado";
+    public static final String IMAGEN_DE_COMPETENCIA = "imagen.competencia.guardado";
+    public static final String PAIS_COMPETENCIA = "pais.competencia.guardado";
+    public static final String ESTADO_COMPETENCIA = "estado.competencia.guardado";
+    public static final String CIUDAD_COMPETENCIA = "ciudad.competencia.guardado";
+    public static final String COLONIA_COMPETENCIA = "colonia.competencia.guardado";
+    public static final String CALLE_COMPETENCIA = "calle.competencia.guardado";
+    public static final String COORDENADAS_COMPETENCIA = "coordenadas.competencia.guardado";
+    public static final String AVAL_DE_COMPETENCIA = "aval.competencia.guardado";
+    public static final String DESCRIPCION_COMPETENCIA = "descripcion.competencia.guardado";
+
+    private TextView txtFecha, txtHora, txtCoordenadas;
+    private EditText Nombre, Precio, Ciudad, Colonia, Calle, Descripcion;
     private Button Informacion, btnImagen, btnDate, Aval, Guardar, btnHora, btnLugar;
     private Spinner Pais, Estado;
-    private ImageView img;
+    private ImageView imgCarrera, imgAval;
     private Usuario usuario = Usuario.getUsuarioInstance();
 
+    // Útiles para imágenes
     private Bitmap bitmap;
     private ProgressDialog progreso;
+    private boolean diferenciar_imagen;
 
+    // Útiles para fecha y hora
     private Calendar calendar;
     private DatePickerDialog picker;
     private TimePickerDialog timePicker;
-    private String fecha;
-    private String hora;
     private String Reembolso;
 
     private String dominio;
 
     BottomNavigationView MenuUsuario;
 
-
-
     int imagen=0, dia, mes, ano;
-    private String path = "xxx", estado, pais;
+
+    // Miembros para guardar los valores de los datos de los EditText
+    private String nombreCompetencia="", fecha="", hora="", pathCompetencia="", pais="", estado="", ciudad="", colonia="", calle="", coordenadas="", pathAval="", descripcion="";
+    private int precio = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +108,8 @@ public class crear_competencia extends AppCompatActivity {
         btnHora = (Button) findViewById(R.id.btnHoraCompetencia);
         btnImagen = (Button) findViewById(R.id.btnImagenCompetencia);
         btnDate = (Button)findViewById(R.id.btnSeleccionarFecha);
-        img = (ImageView)findViewById(R.id.imgCompetencia);
+        imgCarrera = (ImageView)findViewById(R.id.imgCompetencia);
+        imgAval = (ImageView)findViewById(R.id.imgAval);
         Ciudad = (EditText)findViewById(R.id.etCiudadCompetencia);
         Colonia = (EditText)findViewById(R.id.etColoniaCompetencia);
         Pais = (Spinner) findViewById(R.id.spPaisCompetencia);
@@ -101,8 +121,9 @@ public class crear_competencia extends AppCompatActivity {
         txtFecha = (TextView)findViewById(R.id.tvFechaPicker);
         txtHora = (TextView)findViewById(R.id.tvHoraCompetencia);
         btnLugar = (Button)findViewById(R.id.btnSeleccionarLugar);
-        Coordenadas = (EditText)findViewById(R.id.etCoordenadas);
+        txtCoordenadas = (TextView)findViewById(R.id.tvCoordenadas);
 
+        obtenerAutoguardado();
         cargarSpinnerEstado();
         cargarSpinnerPais();
 
@@ -137,16 +158,18 @@ public class crear_competencia extends AppCompatActivity {
         btnImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Guardar imagen
+                //Guardar imagen de la competencia
+                diferenciar_imagen = true;
                 CargarImagen();
-                imagen = 1;
             }
         });
+
         Aval.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Guardar la imagen del aval
-
+                diferenciar_imagen = false;
+                CargarImagen();
             }
         });
 
@@ -162,6 +185,7 @@ public class crear_competencia extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         hora = hourOfDay + ":" + minute;
                         txtHora.setText(hora);
+                        autoguardadoOportuno();
                     }
                 }, horas, minuto, true);
 
@@ -184,6 +208,7 @@ public class crear_competencia extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         fecha = year + "-" + (month+1) + "-" + dayOfMonth;
                         txtFecha.setText(fecha);
+                        autoguardadoOportuno();
                     }
                 }, ano, mes, dia);
 
@@ -202,26 +227,23 @@ public class crear_competencia extends AppCompatActivity {
         Guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //subirImagenCompetencia("http://192.168.137.1:811/WebServiceRunnatica/agregarCompetencia.php?");
-                    subirImagenCompetencia("http://45.15.24.210/WebServiceRunnatica/guardarImagen.php?");
-                if (true){//Validaciones()){
-                    /*SubirCompetencia(dominio + "agregarCompetencia.php?" +
+                if (Validaciones()){
+                    SubirCompetencia(dominio + "agregarCompetencia.php?" +
                             "Id_usuario=" + usuario.getId() +
-                            "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
-                            "&Aval=Aval" +
-                            "&Coordenadas=" +Coordenadas.getText().toString().replaceAll(" ", "%20")+
-                            "&Nombre_competencia=" + Nombre.getText().toString().replaceAll(" ", "%20")+
+                            "&Descripcion=" + descripcion.replaceAll(" ", "%20") +
+                            "&Aval=" + pathAval +
+                            "&Coordenadas=" + coordenadas +
+                            "&Nombre_competencia=" + nombreCompetencia.replaceAll(" ", "%20") +
                             "&Pais=" + pais +
-                            "&Colonia=" +Colonia.getText().toString().replaceAll(" ", "%20")+
-                            "&Calle=" +Calle.getText().toString().replaceAll(" ", "%20")+
-                            "&Ciudad=" +Ciudad.getText().toString().replaceAll(" ", "%20")+
+                            "&Colonia=" + colonia.replaceAll(" ", "%20") +
+                            "&Calle=" + calle.replaceAll(" ", "%20") +
+                            "&Ciudad=" + ciudad.replaceAll(" ", "%20") +
                             "&Fecha=" +fecha+
                             "&Hora=" +hora+
                             "&Estado=" + estado +
                             "&Reembolso=N" +
-                            "&Precio=" +Precio.getText().toString()+
-                            "&path="+path);*/
-                    //subirImagenCompetencia(dominio + "uploadImg.php?");
+                            "&Precio=" + precio +
+                            "&path="+pathCompetencia);
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
                 }
@@ -231,16 +253,39 @@ public class crear_competencia extends AppCompatActivity {
         btnLugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                autoguardadoOportuno();
                 mapa();
+                finish();
             }
         });
+
+        //Métodos para un autoguardado en tiempo real
+        Nombre.addTextChangedListener(this);
+        Descripcion.addTextChangedListener(this);
+        Colonia.addTextChangedListener(this);
+        Colonia.addTextChangedListener(this);
+        Calle.addTextChangedListener(this);
+        Ciudad.addTextChangedListener(this);
+        Precio.addTextChangedListener(this);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        autoguardadoOportuno();
     }
 
     private void mapa() {
         Intent intent = new Intent(crear_competencia.this, mapCompetencia.class);
-        intent.putExtra("Latitud", "0.0");
-        intent.putExtra("Longitud", "0.0");
-        intent.putExtra("nombre_competencia", "");
         startActivity(intent);
     }
 
@@ -261,6 +306,7 @@ public class crear_competencia extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 estado = parent.getItemAtPosition(position).toString();
+                autoguardadoOportuno();
             }
 
             @Override
@@ -278,6 +324,7 @@ public class crear_competencia extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 pais = parent.getItemAtPosition(position).toString();
+                autoguardadoOportuno();
             }
 
             @Override
@@ -315,6 +362,16 @@ public class crear_competencia extends AppCompatActivity {
         requestQueue.add(stringRequest);//hacemos la peticion
     }
 
+    /**
+     * Este método crea una petición post hacia un web service (especificado con el parámetro que esta recibiendo)
+     *
+     * Descompone una imagen seleccionada para obtener su string y después enviarla
+     *
+     * La respuesta de la petición entrega el path de la imagen guardada en el servidor o en su defecto
+     * entrega el error al intentar subir la imagen al servidor (controles de errores definidos en el web service)
+     *
+     * @param URL
+     */
     private void subirImagenCompetencia(String URL) {
         progreso = new ProgressDialog(crear_competencia.this);
         progreso.setMessage("Guardando Imagen...");
@@ -324,28 +381,18 @@ public class crear_competencia extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        progreso.hide();
-                        path = response;
+                        progreso.dismiss();
                         Log.i("Respuesta_img", response);
                         if (response.equals("Error al subir")) {
                             Toast.makeText(getApplicationContext(), "La imagen no se pudo subir con éxito", Toast.LENGTH_SHORT).show();
                         } else {
-                            SubirCompetencia(dominio + "agregarCompetencia.php?" +
-                                    "Id_usuario=" + usuario.getId() +
-                                    "&Descripcion=" +Descripcion.getText().toString().replaceAll(" ", "%20")+
-                                    "&Aval=Aval" +
-                                    "&Coordenadas=95959595959" +
-                                    "&Nombre_competencia=" + Nombre.getText().toString().replaceAll(" ", "%20")+
-                                    "&Pais=" + pais +
-                                    "&Colonia=" +Colonia.getText().toString().replaceAll(" ", "%20")+
-                                    "&Calle=" +Calle.getText().toString().replaceAll(" ", "%20")+
-                                    "&Ciudad=" +Ciudad.getText().toString().replaceAll(" ", "%20")+
-                                    "&Fecha=" +fecha+
-                                    "&Hora=" +hora+
-                                    "&Estado=" + estado +
-                                    "&Reembolso=N" +
-                                    "&Precio=" +Precio.getText().toString()+
-                                    "&path="+path);
+                            if (diferenciar_imagen) {
+                                Log.i("path_imagen", response);
+                                pathCompetencia = response;
+                            } else {
+                                Log.i("path_imagen", response);
+                                pathAval = response;
+                            }
                         }
                     }
                 },
@@ -392,19 +439,36 @@ public class crear_competencia extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK){
+            //imgCarrera.setImageURI(path);//poner la imagen que busco
             Uri path = data.getData();//valor que te devuelve el metodo sobrecargado (el data es la imagen de la galeria)
-            img.setImageURI(path);//poner la imagen que busco
 
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), path);
-                img.setImageBitmap(bitmap);//Se obtiene el bipmap
-            } catch (IOException e) {
-                e.printStackTrace();
+            //La imagen se cargar desde el botón de imagen competencia
+            if (diferenciar_imagen) {
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), path);
+                    imgCarrera.setImageBitmap(bitmap);//Setear bitmap de la imagen en el ImageView
+                    subirImagenCompetencia(dominio+"guardarImagen.php?");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if (!diferenciar_imagen) {
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), path);
+                    imgAval.setImageBitmap(bitmap);//Setear bitmap de la imagen en el ImageView
+                    subirImagenCompetencia(dominio+"guardarImagen.php?");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+
         }
     }
 
-        private Boolean Validaciones() {
+    /**
+     * Metodo que valida el formulario para su posterior envio
+     * @return
+     */
+    private Boolean Validaciones() {
         Boolean siguiente = false;
 
         if (Nombre.getText().toString().length() <= 0) {
@@ -459,5 +523,71 @@ public class crear_competencia extends AppCompatActivity {
     private void Ajustes(){
         Intent next = new Intent(this, ajustes_competidor.class);
         startActivity(next);
+    }
+
+    /**
+     * Método que crea un autoguardado para la competencia que se está creando por si no se termina de crear la competencia
+     */
+    private void autoguardadoOportuno() {
+        SharedPreferences preferences = getSharedPreferences("Autoguardado_Competencia", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        nombreCompetencia = Nombre.getText().toString();
+        descripcion = Descripcion.getText().toString();
+        coordenadas = txtCoordenadas.getText().toString();
+        colonia = Colonia.getText().toString();
+        calle = Calle.getText().toString();
+        ciudad = Ciudad.getText().toString();
+        if (Precio.getText().toString().equals("")) {
+            precio = 0;
+        }else {
+            precio = Integer.parseInt(Precio.getText().toString());
+        }
+
+        Log.i("AutoGuardado", "Se hizó el autoguardado");
+
+        editor.putString(NOMBRE_COMPETENCIA, nombreCompetencia);
+        editor.putInt(PRECIO_COMPETENCIA, precio);
+        editor.putString(FECHA_COMPETENCIA, fecha);
+        editor.putString(HORA_COMPETENCIA, hora);
+        editor.putString(IMAGEN_DE_COMPETENCIA, pathCompetencia);
+        editor.putString(PAIS_COMPETENCIA, pais);
+        editor.putString(ESTADO_COMPETENCIA, estado);
+        editor.putString(CIUDAD_COMPETENCIA, ciudad);
+        editor.putString(COLONIA_COMPETENCIA, colonia);
+        editor.putString(CALLE_COMPETENCIA, calle);
+        editor.putString(COORDENADAS_COMPETENCIA, coordenadas);
+        editor.putString(AVAL_DE_COMPETENCIA, pathAval);
+        editor.putString(DESCRIPCION_COMPETENCIA, descripcion);
+
+        editor.commit();
+    }
+
+    private void obtenerAutoguardado() {
+        SharedPreferences preferences = getSharedPreferences("Autoguardado_Competencia", Context.MODE_PRIVATE);
+
+        nombreCompetencia = preferences.getString(NOMBRE_COMPETENCIA, "");
+        precio = preferences.getInt(PRECIO_COMPETENCIA, 0);
+        fecha = preferences.getString(FECHA_COMPETENCIA, "");
+        hora = preferences.getString(HORA_COMPETENCIA, "");
+        pathCompetencia = preferences.getString(IMAGEN_DE_COMPETENCIA, "");
+        pais = preferences.getString(PAIS_COMPETENCIA, "");
+        estado = preferences.getString(ESTADO_COMPETENCIA, "");
+        ciudad = preferences.getString(CIUDAD_COMPETENCIA, "");
+        colonia = preferences.getString(COLONIA_COMPETENCIA, "");
+        calle = preferences.getString(CALLE_COMPETENCIA, "");
+        coordenadas = preferences.getString(COORDENADAS_COMPETENCIA, "");
+        pathAval = preferences.getString(AVAL_DE_COMPETENCIA, "");
+        descripcion = preferences.getString(DESCRIPCION_COMPETENCIA, "");
+
+        Nombre.setText(nombreCompetencia);
+        Precio.setText(precio+"");
+        txtFecha.setText(fecha);
+        txtHora.setText(hora);
+        Ciudad.setText(ciudad);
+        Colonia.setText(colonia);
+        Calle.setText(calle);
+        txtCoordenadas.setText(coordenadas);
+        Descripcion.setText(descripcion);
     }
 }

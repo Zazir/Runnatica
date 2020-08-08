@@ -7,6 +7,7 @@
     tools:context=".crear_inscripcion">
 
     <LinearLayout
+        android:id="@+id/kkto"
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:background="@drawable/barra_verde">
@@ -22,7 +23,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kkto"
+        android:layout_above="@+id/bottomNavigation"
+        android:layout_marginBottom="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,10 +37,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="10dp"
                 android:text="Nombre de la Inscripción"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30dp"></TextView>
+                android:textSize="30dp"/>
 
             <EditText
                 android:id="@+id/etNombreInscripcion"
@@ -44,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:textColor="@android:color/background_dark"></EditText>
+                android:textColor="@android:color/background_dark"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,7 +56,7 @@
                 android:layout_marginLeft="20dp"
                 android:text="Cantidad"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30dp"></TextView>
+                android:textSize="30dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,7 +75,7 @@
                         android:layout_marginTop="10dp"
                         android:text="Normal"
                         android:textColor="@android:color/background_dark"
-                        android:textSize="25dp"></TextView>
+                        android:textSize="25dp"/>
 
                     <EditText
                         android:id="@+id/etCantidadNormal"
@@ -80,8 +84,7 @@
                         android:layout_marginLeft="20dp"
                         android:textColor="@android:color/background_dark"
                         android:numeric="integer"
-                        android:inputType="number"
-                        ></EditText>
+                        android:inputType="number"/>
 
                 </LinearLayout>
 
@@ -104,8 +107,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/background_dark"
                         android:numeric="integer"
-                        android:inputType="number"
-                        ></EditText>
+                        android:inputType="number"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -134,7 +136,7 @@
                         android:layout_marginLeft="20dp"
                         android:text="Mínimo de edad"
                         android:textColor="@android:color/background_dark"
-                        android:textSize="25dp"></TextView>
+                        android:textSize="25dp"/>
 
                     <EditText
                         android:id="@+id/etDesdeAnos"
@@ -142,8 +144,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/background_dark"
                         android:numeric="integer"
-                        android:inputType="number"
-                        ></EditText>
+                        android:inputType="number"/>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -157,13 +159,14 @@
                         android:layout_marginLeft="20dp"
                         android:text="Máximo de edad"
                         android:textColor="@android:color/background_dark"
-                        android:textSize="25dp"></TextView>
+                        android:textSize="25sp"/>
 
                     <EditText
                         android:id="@+id/etHastaAnos"
                         android:layout_width="98dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/background_dark"></EditText>
+                        android:textColor="@android:color/background_dark"
+                        android:numeric="integer"/>
                 </LinearLayout>
 
                 <TextView
@@ -200,21 +203,8 @@
                     android:enabled="false"
                     android:textColor="@android:color/background_light"
                     android:textSize="20dp"></Button>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="120dp"
-                    ></TextView>
 
             </LinearLayout>
-
-            <FrameLayout
-                android:id="@+id/contenedorTarjeta"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </FrameLayout>
-
 
         </LinearLayout>
 

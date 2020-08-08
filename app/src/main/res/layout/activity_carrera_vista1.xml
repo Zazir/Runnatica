@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/llInscribirse"
         android:layout_above="@+id/bottomNavigation"
-        android:layout_marginEnd="5dp">
+        android:layout_marginBottom="5dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -29,17 +29,17 @@
                 android:id="@+id/ivFotoCompetencia"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@color/cardview_dark_background"></ImageView>
+                android:background="@color/cardview_dark_background"/>
 
             <TextView
                 android:id="@+id/tvNombreCompetencia"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_height="137dp"
                 android:layout_below="@+id/ivFotoCompetencia"
-                android:text="Medio Maraton de la Ciudad De Mexico"
+                android:text="Nombre de la competencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="35dp"></TextView>
+                android:textSize="35sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,7 +76,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
-                android:layout_below="@+id/imgglobo" />
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/tvLugarCompetencia" />
 
             <ImageView
                 android:id="@+id/imgglobo"
@@ -188,12 +189,12 @@
 
             <EditText
                 android:id="@+id/etRespuestaForo"
-                android:layout_width="375dp"
-                android:layout_height="81dp"
-                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:inputType="text"
-                android:layout_below="@+id/rvForo">
-            </EditText>
+                android:layout_below="@+id/rvForo"/>
 
             <Spinner
                 android:id="@+id/spRespuestaCategoria"
@@ -226,10 +227,11 @@
 
             <ImageView
                 android:id="@+id/ivResultados"
-                android:layout_width="362dp"
-                android:layout_height="282dp"
-                android:layout_marginLeft="20dp"
-                android:layout_below="@+id/txtTablaResultados"></ImageView>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@+id/txtTablaResultados"/>
 
             <Button
                 android:id="@+id/btnIncribirse"
