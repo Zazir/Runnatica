@@ -1,10 +1,9 @@
 package com.runnatica.runnatica;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +17,24 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import static com.runnatica.runnatica.crear_competencia.AVAL_DE_COMPETENCIA;
+import static com.runnatica.runnatica.crear_competencia.CALLE_COMPETENCIA;
+import static com.runnatica.runnatica.crear_competencia.CIUDAD_COMPETENCIA;
+import static com.runnatica.runnatica.crear_competencia.COLONIA_COMPETENCIA;
+import static com.runnatica.runnatica.crear_competencia.COORDENADAS_COMPETENCIA;
+import static com.runnatica.runnatica.crear_competencia.DESCRIPCION_COMPETENCIA;
+import static com.runnatica.runnatica.crear_competencia.ESTADO_COMPETENCIA;
+import static com.runnatica.runnatica.crear_competencia.FECHA_COMPETENCIA;
+import static com.runnatica.runnatica.crear_competencia.HORA_COMPETENCIA;
+import static com.runnatica.runnatica.crear_competencia.IMAGEN_DE_COMPETENCIA;
+import static com.runnatica.runnatica.crear_competencia.NOMBRE_COMPETENCIA;
+import static com.runnatica.runnatica.crear_competencia.PAIS_COMPETENCIA;
+import static com.runnatica.runnatica.crear_competencia.PRECIO_COMPETENCIA;
 
 public class crear_inscripcion extends AppCompatActivity{
     private EditText Nombre, CantidadNormal, CantidadForaneos, DesdeAnos, HastaAnos;
@@ -129,6 +146,8 @@ public class crear_inscripcion extends AppCompatActivity{
                             CantidadForaneos.setText("");
                             DesdeAnos.setText("");
                             HastaAnos.setText("");
+
+                            limpiarArchivoCompetencia();
                         } else
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                     }
@@ -141,6 +160,28 @@ public class crear_inscripcion extends AppCompatActivity{
                 });
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
+    private void limpiarArchivoCompetencia() {
+        SharedPreferences preferences = getSharedPreferences("Autoguardado_Competencia", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putString(NOMBRE_COMPETENCIA, "");
+        editor.putInt(PRECIO_COMPETENCIA, 0);
+        editor.putString(FECHA_COMPETENCIA, "");
+        editor.putString(HORA_COMPETENCIA, "");
+        editor.putString(IMAGEN_DE_COMPETENCIA, "");
+        editor.putString(PAIS_COMPETENCIA, "");
+        editor.putString(ESTADO_COMPETENCIA, "");
+        editor.putString(CIUDAD_COMPETENCIA, "");
+        editor.putString(COLONIA_COMPETENCIA, "");
+        editor.putString(CALLE_COMPETENCIA, "");
+        editor.putString(COORDENADAS_COMPETENCIA, "Coordenadas");
+        editor.putString(AVAL_DE_COMPETENCIA, "");
+        editor.putString(DESCRIPCION_COMPETENCIA, "");
+
+        editor.commit();
+    }
+
     private Boolean Validaciones() {
         Boolean siguiente = false;
         if (Nombre.getText().toString().length() <= 0) {

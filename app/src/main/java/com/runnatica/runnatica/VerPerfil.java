@@ -2,9 +2,6 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,11 +16,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.poho.Usuario;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class VerPerfil extends AppCompatActivity {
@@ -96,8 +96,7 @@ public class VerPerfil extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONArray userArray = new JSONArray(response);
-                            JSONObject usuario = userArray.getJSONObject(0);
+                            JSONObject usuario = new JSONObject(response);
 
                             String fecha = usuario.optString("f_nacimiento");
                             String dia = fecha.substring(0, 2);
@@ -127,6 +126,7 @@ public class VerPerfil extends AppCompatActivity {
                 });
         Volley.newRequestQueue(this).add(request);
     }
+
     private void home(){
         Intent next = new Intent(this, home.class);
         startActivity(next);

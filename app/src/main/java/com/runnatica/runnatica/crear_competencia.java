@@ -548,8 +548,6 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
             precio = Integer.parseInt(Precio.getText().toString());
         }
 
-        Log.i("AutoGuardado", "Se hizó el autoguardado");
-
         editor.putString(NOMBRE_COMPETENCIA, nombreCompetencia);
         editor.putInt(PRECIO_COMPETENCIA, precio);
         editor.putString(FECHA_COMPETENCIA, fecha);
