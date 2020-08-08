@@ -28,7 +28,6 @@ import static com.runnatica.runnatica.crear_competencia.CIUDAD_COMPETENCIA;
 import static com.runnatica.runnatica.crear_competencia.COLONIA_COMPETENCIA;
 import static com.runnatica.runnatica.crear_competencia.COORDENADAS_COMPETENCIA;
 import static com.runnatica.runnatica.crear_competencia.DESCRIPCION_COMPETENCIA;
-import static com.runnatica.runnatica.crear_competencia.ESTADO_COMPETENCIA;
 import static com.runnatica.runnatica.crear_competencia.FECHA_COMPETENCIA;
 import static com.runnatica.runnatica.crear_competencia.HORA_COMPETENCIA;
 import static com.runnatica.runnatica.crear_competencia.IMAGEN_DE_COMPETENCIA;
@@ -171,7 +170,7 @@ public class crear_inscripcion extends AppCompatActivity{
         editor.putString(HORA_COMPETENCIA, "");
         editor.putString(IMAGEN_DE_COMPETENCIA, "");
         editor.putString(PAIS_COMPETENCIA, "");
-        editor.putString(ESTADO_COMPETENCIA, "");
+        //editor.putString(ESTADO_COMPETENCIA, "");
         editor.putString(CIUDAD_COMPETENCIA, "");
         editor.putString(COLONIA_COMPETENCIA, "");
         editor.putString(CALLE_COMPETENCIA, "");

@@ -1,8 +1,6 @@
 package com.runnatica.runnatica.adapter;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +12,9 @@ import com.runnatica.runnatica.R;
 import com.runnatica.runnatica.poho.Competencias;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolderCompetencia> {
 
@@ -65,8 +66,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolderCompeten
             txtNombreCompetencias.setText(pojoCompetencia.getNombreCompetencia());
             txtDescripcionCompetencia.setText(pojoCompetencia.getDescripcionCompetencia());
             txtPrecioCompetencia.setText(pojoCompetencia.getPrecioCompetencia());
+
+            //pojoCompetencia.getImageCompetencia()
                 try {
-                    imgCompetencia.setBackground(null);
                     Glide.with(mCtx).load(pojoCompetencia.getImageCompetencia()).into(imgCompetencia);
                 }catch (IllegalArgumentException ex){
                     Log.i("Glide-Error", ""+ex);

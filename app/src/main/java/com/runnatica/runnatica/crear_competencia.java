@@ -28,10 +28,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -554,7 +550,7 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
         editor.putString(HORA_COMPETENCIA, hora);
         editor.putString(IMAGEN_DE_COMPETENCIA, pathCompetencia);
         editor.putString(PAIS_COMPETENCIA, pais);
-        editor.putString(ESTADO_COMPETENCIA, estado);
+        //editor.putString(ESTADO_COMPETENCIA, estado);
         editor.putString(CIUDAD_COMPETENCIA, ciudad);
         editor.putString(COLONIA_COMPETENCIA, colonia);
         editor.putString(CALLE_COMPETENCIA, calle);
@@ -574,7 +570,7 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
         hora = preferences.getString(HORA_COMPETENCIA, "");
         pathCompetencia = preferences.getString(IMAGEN_DE_COMPETENCIA, "");
         pais = preferences.getString(PAIS_COMPETENCIA, "");
-        estado = preferences.getString(ESTADO_COMPETENCIA, "");
+        //estado = preferences.getString(ESTADO_COMPETENCIA, "");
         ciudad = preferences.getString(CIUDAD_COMPETENCIA, "");
         colonia = preferences.getString(COLONIA_COMPETENCIA, "");
         calle = preferences.getString(CALLE_COMPETENCIA, "");
