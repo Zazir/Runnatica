@@ -134,8 +134,7 @@ public class home extends AppCompatActivity {
                 Localizacion = city;
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(home.this, "No funciona", Toast.LENGTH_SHORT).show();
-                Nogps();
+                Toast.makeText(home.this, "Tu GPS esta desactivado, activelo para poder continuar", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -163,6 +162,7 @@ public class home extends AppCompatActivity {
                     }catch(Exception e){
                         e.printStackTrace();
                         Toast.makeText(home.this, "No funciona", Toast.LENGTH_SHORT).show();
+
                     }
                 }else{
                     Toast.makeText(this,"No has dado permisos aun", Toast.LENGTH_SHORT).show();
@@ -179,16 +179,16 @@ public class home extends AppCompatActivity {
         try{
             addresses = geocoder.getFromLocation(lat, lon, 20);
             if(addresses.size() > 0){
-               for(Address adr: addresses){
-                   if(adr.getAdminArea() != null && adr.getAdminArea().length() > 0){
+                for(Address adr: addresses){
+                    if(adr.getAdminArea() != null && adr.getAdminArea().length() > 0){
                         cityName = adr.getAdminArea();
-                   }
+                    }
                     break;
                 }
-             }
-            }catch(IOException e){
-                e.printStackTrace();
             }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
         return cityName;
     }
     private void home(){
@@ -258,6 +258,7 @@ public class home extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
+
     private void launchCompetenciaView(String id) {
         Intent intent = new Intent(home.this, carrera_vista1.class);
         intent.putExtra("id", id);
@@ -269,7 +270,7 @@ public class home extends AppCompatActivity {
         startActivity(intent);
     }
     private void Nogps(){
-        Intent intent = new Intent(home.this, carrera_vista1.class);
+        Intent intent = new Intent(home.this, Nogps.class);
         startActivity(intent);
     }
 }

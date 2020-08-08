@@ -10,11 +10,8 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +22,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,6 +33,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.poho.Usuario;
 
 import java.io.ByteArrayOutputStream;
@@ -60,6 +62,8 @@ public class Editar_perfil extends AppCompatActivity {
 
     private String dominio;
     private Usuario usuario = Usuario.getUsuarioInstance();
+    private String path = "xxx";
+    private ImageView FotoUsuarioNueva;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,7 @@ public class Editar_perfil extends AppCompatActivity {
         btnGuardar = (Button)findViewById(R.id.btnGuardar);
         //img = (ImageView)findViewById(R.id.imgFotoPerfil);
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+        FotoUsuarioNueva = (ImageView)findViewById(R.id.ivFotoUsuarioNueva);
 
         //Posicionar el icono del menu
         Menu menu = MenuUsuario.getMenu();
@@ -158,7 +163,6 @@ public class Editar_perfil extends AppCompatActivity {
             }
         });
 
-
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,7 +175,7 @@ public class Editar_perfil extends AppCompatActivity {
                             "&ciudad=" + CiudadEditar.getText().toString().replaceAll(" ", "%20") +
                             "&estado=" + EstadoEditar.getText().toString().replaceAll(" ", "%20") +
                             "&pais=" + PaisEditar.getText().toString().replaceAll(" ", "%20"));
-                    //actualizarFotoPerfil(dominio + "uploadImg.php?");
+                    actualizarFotoPerfil(dominio + "guardarImagen.php?");
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
                 };
@@ -192,6 +196,51 @@ public class Editar_perfil extends AppCompatActivity {
             }
         });
     }
+
+    private void subirImagen(String URL) {
+        progreso = new ProgressDialog(Editar_perfil.this);
+        progreso.setMessage("Guardando Imagen...");
+        progreso.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progreso.hide();
+                        Log.i("Respuesta_img", response);
+                        if (response.equals("Error al subir")) {
+                            Toast.makeText(getApplicationContext(), "La imagen no se pudo subir con éxito", Toast.LENGTH_SHORT).show();
+                        } else {
+                            //Aqui recibo el URL de la Imagen
+                            path = response;
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progreso.dismiss();
+                        Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                String imagen = getStringImage(bitmap);
+                String nombreFoto = (System.currentTimeMillis()/1000)+"";
+
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("Foto", imagen);
+                parametros.put("NombreFoto", nombreFoto);
+
+                return parametros;
+            }
+        };
+
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
 
     private void obtenerPreferencias() {
         SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
@@ -318,16 +367,18 @@ public class Editar_perfil extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK){
             Uri path = data.getData();
-            img.setImageURI(path);
+            FotoUsuarioNueva.setImageURI(path);
 
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), path);
-                img.setImageBitmap(bitmap);
+                FotoUsuarioNueva.setImageBitmap(bitmap);
+                subirImagen(dominio + "guardarImagen.php?");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
     private void home(){
         Intent next = new Intent(this, home.class);
         startActivity(next);

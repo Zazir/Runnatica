@@ -216,13 +216,13 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
 
 
         List<ExcludedPaymentType> list1 = new ArrayList<>();//lista con datos de la venta
-        ExcludedPaymentType itempay = new ExcludedPaymentType();
-        itempay.setId("prepaid_card"); //EXCLUIR MEDIOS DE PAG
+       ExcludedPaymentType itempay = new ExcludedPaymentType();
+       itempay.setId("prepaid_card"); //EXCLUIR MEDIOS DE PAG
         list1.add(itempay); //agregamos los detalles a la lista
 
 
         PaymentMethods methods = new PaymentMethods();
-        methods.setExcludedPaymentTypes(list1); //precio unitario de producto
+       methods.setExcludedPaymentTypes(list1); //precio unitario de producto
 
 
 

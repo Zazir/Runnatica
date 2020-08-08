@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,7 @@ public class Subir_Resultados extends AppCompatActivity {
     private Bitmap bitmap;
     private ProgressDialog progreso;
     BottomNavigationView MenuOrganizador;
+    private String path = "xxx";
 
     private String dominio;
 
@@ -147,6 +149,49 @@ public class Subir_Resultados extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);//creamos la peticion hacemos la peticion
         requestQueue.add(stringRequest);//hacemos la peticion
 
+    }
+    private void subirImagenCompetencia(String URL) {
+        progreso = new ProgressDialog(Subir_Resultados.this);
+        progreso.setMessage("Guardando Imagen...");
+        progreso.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progreso.hide();
+                        Log.i("Respuesta_img", response);
+                        if (response.equals("Error al subir")) {
+                            Toast.makeText(getApplicationContext(), "La imagen no se pudo subir con éxito", Toast.LENGTH_SHORT).show();
+                        } else {
+                            //Aqui recibo el URL de la Imagen
+                            path = response;
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progreso.dismiss();
+                        Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                String imagen = getStringImage(bitmap);
+                String nombreFoto = (System.currentTimeMillis()/1000)+"";
+
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("Foto", imagen);
+                parametros.put("NombreFoto", nombreFoto);
+
+                return parametros;
+            }
+        };
+
+        Volley.newRequestQueue(this).add(stringRequest);
     }
 
     private void CargarImagen() {//funcion de tipo void para hacer un proceso

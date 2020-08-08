@@ -160,7 +160,7 @@
                 android:id="@+id/btnGuardar"
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/btnFotoEditar"
+                android:layout_below="@+id/ivFotoUsuarioNueva"
                 android:layout_marginLeft="45dp"
                 android:background="@color/grisBoton"
                 android:layout_marginTop="20dp"
@@ -236,6 +236,11 @@
                 android:inputType="text"
                 />
 
+            <ImageView
+                android:id="@+id/ivFotoUsuarioNueva"
+                android:layout_width="match_parent"
+                android:layout_height="179dp"
+                android:layout_below="@+id/btnFotoEditar"></ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
