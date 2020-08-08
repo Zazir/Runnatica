@@ -1,6 +1,7 @@
 package com.runnatica.runnatica;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Login extends AppCompatActivity {
@@ -38,7 +40,6 @@ public class Login extends AppCompatActivity {
     public static final String NOMBRE_USUARIO_SESSION = "nombre.usuario.session";
     public static final String CORREO_SESSION = "correo.session";
     public static final String NACIMIENTO_USUARIO_SESSION = "fecha.nacimiento.session";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,14 @@ public class Login extends AppCompatActivity {
         Entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iniciarSesion();
+
+                String usuario = getString(R.string.credencial_usuario);
+                String contrasena = getString(R.string.credencial_contrasena);
+
+                if (Usuariotxt.getText().toString().equals(usuario) && Contrasenatxt.getText().toString().equals(contrasena)) {
+                    Administrador();
+                } else
+                    iniciarSesion();
             }
         });
 
@@ -101,6 +109,7 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Error en las credenciales", Toast.LENGTH_SHORT).show();
                     return;
                 }else if (response.contains("borrado")) {
+                    alertaEliminado();
                     Toast.makeText(getApplicationContext(), "Tu usuario se borró por no subir los resultados de las competencias", Toast.LENGTH_LONG).show();
                     return;
                 } else {
@@ -158,5 +167,26 @@ public class Login extends AppCompatActivity {
         user.setNombre(preferences.getString(NOMBRE_USUARIO_SESSION, "No_name"));
         user.setCorreo(preferences.getString(CORREO_SESSION, "No_mail"));
         user.setFechaNacimiento(preferences.getInt(NACIMIENTO_USUARIO_SESSION, 0));
+    }
+
+    private void Administrador() {
+        Intent intent = new Intent(Login.this, VistaAdministrador.class);
+        startActivity(intent);
+    }
+
+    private void alertaEliminado() {
+        AlertDialog.Builder alerta = new AlertDialog.Builder(Login.this);
+
+        alerta.setTitle("Cuenta Eliminada");
+        alerta.setMessage("Razón: Por no subir los resultados de las competencias");
+
+        alerta.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        alerta.show();
     }
 }

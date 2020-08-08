@@ -6,6 +6,9 @@
 
     <string name="ip">http://45.15.24.210/WebServiceRunnatica/</string>
 
+    <string name="credencial_usuario">admin</string>
+    <string name="credencial_contrasena">admin</string>
+
     <string name="title_activity_home_drawer">homeDrawer</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
