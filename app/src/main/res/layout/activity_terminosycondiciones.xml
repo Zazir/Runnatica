@@ -134,7 +134,6 @@ El Usuario se obliga a sacar en paz y a salvo a Runnatica sus afiliadas, directi
         </RelativeLayout>
     </ScrollView>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="78dp"
