@@ -2,15 +2,17 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -27,8 +29,7 @@ public class ajustes_organizador extends AppCompatActivity {
         listview = (ListView)findViewById(R.id.lvAjustesOrganizador);
 
         final ArrayList<String> arrayList=new ArrayList<>();
-        arrayList.add("Posponer Competencias");
-        arrayList.add("Cancelar Competencias");
+        arrayList.add("Posponer/Cancelar Competencias");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
         listview.setAdapter(arrayAdapter);
@@ -62,10 +63,6 @@ public class ajustes_organizador extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i == 0){
                     PosponerCompetencia();
-                }
-                if(i == 1){
-                    CancelarCompetencia();
-                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
 
             }

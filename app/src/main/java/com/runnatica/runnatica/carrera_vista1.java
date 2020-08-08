@@ -165,6 +165,7 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
                         "&mensaje="+txtComentario.getText().toString().replaceAll(" ", "%20") +
                         "&tipo_mensaje=" + categoria);
             }
+
         });
     }
 
