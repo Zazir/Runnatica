@@ -65,9 +65,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolderCompeten
         public void asignarDatos(Competencias pojoCompetencia, final int posicion, final OnItemClickListener listener) {
             txtNombreCompetencias.setText(pojoCompetencia.getNombreCompetencia());
             txtDescripcionCompetencia.setText(pojoCompetencia.getDescripcionCompetencia());
-            txtPrecioCompetencia.setText(pojoCompetencia.getPrecioCompetencia());
+            txtPrecioCompetencia.setText("$"+pojoCompetencia.getPrecioCompetencia());
 
-            //pojoCompetencia.getImageCompetencia()
                 try {
                     Glide.with(mCtx).load(pojoCompetencia.getImageCompetencia()).into(imgCompetencia);
                 }catch (IllegalArgumentException ex){

@@ -45,6 +45,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class crear_competencia extends AppCompatActivity implements TextWatcher {
 
     // Constantes para códigos

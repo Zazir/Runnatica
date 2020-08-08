@@ -17,32 +17,45 @@
         card_view:cardElevation="5dp"
         card_view:cardUseCompatPadding="true">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imgvCompe"
-                android:layout_width="0dp"
-                android:layout_height="122dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:src="@drawable/logo" />
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/logo"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/btn_desing1"/>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="119dp"
-                android:layout_marginTop="12dp"
-                android:layout_weight="2"
-                android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/imgvCompe">
+
+                <TextView
+                    android:id="@+id/tvPrecioCompe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="5dp"
+                    android:textStyle="bold"
+                    android:text="Precio"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tvNombreCompe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/tvPrecioCompe"
+                    android:textAlignment="center"
                     android:text="Nombre Competencia"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -51,31 +64,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/tvNombreCompe"
+                    android:layout_centerHorizontal="true"
+                    android:textAlignment="center"
                     android:text="Descripción"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <TextView
-                    android:id="@+id/tvPrecioCompe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="5dp"
-                    android:text="Precio"
-                    android:textAppearance="?android:attr/textAppearance" />
-
-                <TextView
-                    android:id="@+id/tvid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="10dp"
-                    android:text="Android Version"
-                    android:textAppearance="?android:attr/textAppearance" />
-
-            </LinearLayout>
-        </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
