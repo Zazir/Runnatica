@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_index"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Nogps"></activity>
+        <activity android:name=".VistaAdministrador"></activity>
+        <activity android:name=".Nogps" />
         <activity
             android:name=".ui.login.NoGPS"
             android:label="@string/title_activity_no_g_p_s" />
