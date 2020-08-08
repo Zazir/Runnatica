@@ -21,9 +21,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -39,6 +36,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import static com.runnatica.runnatica.Login.CORREO_SESSION;
 import static com.runnatica.runnatica.Login.ID_USUARIO_SESSION;
@@ -97,20 +97,21 @@ public class registro_usuario extends AppCompatActivity {
         Registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Validaciones())
-                SubirUsuario(dominio + "agregarUsuario.php?" +
-                        "NombreYApellido=" + Nombre.getText().toString().replaceAll(" ", "%20") +
-                        "&Email=" + Correo +
-                        "&Contrasena=" + Contrasena +
-                        "&Sexo=" + genero +
-                        "&FechaNacimiento=" + FechaNacimiento +
-                        "&Telefono=0" +
-                        "&Terminos=" + flagTerminos +
-                        "&Ciudad=" + Ciudad.getText().toString().replaceAll(" ", "%20") +
-                        "&Estado=" + Estado.getText().toString().replaceAll(" ", "%20") +
-                        "&Pais=" + Pais.getText().toString().replaceAll(" ", "%20") +
-                        "&PathFoto="+ path
-                        );
+                if (Validaciones()) {
+                    Log.i("Problema", "entra");
+                    SubirUsuario(dominio + "agregarUsuario.php?" +
+                            "NombreYApellido=" + Nombre.getText().toString().replaceAll(" ", "%20") +
+                            "&Email=" + Correo +
+                            "&Contrasena=" + Contrasena +
+                            "&Sexo=" + genero +
+                            "&FechaNacimiento=" + FechaNacimiento +
+                            "&Telefono=0" +
+                            "&Terminos=" + flagTerminos +
+                            "&Ciudad=" + Ciudad.getText().toString().replaceAll(" ", "%20") +
+                            "&Estado=" + Estado.getText().toString().replaceAll(" ", "%20") +
+                            "&Pais=" + Pais.getText().toString().replaceAll(" ", "%20") +
+                            "&PathFoto=" + path);
+                }
                 else
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
 
@@ -143,7 +144,7 @@ public class registro_usuario extends AppCompatActivity {
                 picker = new DatePickerDialog(registro_usuario.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        FechaNacimiento = year + "-" + (month+1) + "-" + dayOfMonth;
+                        FechaNacimiento = dayOfMonth + (month+1) + year + "";
                         MostrarFecha.setText(FechaNacimiento);
                         flagFecha = 1;
                     }
@@ -260,6 +261,9 @@ public class registro_usuario extends AppCompatActivity {
     private void SubirUsuario(String URL) {
         //stringRequest es el objeto el cual almacena los datos.
         //Declaramos un StringRequest definiendo el método que utilizamos, en este caso es GET
+
+        Log.i("Problema", URL);
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {//Aqui recibimos un objeto como parametro, es la respuesta a un listener
             @Override
             public void onResponse(String response) {//Operacion exitosa a travez del web service
