@@ -9,12 +9,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ajustes_organizador extends AppCompatActivity {
     ListView listview;
@@ -69,14 +69,12 @@ public class ajustes_organizador extends AppCompatActivity {
         });
 
     }
+
     private void PosponerCompetencia(){
         Intent next = new Intent(this, editar_competencia.class);
         startActivity(next);
     }
-    private void CancelarCompetencia(){
-        Intent next = new Intent(this, editar_competencia.class);
-        startActivity(next);
-    }
+
     private void homeOrganizador(){
         Intent next = new Intent(this, home_organizador.class);
         startActivity(next);

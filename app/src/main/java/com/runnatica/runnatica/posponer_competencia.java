@@ -5,9 +5,6 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,8 +19,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class posponer_competencia extends AppCompatActivity {
 
@@ -191,18 +192,17 @@ public class posponer_competencia extends AppCompatActivity {
     }
 
     private void launchCancelar() {
-        final CharSequence[] opciones = {"Aceptar", "Cancelar"};
 
         AlertDialog.Builder alerta = new AlertDialog.Builder(posponer_competencia.this);
         alerta.setTitle("Cancelar competencia");
         alerta.setMessage("Es una operación irreversible");
-        alerta.setPositiveButton("Posponer", new DialogInterface.OnClickListener() {
+        alerta.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 cancelarCompetencia(dominio + "actualizarCompetencia.php?" +
                         "id_competencia=" + id_competencia +
                         "&fecha_posponer=" + fecha +
-                        "&operacion=2");
+                        "&operacion=3");
             }
         });
         alerta.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
