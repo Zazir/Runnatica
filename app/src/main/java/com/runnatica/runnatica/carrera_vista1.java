@@ -156,6 +156,7 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
         });
 
         btnEnviarComentario.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 comentarForo(dominio + "agregarComentario.php?" +

@@ -69,7 +69,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         GoogleApiClient.OnConnectionFailedListener {
 
 
-
+    private Usuario usuario = Usuario.getUsuarioInstance();
 
     private Button paypal, MercadoPago;
     PlantillaPDF plantillaPDF = new PlantillaPDF(pagarInscripciones.this);
@@ -95,7 +95,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
 
     Calendar calendar = Calendar.getInstance();
     final String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-    Usuario usuario = Usuario.getUsuarioInstance();
+    Usuario usuario2 = Usuario.getUsuarioInstance();
 
     private String monto;
     private int total;
@@ -204,55 +204,58 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         }else if (ids_foraneos.length() > 1){
             total = Integer.parseInt(monto) * (this.total+1);
         }
-        item.setUnitPrice(Double.parseDouble(String.valueOf(total))); //precio unitario de producto
-        item.setTitle(Organizador); //titulo de la venta del producto
-        item.setQuantity(1); //cantidad de productos a vender
-        item.setDescription(NombreCompetencia); //descripcion del producto
-        item.setCurrencyId("MXN"); //moneda de pais del precio
-        list.add(item); //agregamos los detalles a la lista
+        if(total <300){
+            Toast.makeText(this, "No se pueden hacer pagos con Tarjeta ni en efectivo por montos minimos de 300 MXN", Toast.LENGTH_SHORT).show();
+        }else {
+            item.setUnitPrice(Double.parseDouble(String.valueOf(total))); //precio unitario de producto
+            item.setTitle(Organizador); //titulo de la venta del producto
+            item.setQuantity(1); //cantidad de productos a vender
+            item.setDescription(NombreCompetencia); //descripcion del producto
+            item.setCurrencyId("MXN"); //moneda de pais del precio
+            list.add(item); //agregamos los detalles a la lista
 
-        Payer payer = new Payer(); //objeto con los datos de usuario comprador
-        payer.setEmail("prueba@gmail.com"); //email del usuario comprador
-
-
-        List<ExcludedPaymentType> list1 = new ArrayList<>();//lista con datos de la venta
-       ExcludedPaymentType itempay = new ExcludedPaymentType();
-       itempay.setId("prepaid_card"); //EXCLUIR MEDIOS DE PAG
-        list1.add(itempay); //agregamos los detalles a la lista
+            Payer payer = new Payer(); //objeto con los datos de usuario comprador
+            payer.setEmail(usuario2.getCorreo()); //email del usuario comprador
 
 
-        PaymentMethods methods = new PaymentMethods();
-       methods.setExcludedPaymentTypes(list1); //precio unitario de producto
+            List<ExcludedPaymentType> list1 = new ArrayList<>();//lista con datos de la venta
+            ExcludedPaymentType itempay = new ExcludedPaymentType();
+            itempay.setId("prepaid_card"); //EXCLUIR MEDIOS DE PAG
+            list1.add(itempay); //agregamos los detalles a la lista
 
 
-
-        PagoDetalles pagoDetalles = new PagoDetalles(); //generamos el objeto para enviar a mercado pago
-        pagoDetalles.setPayer(payer);
-        pagoDetalles.setItems(list);
-        pagoDetalles.setmPayment_methods(methods);
+            PaymentMethods methods = new PaymentMethods();
+            methods.setExcludedPaymentTypes(list1); //precio unitario de producto
 
 
-        disposable = retrofitApi.obtenerDatosPago(pagoDetalles).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<ResponsePago>() {
-                    @Override
-                    public void onNext(ResponsePago responsePago) {
-                        //una vez generada el id de compra lo mandamos a mercado pago y se genera la ventana de tarjetas
-                        new MercadoPagoCheckout.Builder(PUBLIC_KEY, responsePago.getId())
-                                .build()
-                                .startPayment(pagarInscripciones.this, 12);
-                    }
+            PagoDetalles pagoDetalles = new PagoDetalles(); //generamos el objeto para enviar a mercado pago
+            pagoDetalles.setPayer(payer);
+            pagoDetalles.setItems(list);
+            pagoDetalles.setmPayment_methods(methods);
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d("aca","error = " + e.getMessage());
 
-                    }
+            disposable = retrofitApi.obtenerDatosPago(pagoDetalles).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableObserver<ResponsePago>() {
+                        @Override
+                        public void onNext(ResponsePago responsePago) {
+                            //una vez generada el id de compra lo mandamos a mercado pago y se genera la ventana de tarjetas
+                            new MercadoPagoCheckout.Builder(PUBLIC_KEY, responsePago.getId())
+                                    .build()
+                                    .startPayment(pagarInscripciones.this, 12);
+                        }
 
-                    @Override
-                    public void onComplete() {
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.d("aca", "error = " + e.getMessage());
 
-                    }
-                });
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
+        }
 
     }
 
@@ -546,11 +549,16 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
 
         plantillaPDF.abrirArchivo();
         plantillaPDF.addMetadata("Carrera", "Inscripcion", "Runnatica");
-        plantillaPDF.addHeaders(NombreCompetencia.toString(), "Marca", Fecha1);
-        plantillaPDF.addParagraph("Código QR");
-        plantillaPDF.addParagraph(usuario.getNombre());
-        plantillaPDF.addParagraph(Lugar);
-        plantillaPDF.addParagraph(Organizador);
+
+        plantillaPDF.addHeaders("Runnatica", "Inscripcion Oficial", "");
+        plantillaPDF.addParagraph("Informacion: " );
+        plantillaPDF.addParagraph("Carrera: " + NombreCompetencia.toString());
+        plantillaPDF.addParagraph("Nombre del Competidor"+ usuario.getNombre());
+        plantillaPDF.addParagraph("Fecha de Inscripcion: "+ Fecha1);
+        plantillaPDF.addParagraph("Monto Pagado: "+ total + " MXN");
+        plantillaPDF.addParagraph("Direccion de Competencia: "+Lugar);
+        plantillaPDF.addParagraph("Organizador: "+Organizador);
+        //plantillaPDF.addParagraph("Código QR");
         plantillaPDF.cerrarDocumento();
         plantillaPDF.sendMail();
     }

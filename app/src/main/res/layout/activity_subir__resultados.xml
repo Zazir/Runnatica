@@ -66,15 +66,46 @@
                 android:text="Imagenes"
                 android:textColor="@android:color/background_dark"></TextView>
 
+            <TextView
+                android:id="@+id/Sugerencias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnSeleccioarResultados"
+                android:text="Foto con la siguiente información:"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20dp"></TextView>
+            <TextView
+                android:id="@+id/Sugerencias2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Sugerencias"
+                android:text="- Nombre de Competidores"
+                android:textSize="20dp"
+                android:textColor="@android:color/background_dark"
+                ></TextView>
+            <TextView
+                android:id="@+id/Sugerencias3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Sugerencias2"
+                android:text="- Lugar de cada competidor"
+                android:textSize="20dp"
+                android:textColor="@android:color/background_dark"
+                ></TextView>
+            <TextView
+                android:id="@+id/Sugerencias4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Sugerencias3"
+                android:text="- Tiempo hecho en la Ruta"
+                android:textSize="20dp"
+                android:textColor="@android:color/background_dark"
+                ></TextView>
             <Button
                 android:id="@+id/btnSubirResultados"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="80dp"
-                android:layout_marginTop="195dp"
-                android:layout_marginEnd="1dp"
+                android:layout_below="@+id/Sugerencias4"
                 android:text="Subir Fotos"
                 android:textColor="@android:color/background_dark"></Button>
 

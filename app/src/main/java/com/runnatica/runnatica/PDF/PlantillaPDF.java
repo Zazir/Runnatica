@@ -52,7 +52,7 @@ public class PlantillaPDF {
     private Font TITULOS = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
     private Font SUBTITULOS = new Font(Font.FontFamily.HELVETICA, 14, Font.ITALIC);
     private Font TEXTO = new Font(Font.FontFamily.TIMES_ROMAN, 12);
-    private Font FECHA = new Font(Font.FontFamily.ZAPFDINGBATS, 10, Font.BOLD);
+    private Font FECHA = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD);
 
     private Context context;
 
@@ -108,7 +108,7 @@ public class PlantillaPDF {
 
     public void addImage(Bitmap bitmap) {
         try {
-            Image image = Image.getInstance("");
+            Image image = Image.getInstance("drawable/codigoqr.png");
             documento.add(image);
         }
         catch(IOException | DocumentException ex)

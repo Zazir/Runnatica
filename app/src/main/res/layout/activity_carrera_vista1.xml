@@ -191,10 +191,11 @@
                 android:id="@+id/etRespuestaForo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/rvForo"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginEnd="20dp"
-                android:inputType="text"
-                android:layout_below="@+id/rvForo"/>
+                android:inputType="text" />
 
             <Spinner
                 android:id="@+id/spRespuestaCategoria"

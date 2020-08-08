@@ -2,15 +2,16 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -112,7 +113,7 @@ public class InscripcionForaneo extends AppCompatActivity {
     }
 
     public void moveNewActivity(){
-        Intent intent = new Intent(InscripcionForaneo.this, pagarInscripciones.class);
+        Intent intent = new Intent(InscripcionForaneo.this, AvisoPago.class);
         intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia);
         intent.putExtra("CANT_FORANEOS", ids_foraneos);
