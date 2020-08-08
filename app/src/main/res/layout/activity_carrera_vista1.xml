@@ -214,12 +214,31 @@
             </Button>
 
             <TextView
-                android:id="@+id/txtTablaResultados"
+                android:id="@+id/txtAval"
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/spRespuestaCategoria"
+                android:text="Aval del Evento"
+                android:textColor="@android:color/background_dark"
+                android:textSize="35dp"
+                ></TextView>
+            <ImageView
+                android:id="@+id/ivAval"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@+id/txtAval"/>
+
+            <TextView
+                android:id="@+id/txtTablaResultados"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/ivAval"
                 android:text="Tabla de resultados"
                 android:textColor="@android:color/background_dark"
                 android:textSize="35dp"

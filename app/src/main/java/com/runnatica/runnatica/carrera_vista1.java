@@ -54,7 +54,7 @@ import java.util.List;
 
 public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallback {
     BottomNavigationView MenuUsuario;
-    private ImageView imgCompetencia;
+    private ImageView imgCompetencia, imgAval, imgResultados;
     private TextView txtNomCompe, txtOrganizador, txtFechaCompe, txtHoraCompe,
             txtLugarCompe, txtPrecioCompe, txtDescripcionCompe, txtRegistrarse,
             txtComentario;
@@ -107,6 +107,8 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
         ForoRecycler.setHasFixedSize(true);
         ForoRecycler.setLayoutManager(new LinearLayoutManager(this));
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+        imgAval = (ImageView)findViewById(R.id.ivAval);
+        imgResultados = (ImageView)findViewById(R.id.ivResultados);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapaFragment);
         mapFragment.getMapAsync(this);
 
@@ -114,6 +116,7 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
         Menu menu = MenuUsuario.getMenu();
         MenuItem menuItem= menu.getItem(0);
         menuItem.setChecked(true);
+
         //
         MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
