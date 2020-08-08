@@ -560,7 +560,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         plantillaPDF.addParagraph("Organizador: "+Organizador);
         //plantillaPDF.addParagraph("Código QR");
         plantillaPDF.cerrarDocumento();
-        plantillaPDF.sendMail();
+        plantillaPDF.sendMail(usuario.getCorreo());
     }
 
     public boolean validarPermisos() {
