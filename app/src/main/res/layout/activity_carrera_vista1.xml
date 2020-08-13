@@ -12,6 +12,15 @@
         android:layout_height="59dp"
         android:background="@drawable/barra_verde"
         android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Competencia"
+            android:textColor="@android:color/background_light"
+            android:textSize="40dp"/>
     </LinearLayout>
 
     <ScrollView

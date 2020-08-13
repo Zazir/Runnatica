@@ -191,7 +191,7 @@
                 android:layout_height="wrap_content"
                 android:text="Pais:"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/txtDireccion"
+                android:layout_below="@+id/tvCoordenadas"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"/>
 
@@ -275,7 +275,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/etCalleCompetencia"
+                android:layout_below="@+id/txtDireccion"
                 android:text="Seleccionar inicio de la competencia"/>
 
             <TextView
@@ -293,9 +293,9 @@
                 android:id="@+id/txtAval"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvCoordenadas"
                 android:layout_centerHorizontal="true"
                 android:text="Aval del Evento"
+                android:layout_below="@+id/etCalleCompetencia"
                 android:textColor="@android:color/background_dark"
                 android:textSize="30sp"/>
 
