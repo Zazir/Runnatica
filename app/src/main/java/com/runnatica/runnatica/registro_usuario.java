@@ -13,11 +13,14 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,13 +59,15 @@ public class registro_usuario extends AppCompatActivity {
                     "$");
 
     Button Hombre, Mujer, Foto, Registrarse, Fecha;
-    EditText Nombre, Ciudad, Estado, Pais;
+    EditText Nombre, Ciudad;
     CheckBox Terminos;
     TextView Condiciones, MostrarFecha;
+    private Spinner Estado, Pais;
+
     int flagTerminos = 0, flagFecha = 0;
     private String genero = "";
     private String dominio, Correo, Contrasena;
-    private String FechaNacimiento;
+    private String FechaNacimiento, pais, estado;
     private Calendar calendar;
     private DatePickerDialog picker;
     private String path = "xxx";
@@ -89,10 +94,13 @@ public class registro_usuario extends AppCompatActivity {
         MostrarFecha = (TextView) findViewById(R.id.tvMostrarFecha);
         Condiciones = (TextView)findViewById(R.id.tvCondiciones);
         Ciudad = (EditText)findViewById(R.id.etCiudad);
-        Estado = (EditText)findViewById(R.id.etEstado);
-        Pais = (EditText)findViewById(R.id.etPais);
+        Estado = (Spinner) findViewById(R.id.spEstado);
+        Pais = (Spinner) findViewById(R.id.spPais);
         FotoUsuario = (ImageView)findViewById(R.id.ivFotoUsuarioRegistro);
+
         getLastViewData();
+        cargarSpinnerEstado();
+        cargarSpinnerPais();
 
         Registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,8 +116,8 @@ public class registro_usuario extends AppCompatActivity {
                             "&Telefono=0" +
                             "&Terminos=" + flagTerminos +
                             "&Ciudad=" + Ciudad.getText().toString().replaceAll(" ", "%20") +
-                            "&Estado=" + Estado.getText().toString().replaceAll(" ", "%20") +
-                            "&Pais=" + Pais.getText().toString().replaceAll(" ", "%20") +
+                            "&Estado=" + estado.replaceAll(" ", "%20") +
+                            "&Pais=" + pais.replaceAll(" ", "%20") +
                             "&PathFoto=" + path);
                 }
                 else
@@ -181,6 +189,40 @@ public class registro_usuario extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), terminosycondiciones.class);
                 startActivity(i);
+            }
+        });
+    }
+
+    private void cargarSpinnerEstado() {
+        ArrayAdapter<CharSequence> opcionesSpCat = ArrayAdapter.createFromResource(this, R.array.estados, android.R.layout.simple_spinner_item);
+        Estado.setAdapter(opcionesSpCat);
+
+        Estado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                estado = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void cargarSpinnerPais() {
+        ArrayAdapter<CharSequence> opcionesSpCat = ArrayAdapter.createFromResource(this, R.array.paises, android.R.layout.simple_spinner_item);
+        Pais.setAdapter(opcionesSpCat);
+
+        Pais.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                pais = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
@@ -322,10 +364,10 @@ public class registro_usuario extends AppCompatActivity {
              Fecha.setError("Debes de seleccionar una fecha");
         }else if (Ciudad.getText().toString().length() <= 0) {
             Ciudad.setError("Agrega tu ciudad");
-        }else if (Estado.getText().toString().length() <= 0){
-            Estado.setError("Agrega tu estado");
-        }else if (Pais.getText().toString().length() <= 0){
-            Pais.setError("Agrega tu pais");
+        }else if (estado.length() <= 0){
+            siguiente = false;
+        }else if (pais.length() <= 0){
+            siguiente = false;
         }else siguiente = true;
 
         return siguiente;

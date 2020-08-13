@@ -17,40 +17,192 @@
             android:gravity="center"
             android:text="Datos del Usuario"
             android:textColor="@android:color/background_light"
-            android:textSize="30dp"></TextView>
+            android:textSize="30sp"/>
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="578dp"
         android:layout_below="@+id/llArriba"
-        >
+        android:layout_above="@+id/Footer"
+        android:layout_marginBottom="5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/txtFechaN"
-                android:layout_width="346dp"
-                android:layout_height="39dp"
-                android:layout_below="@+id/btnHombre"
-                android:layout_marginEnd="41dp"
-                android:text="Fecha de Nacimiento:"
+                android:id="@+id/txtnombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre y Apellido"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
 
+            <EditText
+                android:id="@+id/etNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtnombre"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/txtSexo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etNombre"
+                android:layout_marginStart="15dp"
+                android:text="Sexo"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnMujer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtSexo"
+                android:background="@color/grisBoton"
+                android:layout_marginStart="30dp"
+                android:text="Mujer"
+                android:drawableLeft="@drawable/mujer"
+                android:paddingHorizontal="10dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btnHombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtSexo"
+                android:background="@color/grisBoton"
+                android:layout_toEndOf="@+id/btnMujer"
+                android:layout_marginStart="15dp"
+                android:paddingHorizontal="10dp"
+                android:text=" Hombre"
+                android:drawableLeft="@drawable/hombre"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtFechaN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnHombre"
+                android:layout_marginStart="15dp"
+                android:text="Fecha de Nacimiento"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/btnSeleccionNacimiento"
-                android:layout_width="166dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtFechaN"
-                android:layout_marginEnd="191dp"
                 android:background="@color/grisBoton"
-                android:text="Seleccionar Fecha"
+                android:layout_marginStart="30dp"
+                android:text=" Seleccionar Fecha"
+                android:drawableLeft="@drawable/calendar"
+                android:paddingHorizontal="15dp"
                 android:textColor="@android:color/background_dark"
-                android:textSize="15sp"></Button>
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvResidencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnSeleccionNacimiento"
+                android:text="Lugar de Residencia"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/Ciudad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvResidencia"
+                android:text="Ciudad"
+                android:layout_marginStart="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/etCiudad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Ciudad"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"/>
+
+            <TextView
+                android:id="@+id/tvEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etCiudad"
+                android:text="Estado"
+                android:layout_marginStart="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25sp" />
+
+            <Spinner
+                android:id="@+id/spEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@+id/tvEstado"
+                android:layout_marginStart="30dp"/>
+
+            <TextView
+                android:id="@+id/tvPais"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spEstado"
+                android:text="Pais"
+                android:layout_marginStart="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25sp" />
+
+            <Spinner
+                android:id="@+id/spPais"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="30dp"
+                android:layout_below="@+id/tvPais" />
+
+            <TextView
+                android:id="@+id/tvFoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spPais"
+                android:text="Imagen de perfil"
+                android:layout_marginStart="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/btnFoto"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@+id/tvFoto"
+                android:background="@color/grisBoton"
+                android:text=" Seleccionar"
+                android:drawableLeft="@drawable/imagen"
+                android:paddingHorizontal="5dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/background_dark"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/ivFotoUsuarioRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@+id/btnFoto" />
 
             <TextView
                 android:id="@+id/tvMostrarFecha"
@@ -61,150 +213,22 @@
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"></TextView>
 
-            <TextView
-                android:id="@+id/Ciudad"
-                android:layout_width="117dp"
-                android:layout_height="33dp"
-                android:layout_below="@+id/tvResidencia"
-                android:layout_marginEnd="243dp"
-                android:text="Ciudad:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/tvEstado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/etCiudad"
-                android:text="Estado:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/tvPais"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/etEstado"
-                android:text="Pais:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
-
-
-            <EditText
-                android:id="@+id/etCiudad"
-                android:layout_width="241dp"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:layout_below="@+id/Ciudad" />
-
-            <EditText
-                android:id="@+id/etEstado"
-                android:layout_width="240dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvEstado"
-                android:inputType="text"
-                />
-
-            <EditText
-                android:id="@+id/etPais"
-                android:layout_width="241dp"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:layout_below="@+id/tvPais" />
-
-            <Button
-                android:id="@+id/btnMujer"
-                android:layout_width="125dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtSexo"
-                android:layout_marginLeft="110dp"
-                android:background="@color/grisBoton"
-                android:text="Mujer"
-                android:textColor="@android:color/background_dark"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/btnHombre"
-                android:layout_width="125dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtSexo"
-                android:layout_marginEnd="263dp"
-                android:background="@color/grisBoton"
-                android:text="Hombre"
-                android:textColor="@android:color/background_dark"
-                android:textSize="20sp" />
-
             <Button
                 android:id="@+id/btnRegistrarse"
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/checkTerminos"
-                android:layout_marginLeft="45dp"
                 android:background="@color/grisBoton"
+                android:layout_centerHorizontal="true"
                 android:text="Registrar"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/btnFoto"
-                android:layout_width="159dp"
-                android:layout_height="31dp"
-                android:layout_below="@+id/tvFoto"
-                android:background="@color/grisBoton"
-                android:text="Seleccionar"
-                android:textColor="@android:color/background_dark"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/txtnombre"
-                android:layout_width="346dp"
-                android:layout_height="39dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="46dp"
-                android:text="Nombre y Apellido:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
-
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvFoto"
-                android:layout_marginLeft="170dp"
-                android:text="Archivo"
-                android:textColor="@android:color/background_dark"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/ivFotoUsuarioRegistro"
-                android:layout_width="match_parent"
-                android:layout_height="177dp"
-                android:layout_below="@+id/btnFoto"></ImageView>
-            <TextView
-                android:id="@+id/tvResidencia"
-                android:layout_width="346dp"
-                android:layout_height="39dp"
-                android:layout_below="@+id/btnSeleccionNacimiento"
-                android:text="Lugar de Residencia:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/tvFoto"
-                android:layout_width="129dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/etPais"
-                android:text="Foto:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/tvTyC"
                 android:layout_width="310dp"
                 android:layout_height="34dp"
+                android:layout_marginStart="15dp"
                 android:layout_below="@+id/ivFotoUsuarioRegistro"
                 android:text="Terminos y Condiciones:"
                 android:textColor="@android:color/background_dark"
@@ -212,33 +236,14 @@
 
             <TextView
                 android:id="@+id/tvCondiciones"
-                android:layout_width="257dp"
+                android:layout_width="wrap_content"
                 android:layout_height="33dp"
+                android:layout_marginTop="4dp"
                 android:layout_below="@+id/tvTyC"
-                android:layout_marginLeft="110dp"
+                android:layout_toEndOf="@+id/checkTerminos"
                 android:text="Terminos y Condiciones"
                 android:textColor="#021BFA"
                 android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/txtSexo"
-                android:layout_width="346dp"
-                android:layout_height="39dp"
-                android:layout_below="@+id/etNombre"
-                android:layout_marginEnd="41dp"
-                android:text="Sexo:"
-                android:textColor="@android:color/background_dark"
-                android:textSize="25sp" />
-
-            <EditText
-                android:id="@+id/etNombre"
-                android:layout_width="355dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtnombre"
-                android:layout_marginEnd="37dp"
-                android:inputType="text"
-                />
-
 
             <CheckBox
                 android:id="@+id/checkTerminos"
@@ -247,20 +252,15 @@
                 android:layout_below="@+id/tvTyC"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp"
+                android:layout_marginStart="15dp"
                 tools:text="Aceptar" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1000dp"
-                ></TextView>
-
 
         </RelativeLayout>
 
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/Footer"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_alignParentStart="true"
@@ -268,6 +268,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="0dp"
         android:background="@drawable/barra_verde"
-        android:minHeight="@android:dimen/thumbnail_height"></LinearLayout>
+        android:minHeight="@android:dimen/thumbnail_height"
+        android:orientation="horizontal" />
 
 </RelativeLayout>

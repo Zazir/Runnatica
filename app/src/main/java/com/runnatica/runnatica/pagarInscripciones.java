@@ -301,7 +301,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
                     //error en algun paso de mercado pago
                     final MercadoPagoError mercadoPagoError =
                             (MercadoPagoError) data.getSerializableExtra(MercadoPagoCheckout.EXTRA_ERROR);
-                    //el objeto mercadoPagoError contiene todos los datos de porque no se genero la venta
+                    //el objeto mercadoPagoError contiene todos los datos de porque no se hombre la venta
 
                 } else {
                     //compra cancelada
