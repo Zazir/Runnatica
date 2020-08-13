@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -21,9 +24,6 @@ import com.runnatica.runnatica.poho.Usuario;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 
 public class VerPerfil extends AppCompatActivity {
@@ -102,7 +102,7 @@ public class VerPerfil extends AppCompatActivity {
                             String dia = fecha.substring(0, 2);
                             String mes = fecha.substring(2, 4);
                             String ano = fecha.substring(4);
-                            String dateBorn = dia+"-"+mes+"-"+ano;
+                            String dateBorn = dia+"/"+mes+"/"+ano;
 
                             Glide.with(VerPerfil.this).load(usuario.optString("foto_usuario")).into(imgUsuario);
                             NombreUsuario.setText(usuario.optString("nombre"));

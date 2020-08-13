@@ -104,6 +104,7 @@ public class posponer_competencia extends AppCompatActivity {
                     }
                 }, ano, mes, dia);
 
+                picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 picker.show();
             }
         });

@@ -3,11 +3,6 @@ package com.runnatica.runnatica;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,11 +15,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.adapter.MyAdapter;
 import com.runnatica.runnatica.poho.Competencias;
 
@@ -64,8 +65,8 @@ public class busqueda_competidor extends AppCompatActivity {
 
         btnfecha = (Button)findViewById(R.id.btnFiltroFecha);
         btnEstado = (Button)findViewById(R.id.btnBuscarEstado);
-        btnPais = (Button)findViewById(R.id.btnBuscarPais);
-        spPais = (Spinner) findViewById(R.id.spFiltroPais);
+        //btnPais = (Button)findViewById(R.id.btnBuscarPais);
+        //spPais = (Spinner) findViewById(R.id.spFiltroPais);
         spEstado = (Spinner)findViewById(R.id.spFiltroEstado);
         LaFecha = (TextView)findViewById(R.id.xx);
         rvFiltro = (RecyclerView) findViewById(R.id.rvFiltroCompetencias);
@@ -75,7 +76,7 @@ public class busqueda_competidor extends AppCompatActivity {
         listCompetencias = new ArrayList<>();
 
         cargarSpinnerEstado();
-        cargarSpinnerPais();
+        //cargarSpinnerPais();
 
         MenuUsuario=(BottomNavigationView)findViewById(R.id.bottomNavigation);
 
@@ -146,12 +147,12 @@ public class busqueda_competidor extends AppCompatActivity {
             }
         });
 
-        btnPais.setOnClickListener(new View.OnClickListener() {
+        /*btnPais.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CargarCompetencias(dominio + "filtroCompetencias.php?pais=" + pais);
             }
-        });
+        });*/
     }
 
     private void home(){
@@ -188,7 +189,7 @@ public class busqueda_competidor extends AppCompatActivity {
         });
     }
 
-    private void cargarSpinnerPais() {
+    /*private void cargarSpinnerPais() {
         ArrayAdapter<CharSequence> opcionesSpCat = ArrayAdapter.createFromResource(this, R.array.paises, android.R.layout.simple_spinner_item);
         spPais.setAdapter(opcionesSpCat);
 
@@ -203,7 +204,7 @@ public class busqueda_competidor extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
     private void CargarCompetencias(String URL) {
         if (listCompetencias != null)
