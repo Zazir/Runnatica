@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +45,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class home extends AppCompatActivity {
     BottomNavigationView MenuUsuario;
-    TextView NombreCiudad;
+    TextView NombreCiudad, txtAdvertencia;
     Button Estado, Pais;
     int bandera = 0;
 
@@ -65,6 +66,7 @@ public class home extends AppCompatActivity {
         obtenerPreferencias();
 
         //Enlaces de elementos por id's
+        txtAdvertencia = (TextView)findViewById(R.id.tvAdvertencia);
         recyclerView = (RecyclerView) findViewById(R.id.rcvCompetencia);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -244,7 +246,10 @@ public class home extends AppCompatActivity {
                                     launchCompetenciaView(idS);
                                 }
                             });
-                            recyclerView.setAdapter(adapter);
+                            if (adapter.getItemCount() <= 0) {
+                                txtAdvertencia.setVisibility(View.VISIBLE);
+                            }else
+                                recyclerView.setAdapter(adapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

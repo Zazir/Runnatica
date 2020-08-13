@@ -1,6 +1,7 @@
 package com.runnatica.runnatica;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,14 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -37,14 +34,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class busqueda_competidor extends AppCompatActivity {
 
-    private Button btnfecha, btnKm, btnEstado, btnPais;
+    private Button btnfecha, btnKm, btnEstado, btnPais, btnOtraBusqueda;
     private Spinner spPais, spEstado;
     private EditText txtKM;
     private RecyclerView rvFiltro;
-    private TextView LaFecha;
-    BottomNavigationView MenuUsuario;
+    private TextView LaFecha, txtAdvertencia;
+    private BottomNavigationView MenuUsuario;
+    private RelativeLayout lytFecha, lytEstado;
 
     private String estado, pais;
 
@@ -65,10 +68,14 @@ public class busqueda_competidor extends AppCompatActivity {
 
         btnfecha = (Button)findViewById(R.id.btnFiltroFecha);
         btnEstado = (Button)findViewById(R.id.btnBuscarEstado);
+        btnOtraBusqueda = (Button)findViewById(R.id.btnAnother);
         //btnPais = (Button)findViewById(R.id.btnBuscarPais);
         //spPais = (Spinner) findViewById(R.id.spFiltroPais);
         spEstado = (Spinner)findViewById(R.id.spFiltroEstado);
         LaFecha = (TextView)findViewById(R.id.xx);
+        txtAdvertencia = (TextView)findViewById(R.id.tvAdvertencia);
+        lytFecha = (RelativeLayout)findViewById(R.id.llFecha);
+        lytEstado = (RelativeLayout)findViewById(R.id.llEstado);
         rvFiltro = (RecyclerView) findViewById(R.id.rvFiltroCompetencias);
         rvFiltro.setHasFixedSize(true);
         rvFiltro.setLayoutManager(new LinearLayoutManager(this));
@@ -153,6 +160,14 @@ public class busqueda_competidor extends AppCompatActivity {
                 CargarCompetencias(dominio + "filtroCompetencias.php?pais=" + pais);
             }
         });*/
+
+        btnOtraBusqueda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLayoutVisible();
+                txtAdvertencia.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void home(){
@@ -210,10 +225,16 @@ public class busqueda_competidor extends AppCompatActivity {
         if (listCompetencias != null)
             listCompetencias.clear();
 
+        ProgressDialog progreso = new ProgressDialog(busqueda_competidor.this);
+        progreso.setMessage("Estamos buscando las carreras...");
+        progreso.show();
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        progreso.dismiss();
+                        setLayoutInvisible();
                         try {
                             //Hacer el string a json array object
                             JSONArray array = new JSONArray(response);
@@ -244,7 +265,10 @@ public class busqueda_competidor extends AppCompatActivity {
                                     launchCompetenciaView(idS);
                                 }
                             });
-                            rvFiltro.setAdapter(adapter);
+                            if (adapter.getItemCount() <= 0) {
+                                txtAdvertencia.setVisibility(View.VISIBLE);
+                            }else
+                                rvFiltro.setAdapter(adapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -252,6 +276,7 @@ public class busqueda_competidor extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progreso.dismiss();
                 Toast.makeText(getApplicationContext(), "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
             }
         });
@@ -262,7 +287,24 @@ public class busqueda_competidor extends AppCompatActivity {
     private void launchCompetenciaView(String id) {
         Intent intent = new Intent(busqueda_competidor.this, carrera_vista1.class);
         intent.putExtra("id", id);
+        intent.putExtra("registro", true);
         startActivity(intent);
+    }
+
+    private void setLayoutInvisible() {
+        if (lytFecha.getVisibility() == View.VISIBLE && lytEstado.getVisibility() == View.VISIBLE) {
+            lytFecha.setVisibility(View.GONE);
+            lytEstado.setVisibility(View.GONE);
+            btnOtraBusqueda.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setLayoutVisible() {
+        if (lytFecha.getVisibility() == View.GONE && lytFecha.getVisibility() == View.GONE) {
+            lytFecha.setVisibility(View.VISIBLE);
+            lytEstado.setVisibility(View.VISIBLE);
+            btnOtraBusqueda.setVisibility(View.GONE);
+        }
     }
 }
 

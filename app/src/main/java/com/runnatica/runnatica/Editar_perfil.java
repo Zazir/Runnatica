@@ -22,10 +22,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,6 +37,10 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Editar_perfil extends AppCompatActivity {
 
@@ -206,7 +206,7 @@ public class Editar_perfil extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        progreso.hide();
+                        progreso.dismiss();
                         Log.i("Respuesta_img", response);
                         if (response.equals("Error al subir")) {
                             Toast.makeText(getApplicationContext(), "La imagen no se pudo subir con éxito", Toast.LENGTH_SHORT).show();
@@ -327,7 +327,7 @@ public class Editar_perfil extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        progreso.hide();
+                        progreso.dismiss();
                         Toast.makeText(getApplicationContext(), "Perfil actualizado" + response, Toast.LENGTH_SHORT).show();
                     }
                 },
