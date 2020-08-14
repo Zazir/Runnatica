@@ -2,9 +2,6 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -23,6 +20,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class InscripcionesCompetidor extends AppCompatActivity {
     private RecyclerView rvInscripciones;
@@ -102,7 +103,9 @@ public class InscripcionesCompetidor extends AppCompatActivity {
 
                             //Creamos instancia del adapter
                             inscripcionesAdapter = new inscripcionesUsuarioAdapter(InscripcionesCompetidor.this, inscripcionesList);
-                            inscripcionesAdapter.notifyDataSetChanged();
+                            if (inscripcionesAdapter.puedeAvanzar) {
+                                btnNext.setEnabled(inscripcionesAdapter.puedeAvanzar);
+                            }
                             rvInscripciones.setAdapter(inscripcionesAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();

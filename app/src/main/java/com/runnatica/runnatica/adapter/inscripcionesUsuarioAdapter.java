@@ -1,10 +1,9 @@
 package com.runnatica.runnatica.adapter;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.runnatica.runnatica.R;
@@ -13,9 +12,13 @@ import com.runnatica.runnatica.poho.Usuario;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class inscripcionesUsuarioAdapter extends RecyclerView.Adapter<inscripcionesUsuarioAdapter.ViewHolderInscripciones> {
     private Context ctx;
     private List<Inscripciones> inscripcionesList;
+    public static boolean puedeAvanzar = false;
 
     public inscripcionesUsuarioAdapter(Context ctx, List<Inscripciones> inscripcionesList) {
         this.ctx = ctx;
@@ -40,7 +43,8 @@ public class inscripcionesUsuarioAdapter extends RecyclerView.Adapter<inscripcio
     }
 
     class ViewHolderInscripciones extends RecyclerView.ViewHolder {
-        TextView txtNombreInscripcion, txtMinEdad, txtMaxEdad, txtCantidad;
+        TextView txtNombreInscripcion, txtMinEdad, txtMaxEdad;
+        ImageView imgTicket;
         Usuario usuario = Usuario.getUsuarioInstance();
 
         public ViewHolderInscripciones(View vistaInscripcion) {
@@ -48,16 +52,17 @@ public class inscripcionesUsuarioAdapter extends RecyclerView.Adapter<inscripcio
             txtNombreInscripcion = (TextView)vistaInscripcion.findViewById(R.id.tvNombreInscripcion);
             txtMinEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMinEdadInscripcion);
             txtMaxEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMaxEdadInscripcion);
-            txtCantidad = (TextView)vistaInscripcion.findViewById(R.id.tvCantidadBoletos);
+            imgTicket = (ImageView) vistaInscripcion.findViewById(R.id.tvCantidadBoletos);
         }
 
         public void asignarDatos(Inscripciones inscripciones, final int posicion) {
             txtNombreInscripcion.setText(inscripciones.getNombreInscripcion());
             txtMinEdad.setText("Edad mínima "+inscripciones.getEdadMinina() + " años");
             txtMaxEdad.setText("Edad máxima "+inscripciones.getEdadMaxima() + " años");
-            if (usuario.getEdadUsuario() >= inscripciones.getEdadMinina() && usuario.getEdadUsuario() <= inscripciones.getEdadMaxima())
-                txtCantidad.setText("1 Boleto");
-            else txtCantidad.setText("No calificas para esta categoria");
+            if (usuario.getEdadUsuario() >= inscripciones.getEdadMinina() && usuario.getEdadUsuario() <= inscripciones.getEdadMaxima()) {
+                imgTicket.setImageResource(R.drawable.ticket);
+                puedeAvanzar = true;
+            }else imgTicket.setImageResource(R.drawable.dangerous);
         }
     }
 }

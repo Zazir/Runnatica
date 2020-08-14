@@ -31,8 +31,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/txtNombreCompetencia"
                 android:layout_centerHorizontal="true"
@@ -52,6 +52,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_below="@+id/txtNombreCompetencia"
                 android:textColor="@android:color/background_dark" />
+
             <TextView
                 android:id="@+id/txtDescripcion"
                 android:layout_width="wrap_content"
@@ -66,13 +67,14 @@
 
             <EditText
                 android:id="@+id/etEditarDescripcion"
-                android:layout_width="340dp"
-                android:layout_height="181dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/txtDescripcion"
                 android:layout_centerHorizontal="true"
-                android:layout_marginStart="10dp"
+                android:layout_marginHorizontal="10dp"
                 android:inputType="textMultiLine"
                 android:textColor="@android:color/background_dark" />
+
             <TextView
                 android:id="@+id/txtEditarImagenEvento"
                 android:layout_width="wrap_content"
@@ -89,6 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"/>
+
             <Button
                 android:id="@+id/btnImagenCompetencia"
                 android:layout_width="wrap_content"
@@ -106,7 +109,6 @@
                 android:background="@color/grisBoton"
                 android:layout_marginEnd="20dp"
                 android:text="Siguiente"/>
-
 
         </RelativeLayout>
     </ScrollView>
