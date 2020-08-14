@@ -108,6 +108,13 @@ public class vista1_organizador extends AppCompatActivity {
                 goToEditarCompetencia();
             }
         });
+
+        PosponerEliminarCompetencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPosponerCompetencia();
+            }
+        });
     }
 
     private void getLastViewData() {
@@ -304,10 +311,14 @@ public class vista1_organizador extends AppCompatActivity {
     }
 
     private void goToEditarCompetencia() {
-        Intent intent = new Intent(this, vista1_organizador.class);
+        Intent intent = new Intent(this, editar_competencia2.class);
         intent.putExtra("id_competencia", id_competencia);
         startActivity(intent);
     }
 
-    
+    private void goToPosponerCompetencia() {
+        Intent intent = new Intent(this, posponer_competencia.class);
+        intent.putExtra("id_competencia", id_competencia);
+        startActivity(intent);
+    }
 }

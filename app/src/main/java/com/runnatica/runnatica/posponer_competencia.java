@@ -15,9 +15,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -26,6 +23,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class posponer_competencia extends AppCompatActivity {
 
@@ -145,7 +145,7 @@ public class posponer_competencia extends AppCompatActivity {
     private void getLastViewData() {
         Bundle extra = posponer_competencia.this.getIntent().getExtras();
         assert extra != null;
-        id_competencia = extra.getString("id");
+        id_competencia = extra.getString("id_competencia");
     }
 
     private void posponerCompetencia(String URL) {
