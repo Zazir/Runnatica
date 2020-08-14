@@ -3,22 +3,17 @@
 
     <item
         android:id="@+id/menu_home"
-        android:title="Inicio"
-        android:icon="@drawable/ic_home"
+        android:title="Competencias"
+        android:icon="@drawable/ic_competencias"
         ></item>
     <item
         android:id="@+id/menu_historial"
-        android:title="Historial"
-        android:icon="@drawable/ic_historial"
-        ></item>
-    <item
-        android:id="@+id/menu_ajustes"
-        android:title="Ajustes"
-        android:icon="@drawable/ic_ajustes"
+        android:title="Organizadas"
+        android:icon="@drawable/ic_pasadas"
         ></item>
     <item
         android:id="@+id/menu_regresar"
-        android:title="regresar"
+        android:title="regresar a Competidor"
         android:icon="@drawable/ic_regresar"
         ></item>
 </menu>
