@@ -48,9 +48,6 @@ public class ajustes_organizador extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.menu_historial) {
                     historialOrganizador();
                 }
-                if (menuItem.getItemId() == R.id.menu_ajustes) {
-                    ajuestesOrganizador();
-                }
                 if (menuItem.getItemId() == R.id.menu_regresar) {
                     home();
                 }
