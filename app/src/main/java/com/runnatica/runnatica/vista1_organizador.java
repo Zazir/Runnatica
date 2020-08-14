@@ -317,7 +317,7 @@ public class vista1_organizador extends AppCompatActivity {
     }
 
     private void goToPosponerCompetencia() {
-        Intent intent = new Intent(this, editar_competencia.class);
+        Intent intent = new Intent(this, posponer_competencia.class);
         intent.putExtra("id_competencia", id_competencia);
         startActivity(intent);
     }
