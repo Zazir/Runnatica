@@ -50,6 +50,7 @@ public class editar_competencia2 extends AppCompatActivity {
         imgCompetencia = (ImageView)findViewById(R.id.imgCompetencia);
 
         dominio = getString(R.string.ip);
+        getLastViewData();
 
         SeleccionarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +99,7 @@ public class editar_competencia2 extends AppCompatActivity {
 
     private void getLastViewData() {
         Bundle extra = editar_competencia2.this.getIntent().getExtras();
-        id_competencia = extra.getString("id");
+        id_competencia = extra.getString("id_competencia");
     }
 
     private void subirImagenCompetencia(String URL) {

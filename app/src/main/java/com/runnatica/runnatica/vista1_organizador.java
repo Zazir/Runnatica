@@ -9,9 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -26,6 +23,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class vista1_organizador extends AppCompatActivity {
     BarChart graficaBarras;
@@ -99,6 +99,13 @@ public class vista1_organizador extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FotosResultados();
+            }
+        });
+
+        btnEditarCompetencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToEditarCompetencia();
             }
         });
     }
@@ -269,25 +276,38 @@ public class vista1_organizador extends AppCompatActivity {
         next.putExtra("id_competencia", id_competencia);
         startActivity(next);
     }
+
     void FotosResultados(){
         Intent next = new Intent(this, Subir_Resultados.class);
         next.putExtra("id_competencia", id_competencia);
         startActivity(next);
     }
+
     private void homeOrganizador(){
         Intent next = new Intent(this, home_organizador.class);
         startActivity(next);
     }
+
     private void historialOrganizador(){
         Intent next = new Intent(this, historial_organizador.class);
         startActivity(next);
     }
+
     private void ajuestesOrganizador(){
         Intent next = new Intent(this, ajustes_organizador.class);
         startActivity(next);
     }
+
     private void home(){
         Intent next = new Intent(this, home.class);
         startActivity(next);
     }
+
+    private void goToEditarCompetencia() {
+        Intent intent = new Intent(this, vista1_organizador.class);
+        intent.putExtra("id_competencia", id_competencia);
+        startActivity(intent);
+    }
+
+    
 }
