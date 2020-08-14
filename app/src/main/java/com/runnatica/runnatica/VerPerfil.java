@@ -90,6 +90,7 @@ public class VerPerfil extends AppCompatActivity {
         CargarInfoUsuario(dominio + "obtenerUsuario.php?id_usuario=" + usuario.getId());
     }
 
+
     private void CargarInfoUsuario(String URL) {
         StringRequest request = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
@@ -145,8 +146,16 @@ public class VerPerfil extends AppCompatActivity {
     }
 
     private void EditarPerfil(){
-        Intent next = new Intent(this, Editar_perfil.class);
-        startActivity(next);
+        Intent intent = new Intent(VerPerfil.this, Editar_perfil.class);
+        intent.putExtra("NombreUsuario", NombreUsuario.getText());
+        intent.putExtra("CorreoUsuario", CorreoUsuario.getText());
+        intent.putExtra("SexoUsuario", SexoUsuario.getText());
+        intent.putExtra("FechaNacimientoUsuario", FechaNacimientoUsuario.getText());
+        intent.putExtra("CiudadUsuario", CiudadUsuario.getText());
+        intent.putExtra("EstadoUsuario", EstadoUsuario.getText());
+        intent.putExtra("PaisUsuario", PaisUsuario.getText());
+
+        startActivity(intent);
         finish();
     }
 }

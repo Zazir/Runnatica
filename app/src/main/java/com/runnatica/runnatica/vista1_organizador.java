@@ -30,7 +30,7 @@ import java.util.List;
 public class vista1_organizador extends AppCompatActivity {
     BarChart graficaBarras;
     List<String> ListaFechas;
-    Button ListaInscritos, FotosResultados;
+    Button ListaInscritos, FotosResultados, btnEditarCompetencia, PosponerEliminarCompetencia;
     TextView txtVendidasUsuarios, txtTotalUsuarios, txtVendidosForaneos, txtTotalForaneos, txtIngresoTotal;
     BottomNavigationView MenuOrganizador;
 
@@ -53,6 +53,8 @@ public class vista1_organizador extends AppCompatActivity {
         txtVendidosForaneos = (TextView)findViewById(R.id.tvForaneasVendidas);
         txtTotalForaneos = (TextView)findViewById(R.id.tvTotalForaneos);
         txtIngresoTotal = (TextView)findViewById(R.id.ingreso);
+        btnEditarCompetencia = (Button)findViewById(R.id.btnEditarCompetencia);
+        PosponerEliminarCompetencia = (Button)findViewById(R.id.btnPosponerEliminarCompetencia);
         getLastViewData();
 
         MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);

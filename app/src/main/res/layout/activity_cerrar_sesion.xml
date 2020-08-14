@@ -22,33 +22,43 @@
     </LinearLayout>
 
     <TextView
-        android:gravity="center"
-        android:layout_width="442dp"
-        android:layout_height="167dp"
+        android:id="@+id/txtCerrarSesion"
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="150dp"
+        android:gravity="center"
         android:text="¿Seguro que quiere cerrar su sesion?"
         android:textColor="@android:color/background_dark"
-        android:textSize="50dp">
-    </TextView>
+        android:textSize="50dp"></TextView>
 
-    <Button
-        android:id="@+id/btnCerrarSesion"
-        android:layout_width="142dp"
-        android:layout_height="85dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="400dp"
-        android:text="Si"
-        android:textSize="30dp"></Button>
+    <RelativeLayout
+        android:layout_width="289dp"
+        android:layout_height="86dp"
+        android:layout_below="@+id/txtCerrarSesion"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp">
 
-    <Button
-        android:id="@+id/btnNoCerrarSesion"
-        android:layout_width="144dp"
-        android:layout_height="85dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="400dp"
-        android:text="No"
-        android:textSize="30dp"></Button>
+        <Button
+            android:id="@+id/btnCerrarSesion"
+            android:layout_width="142dp"
+            android:layout_height="85dp"
+            android:text="Si"
+            android:textSize="30dp"></Button>
+
+        <Button
+            android:id="@+id/btnNoCerrarSesion"
+            android:layout_width="144dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/btnCerrarSesion"
+            android:text="No"
+            android:textSize="30dp"></Button>
+
+    </RelativeLayout>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"

@@ -22,6 +22,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,16 +42,13 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 public class Editar_perfil extends AppCompatActivity {
 
     Button MujerEditar, HombreEditar, btnFotoEditar, EditarContrasena, btnGuardar, btnFechaNacimiento, btnEditarCorreo;
     EditText CiudadEditar, EstadoEditar, PaisEditar, NombreEditar;
     TextView MostrarFecha;
     ImageView img;
+    String NombreUsuario1, CorreoUsuario1, SexoUsuario1, FechaNacimientoUsuario1, CiudadUsuario1, EstadoUsuario1, PaisUsuario1;
     BottomNavigationView MenuUsuario;
     private String genero = "";
     private String FechaNacimiento;
@@ -58,7 +59,8 @@ public class Editar_perfil extends AppCompatActivity {
     private Calendar calendar;
     private DatePickerDialog picker;
 
-    int flagFecha = 0;
+    Boolean flagFecha = false;
+    Boolean flagFoto = false;
 
     private String dominio;
     private Usuario usuario = Usuario.getUsuarioInstance();
@@ -86,6 +88,32 @@ public class Editar_perfil extends AppCompatActivity {
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         FotoUsuarioNueva = (ImageView)findViewById(R.id.ivFotoUsuarioNueva);
 
+        getLastViewData();
+
+        NombreEditar.setText(NombreUsuario1);
+        CiudadEditar.setText(CiudadUsuario1);
+        EstadoEditar.setText(EstadoUsuario1);
+        PaisEditar.setText(PaisUsuario1);
+        //FechaNacimiento = FechaNacimientoUsuario1;
+        //MostrarFecha.setText(FechaNacimientoUsuario1);
+
+        if(SexoUsuario1.equals("Hombre")){
+            genero = "Hombre";
+            MujerEditar.setBackgroundColor(Color.GRAY);
+            HombreEditar.setBackgroundColor(Color.RED);
+        }
+
+        if(SexoUsuario1.equals("Mujer")){
+            genero = "Mujer";
+            MujerEditar.setBackgroundColor(Color.RED);
+            HombreEditar.setBackgroundColor(Color.GRAY);
+        }
+
+
+
+        //Toast.makeText(getApplicationContext(), "Fecha: " + FechaNacimientoUsuario1, Toast.LENGTH_SHORT).show();
+
+
         //Posicionar el icono del menu
         Menu menu = MenuUsuario.getMenu();
         MenuItem menuItem= menu.getItem(3);
@@ -102,9 +130,14 @@ public class Editar_perfil extends AppCompatActivity {
                 picker = new DatePickerDialog(Editar_perfil.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        FechaNacimiento = ""+dayOfMonth+(month+1)+year;
-                        MostrarFecha.setText(year + "-" + (month+1) + "-" + dayOfMonth);
-                        flagFecha = 1;
+                        String MesTemp = month+1+ "";
+                        if(MesTemp.length() <=1){
+                            MesTemp = "0" + MesTemp;
+                            Log.i("Mes", MesTemp);
+                        }
+                        FechaNacimiento = dayOfMonth + "" + MesTemp + "" + year + "";
+                        MostrarFecha.setText(FechaNacimiento);
+                        flagFecha = true;
                     }
                 }, ano, mes, dia);
 
@@ -176,6 +209,8 @@ public class Editar_perfil extends AppCompatActivity {
                             "&estado=" + EstadoEditar.getText().toString().replaceAll(" ", "%20") +
                             "&pais=" + PaisEditar.getText().toString().replaceAll(" ", "%20") +
                             "&path=" +path);
+                    Atras();
+                    finish();
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
                 };
@@ -212,6 +247,7 @@ public class Editar_perfil extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "La imagen no se pudo subir con éxito", Toast.LENGTH_SHORT).show();
                         } else {
                             //Aqui recibo el URL de la Imagen
+                            flagFoto = true;
                             path = response;
                         }
                     }
@@ -265,14 +301,16 @@ public class Editar_perfil extends AppCompatActivity {
         Boolean siguiente = false;
         if (NombreEditar.getText().toString().length() <= 0) {
             NombreEditar.setError("Debes de poner un nombre");
-        }else if(flagFecha == 0) {
-            btnFechaNacimiento.setError("Debes seleccionar una Fecha");
         }else if(CiudadEditar.getText().toString().length() <= 0) {
             CiudadEditar.setError("Debes de poner una ciudad");
         }else if(EstadoEditar.getText().toString().length() <= 0) {
-            EstadoEditar.setError("Debes de poner un correo");
+            EstadoEditar.setError("Debes de poner un Estado");
         }else if(PaisEditar.getText().toString().length() <= 0) {
-            PaisEditar.setError("Debes de poner un correo");
+            PaisEditar.setError("Debes de poner un Pais");
+        }else if(flagFoto == false) {
+            btnFotoEditar.setError("Debes de Subir una Foto");
+        }else if(flagFecha == false) {
+            btnFechaNacimiento.setError("Debes de Subir una Foto");
         }else siguiente = true;
 
         return siguiente;
@@ -340,9 +378,23 @@ public class Editar_perfil extends AppCompatActivity {
             }
         }
     }
+    private void getLastViewData() {
+        Bundle extra = Editar_perfil.this.getIntent().getExtras();
+        NombreUsuario1 = extra.getString("NombreUsuario");
+        CorreoUsuario1 = extra.getString("CorreoUsuario");
+        SexoUsuario1 = extra.getString("SexoUsuario");
+        FechaNacimientoUsuario1 = extra.getString("FechaNacimientoUsuario");
+        CiudadUsuario1 = extra.getString("CiudadUsuario");
+        EstadoUsuario1 = extra.getString("EstadoUsuario");
+        PaisUsuario1 = extra.getString("PaisUsuario");
 
+    }
     private void home(){
         Intent next = new Intent(this, home.class);
+        startActivity(next);
+    }
+    private void Atras(){
+        Intent next = new Intent(this, VerPerfil.class);
         startActivity(next);
     }
     private void Busqueda(){
