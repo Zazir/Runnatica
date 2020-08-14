@@ -22,6 +22,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 
 import androidx.annotation.NonNull;
@@ -88,6 +92,7 @@ public class posponer_competencia extends AppCompatActivity {
         });
 
         getLastViewData();
+        obtenerFechaCompetencia(dominio + "obtenerCompetencia.php?idCompe=" + id_competencia);
 
         txtFecha.setText(dia+"/"+(mes+1)+"/"+ano);
         dominio = getString(R.string.ip);
@@ -237,6 +242,31 @@ public class posponer_competencia extends AppCompatActivity {
 
         alerta.show();
     }
+
+    private void obtenerFechaCompetencia(String URL) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            JSONObject respuesta = jsonArray.getJSONObject(0);
+
+                            txtFecha.setText(respuesta.optString("fecha"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
     private void homeOrganizador(){
         Intent next = new Intent(this, home_organizador.class);
         startActivity(next);
