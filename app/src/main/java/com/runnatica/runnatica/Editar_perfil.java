@@ -174,8 +174,8 @@ public class Editar_perfil extends AppCompatActivity {
                             "&f_nacimiento=" + FechaNacimiento +
                             "&ciudad=" + CiudadEditar.getText().toString().replaceAll(" ", "%20") +
                             "&estado=" + EstadoEditar.getText().toString().replaceAll(" ", "%20") +
-                            "&pais=" + PaisEditar.getText().toString().replaceAll(" ", "%20"));
-                    actualizarFotoPerfil(dominio + "guardarImagen.php?");
+                            "&pais=" + PaisEditar.getText().toString().replaceAll(" ", "%20") +
+                            "&path=" +path);
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
                 };
@@ -289,7 +289,7 @@ public class Editar_perfil extends AppCompatActivity {
 
     private void actualizarPerfil(String URL) {
         progreso = new ProgressDialog(Editar_perfil.this);
-        progreso.setMessage("Cargando...");
+        progreso.setMessage("Actualizando perfil...");
         progreso.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
@@ -316,44 +316,6 @@ public class Editar_perfil extends AppCompatActivity {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
-    }
-
-    private void actualizarFotoPerfil(String URL) {
-        progreso = new ProgressDialog(Editar_perfil.this);
-        progreso.setMessage("Cargando...");
-        progreso.show();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        progreso.dismiss();
-                        Toast.makeText(getApplicationContext(), "Perfil actualizado" + response, Toast.LENGTH_SHORT).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progreso.dismiss();
-                        Toast.makeText(getApplicationContext(), "Hubo un error con la conexión", Toast.LENGTH_SHORT).show();
-                    }
-                })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                String imagen = getStringImage(bitmap);
-                String nombreFoto = (System.currentTimeMillis()/1000)+"";
-
-                Map<String, String> parametros = new HashMap<>();
-                parametros.put("Foto", imagen);
-                parametros.put("NombreFoto", nombreFoto);
-
-                return parametros;
-            }
-        };
-
-        Volley.newRequestQueue(this).add(stringRequest);
     }
 
     private void CargarImagen() {
