@@ -18,6 +18,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -45,12 +51,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallback {
     BottomNavigationView MenuUsuario;
@@ -401,6 +401,48 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
     private void Ajustes(){
         Intent next = new Intent(this, ajustes_competidor.class);
         startActivity(next);
+    }
+    private String PonerMes(int Mes){
+        switch(Mes){
+            case 1:
+                return "Enero";
+                break;
+            case 2:
+                return "Febrero";
+            break;
+            case 3:
+                return "Marzo";
+            break;
+            case 4:
+                return "Abril";
+            break;
+            case 5:
+                return "Mayo";
+            break;
+            case 6:
+                return "Junio";
+            break;
+            case 7:
+                return "Julio";
+            break;
+            case 8:
+                return "Agosto";
+            break;
+            case 9:
+                return "Septiembre";
+            break;
+            case 10:
+                return "Octubre";
+            break;
+            case 11:
+                return "Nobiembre";
+            break;
+            case 12:
+                return "Diciembre";
+            break;
+
+        }
+
     }
 
     //Google maps integration

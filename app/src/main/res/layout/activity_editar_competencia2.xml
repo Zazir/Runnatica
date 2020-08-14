@@ -24,46 +24,47 @@
     <ScrollView
         android:id="@+id/scr"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/llEditarCompetencia"
+        android:layout_height="505dp"
         android:layout_above="@+id/bottomNavigation"
+        android:layout_below="@+id/llEditarCompetencia"
         android:layout_marginBottom="5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottomNavigation">
 
             <TextView
                 android:id="@+id/txtNombreCompetencia"
-                android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_marginStart="10dp"
                 android:text="Nombre de la Competencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
 
             <EditText
                 android:id="@+id/etNombreCompetencia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
                 android:layout_below="@+id/txtNombreCompetencia"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="@android:color/background_dark" />
 
             <TextView
                 android:id="@+id/txtDescripcion"
                 android:layout_width="wrap_content"
                 android:layout_height="58dp"
+                android:layout_below="@+id/etNombreCompetencia"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:gravity="center"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/etNombreCompetencia"
                 android:text="Descripcion de la Competencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="25dp"/>
+                android:textSize="25dp" />
 
             <EditText
                 android:id="@+id/etEditarDescripcion"
@@ -83,32 +84,32 @@
                 android:layout_centerHorizontal="true"
                 android:text="Imagen del Evento"
                 android:textColor="@android:color/background_dark"
-                android:textSize="30dp"/>
+                android:textSize="30dp" />
 
             <ImageView
                 android:id="@+id/imgCompetencia"
-                android:layout_below="@id/txtEditarImagenEvento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"/>
+                android:layout_below="@id/txtEditarImagenEvento"
+                android:layout_centerHorizontal="true" />
 
             <Button
                 android:id="@+id/btnImagenCompetencia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/imgCompetencia"
-                android:text="Seleccionar"/>
+                android:layout_centerHorizontal="true"
+                android:text="Seleccionar" />
 
             <Button
                 android:id="@+id/btnGuardarEditar"
                 android:layout_width="310dp"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/btnImagenCompetencia"
-                android:background="@color/grisBoton"
+                android:layout_centerHorizontal="true"
                 android:layout_marginEnd="20dp"
-                android:text="Siguiente"/>
+                android:background="@color/grisBoton"
+                android:text="Siguiente" />
 
         </RelativeLayout>
     </ScrollView>

@@ -13,7 +13,7 @@
         ></item>
     <item
         android:id="@+id/menu_regresar"
-        android:title="regresar a Competidor"
+        android:title="regresar a Inicio"
         android:icon="@drawable/ic_regresar"
         ></item>
 </menu>
