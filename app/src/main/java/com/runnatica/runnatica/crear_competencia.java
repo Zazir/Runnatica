@@ -28,10 +28,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -299,7 +295,7 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
         usuario.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
         usuario.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
         usuario.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
-        usuario.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
+        usuario.setFechaNacimiento(preferences.getString(Login.NACIMIENTO_USUARIO_SESSION, "0"));
     }
 
     private void cargarSpinnerEstado() {

@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 public class Usuario {
     private static Usuario usuario;
     private int id;
-    private int fechaNacimiento;
+    private String fechaNacimiento;
     private String nombre;
     private String tipoUsuario;
     private String correo;
@@ -17,7 +17,7 @@ public class Usuario {
     private Usuario() {
     }
 
-    public Usuario(int id, int fechaNacimiento, String nombre, String tipoUsuario, String correo) {
+    public Usuario(int id, String fechaNacimiento, String nombre, String tipoUsuario, String correo) {
         this.id = id;
         this.fechaNacimiento = fechaNacimiento;
         this.nombre = nombre;
@@ -40,11 +40,11 @@ public class Usuario {
         this.id = id;
     }
 
-    public int getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(int fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -73,7 +73,7 @@ public class Usuario {
     }
 
     public int getEdadUsuario() {
-        String fecha = ""+fechaNacimiento;
+        String fecha = fechaNacimiento;
         String dia = fecha.substring(0, 2);
         String mes = fecha.substring(2, 4);
         String ano = fecha.substring(4);

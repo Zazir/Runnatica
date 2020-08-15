@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +17,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.poho.Usuario;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class EditarCorreo extends AppCompatActivity {
@@ -94,7 +95,7 @@ public class EditarCorreo extends AppCompatActivity {
         usuario.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
         usuario.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
         usuario.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
-        usuario.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
+        usuario.setFechaNacimiento(preferences.getString(Login.NACIMIENTO_USUARIO_SESSION, "0"));
     }
 
     private void home(){

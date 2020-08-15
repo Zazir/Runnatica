@@ -24,9 +24,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -42,6 +39,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import static com.runnatica.runnatica.Login.CORREO_SESSION;
 import static com.runnatica.runnatica.Login.ID_USUARIO_SESSION;
@@ -321,7 +321,7 @@ public class registro_usuario extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Usuario Creado", Toast.LENGTH_SHORT).show();
 
                         user.setId(temp);
-                        user.setFechaNacimiento(Integer.parseInt(FechaNacimiento));
+                        user.setFechaNacimiento(FechaNacimiento);
                         user.setCorreo(Correo);
                         user.setNombre(Nombre.getText().toString());
 
@@ -350,7 +350,7 @@ public class registro_usuario extends AppCompatActivity {
         editor.putInt(ID_USUARIO_SESSION, user.getId());
         editor.putString(NOMBRE_USUARIO_SESSION, user.getNombre());
         editor.putString(CORREO_SESSION, user.getCorreo());
-        editor.putInt(NACIMIENTO_USUARIO_SESSION, user.getFechaNacimiento());
+        editor.putString(NACIMIENTO_USUARIO_SESSION, user.getFechaNacimiento());
 
         editor.commit();
     }

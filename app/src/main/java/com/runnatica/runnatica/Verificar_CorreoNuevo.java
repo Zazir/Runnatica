@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.poho.Usuario;
 
 import java.util.Properties;
@@ -34,6 +32,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Verificar_CorreoNuevo extends AppCompatActivity {
@@ -123,7 +124,7 @@ public class Verificar_CorreoNuevo extends AppCompatActivity {
         usuario.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
         usuario.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
         usuario.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
-        usuario.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
+        usuario.setFechaNacimiento(preferences.getString(Login.NACIMIENTO_USUARIO_SESSION, "0"));
     }
 
     private void getLastViewData() {

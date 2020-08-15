@@ -186,7 +186,7 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
         user.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
         user.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
         user.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
-        user.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
+        user.setFechaNacimiento(preferences.getString(Login.NACIMIENTO_USUARIO_SESSION, "0"));
     }
 
     private void CrearInscripcion() {

@@ -22,10 +22,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,6 +37,10 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Editar_perfil extends AppCompatActivity {
 
@@ -132,14 +132,17 @@ public class Editar_perfil extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         String MesTemp = month+1+ "";
                         String DayTemp = dayOfMonth+ "";
+
                         if(MesTemp.length() <=1){
                             MesTemp = "0" + MesTemp;
-                            Log.i("Mes", MesTemp);
+                            Log.i("FechaNacimiento", MesTemp);
                         }
+
                         if(dayOfMonth <=9){
                             DayTemp = "0" + dayOfMonth;
-
+                            Log.i("FechaNacimiento", DayTemp);
                         }
+
                         FechaNacimiento = DayTemp + "" + MesTemp + "" + year + "";
                         MostrarFecha.setText(FechaNacimiento);
                         flagFecha = true;
@@ -289,7 +292,7 @@ public class Editar_perfil extends AppCompatActivity {
         usuario.setId(preferences.getInt(Login.ID_USUARIO_SESSION, 0));
         usuario.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
         usuario.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
-        usuario.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
+        usuario.setFechaNacimiento(preferences.getString(Login.NACIMIENTO_USUARIO_SESSION, "0"));
     }
 
     private void goToEditarCorreo() {

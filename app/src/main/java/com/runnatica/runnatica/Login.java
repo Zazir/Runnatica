@@ -120,7 +120,7 @@ public class Login extends AppCompatActivity {
                         jsonobject = jsonarray.getJSONObject(0);
                         user.setId(Integer.parseInt(jsonobject.getString("id_usuarios")));
                         user.setTipoUsuario(jsonobject.optString("tipo_usr"));
-                        user.setFechaNacimiento(jsonobject.optInt("f_nacimiento"));
+                        user.setFechaNacimiento(jsonobject.optString("f_nacimiento"));
                         user.setCorreo(jsonobject.optString("correo"));
                         user.setNombre(jsonobject.optString("nombre"));
 
@@ -155,7 +155,7 @@ public class Login extends AppCompatActivity {
         editor.putInt(ID_USUARIO_SESSION, user.getId());
         editor.putString(NOMBRE_USUARIO_SESSION, user.getNombre());
         editor.putString(CORREO_SESSION, user.getCorreo());
-        editor.putInt(NACIMIENTO_USUARIO_SESSION, user.getFechaNacimiento());
+        editor.putString(NACIMIENTO_USUARIO_SESSION, user.getFechaNacimiento());
 
         editor.commit();
     }
@@ -166,7 +166,7 @@ public class Login extends AppCompatActivity {
         user.setId(preferences.getInt(ID_USUARIO_SESSION, 0));
         user.setNombre(preferences.getString(NOMBRE_USUARIO_SESSION, "No_name"));
         user.setCorreo(preferences.getString(CORREO_SESSION, "No_mail"));
-        user.setFechaNacimiento(preferences.getInt(NACIMIENTO_USUARIO_SESSION, 0));
+        user.setFechaNacimiento(preferences.getString(NACIMIENTO_USUARIO_SESSION, "0"));
     }
 
     private void Administrador() {
