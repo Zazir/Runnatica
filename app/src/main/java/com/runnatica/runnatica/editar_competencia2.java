@@ -14,9 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -28,6 +25,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class editar_competencia2 extends AppCompatActivity {
 
@@ -67,8 +67,6 @@ public class editar_competencia2 extends AppCompatActivity {
                         "&descripcion=" + EditarDescripcion.getText().toString().replaceAll(" ", "%20") +
                         "&Foto=" + path +
                         "&id_competencia=" + id_competencia);
-
-                Salir();
             }
         });
     }
@@ -79,6 +77,7 @@ public class editar_competencia2 extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(getApplicationContext(), "Competencia actualizada con éxito", Toast.LENGTH_SHORT).show();
+                        Salir();
                     }
                 },
                 new Response.ErrorListener() {
@@ -92,7 +91,7 @@ public class editar_competencia2 extends AppCompatActivity {
     }
 
     private void Salir(){
-        Intent next = new Intent(this, vista1_organizador.class);
+        Intent next = new Intent(this, home_organizador.class);
         startActivity(next);
         finish();
     }

@@ -1,17 +1,14 @@
 package com.runnatica.runnatica;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -36,6 +33,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import static com.runnatica.runnatica.carrera_vista1.IDS_FORANEOS;
 
 public class InscripcionForaneo extends AppCompatActivity {
 
@@ -80,12 +84,21 @@ public class InscripcionForaneo extends AppCompatActivity {
         btnInscribir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ids_foraneos = inscripcionesAdapter.idsForaneos;
+                //ids_foraneos = inscripcionesAdapter.idsForaneos;
+                guardarDatosInscripcion();
                 CrearInscripcion();
             }
         });
 
+    }
 
+    private void guardarDatosInscripcion() {
+        SharedPreferences preferences = getSharedPreferences("Autoguardado_Inscripcion", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putString(IDS_FORANEOS, inscripcionesAdapter.idsForaneos);
+
+        editor.commit();
     }
 
     private void getLastViewData() {
@@ -101,18 +114,18 @@ public class InscripcionForaneo extends AppCompatActivity {
 
     private void aAgregarForaneos() {
         Intent intent = new Intent(InscripcionForaneo.this, agregarForaneo.class);
-        intent.putExtra("monto", monto);
+        /*intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia);
         intent.putExtra("CANT_FORANEOS", ids_foraneos);
         intent.putExtra("NOMBRE_COMPETENCIA", NombreCompetencia);
         intent.putExtra("FECHA", Fecha);
         intent.putExtra("LUGAR", Lugar);
-        intent.putExtra("ORGANIZADOR", Organizador);
+        intent.putExtra("ORGANIZADOR", Organizador);*/
         startActivity(intent);
         finish();
     }
 
-    public void moveNewActivity(){
+    public void moveNewActivity() {
         Intent intent = new Intent(InscripcionForaneo.this, AvisoPago.class);
         intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia);

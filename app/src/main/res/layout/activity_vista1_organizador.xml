@@ -10,6 +10,9 @@
         android:id="@+id/llNombreTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:background="@drawable/barra_verde">
 
         <TextView
@@ -20,15 +23,15 @@
             android:layout_marginTop="5dp"
             android:text="Nombre Competencia"
             android:textColor="@android:color/background_light"
-            android:textSize="35dp"></TextView>
+            android:textSize="35dp"/>
     </LinearLayout>
 
     <ScrollView
         android:id="@+id/svVistaOrganizador"
         android:layout_width="match_parent"
-        android:layout_height="518dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/llNombreTitulo"
-        >
+        android:layout_above="@+id/MenuOrganizador">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -41,8 +44,8 @@
                 android:text="Total Ventas"
                 android:textSize="35dp"
                 android:layout_centerHorizontal="true"
-                android:textColor="@android:color/background_dark"
-                ></TextView>
+                android:textColor="@android:color/background_dark"/>
+
             <TextView
                 android:id="@+id/txtingreso"
                 android:textColor="@android:color/background_dark"
@@ -51,8 +54,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/txtVentas"
                 android:text="Precio de la Competencia:"
-                android:textSize="25dp"
-                ></TextView>
+                android:textSize="25dp"/>
 
             <TextView
                 android:id="@+id/ingreso"
@@ -201,9 +203,7 @@
         android:background="@drawable/barra_verde"
         android:minHeight="@android:dimen/thumbnail_height"
         app:itemTextColor="@android:color/background_dark"
-        app:menu="@menu/main"
-        android:layout_above="@+id/svVistaOrganizador"
-        ></com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:menu="@menu/main"/>
 
 
 </RelativeLayout>

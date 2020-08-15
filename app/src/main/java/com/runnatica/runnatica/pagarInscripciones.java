@@ -16,10 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -56,6 +52,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -64,6 +63,13 @@ import retrofit2.Retrofit;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static com.runnatica.runnatica.carrera_vista1.FECHA_COMPETENCIA;
+import static com.runnatica.runnatica.carrera_vista1.IDS_FORANEOS;
+import static com.runnatica.runnatica.carrera_vista1.ID_COMPETENCIA;
+import static com.runnatica.runnatica.carrera_vista1.LUGAR_COMPETENCIA;
+import static com.runnatica.runnatica.carrera_vista1.MONTO;
+import static com.runnatica.runnatica.carrera_vista1.NOMBRE_COMPETENCIA;
+import static com.runnatica.runnatica.carrera_vista1.ORGANIZADOR;
 
 public class pagarInscripciones extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
@@ -79,19 +85,6 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
     private static final int PAYPAL_REQUEST_CODE = 7171;
     private static PayPalConfiguration config = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)//Seleccionado el modo sandbox
             .clientId(PaypalConfig.PAYPAL_CLIENT_ID);
-
-    /*private GoogleApiClient mGoogleApiClient;
-    private SupportWalletFragment mWalletFragment;
-    private SupportWalletFragment mXmlWalletFrafment;
-
-    private MaskedWallet mMaskedWallet;
-    private FullWallet mFullWallet;
-
-    public static final int MAKED_WALLET_REQUEST_CODE = 888;
-    public static final int FULL_WALLET_REQUEST_CODE = 889;
-
-    public static final String WALLET_FRAGMENT_ID = "wallet_fragment";*/
-
 
     Calendar calendar = Calendar.getInstance();
     final String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
@@ -120,39 +113,6 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         retrofit = RetrofitClient.getInstance();
         retrofitApi = retrofit.create(RetrofitApi.class);
         //MercadopAGO
-
-        /*WalletFragmentInitParams startParams;
-        WalletFragmentInitParams.Builder startParamsBuilder = WalletFragmentInitParams.newBuilder()
-                .setMaskedWalletRequest(generateMaskedWalletRequest())
-                .setMaskedWalletRequestCode(MAKED_WALLET_REQUEST_CODE);
-
-        startParams = startParamsBuilder.build();
-
-        if (mWalletFragment == null) {
-            WalletFragmentStyle walletFragmentStyle = new WalletFragmentStyle()
-                    .setBuyButtonText(BuyButtonText.BUY_WITH_GOOGLE)
-                    .setBuyButtonWidth(Dimension.MATCH_PARENT);
-
-            WalletFragmentOptions walletFragmentOptions = WalletFragmentOptions.newBuilder()
-                    .setEnvironment(WalletConstants.ENVIRONMENT_SANDBOX)
-                    .setFragmentStyle(walletFragmentStyle)
-                    .setTheme(WalletConstants.THEME_HOLO_DARK)
-                    .setMode(WalletFragmentMode.BUY_BUTTON).build();
-
-            mWalletFragment = SupportWalletFragment.newInstance(walletFragmentOptions);
-
-            mWalletFragment.initialize(startParams);
-        }
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.wallet_button_holder, mWalletFragment, WALLET_FRAGMENT_ID).commit();
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(Wallet.API, new Wallet.WalletOptions.Builder()
-                        .setEnvironment(WalletConstants.ENVIRONMENT_SANDBOX)
-                        .setTheme(WalletConstants.THEME_HOLO_DARK)
-                        .build()).build();*/
 
         dominio = getString(R.string.ip);
 
@@ -342,33 +302,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         }else if (requestCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
             Toast.makeText(this, "Petición inválida", Toast.LENGTH_SHORT).show();
 
-        }/*else if (requestCode == MAKED_WALLET_REQUEST_CODE) {
-            switch (resultCode) {
-                case Activity.RESULT_OK:
-                    mMaskedWallet = data.getParcelableExtra(WalletConstants.EXTRA_MASKED_WALLET);
-                    break;
-                case Activity.RESULT_CANCELED:
-                     break;
-                default:
-                    Toast.makeText(this, "Transaccion cancelada", Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }else if (requestCode == FULL_WALLET_REQUEST_CODE) {
-            switch (resultCode) {
-                case Activity.RESULT_OK:
-                    mFullWallet = data.getParcelableExtra(WalletConstants.EXTRA_FULL_WALLET);
-                    Toast.makeText(this, mFullWallet.getProxyCard().getPan(), Toast.LENGTH_SHORT).show();
-                    Wallet.Payments.notifyTransactionStatus(mGoogleApiClient,
-                            generateNotifyTransactionStatusRequest(mFullWallet.getGoogleTransactionId(),
-                            NotifyTransactionStatusRequest.Status.SUCCESS));
-                    break;
-                default:
-                    Toast.makeText(this, "Ocurrió un error", Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }else if (requestCode == WalletConstants.RESULT_ERROR) {
-            Toast.makeText(this, "Transaccion cancelada", Toast.LENGTH_SHORT).show();
-        }*/
+        }
     }
 
 
@@ -383,21 +317,17 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         usuario.setFechaNacimiento(preferences.getInt(Login.NACIMIENTO_USUARIO_SESSION, 0));
     }
 
-    /*@Override
-    protected void onStart() {
-        mGoogleApiClient.connect();
-        super.onStart();
-    }*/
-
     private void getLastViewData() {
-        Bundle extra = pagarInscripciones.this.getIntent().getExtras();
+        /*Bundle extra = pagarInscripciones.this.getIntent().getExtras();
         id_competencia = extra.getString("ID_COMPENTENCIA");
         monto = extra.getString("monto");
         ids_foraneos = extra.getString("CANT_FORANEOS");
         NombreCompetencia = extra.getString("NOMBRE_COMPETENCIA");
         Fecha1 = extra.getString("FECHA");
         Lugar = extra.getString("LUGAR");
-        Organizador = extra.getString("ORGANIZADOR");
+        Organizador = extra.getString("ORGANIZADOR");*/
+
+        obtenerAutoguardado();
 
         ids_foraneos = ids_foraneos.trim();
         //Toast.makeText(this, ids_foraneos, Toast.LENGTH_SHORT).show();
@@ -405,6 +335,18 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         total = ids_foraneos.split(" ").length;
         //Toast.makeText(this, total+"", Toast.LENGTH_SHORT).show();
         Log.i("Cantidad_seleccionados", total+"Total");
+    }
+
+    private void obtenerAutoguardado() {
+        SharedPreferences preferences = getSharedPreferences("Autoguardado_Inscripcion", Context.MODE_PRIVATE);
+
+        id_competencia = preferences.getString(ID_COMPETENCIA, "");
+        monto = preferences.getString(MONTO, "0");
+        NombreCompetencia = preferences.getString(NOMBRE_COMPETENCIA, "");
+        Fecha1 = preferences.getString(FECHA_COMPETENCIA, "");
+        Lugar = preferences.getString(LUGAR_COMPETENCIA, "");
+        Organizador = preferences.getString(ORGANIZADOR, "");
+        ids_foraneos = preferences.getString(IDS_FORANEOS, "");
     }
 
     @Override
@@ -438,67 +380,6 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
         startActivityForResult(intent, PAYPAL_REQUEST_CODE);
     }
-
-
-
-    /*public static NotifyTransactionStatusRequest generateNotifyTransactionStatusRequest(String googleTransactionId, int status) {
-        return NotifyTransactionStatusRequest.newBuilder()
-                .setGoogleTransactionId(googleTransactionId)
-                .setStatus(status)
-                .build();
-    }
-
-    private MaskedWalletRequest generateMaskedWalletRequest() {
-        MaskedWalletRequest maskedWalletRequest = MaskedWalletRequest.newBuilder()
-                .setMerchantName("Runnatica")
-                .setPhoneNumberRequired(true)
-                .setShippingAddressRequired(true)
-                .setCurrencyCode("MXN")
-                .setShouldRetrieveWalletObjects(true)
-                .setEstimatedTotalPrice(monto)
-                .setCart(Cart.newBuilder()
-                    .setCurrencyCode("MXN")
-                    .setTotalPrice(monto)
-                    .addLineItem(LineItem.newBuilder()
-                            .setCurrencyCode("MXN")
-                            .setQuantity("1")
-                            .setUnitPrice(monto)
-                            .setTotalPrice(monto)
-                            .build())
-                        .build())
-                .build();
-
-        return maskedWalletRequest;
-    }
-
-    private FullWalletRequest generateFullWalletRequest(String googleTransactionID) {
-        FullWalletRequest fullWalletRequest = FullWalletRequest.newBuilder()
-                .setCart(Cart.newBuilder()
-                        .setCurrencyCode("MXN")
-                        .setTotalPrice(monto)
-                        .addLineItem(LineItem.newBuilder()
-                                .setCurrencyCode("MXN")
-                                .setQuantity("1")
-                                .setUnitPrice(monto)
-                                .setTotalPrice(monto)
-                                .build())
-                .addLineItem(LineItem.newBuilder()
-                        .setCurrencyCode("MXN")
-                        .setDescription("Competencia")
-                        .setRole(LineItem.Role.TAX)
-                        .setTotalPrice(monto)
-                        .build()).build())
-                .build();
-
-        return fullWalletRequest;
-    }
-
-    public void requesFullWallet(View view) {
-        if (mGoogleApiClient.isConnected()) {
-            Wallet.Payments.loadFullWallet(mGoogleApiClient,
-                    generateFullWalletRequest(mMaskedWallet.getGoogleTransactionId()), FULL_WALLET_REQUEST_CODE);
-        }
-    }*/
 
     // --------------------------> PAYPAL INTEGRATION <------------------------------- //
 
@@ -637,96 +518,6 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         dialog.show();
     }
 
-    public void requestFullWallet(View view) {
-
-    }
-
-    /*try {
-            readyToPayRequest = IsReadyToPayRequest.fromJson(baseConfigurationJson().toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Task<Boolean> task = paymentsClient.isReadyToPay(readyToPayRequest);
-        task.addOnCompleteListener(this, new OnCompleteListener<Boolean>() {
-            @Override
-            public void onComplete(@NonNull Task<Boolean> completeTask) {
-                if (completeTask.isSuccessful()) {
-                    showGooglePayButton(completeTask.getResult());
-                }else {
-
-                }
-            }
-        });*/
-
-    /*Wallet.WalletOptions walletOptions = new Wallet.WalletOptions.Builder()
-                .setEnvironment(WalletConstants.ENVIRONMENT_TEST).build();
-
-        paymentsClient = Wallet.getPaymentsClient(pagarInscripciones.this, walletOptions);
-        try {
-            final PaymentDataRequest request = PaymentDataRequest.fromJson(paymentRequestJSON().toString());
-            AutoResolveHelper.resolveTask(paymentsClient.loadPaymentData(request), this, LOAD_PAYMENT);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
-
-    /*private static JSONObject baseConfigurationJson() throws JSONException {
-        return new JSONObject()
-                .put("apiVersion", 2)
-                .put("apiVersionMinor", 0)
-                .put("allowedPaymentMethods", new JSONArray().put(getCardPaymentMethod()));
-    }
-
-    private void showGooglePayButton(Boolean userIsReadyToPay) {
-        if (userIsReadyToPay) {
-            // eg: googlePayButton.setVisibility(View.VISIBLE);
-        }else {
-            // Google pay is not supported
-        }
-    }
-
-    private JSONObject paymentRequestJSON() throws JSONException {
-        final JSONObject paymentRequestJson = baseConfigurationJson();
-        paymentRequestJson.put("transactionInfo", new JSONObject()
-            .put("totalPrice", monto)
-            .put("totalPriceStatus", "FINAL")
-            .put("currencyCode", "MXN"));
-
-        paymentRequestJson.put("merchantInfo", new JSONObject()
-            .put("merchantId", "0151068430315")
-            .put("merchantName", "Chocoso"));
-
-        return paymentRequestJson;
-    }
-
-    private static JSONObject getCardPaymentMethod() throws JSONException {
-        final String[] networks = new String[] {"VISA", "AMEX"};
-        final String[] authMethods = new String[] {"PAY_ONLY", "CRYPTOGRAM_3DS"};
-
-        JSONObject card = new JSONObject();
-        card.put("type", "CARD");
-        card.put("tokenizationSpecification", getTokenizationSpec());
-        card.put("parameters", new JSONObject()
-            .put("allowedAuthMethods", new JSONArray(authMethods))
-            .put("allowedCardNetworks", new JSONArray(networks)));
-
-        return card;
-    }*/
-    private void home(){
-        Intent next = new Intent(this, home.class);
-        startActivity(next);
-    }
-    private void Busqueda(){
-        Intent next = new Intent(this, busqueda_competidor.class);
-        startActivity(next);
-    }
-    private void Historial(){
-        Intent next = new Intent(this, historial_competidor.class);
-        startActivity(next);
-    }
-    private void Ajustes(){
-        Intent next = new Intent(this, ajustes_competidor.class);
-        startActivity(next);
-    }
     private void Felicidades(){
         Intent next = new Intent(this, FelicidadesCompetidor.class);
         startActivity(next);

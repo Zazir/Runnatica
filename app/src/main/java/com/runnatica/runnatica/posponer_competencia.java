@@ -57,6 +57,8 @@ public class posponer_competencia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posponer_competencia);
 
+        dominio = getString(R.string.ip);
+
         btnDate = (Button)findViewById(R.id.btnPosponerFecha);
         btnPosponer = (Button)findViewById(R.id.btnActualizar);
         btnCancelar = (Button)findViewById(R.id.btnActualizarC);
@@ -95,7 +97,6 @@ public class posponer_competencia extends AppCompatActivity {
         obtenerFechaCompetencia(dominio + "obtenerCompetencia.php?idCompe=" + id_competencia);
 
         txtFecha.setText(dia+"/"+(mes+1)+"/"+ano);
-        dominio = getString(R.string.ip);
 
         btnDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,9 +159,10 @@ public class posponer_competencia extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if (response.equals("Pospuesta"))
+                        if (response.equals("Pospuesta")) {
                             Toast.makeText(getApplicationContext(), "La competencia ha sido pospuesta exitosamente, le informaremos a tus competidores", Toast.LENGTH_LONG).show();
-                        else if (response.equals("Error en la operacion"))
+                            Salir();
+                        }else if (response.equals("Error en la operacion"))
                             Toast.makeText(getApplicationContext(), "Error al procesar la petición", Toast.LENGTH_LONG).show();
                     }
                 },
@@ -178,9 +180,10 @@ public class posponer_competencia extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if (response.equals("Cancelada"))
+                        if (response.equals("Cancelada")) {
                             Toast.makeText(getApplicationContext(), "La competencia ha sido cancelada exitosamente, le informaremos a tus competidores", Toast.LENGTH_LONG).show();
-                        else if (response.equals("Error en la operacion"))
+                            Salir();
+                        }else if (response.equals("Error en la operacion"))
                             Toast.makeText(getApplicationContext(), "Error al procesar la petición", Toast.LENGTH_LONG).show();
                     }
                 },
@@ -271,16 +274,25 @@ public class posponer_competencia extends AppCompatActivity {
         Intent next = new Intent(this, home_organizador.class);
         startActivity(next);
     }
+
     private void historialOrganizador(){
         Intent next = new Intent(this, historial_organizador.class);
         startActivity(next);
     }
+
     private void ajuestesOrganizador(){
         Intent next = new Intent(this, ajustes_organizador.class);
         startActivity(next);
     }
+
     private void home(){
         Intent next = new Intent(this, home.class);
         startActivity(next);
+    }
+
+    private void Salir(){
+        Intent next = new Intent(this, home_organizador.class);
+        startActivity(next);
+        finish();
     }
 }

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,12 +18,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -52,7 +47,22 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallback {
+    //Constantes
+    public static final String NOMBRE_COMPETENCIA = "nombre.competencia.inscripcion";
+    public static final String MONTO = "monto.competencia.inscripcion";
+    public static final String ID_COMPETENCIA = "id.competencia.inscripcion";
+    public static final String FECHA_COMPETENCIA = "fecha.competencia.inscripcion";
+    public static final String LUGAR_COMPETENCIA = "lugar.competencia.inscripcion";
+    public static final String ORGANIZADOR = "organizador.competencia.inscripcion";
+    public static final String IDS_FORANEOS = "foraneos.competencia.inscripcion";
+
     BottomNavigationView MenuUsuario;
     private ImageView imgCompetencia, imgAval, imgResultados;
     private TextView txtNomCompe, txtOrganizador, txtFechaCompe, txtHoraCompe,
@@ -181,14 +191,30 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
 
     private void CrearInscripcion() {
         Intent intent = new Intent(carrera_vista1.this, InscripcionesCompetidor.class);
-        intent.putExtra("NOMBRE_COMPETENCIA", txtNomCompe.getText());
+        /*intent.putExtra("NOMBRE_COMPETENCIA", txtNomCompe.getText());
         intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia);
         intent.putExtra("FECHA", txtFechaCompe.getText());
         intent.putExtra("LUGAR", txtLugarCompe.getText());
-        intent.putExtra("ORGANIZADOR", txtOrganizador.getText());
+        intent.putExtra("ORGANIZADOR", txtOrganizador.getText());*/
+
+        guardarDatosInscripcion();
         startActivity(intent);
         finish();
+    }
+
+    private void guardarDatosInscripcion() {
+        SharedPreferences preferences = getSharedPreferences("Autoguardado_Inscripcion", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putString(NOMBRE_COMPETENCIA, txtNomCompe.getText().toString());
+        editor.putString(MONTO, monto);
+        editor.putString(ID_COMPETENCIA, id_competencia);
+        editor.putString(FECHA_COMPETENCIA, txtFechaCompe.getText().toString());
+        editor.putString(LUGAR_COMPETENCIA, txtLugarCompe.getText().toString());
+        editor.putString(ORGANIZADOR, txtOrganizador.getText().toString());
+
+        editor.commit();
     }
 
     private void cargarSpinnerComentar() {
@@ -243,7 +269,8 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
                             nombreCompe = respuesta.optString("nom_comp");
                             txtNomCompe.setText(respuesta.optString("nom_comp"));
                             txtOrganizador.setText(respuesta.optString("nombre"));
-                            txtFechaCompe.setText(respuesta.optString("fecha"));
+                            //txtFechaCompe.setText(respuesta.optString("fecha"));
+                            txtFechaCompe.setText(PonerMes(respuesta.optString("fecha")));
                             txtLugarCompe.setText(respuesta.optString("ciudad")+", "+respuesta.optString("colonia")+", "+respuesta.optString("calle"));
                             txtPrecioCompe.setText("$" + respuesta.optString("precio"));
                             txtDescripcionCompe.setText(respuesta.optString("descripcion"));
@@ -402,47 +429,53 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
         Intent next = new Intent(this, ajustes_competidor.class);
         startActivity(next);
     }
-    private String PonerMes(int Mes){
+    private String PonerMes(String diaCompetencia){
+        String Temp[] = diaCompetencia.split("-");
+        int Mes = Integer.parseInt(Temp[1]);
+        Log.i("Mes", "Mes numero: " + Mes);
+
+        String MES = "";
+
         switch(Mes){
             case 1:
-                return "Enero";
+                MES = "Enero";
                 break;
             case 2:
-                return "Febrero";
-            break;
+                MES = "Febrero";
+                break;
             case 3:
-                return "Marzo";
-            break;
+                MES = "Marzo";
+                break;
             case 4:
-                return "Abril";
-            break;
+                MES = "Abril";
+                break;
             case 5:
-                return "Mayo";
-            break;
+                MES = "Mayo";
+                break;
             case 6:
-                return "Junio";
-            break;
+                MES = "Junio";
+                break;
             case 7:
-                return "Julio";
-            break;
+                MES = "Julio";
+                break;
             case 8:
-                return "Agosto";
-            break;
+                MES = "Agosto";
+                break;
             case 9:
-                return "Septiembre";
-            break;
+                MES = "Septiembre";
+                break;
             case 10:
-                return "Octubre";
-            break;
+                MES = "Octubre";
+                break;
             case 11:
-                return "Nobiembre";
-            break;
+                MES = "Nobiembre";
+                break;
             case 12:
-                return "Diciembre";
-            break;
-
+                MES = "Diciembre";
+                break;
         }
 
+        return Temp[0] + " de " + MES + " del " + Temp[2];
     }
 
     //Google maps integration

@@ -67,6 +67,9 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+
         googleMap.setOnMapLongClickListener(this);
     }
 

@@ -1,6 +1,8 @@
 package com.runnatica.runnatica;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +27,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static com.runnatica.runnatica.carrera_vista1.FECHA_COMPETENCIA;
+import static com.runnatica.runnatica.carrera_vista1.ID_COMPETENCIA;
+import static com.runnatica.runnatica.carrera_vista1.LUGAR_COMPETENCIA;
+import static com.runnatica.runnatica.carrera_vista1.MONTO;
+import static com.runnatica.runnatica.carrera_vista1.NOMBRE_COMPETENCIA;
+import static com.runnatica.runnatica.carrera_vista1.ORGANIZADOR;
+
 public class InscripcionesCompetidor extends AppCompatActivity {
     private RecyclerView rvInscripciones;
     private Button btnNext;
@@ -41,7 +50,8 @@ public class InscripcionesCompetidor extends AppCompatActivity {
         rvInscripciones.setHasFixedSize(true);
         rvInscripciones.setLayoutManager(new LinearLayoutManager(this));
 
-        getLastViewData();
+        //getLastViewData();
+        obtenerAutoguardado();
 
         String dominio = getString(R.string.ip);
         cargarInscripciones(dominio + "obtenerInscripciones.php?id_compentencia=" + id_competencia);
@@ -63,6 +73,17 @@ public class InscripcionesCompetidor extends AppCompatActivity {
         Fecha = extra.getString("FECHA");
         Lugar = extra.getString("LUGAR");
         Organizador = extra.getString("ORGANIZADOR");
+    }
+
+    private void obtenerAutoguardado() {
+        SharedPreferences preferences = getSharedPreferences("Autoguardado_Inscripcion", Context.MODE_PRIVATE);
+
+        id_competencia = preferences.getString(ID_COMPETENCIA, "");
+        monto = preferences.getString(MONTO, "0");
+        NombreCompetencia = preferences.getString(NOMBRE_COMPETENCIA, "");
+        Fecha = preferences.getString(FECHA_COMPETENCIA, "");
+        Lugar = preferences.getString(LUGAR_COMPETENCIA, "");
+        Organizador = preferences.getString(ORGANIZADOR, "");
     }
 
     private void CrearInscripcion() {

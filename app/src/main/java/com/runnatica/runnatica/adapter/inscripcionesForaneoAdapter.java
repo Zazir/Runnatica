@@ -86,8 +86,8 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
         public ViewHolderInscripciones(View vistaInscripcion) {
             super(vistaInscripcion);
             txtNombreInscripcion = (TextView)vistaInscripcion.findViewById(R.id.tvNombreInscripcionForaneo);
-            txtMinEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMinEdadInscripcionForaneo);
-            txtMaxEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMaxEdadInscripcionForaneo);
+            //txtMinEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMinEdadInscripcionForaneo);
+            //txtMaxEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMaxEdadInscripcionForaneo);
             lvForaneo = (ListView) vistaInscripcion.findViewById(R.id.lvForaneos);
 
             lvForaneo.setOnItemClickListener(this);
@@ -121,8 +121,8 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
 
         public void asignarDatos(Inscripciones inscripciones, final int posicion) {
             txtNombreInscripcion.setText(inscripciones.getNombreInscripcion());
-            txtMinEdad.setText("Edad mínima "+inscripciones.getEdadMinina() + " años");
-            txtMaxEdad.setText("Edad máxima "+inscripciones.getEdadMaxima() + " años");
+            /*txtMinEdad.setText("Edad mínima "+inscripciones.getEdadMinina() + " años");
+            txtMaxEdad.setText("Edad máxima "+inscripciones.getEdadMaxima() + " años");*/
 
             ConsultarDatosSpinner("http://45.15.24.210/WebServiceRunnatica/obtenerForaneos.php?id_usuario=" + usuario.getId(), inscripciones);
         }
