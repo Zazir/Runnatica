@@ -287,6 +287,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
                         "&id_foraneo=" + ids_foraneos.replaceAll(" ", "%20"));
 
                 crearPDF(currentDate);
+                limpiarForaneos();
                 PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
                 if (confirmation != null){
                     try {
@@ -305,8 +306,14 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         }
     }
 
+    private void limpiarForaneos() {
+        SharedPreferences preferences = getSharedPreferences("Autoguardado_Inscripcion", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
 
+        editor.putString(IDS_FORANEOS, "");
 
+        editor.commit();
+    }
 
     private void obtenerPreferencias() {
         SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
@@ -318,15 +325,6 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
     }
 
     private void getLastViewData() {
-        /*Bundle extra = pagarInscripciones.this.getIntent().getExtras();
-        id_competencia = extra.getString("ID_COMPENTENCIA");
-        monto = extra.getString("monto");
-        ids_foraneos = extra.getString("CANT_FORANEOS");
-        NombreCompetencia = extra.getString("NOMBRE_COMPETENCIA");
-        Fecha1 = extra.getString("FECHA");
-        Lugar = extra.getString("LUGAR");
-        Organizador = extra.getString("ORGANIZADOR");*/
-
         obtenerAutoguardado();
 
         ids_foraneos = ids_foraneos.trim();
