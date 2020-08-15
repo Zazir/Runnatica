@@ -131,11 +131,16 @@ public class Editar_perfil extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         String MesTemp = month+1+ "";
+                        String DayTemp = dayOfMonth+ "";
                         if(MesTemp.length() <=1){
                             MesTemp = "0" + MesTemp;
                             Log.i("Mes", MesTemp);
                         }
-                        FechaNacimiento = dayOfMonth + "" + MesTemp + "" + year + "";
+                        if(dayOfMonth <=9){
+                            DayTemp = "0" + dayOfMonth;
+
+                        }
+                        FechaNacimiento = DayTemp + "" + MesTemp + "" + year + "";
                         MostrarFecha.setText(FechaNacimiento);
                         flagFecha = true;
                     }
@@ -307,10 +312,8 @@ public class Editar_perfil extends AppCompatActivity {
             EstadoEditar.setError("Debes de poner un Estado");
         }else if(PaisEditar.getText().toString().length() <= 0) {
             PaisEditar.setError("Debes de poner un Pais");
-        }else if(flagFoto == false) {
-            btnFotoEditar.setError("Debes de Subir una Foto");
         }else if(flagFecha == false) {
-            btnFechaNacimiento.setError("Debes de Subir una Foto");
+            btnFechaNacimiento.setError("Debes poner una fecha");
         }else siguiente = true;
 
         return siguiente;
