@@ -24,6 +24,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -39,9 +42,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import static com.runnatica.runnatica.Login.CORREO_SESSION;
 import static com.runnatica.runnatica.Login.ID_USUARIO_SESSION;
@@ -364,8 +364,6 @@ public class registro_usuario extends AppCompatActivity {
             Toast.makeText(this, "Selecciona tu sexo", Toast.LENGTH_SHORT).show();
         }else if (flagTerminos == 0){
             Terminos.setError("Debes de Aceptar terminos y condiciones");
-        }else if (flagFecha == 0){
-             Fecha.setError("Debes de seleccionar una fecha");
         }else if (Ciudad.getText().toString().length() <= 0) {
             Ciudad.setError("Agrega tu ciudad");
         }else if (estado.length() <= 0){
