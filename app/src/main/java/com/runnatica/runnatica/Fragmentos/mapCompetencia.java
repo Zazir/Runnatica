@@ -8,10 +8,10 @@ import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import androidx.fragment.app.FragmentActivity;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -27,6 +27,8 @@ import com.runnatica.runnatica.crear_competencia;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.fragment.app.FragmentActivity;
 
 import static com.runnatica.runnatica.crear_competencia.CALLE_COMPETENCIA;
 import static com.runnatica.runnatica.crear_competencia.CIUDAD_COMPETENCIA;
@@ -86,21 +88,12 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         //mMap.moveCamera();
-        googleMap.setOnMapLongClickListener(this);
-
-        //mMap = googleMap;
-        // googleMapOptions.mapType(googleMap.MAP_TYPE_HYBRID)
-        //    .compassEnabled(true);
-
-        // Add a marker in Sydney and move the camera
-        //LatLng Mexico = new LatLng(19.686081, -98.871635);
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(Mexico));
-        //mMap.setOnMapLongClickListener(this);
 
         mMap = googleMap;
         mMap.moveCamera(CameraUpdateFactory.newLatLng(Mexico));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
 
+        googleMap.setOnMapLongClickListener(this);
     }
 
     @Override
@@ -109,9 +102,6 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
             mMap.clear();// Aqui eliminamos los marcadores
             marker = new MarkerOptions();
         }
-
-        mMap.addMarker(marker.position(latLng).title(latLng.latitude + ","+latLng.longitude));//Añadimos el marcador
-        Coordenadas = latLng.latitude+","+latLng.longitude;
 
         geocoder = new Geocoder(this, Locale.getDefault());
 
@@ -126,12 +116,26 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
             pais = address.get(0).getCountryName();
             colonia = address.get(0).getSubLocality();
             calle = addressPart[0];
+
+            Log.i("Point_selected", addres);
+            Log.i("Point_selected", colonia + "");
+
+            if (colonia == null) {
+                Toast.makeText(this, "Debes seleccionar un punto real", Toast.LENGTH_SHORT).show();
+            }else {
+
+                mMap.addMarker(marker.position(latLng).title(latLng.latitude + "," + latLng.longitude));//Añadimos el marcador
+                Coordenadas = latLng.latitude + "," + latLng.longitude;
+
+                guardarCoordenadasArchivo(Coordenadas);
+                btnSelectCoords.setEnabled(true);
+
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(this, "Debes seleccionar un punto real", Toast.LENGTH_SHORT).show();
         }
-
-        guardarCoordenadasArchivo(Coordenadas);
-        btnSelectCoords.setEnabled(true);
     }
 
     private void regresarCoordenadas() {
