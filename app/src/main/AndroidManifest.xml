@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_index"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegistrarForaneos"></activity>
+        <activity android:name=".RegistroMedio"></activity>
+        <activity android:name=".RegistrarForaneos" />
         <activity android:name=".AvisoPago" />
         <activity android:name=".AsignarUsuarios" />
         <activity android:name=".VistaAdministrador" />

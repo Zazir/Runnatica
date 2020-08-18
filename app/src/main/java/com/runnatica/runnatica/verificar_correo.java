@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -21,8 +23,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class verificar_correo extends AppCompatActivity {
 
@@ -79,7 +79,6 @@ public class verificar_correo extends AppCompatActivity {
     private void getLastViewData() {
         Bundle extra = verificar_correo.this.getIntent().getExtras();
         Correo = extra.getString("Correo");
-        Contrasena = extra.getString("Contrasena");
     }
     private int CodigoRandom(){
         int numero = (int) (Math.random() * 9999) + 1;
@@ -146,9 +145,10 @@ public class verificar_correo extends AppCompatActivity {
     }
     private void Siguiente(){
         Toast.makeText(getApplicationContext(), "Codigo Correcto", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(verificar_correo.this, registro_usuario.class);
+        Intent intent = new Intent(verificar_correo.this, RegistroMedio.class);
         intent.putExtra("Correo", Correo);
-        intent.putExtra("Contrasena", Contrasena);
+        intent.putExtra("Nombre", "");
+        intent.putExtra("Foto", "");
         startActivity(intent);
         finish();
     }

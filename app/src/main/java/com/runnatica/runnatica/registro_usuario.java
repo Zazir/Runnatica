@@ -34,6 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.runnatica.runnatica.poho.Usuario;
 
 import java.io.ByteArrayOutputStream;
@@ -64,9 +65,10 @@ public class registro_usuario extends AppCompatActivity {
     TextView Condiciones, MostrarFecha;
     private Spinner Estado, Pais;
 
-    int flagTerminos = 0, flagFecha = 0;
+    int flagTerminos = 0;
+    boolean flagFecha;
     private String genero = "";
-    private String dominio, Correo, Contrasena;
+    private String dominio, Correo, Contrasena, NombreGoogle, FotoGoogle;
     private String FechaNacimiento, pais, estado;
     private Calendar calendar;
     private DatePickerDialog picker;
@@ -81,6 +83,7 @@ public class registro_usuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
 
+        flagFecha = false;
         dominio = getString(R.string.ip);
 
         //Enlaces de elementos por id's
@@ -101,6 +104,11 @@ public class registro_usuario extends AppCompatActivity {
         getLastViewData();
         cargarSpinnerEstado();
         cargarSpinnerPais();
+
+        Nombre.setText(NombreGoogle);
+        path = FotoGoogle;
+        Glide.with(registro_usuario.this).load(FotoGoogle).into(FotoUsuario);
+        //Toast.makeText(getApplicationContext(), FotoGoogle, Toast.LENGTH_SHORT).show();
 
         Registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +166,7 @@ public class registro_usuario extends AppCompatActivity {
                             MesTemp = "0" + MesTemp;
                             FechaNacimiento = dayOfMonth + "" + MesTemp + "" + year + "";
                             MostrarFecha.setText(FechaNacimiento);
-                            flagFecha = 1;
+                            flagFecha = true;
                         }
                     }
                 }, ano, mes, dia);
@@ -370,6 +378,8 @@ public class registro_usuario extends AppCompatActivity {
             siguiente = false;
         }else if (pais.length() <= 0){
             siguiente = false;
+        }else if (flagFecha == false){
+            Fecha.setError("Agrega tu Fecha de Nacimiento");
         }else siguiente = true;
 
         return siguiente;
@@ -380,6 +390,8 @@ public class registro_usuario extends AppCompatActivity {
         Bundle extra = registro_usuario.this.getIntent().getExtras();
         Correo = extra.getString("Correo");
         Contrasena = extra.getString("Contrasena");
+        NombreGoogle = extra.getString("Nombre");
+        FotoGoogle = extra.getString("Foto");
     }
 
     private void alHome(){

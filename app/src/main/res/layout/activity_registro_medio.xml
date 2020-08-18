@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".registro_basico">
+    tools:context=".RegistroMedio">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,15 +42,48 @@
         android:textColor="@android:color/background_dark"
         android:textSize="30sp" />
 
+    <TextView
+        android:id="@+id/Contrasena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etUsuario"
+        android:layout_marginLeft="20dp"
+        android:text="Contraseña:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30sp" />
 
+    <TextView
+        android:id="@+id/VerificarContrasena"
+        android:layout_width="317dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etContrasena"
+        android:layout_marginLeft="20dp"
+        android:text="Repetir contraseña:"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/etUsuario"
         android:layout_width="323dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Correo"
-        android:inputType="textEmailAddress"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/etContrasena"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Contrasena"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPassword"/>
+    <EditText
+        android:id="@+id/etVerificarContrasena"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/VerificarContrasena"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/btnSiguiente"

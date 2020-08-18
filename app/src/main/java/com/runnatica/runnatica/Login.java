@@ -4,12 +4,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,19 +24,29 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.runnatica.runnatica.poho.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 public class Login extends AppCompatActivity {
+
+    int RC_SIGN_IN = 0;
     RadioButton rbSesion;
     Button Entrar, Registro;
     EditText Usuariotxt, Contrasenatxt;
+    SignInButton signInButton;
+    String personEmail, personalName, UriURL;
+    Uri personPhoto;
+    GoogleSignInClient mGoogleSignClient;
 
     private RequestQueue rq;
     private JsonRequest jrq;
@@ -62,8 +78,21 @@ public class Login extends AppCompatActivity {
         Contrasenatxt= (EditText) findViewById(R.id.etContrasena);
         rbSesion = (RadioButton)findViewById(R.id.radioSesion);
         rq = Volley.newRequestQueue(this);
+        signInButton = findViewById(R.id.btnEntrarGoogle);
 
-        flagRadio = rbSesion.isChecked();
+                flagRadio = rbSesion.isChecked();
+
+        //Configuracion del perfil de google
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+
+        mGoogleSignClient = GoogleSignIn.getClient(this,gso);
+
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
 
         Entrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +125,7 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
 
     private void iniciarSesion() {
         String dominio = getString(R.string.ip);
@@ -143,6 +173,18 @@ public class Login extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //Result returned from lauching the intent from GoogleSignInClient.getSignInIntent
+        if(requestCode == RC_SIGN_IN){
+            //The Task returnet from this call is always completed, no need to attach
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
     private void alHome() {
         Intent next = new Intent(this, home.class);
         startActivity(next);
@@ -188,5 +230,43 @@ public class Login extends AppCompatActivity {
         });
 
         alerta.show();
+    }
+    private void signIn(){
+        Intent signInIntent = mGoogleSignClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask){
+
+        try{
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            //Signed is succesfully. show authenticated.UI
+            getCorreo();
+            SiguienteGoogle();
+        }catch (ApiException e){
+            //The ApiException status code indicates the detailed falture reason
+            Log.w("Google Sign In Error", "signInResults: failed code= "+ e.getStatusCode());
+            Toast.makeText(Login.this, "Error al entrar", Toast.LENGTH_LONG).show();
+        }
+    }
+    private void getCorreo(){
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(Login.this);
+        if(acct != null){
+            personEmail = acct.getEmail();
+            //Poner validacion de correo
+
+        }
+    }
+    private void SiguienteGoogle(){
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(Login.this);
+        personalName = acct.getDisplayName();
+        personPhoto = acct.getPhotoUrl();
+        UriURL = personPhoto.toString();
+
+        Intent intent = new Intent(Login.this, RegistroMedio.class);
+        intent.putExtra("Correo", personEmail);
+        intent.putExtra("Nombre", personalName);
+        intent.putExtra("Foto", UriURL);
+        startActivity(intent);
+        finish();
     }
 }
