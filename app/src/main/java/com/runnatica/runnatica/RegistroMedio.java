@@ -50,7 +50,6 @@ public class RegistroMedio extends AppCompatActivity {
                     intent.putExtra("Correo", etCorreo.getText().toString());
                     intent.putExtra("Contrasena", etContrasena.getText().toString());
                     intent.putExtra("Nombre", Nombre);
-                    intent.putExtra("Foto", Foto);
                     startActivity(intent);
                     finish();
                 }else{
@@ -63,7 +62,6 @@ public class RegistroMedio extends AppCompatActivity {
         Bundle extra = RegistroMedio.this.getIntent().getExtras();
         Correo = extra.getString("Correo");
         Nombre = extra.getString("Nombre");
-        Foto = extra.getString("Foto");
     }
     private boolean Validaciones(){
         Boolean siguiente = false;
