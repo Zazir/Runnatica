@@ -15,6 +15,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,9 +30,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class posponer_competencia extends AppCompatActivity {
 
@@ -110,7 +110,7 @@ public class posponer_competencia extends AppCompatActivity {
                     }
                 }, ano, mes, dia);
 
-                picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                picker.getDatePicker().setMinDate(System.currentTimeMillis() + 100);
                 picker.show();
             }
         });
