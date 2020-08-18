@@ -31,7 +31,7 @@ public class VerPerfil extends AppCompatActivity {
     private ImageView imgUsuario;
     private TextView NombreUsuario, CorreoUsuario, SexoUsuario, FechaNacimientoUsuario, CiudadUsuario, EstadoUsuario, PaisUsuario;
     private Usuario usuario = Usuario.getUsuarioInstance();
-    private String dominio;
+    private String dominio, fotourl;
     private Button EditarPerfil;
     BottomNavigationView MenuUsuario;
 
@@ -106,6 +106,7 @@ public class VerPerfil extends AppCompatActivity {
                             String dateBorn = dia+"/"+mes+"/"+ano;
 
                             Glide.with(VerPerfil.this).load(usuario.optString("foto_usuario")).into(imgUsuario);
+                            fotourl = usuario.optString("foto_usuario");
                             NombreUsuario.setText(usuario.optString("nombre"));
                             CorreoUsuario.setText(usuario.optString("correo"));
                             SexoUsuario.setText(usuario.optString("sexo"));
@@ -113,6 +114,7 @@ public class VerPerfil extends AppCompatActivity {
                             CiudadUsuario.setText(usuario.optString("ciudad"));
                             EstadoUsuario.setText(usuario.optString("estado"));
                             PaisUsuario.setText(usuario.optString("pais"));
+                            Toast.makeText(getApplicationContext(), fotourl, Toast.LENGTH_SHORT).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -154,6 +156,7 @@ public class VerPerfil extends AppCompatActivity {
         intent.putExtra("CiudadUsuario", CiudadUsuario.getText());
         intent.putExtra("EstadoUsuario", EstadoUsuario.getText());
         intent.putExtra("PaisUsuario", PaisUsuario.getText());
+        intent.putExtra("FotoUsuario", fotourl);
 
         startActivity(intent);
         finish();

@@ -99,7 +99,7 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
 
         mMap = googleMap;
         mMap.moveCamera(CameraUpdateFactory.newLatLng(Mexico));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
 
     }
 

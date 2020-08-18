@@ -22,6 +22,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,17 +42,13 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 public class Editar_perfil extends AppCompatActivity {
 
     Button MujerEditar, HombreEditar, btnFotoEditar, EditarContrasena, btnGuardar, btnFechaNacimiento, btnEditarCorreo;
     EditText CiudadEditar, EstadoEditar, PaisEditar, NombreEditar;
     TextView MostrarFecha;
     ImageView img;
-    String NombreUsuario1, CorreoUsuario1, SexoUsuario1, FechaNacimientoUsuario1, CiudadUsuario1, EstadoUsuario1, PaisUsuario1;
+    String NombreUsuario1, CorreoUsuario1, SexoUsuario1, FechaNacimientoUsuario1, CiudadUsuario1, EstadoUsuario1, PaisUsuario1, FotoUsuario;
     BottomNavigationView MenuUsuario;
     private String genero = "";
     private String FechaNacimiento;
@@ -120,6 +120,7 @@ public class Editar_perfil extends AppCompatActivity {
         menuItem.setChecked(true);
         //
         btnFechaNacimiento.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 calendar = Calendar.getInstance();
@@ -393,7 +394,7 @@ public class Editar_perfil extends AppCompatActivity {
         CiudadUsuario1 = extra.getString("CiudadUsuario");
         EstadoUsuario1 = extra.getString("EstadoUsuario");
         PaisUsuario1 = extra.getString("PaisUsuario");
-
+        FotoUsuario = extra.getString("FotoUsuario");
     }
     private void home(){
         Intent next = new Intent(this, home.class);
