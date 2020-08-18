@@ -1,6 +1,7 @@
 package com.runnatica.runnatica;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import static com.runnatica.runnatica.crear_competencia.AVAL_DE_COMPETENCIA;
@@ -62,12 +64,12 @@ public class crear_inscripcion extends AppCompatActivity{
         txtcantidadInscripciones = (TextView)findViewById(R.id.tvCantidadInscripciones);
 
         idCompetenciaFromLastView();
+        String ip = getString(R.string.ip);
 
         CrearInscripcion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Validaciones()){
-                String ip = getString(R.string.ip);
+                if(Validaciones()) {
                 crearInscripcion(ip + "agregarInscripciones.php?" +
                         "nombreInscripcion=" + Nombre.getText().toString().replaceAll(" ", "%20") +
                         "&id_competencia=" + idCompetencia +
@@ -136,11 +138,15 @@ public class crear_inscripcion extends AppCompatActivity{
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if (response.equals("Inscripcion Creada")){
+                        if (response.equals("Inscripcion Creada")) {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+
                             contInscripciones++;
                             txtcantidadInscripciones.setText("Has definido " + contInscripciones + " inscripciones");
+                            nombresInscripciones = nombresInscripciones.concat(":"+Nombre.getText().toString()+":");
+
                             btnFinalizarInscripciones.setEnabled(true);
+
                             Nombre.setText("");
                             CantidadNormal.setText("");
                             CantidadForaneos.setText("");
@@ -198,24 +204,48 @@ public class crear_inscripcion extends AppCompatActivity{
         }
         else if (HastaAnos.getText().toString().length() <= 0 || HastaAnos.getText().toString().length() >= 3) {
             HastaAnos.setError("Ingresa un Año Valido");
-        }else siguiente = true;
+        }
+        else if (nombresInscripciones.contains(":"+Nombre.getText().toString()+":")) {
+            showAlert();
+        }
+        else siguiente = true;
 
         return siguiente;
     }
+
     private void home(){
         Intent next = new Intent(this, home.class);
         startActivity(next);
     }
+
     private void Busqueda(){
         Intent next = new Intent(this, busqueda_competidor.class);
         startActivity(next);
     }
+
     private void Historial(){
         Intent next = new Intent(this, historial_competidor.class);
         startActivity(next);
     }
+
     private void Ajustes(){
         Intent next = new Intent(this, ajustes_competidor.class);
         startActivity(next);
+    }
+
+    private void showAlert() {
+        AlertDialog.Builder alerta = new AlertDialog.Builder(crear_inscripcion.this);
+
+        alerta.setTitle("Nombre de la inscripción");
+        alerta.setMessage("No puedes usar el mismo nombre para dos diferentes tipos de inscripciones");
+
+        alerta.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        alerta.show();
     }
 }
