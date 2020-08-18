@@ -132,7 +132,7 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
 
             }
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Debes seleccionar un punto real", Toast.LENGTH_SHORT).show();
         }
