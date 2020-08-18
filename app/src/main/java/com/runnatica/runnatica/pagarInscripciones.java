@@ -13,7 +13,10 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -44,7 +47,9 @@ import com.runnatica.runnatica.repositorio.mercadopago.models.ResponsePago;
 import com.runnatica.runnatica.repositorio.mercadopago.retrofit.RetrofitApi;
 import com.runnatica.runnatica.repositorio.mercadopago.retrofit.RetrofitClient;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -78,6 +83,8 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
     private Usuario usuario = Usuario.getUsuarioInstance();
 
     private Button paypal, MercadoPago;
+    private TextView txtCantidadForaneos, txtTotal;
+    private ListView lvForaneosAInscribir;
     PlantillaPDF plantillaPDF = new PlantillaPDF(pagarInscripciones.this);
 
     BottomNavigationView MenuUsuario;
@@ -123,11 +130,13 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
 
         paypal = (Button)findViewById(R.id.btnPaypal);
         MercadoPago = (Button) findViewById(R.id.btnMercadoPago);
-        //mWalletFragment = (SupportWalletFragment)getSupportFragmentManager().findFragmentByTag(WALLET_FRAGMENT_ID);
+        txtCantidadForaneos = (TextView)findViewById(R.id.txtBoletosForaneos);
+        txtTotal = (TextView)findViewById(R.id.txtTotal);
+        lvForaneosAInscribir = (ListView)findViewById(R.id.lvForaneos);
         paypal.setEnabled(false);
 
         getLastViewData();
-        //Toast.makeText(pagarInscripciones.this, ""+NombreCompetencia, Toast.LENGTH_SHORT).show();
+        MostrarForaneosInscripcion(dominio + "obtenerForaneosTabla.php?id_foraneo="+ids_foraneos.replaceAll(" ", "%20"));
 
         if (validarPermisos()) {
             paypal.setEnabled(true);
@@ -146,7 +155,9 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
             public void onClick(View v) {
                 hacerPago();
             }
-        });MercadoPago.setOnClickListener(new View.OnClickListener() {
+        });
+
+        MercadoPago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 generarPago();
@@ -272,8 +283,6 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
 
         }
 
-        //MercadoPago
-
         if(requestCode == PAYPAL_REQUEST_CODE){
             if (resultCode == RESULT_OK){
                 //Petición al WS para mostrar en bd la inscripción
@@ -293,7 +302,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
                     try {
                         String DetallesPago = confirmation.toJSONObject().toString(4);
                         startActivity(new Intent(this, DetallesTransaccion.class).putExtra("PaymentDetails", DetallesPago)
-                                .putExtra("PaymentAmount", monto));
+                                .putExtra("PaymentAmount", total));
                     }catch (JSONException e){
                         e.printStackTrace();
                     }
@@ -313,6 +322,48 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         editor.putString(IDS_FORANEOS, "");
 
         editor.commit();
+    }
+
+    private void MostrarForaneosInscripcion(String URL) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        txtCantidadForaneos.setText("Inscripciones de foraneos: "+total);
+                        llenarListView(response);
+                        if (ids_foraneos.length() < 1) {
+                            txtTotal.setText("$"+monto);
+                            txtCantidadForaneos.setText("Inscripciones de foraneos: 0");
+                        }else if (ids_foraneos.length() > 1){
+                            int tot = Integer.parseInt(monto) * (total+1);
+                            txtTotal.setText("$"+tot);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(pagarInscripciones.this, "Error de conección con el servidor", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void llenarListView(String response) {
+        ArrayList<String> listaParaSp = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(response);
+            for (int i=0 ; i < jsonArray.length() ; i++){
+
+                JSONObject foraneo = jsonArray.getJSONObject(i);
+                listaParaSp.add(foraneo.optString("nombre"));
+            }
+            ArrayAdapter<String> foraneoArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listaParaSp);
+            lvForaneosAInscribir.setAdapter(foraneoArrayAdapter);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void obtenerPreferencias() {

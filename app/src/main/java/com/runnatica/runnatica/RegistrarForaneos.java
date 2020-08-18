@@ -13,9 +13,6 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -29,6 +26,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class RegistrarForaneos extends AppCompatActivity {
 
@@ -153,6 +153,7 @@ public class RegistrarForaneos extends AppCompatActivity {
 
         return siguiente;
     }
+
     private void llenarListView(String response) {
         ArrayList<String> listaParaSp = new ArrayList<>();
         try {
@@ -169,6 +170,7 @@ public class RegistrarForaneos extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     private void peticion(){
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://45.15.24.210/WebServiceRunnatica/obtenerForaneosTabla.php?id_usuario="+ usuario.getId(),
                 new Response.Listener<String>() {
@@ -185,18 +187,22 @@ public class RegistrarForaneos extends AppCompatActivity {
                 });
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
     private void home(){
         Intent next = new Intent(this, home.class);
         startActivity(next);
     }
+
     private void Busqueda(){
         Intent next = new Intent(this, busqueda_competidor.class);
         startActivity(next);
     }
+
     private void Historial(){
         Intent next = new Intent(this, historial_competidor.class);
         startActivity(next);
     }
+
     private void Ajustes(){
         Intent next = new Intent(this, ajustes_competidor.class);
         startActivity(next);
