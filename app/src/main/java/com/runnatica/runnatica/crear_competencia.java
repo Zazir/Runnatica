@@ -17,13 +17,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -66,10 +63,9 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
     public static final String AVAL_DE_COMPETENCIA = "aval.competencia.guardado";
     public static final String DESCRIPCION_COMPETENCIA = "descripcion.competencia.guardado";
 
-    private TextView txtFecha, txtHora, txtCoordenadas;
-    private EditText Nombre, Precio, Ciudad, Colonia, Calle, Descripcion;
+    private TextView txtFecha, txtHora, txtCoordenadas, Ciudad, Colonia, Calle, Pais, Estado;
+    private EditText Nombre, Precio, Descripcion;
     private Button Informacion, btnImagen, btnDate, Aval, Guardar, btnHora, btnLugar;
-    private Spinner Pais, Estado;
     private ImageView imgCarrera, imgAval;
     private Usuario usuario = Usuario.getUsuarioInstance();
 
@@ -110,11 +106,11 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
         btnDate = (Button)findViewById(R.id.btnSeleccionarFecha);
         imgCarrera = (ImageView)findViewById(R.id.imgCompetencia);
         imgAval = (ImageView)findViewById(R.id.imgAval);
-        Ciudad = (EditText)findViewById(R.id.etCiudadCompetencia);
-        Colonia = (EditText)findViewById(R.id.etColoniaCompetencia);
-        Pais = (Spinner) findViewById(R.id.spPaisCompetencia);
-        Estado = (Spinner) findViewById(R.id.spEstadoCompetencia);
-        Calle = (EditText)findViewById(R.id.etCalleCompetencia);
+        Ciudad = (TextView)findViewById(R.id.tvCiudadCompetencia);
+        Colonia = (TextView)findViewById(R.id.tvColoniaCompetencia);
+        Pais = (TextView) findViewById(R.id.txtPaisCompetencia);
+        Estado = (TextView) findViewById(R.id.txtEstadoCompetencia);
+        Calle = (TextView)findViewById(R.id.tvCalleCompetencia);
         Aval = (Button) findViewById(R.id.btnAvalCompetencia);
         Descripcion = (EditText)findViewById(R.id.etDescripcionCompetencia);
         Guardar = (Button) findViewById(R.id.btnGuardarCompetencia);
@@ -124,8 +120,6 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
         txtCoordenadas = (TextView)findViewById(R.id.tvCoordenadas);
 
         obtenerAutoguardado();
-        cargarSpinnerEstado();
-        cargarSpinnerPais();
 
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
@@ -296,42 +290,6 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
         usuario.setNombre(preferences.getString(Login.NOMBRE_USUARIO_SESSION, "No_name"));
         usuario.setCorreo(preferences.getString(Login.CORREO_SESSION, "No_mail"));
         usuario.setFechaNacimiento(preferences.getString(Login.NACIMIENTO_USUARIO_SESSION, "0"));
-    }
-
-    private void cargarSpinnerEstado() {
-        ArrayAdapter<CharSequence> opcionesSpCat = ArrayAdapter.createFromResource(this, R.array.estados, android.R.layout.simple_spinner_item);
-        Estado.setAdapter(opcionesSpCat);
-
-        Estado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                estado = parent.getItemAtPosition(position).toString();
-                autoguardadoOportuno();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    private void cargarSpinnerPais() {
-        ArrayAdapter<CharSequence> opcionesSpCat = ArrayAdapter.createFromResource(this, R.array.paises, android.R.layout.simple_spinner_item);
-        Pais.setAdapter(opcionesSpCat);
-
-        Pais.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                pais = parent.getItemAtPosition(position).toString();
-                autoguardadoOportuno();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     private void SubirCompetencia(String URL) {
@@ -534,10 +492,10 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
 
         nombreCompetencia = Nombre.getText().toString();
         descripcion = Descripcion.getText().toString();
-        coordenadas = txtCoordenadas.getText().toString();
+        /*coordenadas = txtCoordenadas.getText().toString();
         colonia = Colonia.getText().toString();
         calle = Calle.getText().toString();
-        ciudad = Ciudad.getText().toString();
+        ciudad = Ciudad.getText().toString();*/
         if (Precio.getText().toString().equals("")) {
             precio = 0;
         }else {
@@ -549,11 +507,11 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
         editor.putString(FECHA_COMPETENCIA, fecha);
         editor.putString(HORA_COMPETENCIA, hora);
         editor.putString(IMAGEN_DE_COMPETENCIA, pathCompetencia);
-        editor.putString(PAIS_COMPETENCIA, pais);
-        //editor.putString(ESTADO_COMPETENCIA, estado);
+        /*editor.putString(PAIS_COMPETENCIA, pais);
+        editor.putString(ESTADO_COMPETENCIA, estado);
         editor.putString(CIUDAD_COMPETENCIA, ciudad);
         editor.putString(COLONIA_COMPETENCIA, colonia);
-        editor.putString(CALLE_COMPETENCIA, calle);
+        editor.putString(CALLE_COMPETENCIA, calle);*/
         editor.putString(COORDENADAS_COMPETENCIA, coordenadas);
         editor.putString(AVAL_DE_COMPETENCIA, pathAval);
         editor.putString(DESCRIPCION_COMPETENCIA, descripcion);
@@ -570,7 +528,7 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
         hora = preferences.getString(HORA_COMPETENCIA, "");
         pathCompetencia = preferences.getString(IMAGEN_DE_COMPETENCIA, "");
         pais = preferences.getString(PAIS_COMPETENCIA, "");
-        //estado = preferences.getString(ESTADO_COMPETENCIA, "");
+        estado = preferences.getString(ESTADO_COMPETENCIA, "");
         ciudad = preferences.getString(CIUDAD_COMPETENCIA, "");
         colonia = preferences.getString(COLONIA_COMPETENCIA, "");
         calle = preferences.getString(CALLE_COMPETENCIA, "");
@@ -582,6 +540,8 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
         Precio.setText(precio+"");
         txtFecha.setText(fecha);
         txtHora.setText(hora);
+        Pais.setText(pais);
+        Estado.setText(estado);
         Ciudad.setText(ciudad);
         Colonia.setText(colonia);
         Calle.setText(calle);

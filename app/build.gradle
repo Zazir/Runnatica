@@ -44,10 +44,10 @@ dependencies {
     implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
     implementation 'com.itextpdf:itextg:5.5.10'
 
-    implementation files('C:/Runnatica/Runnatica/.idea/libraries/mail.jar')
-    implementation files('C:/Runnatica/Runnatica/.idea/libraries/additionnal.jar')
-    implementation files('C:/Runnatica/Runnatica/.idea/libraries/activation.jar')
-    implementation files('C:/Runnatica/Runnatica/.idea/libraries/glide-3.6.0.jar')
+    implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/mail.jar')
+    implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/additionnal.jar')
+    implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/activation.jar')
+    implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/glide-3.6.0.jar')
 
 
     implementation 'io.conekta:conektasdk:2.0'

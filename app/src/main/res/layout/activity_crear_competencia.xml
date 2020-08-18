@@ -201,7 +201,7 @@
                 android:layout_height="wrap_content"
                 android:text="Estado:"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/spPaisCompetencia"
+                android:layout_below="@+id/txtPaisCompetencia"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"/>
 
@@ -211,16 +211,18 @@
                 android:layout_height="wrap_content"
                 android:text="Ciudad:"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/spEstadoCompetencia"
+                android:layout_below="@+id/txtEstadoCompetencia"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"/>
 
-            <EditText
-                android:id="@+id/etCiudadCompetencia"
-                android:layout_width="321dp"
+            <TextView
+                android:id="@+id/tvCiudadCompetencia"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_below="@+id/txtCiudadCompetencia"/>
+                android:layout_marginHorizontal="20dp"
+                android:layout_below="@+id/txtCiudadCompetencia"
+                android:text="Ciudad"
+                android:textSize="25sp"/>
 
             <TextView
                 android:id="@+id/txtColoniaCompetencia"
@@ -228,30 +230,36 @@
                 android:layout_height="wrap_content"
                 android:text="Colonia:"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/etCiudadCompetencia"
+                android:layout_below="@+id/tvCiudadCompetencia"
                 android:textColor="@android:color/background_dark"
-                android:textSize="20dp"/>
+                android:textSize="20sp"/>
 
-            <EditText
-                android:id="@+id/etColoniaCompetencia"
-                android:layout_width="321dp"
+            <TextView
+                android:id="@+id/tvColoniaCompetencia"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_below="@+id/txtColoniaCompetencia"/>
+                android:layout_marginHorizontal="20dp"
+                android:layout_below="@+id/txtColoniaCompetencia"
+                android:text="Colonia"
+                android:textSize="25sp"/>
 
-            <Spinner
-                android:id="@+id/spPaisCompetencia"
-                android:layout_width="207dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_below="@+id/txtPais"/>
+            <TextView
+                android:id="@+id/txtPaisCompetencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_below="@+id/txtPais"
+                android:text="Pais"
+                android:textSize="25sp"/>
 
-            <Spinner
-                android:id="@+id/spEstadoCompetencia"
-                android:layout_width="207dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_below="@+id/txtEstado"/>
+            <TextView
+                android:id="@+id/txtEstadoCompetencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_below="@+id/txtEstado"
+                android:text="Estado"
+                android:textSize="25sp"/>
 
             <TextView
                 android:id="@+id/txtCalleCompetencia"
@@ -259,16 +267,18 @@
                 android:layout_height="wrap_content"
                 android:text="Calle:"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/etColoniaCompetencia"
+                android:layout_below="@+id/tvColoniaCompetencia"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"/>
 
-            <EditText
-                android:id="@+id/etCalleCompetencia"
-                android:layout_width="321dp"
+            <TextView
+                android:id="@+id/tvCalleCompetencia"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_below="@+id/txtCalleCompetencia"/>
+                android:layout_marginHorizontal="20dp"
+                android:layout_below="@+id/txtCalleCompetencia"
+                android:text="Calle"
+                android:textSize="25sp"/>
 
             <Button
                 android:id="@+id/btnSeleccionarLugar"
@@ -295,7 +305,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="Aval del Evento"
-                android:layout_below="@+id/etCalleCompetencia"
+                android:layout_below="@+id/tvCalleCompetencia"
                 android:textColor="@android:color/background_dark"
                 android:textSize="30sp"/>
 
