@@ -183,7 +183,6 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
                     }
                 }, horas, minuto, true);
 
-
                 timePicker.show();
             }
         });

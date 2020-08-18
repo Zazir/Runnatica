@@ -33,6 +33,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.poho.Usuario;
 
@@ -90,6 +91,18 @@ public class Editar_perfil extends AppCompatActivity {
 
         getLastViewData();
 
+        String fecha = FechaNacimientoUsuario1;
+        String dia = fecha.substring(0, 2);
+        String mes = fecha.substring(3, 5);
+        String ano = fecha.substring(6);
+
+        path = FotoUsuario;
+        Glide.with(Editar_perfil.this).load(FotoUsuario).into(FotoUsuarioNueva);
+
+        FechaNacimiento = dia + "" + mes + "" + ano + "";
+        String FechaMostrar =  dia + "/" + mes + "/" + ano + "/";
+        MostrarFecha.setText(FechaMostrar);
+
         NombreEditar.setText(NombreUsuario1);
         CiudadEditar.setText(CiudadUsuario1);
         EstadoEditar.setText(EstadoUsuario1);
@@ -145,11 +158,13 @@ public class Editar_perfil extends AppCompatActivity {
                         }
 
                         FechaNacimiento = DayTemp + "" + MesTemp + "" + year + "";
-                        MostrarFecha.setText(FechaNacimiento);
+                        String FechaMostrar2 =  DayTemp + "/" + MesTemp + "/" + year + "/";
+                        MostrarFecha.setText(FechaMostrar2);
                         flagFecha = true;
                     }
                 }, ano, mes, dia);
 
+                picker.getDatePicker().setMaxDate(System.currentTimeMillis()-100000000);
                 picker.show();
 
             }
@@ -316,8 +331,6 @@ public class Editar_perfil extends AppCompatActivity {
             EstadoEditar.setError("Debes de poner un Estado");
         }else if(PaisEditar.getText().toString().length() <= 0) {
             PaisEditar.setError("Debes de poner un Pais");
-        }else if(flagFecha == false) {
-            btnFechaNacimiento.setError("Debes poner una fecha");
         }else siguiente = true;
 
         return siguiente;

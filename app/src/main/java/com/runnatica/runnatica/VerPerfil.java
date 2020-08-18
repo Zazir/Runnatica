@@ -114,7 +114,6 @@ public class VerPerfil extends AppCompatActivity {
                             CiudadUsuario.setText(usuario.optString("ciudad"));
                             EstadoUsuario.setText(usuario.optString("estado"));
                             PaisUsuario.setText(usuario.optString("pais"));
-                            Toast.makeText(getApplicationContext(), fotourl, Toast.LENGTH_SHORT).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
