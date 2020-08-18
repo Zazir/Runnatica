@@ -11,8 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -24,8 +27,6 @@ import com.runnatica.runnatica.crear_competencia;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.fragment.app.FragmentActivity;
 
 import static com.runnatica.runnatica.crear_competencia.CALLE_COMPETENCIA;
 import static com.runnatica.runnatica.crear_competencia.CIUDAD_COMPETENCIA;
@@ -44,12 +45,16 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
     private MarkerOptions marker = new MarkerOptions();
     private List<Address> address;
     private Geocoder geocoder;
+    private LatLng Mexico;
+
+    private GoogleMap map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_competencia);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        obtenerPreferencias();
 
         btnSelectCoords = (Button)findViewById(R.id.btnMandarCordenadas);
 
@@ -78,12 +83,24 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         //mMap.moveCamera();
-
         googleMap.setOnMapLongClickListener(this);
+
+        //mMap = googleMap;
+        // googleMapOptions.mapType(googleMap.MAP_TYPE_HYBRID)
+        //    .compassEnabled(true);
+
+        // Add a marker in Sydney and move the camera
+        //LatLng Mexico = new LatLng(19.686081, -98.871635);
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(Mexico));
+        //mMap.setOnMapLongClickListener(this);
+
+        mMap = googleMap;
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(Mexico));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+
     }
 
     @Override
@@ -120,6 +137,13 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
     private void regresarCoordenadas() {
         Intent intent = new Intent(mapCompetencia.this, crear_competencia.class);
         startActivity(intent);
+    }
+    private void obtenerPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+        String latitud= preferences.getString("latitud", "");
+        String longitud= preferences.getString("longitud", "");
+
+        Mexico = new LatLng(Double.parseDouble(latitud), Double.parseDouble(longitud));
     }
 
     private void guardarCoordenadasArchivo(String Coordenadas) {

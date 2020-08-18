@@ -18,6 +18,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -37,12 +43,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 public class home extends AppCompatActivity {
     BottomNavigationView MenuUsuario;
     TextView NombreCiudad, txtAdvertencia;
@@ -54,6 +54,7 @@ public class home extends AppCompatActivity {
     private MyAdapter adapter;
     private int[] id;
     String Localizacion;
+    double latitud, longitud;
     private String dominio;
 
     private Usuario user = Usuario.getUsuarioInstance();
@@ -76,7 +77,7 @@ public class home extends AppCompatActivity {
 
         //Toast.makeText(this, user.getId()+"", Toast.LENGTH_SHORT).show();
         Localizacion();
-
+        guardarPreferencias();
         CargarCompetencias(dominio + "obtenerCompetencias.php?estado="+Localizacion);
 
         //Inicializar arreglo de competencias
@@ -110,6 +111,15 @@ public class home extends AppCompatActivity {
                 return true;
             }
         });
+
+    }
+    private void guardarPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Datos_usuario", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putString("latitud", latitud+"");
+        editor.putString("longitud", longitud+"");
+        editor.commit();
 
     }
 
@@ -161,6 +171,7 @@ public class home extends AppCompatActivity {
                     Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                     try {
                         String city = hereLocation(location.getLatitude(), location.getLongitude());
+
                         NombreCiudad.setText(city);
                     }catch(Exception e){
                         e.printStackTrace();
@@ -177,6 +188,8 @@ public class home extends AppCompatActivity {
 
     private String hereLocation(double lat, double lon){
         String cityName = "";
+        latitud = lat;
+        longitud = lon;
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         List<Address> addresses;
         try{
