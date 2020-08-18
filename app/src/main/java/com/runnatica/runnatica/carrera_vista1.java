@@ -19,6 +19,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -46,12 +52,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallback {
     //Constantes
@@ -431,6 +431,7 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
     }
     private String PonerMes(String diaCompetencia){
         String Temp[] = diaCompetencia.split("-");
+        String Temp2[] = Temp[2].split(" ");
         int Mes = Integer.parseInt(Temp[1]);
         Log.i("Mes", "Mes numero: " + Mes);
 
@@ -468,14 +469,14 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
                 MES = "Octubre";
                 break;
             case 11:
-                MES = "Nobiembre";
+                MES = "Noviembre";
                 break;
             case 12:
                 MES = "Diciembre";
                 break;
         }
 
-        return Temp[0] + " de " + MES + " del " + Temp[2];
+        return Temp2[0] + " de " + MES + " del " + Temp[0]+ " a las " + Temp2[1];
     }
 
     //Google maps integration

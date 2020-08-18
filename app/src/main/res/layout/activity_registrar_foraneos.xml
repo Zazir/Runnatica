@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrarForaneos">
+
+    <LinearLayout
+        android:id="@+id/llInscribirse"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Usuarios Foraneos"
+            android:textColor="@android:color/background_light"
+            android:textSize="30dp"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llInscribirse"
+        android:layout_above="@+id/bottomNavigation"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/etNombreForaneo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Nombre"
+                android:ems="10" />
+
+            <EditText
+                android:id="@+id/etCorreoForaneo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Correo"
+                android:ems="10"
+                android:inputType="textEmailAddress" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/rbtnHombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hombre" />
+
+                <RadioButton
+                    android:id="@+id/rbtnMujer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mujer" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/etEdadForaneo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Edad"
+                android:ems="10"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/btnCreateForaneo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Crear usuario foráneo"/>
+
+            <ListView
+                android:id="@+id/lvForaneos"
+                android:layout_width="wrap_content"
+                android:layout_height="254dp"
+
+                ></ListView>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/barra_verde"
+        android:minHeight="@android:dimen/thumbnail_height"
+        app:itemTextColor="@android:color/background_dark"
+        app:menu="@menu/main_menu"/>
+
+</RelativeLayout>
