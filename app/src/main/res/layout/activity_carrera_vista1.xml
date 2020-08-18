@@ -104,7 +104,7 @@
                 android:layout_height="50dp"
                 android:layout_below="@+id/tvFechaCompetencia"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="25dp"
                 android:background="@drawable/boleto" />
 
             <TextView
@@ -113,7 +113,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvNombreOrganizador"
                 android:layout_marginLeft="70dp"
-                android:layout_marginTop="15dp"
                 android:text="Dia/Mes/Año"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25dp"/>
@@ -139,7 +138,7 @@
                 android:layout_below="@+id/tvFechaCompetencia"
                 android:layout_toEndOf="@+id/imgPrecio"
                 android:textSize="25sp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginStart="5dp"
                 android:textColor="@android:color/background_dark"/>
 

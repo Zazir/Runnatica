@@ -50,6 +50,7 @@ public class RegistrarForaneos extends AppCompatActivity {
         lvForaneo = (ListView)findViewById(R.id.lvForaneos);
 
         final String ip = getString(R.string.ip);
+        peticion();
 
         btnCrearForaneo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,5 +134,21 @@ public class RegistrarForaneos extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    private void peticion(){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://45.15.24.210/WebServiceRunnatica/obtenerForaneosTabla.php?id_usuario="+ usuario.getId(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        llenarListView(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(RegistrarForaneos.this, "Error de conección con el servidor", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(stringRequest);
     }
 }

@@ -272,7 +272,7 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
                             //txtFechaCompe.setText(respuesta.optString("fecha"));
                             txtFechaCompe.setText(PonerMes(respuesta.optString("fecha")));
                             txtLugarCompe.setText(respuesta.optString("ciudad")+", "+respuesta.optString("colonia")+", "+respuesta.optString("calle"));
-                            txtPrecioCompe.setText("$" + respuesta.optString("precio"));
+                            txtPrecioCompe.setText("$" + respuesta.optString("precio") + "MXN");
                             txtDescripcionCompe.setText(respuesta.optString("descripcion"));
                             createMark();
                         } catch (JSONException e) {

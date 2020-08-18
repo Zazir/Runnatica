@@ -10,6 +10,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -33,11 +38,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import static com.runnatica.runnatica.carrera_vista1.IDS_FORANEOS;
 
@@ -64,7 +64,6 @@ public class InscripcionForaneo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscripcion_foraneo);
-        btnCrearForaneos = (Button)findViewById(R.id.btnPasarACrearForaneo);
         btnInscribir = (Button)findViewById(R.id.btnPagarInscripciones);
         rvInscripcionesForaneos = (RecyclerView)findViewById(R.id.rvInscripcionesForaneos);
         rvInscripcionesForaneos.setHasFixedSize(true);
@@ -74,12 +73,6 @@ public class InscripcionForaneo extends AppCompatActivity {
         String dominio = getString(R.string.ip);
         cargarInscripciones(dominio + "obtenerInscripciones.php?id_compentencia=" + id_competencia);
 
-        btnCrearForaneos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                aAgregarForaneos();
-            }
-        });
 
         btnInscribir.setOnClickListener(new View.OnClickListener() {
             @Override

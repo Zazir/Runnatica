@@ -162,7 +162,7 @@ public class registro_usuario extends AppCompatActivity {
                         }
                     }
                 }, ano, mes, dia);
-
+                picker.getDatePicker().setMaxDate(System.currentTimeMillis()-100000000);
                 picker.show();
 
             }

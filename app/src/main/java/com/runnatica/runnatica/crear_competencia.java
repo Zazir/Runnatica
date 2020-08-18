@@ -28,6 +28,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,10 +48,6 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class crear_competencia extends AppCompatActivity implements TextWatcher {
 
@@ -87,7 +87,7 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
     private String dominio;
 
     BottomNavigationView MenuUsuario;
-
+    DatePickerDialog datePickerDialog;
     int imagen=0, dia, mes, ano;
 
     // Miembros para guardar los valores de los datos de los EditText
@@ -212,7 +212,7 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
                     }
                 }, ano, mes, dia);
 
-                picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                picker.getDatePicker().setMinDate(System.currentTimeMillis() + 10000000);
                 picker.show();
             }
         });
