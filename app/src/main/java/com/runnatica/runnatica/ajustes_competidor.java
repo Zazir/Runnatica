@@ -2,9 +2,6 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +9,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -34,6 +36,7 @@ public class ajustes_competidor extends AppCompatActivity {
         arrayList.add("Centro de Ayuda");
         arrayList.add("Aviso de Privacidad");
         arrayList.add("Administrador de Competencia");
+        arrayList.add("Agregar Usuarios Foraneos");
         arrayList.add("Cerrar Sesión");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
@@ -84,6 +87,10 @@ public class ajustes_competidor extends AppCompatActivity {
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
                 if(i == 5){
+                    Foraneos();
+                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(i == 6){
                     CerrarSesion();
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
@@ -138,6 +145,10 @@ public class ajustes_competidor extends AppCompatActivity {
     }
     private void Ajustes(){
         Intent next = new Intent(this, ajustes_competidor.class);
+        startActivity(next);
+    }
+    private void Foraneos(){
+        Intent next = new Intent(this, RegistrarForaneos.class);
         startActivity(next);
     }
 }

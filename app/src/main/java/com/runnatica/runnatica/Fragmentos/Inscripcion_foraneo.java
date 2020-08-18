@@ -1,7 +1,6 @@
 package com.runnatica.runnatica.Fragmentos;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +9,15 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.runnatica.runnatica.R;
+import com.runnatica.runnatica.poho.Usuario;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +36,7 @@ public class Inscripcion_foraneo extends Fragment {
     public String[] arregloID;
     private int index = 0;
     private String sexo;
-
+    private Usuario usuario = Usuario.getUsuarioInstance();
     private int CondicionalTamano;
 
     public Inscripcion_foraneo() {
@@ -73,7 +75,7 @@ public class Inscripcion_foraneo extends Fragment {
                 if (CondicionalTamano > 0) {
                     setSexo();
                     crearUsuarioForaneo(ip + "agregarUsuarioForaneo.php?" +
-                            "id_competencia=" + id_competencia +
+                            "id_competencia=" + usuario.getId() +
                             "&nombre=" + txtNombre.getText().toString().replaceAll(" ", "%20") +
                             "&correo=" + txtCorreo.getText().toString() +
                             "&sexo=" + sexo +
