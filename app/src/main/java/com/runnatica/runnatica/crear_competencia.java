@@ -205,7 +205,7 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
                     }
                 }, ano, mes, dia);
 
-                picker.getDatePicker().setMinDate(System.currentTimeMillis() + 10000000);
+                picker.getDatePicker().setMinDate(System.currentTimeMillis() + 100000000);
                 picker.show();
             }
         });
