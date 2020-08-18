@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -13,9 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -28,6 +27,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class editar_competencia2 extends AppCompatActivity {
 
@@ -62,15 +64,49 @@ public class editar_competencia2 extends AppCompatActivity {
         Siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Validaciones()) {
+                    Salir();
+                /*if (Validaciones()) {
+                }else
+                    Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();*/
+                }
+        });
+
+        EditarNombre.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 ActualizarCompetencia(dominio + "actualizarCompetencia.php?" +
                         "nombre_competencia=" + EditarNombre.getText().toString().replaceAll(" ", "%20") +
-                        "&descripcion=" + EditarDescripcion.getText().toString().replaceAll(" ", "%20") +
-                        "&Foto=" + path +
                         "&id_competencia=" + id_competencia);
-                }else
-                    Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
-                }
+            }
+        });
+
+        EditarDescripcion.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ActualizarCompetencia(dominio + "actualizarCompetencia.php?" +
+                        "descripcion=" + EditarDescripcion.getText().toString().replaceAll(" ", "%20") +
+                        "&id_competencia=" + id_competencia);
+            }
         });
     }
 
@@ -79,8 +115,9 @@ public class editar_competencia2 extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), "Competencia actualizada con éxito", Toast.LENGTH_SHORT).show();
-                        Salir();
+                        //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
+                        //Salir();
+                        Log.i("Respuesta", response);
                     }
                 },
                 new Response.ErrorListener() {
@@ -114,11 +151,13 @@ public class editar_competencia2 extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         progreso.dismiss();
-                        Log.i("Respuesta_img", response);
                         if (response.equals("Error al subir")) {
                             Toast.makeText(getApplicationContext(), "La imagen no se pudo subir con éxito", Toast.LENGTH_SHORT).show();
                         } else {
                             path = response;
+                            ActualizarCompetencia(dominio + "actualizarCompetencia.php?" +
+                                    "Foto=" + path +
+                                    "&id_competencia=" + id_competencia);
                         }
                     }
                 },
