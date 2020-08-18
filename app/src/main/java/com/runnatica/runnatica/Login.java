@@ -39,12 +39,14 @@ import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
 
+    GoogleSignInAccount account;
+
     int RC_SIGN_IN = 0;
     RadioButton rbSesion;
     Button Entrar, Registro;
     EditText Usuariotxt, Contrasenatxt;
     SignInButton signInButton;
-    String personEmail, personalName, UriURL;
+    String personEmail= "", personalName= "", UriURL= "";
     Uri personPhoto;
     GoogleSignInClient mGoogleSignClient;
 
@@ -148,6 +150,7 @@ public class Login extends AppCompatActivity {
                         JSONObject jsonobject;
 
                         jsonobject = jsonarray.getJSONObject(0);
+
                         user.setId(Integer.parseInt(jsonobject.getString("id_usuarios")));
                         user.setTipoUsuario(jsonobject.optString("tipo_usr"));
                         user.setFechaNacimiento(jsonobject.optString("f_nacimiento"));
@@ -238,35 +241,71 @@ public class Login extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask){
 
         try{
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            account = completedTask.getResult(ApiException.class);
+            if(account != null){
+                personEmail = account.getEmail();
+                personalName = account.getDisplayName();
+                personPhoto = account.getPhotoUrl();
+                //UriURL = personPhoto.toString();
+                //Poner validacion de correo
+
+            }
+
             //Signed is succesfully. show authenticated.UI
-            getCorreo();
-            SiguienteGoogle();
+
+            ValidarCorreo();
         }catch (ApiException e){
             //The ApiException status code indicates the detailed falture reason
             Log.w("Google Sign In Error", "signInResults: failed code= "+ e.getStatusCode());
             Toast.makeText(Login.this, "Error al entrar", Toast.LENGTH_LONG).show();
         }
     }
-    private void getCorreo(){
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(Login.this);
-        if(acct != null){
-            personEmail = acct.getEmail();
-            //Poner validacion de correo
 
-        }
-    }
     private void SiguienteGoogle(){
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(Login.this);
-        personalName = acct.getDisplayName();
-        personPhoto = acct.getPhotoUrl();
-        UriURL = personPhoto.toString();
 
         Intent intent = new Intent(Login.this, RegistroMedio.class);
         intent.putExtra("Correo", personEmail);
         intent.putExtra("Nombre", personalName);
-        intent.putExtra("Foto", UriURL);
         startActivity(intent);
         finish();
+    }
+    private void ValidarCorreo(){
+        String dominio = getString(R.string.ip);
+        String url = dominio + "sesion.php?correo=" + personEmail + "&operacion=2";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+                if(response.equals("Noexiste")) {
+                    SiguienteGoogle();
+                }else{
+                    try {
+                        JSONObject jsonobject = new JSONObject(response);
+
+                        user.setId(Integer.parseInt(jsonobject.getString("id_usuarios")));
+                        user.setFechaNacimiento(jsonobject.optString("f_nacimiento"));
+                        user.setCorreo(jsonobject.optString("correo"));
+                        user.setNombre(jsonobject.optString("nombre"));
+                        guardarPreferencias();
+                        alHome();
+                        finish();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Hubo un problema "+error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Volley.newRequestQueue(this).add(stringRequest);
     }
 }
