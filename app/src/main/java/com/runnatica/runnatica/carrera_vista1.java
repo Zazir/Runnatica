@@ -19,12 +19,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -52,6 +46,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallback {
     //Constantes
@@ -83,9 +83,12 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
     private String categoria;
     private String dominio;
     private String coordenadas, nombreCompe;
+    private int totalInscripcionesInt;
 
     private GoogleMap mMap;
     private MarkerOptions marker = new MarkerOptions();
+
+    private StringRequest request;
 
     @Override
     protected void onDestroy() {
@@ -127,8 +130,8 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
         Menu menu = MenuUsuario.getMenu();
         MenuItem menuItem= menu.getItem(0);
         menuItem.setChecked(true);
-
         //
+
         MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -154,6 +157,7 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
         dominio = getString(R.string.ip);
         getLastViewData();
 
+        consultarTotalInscripciones();
         cargarInfoCarrera(dominio + "obtenerCompetencia.php?idCompe=" + id_competencia);
 
         cargarSpinnerComentar();
@@ -517,5 +521,57 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
         float zoom = 16;
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startCom, zoom));//Movemos el mapa a la latitud y longitud que tiene la carrera
+    }
+
+    private void consultarInscritos() {
+        String URL = dominio + "obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=1";
+        request = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            int usuariosInscritos = Integer.parseInt(response);
+
+                            if (totalInscripcionesInt < usuariosInscritos) {
+                                btnInscripcion.setEnabled(true);
+                            }
+                        }catch (Exception e) {}
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(carrera_vista1.this, "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void consultarTotalInscripciones() {
+        String URL = dominio + "obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=3";
+        request = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray res = new JSONArray(response);
+                            JSONObject totalInscripciones = res.getJSONObject(0);
+
+                            totalInscripcionesInt = totalInscripciones.optInt("Total_usuarios");
+                            consultarInscritos();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        //txtTotalUsuarios.setText();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(carrera_vista1.this, "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(request);
     }
 }

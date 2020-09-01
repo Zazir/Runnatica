@@ -269,7 +269,8 @@
                 android:layout_below="@+id/ivResultados"
                 android:layout_marginTop="30dp"
                 android:text="Registrase"
-                android:textSize="25sp"/>
+                android:textSize="25sp"
+                android:enabled="false"/>
 
         </RelativeLayout>
     </ScrollView>
