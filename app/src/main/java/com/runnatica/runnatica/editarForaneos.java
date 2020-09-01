@@ -125,7 +125,8 @@ public class editarForaneos extends AppCompatActivity {
     }
 
     private void getLastViewData() {
-
+    Bundle nombre = getIntent().getExtras();
+    id_Foraneo = nombre.getString("id");
 
     }
 
