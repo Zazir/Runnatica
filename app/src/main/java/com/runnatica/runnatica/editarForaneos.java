@@ -48,6 +48,7 @@ public class editarForaneos extends AppCompatActivity {
         MenuItem menuItem= menu.getItem(3);
         menuItem.setChecked(true);
         //
+        getLastViewData();
         dominio = getString(R.string.ip);
 
         MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -123,7 +124,10 @@ public class editarForaneos extends AppCompatActivity {
         });
     }
 
+    private void getLastViewData() {
 
+
+    }
 
     private void EditarForaneo(String URL){
         Log.i("URL", URL);
