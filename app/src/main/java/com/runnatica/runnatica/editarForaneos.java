@@ -40,7 +40,6 @@ public class editarForaneos extends AppCompatActivity {
         EditarEdadForaneo = (EditText)findViewById(R.id.etEditarEdadForaneo);
         EditarHombre = (RadioButton)findViewById(R.id.rbtnEditarHombre);
         EditarMujer = (RadioButton)findViewById(R.id.rbtnEditarMujer);
-        EditarForaneo = (Button)findViewById(R.id.rbtnEditarMujer);
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
         //Posicionar el icono del menu
@@ -127,7 +126,6 @@ public class editarForaneos extends AppCompatActivity {
     private void getLastViewData() {
     Bundle nombre = getIntent().getExtras();
     id_Foraneo = nombre.getString("id");
-
     }
 
     private void EditarForaneo(String URL){
