@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -41,6 +42,7 @@ public class editarForaneos extends AppCompatActivity {
         EditarHombre = (RadioButton)findViewById(R.id.rbtnEditarHombre);
         EditarMujer = (RadioButton)findViewById(R.id.rbtnEditarMujer);
         EditarForaneo = (Button)findViewById(R.id.rbtnEditarMujer);
+        EditarForaneo = (Button)findViewById(R.id.btnCreateForaneo);
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
         //Posicionar el icono del menu
@@ -69,6 +71,15 @@ public class editarForaneos extends AppCompatActivity {
                 }
 
                 return true;
+            }
+        });
+
+        EditarForaneo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(editarForaneos.this, RegistrarForaneos.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -120,6 +131,20 @@ public class editarForaneos extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 EditarForaneo(dominio + "actualizarForaneo.php?id_foraneo=" + id_Foraneo + "&EdadForaneo=" + EditarEdadForaneo.getText().toString());
+            }
+        });
+
+        EditarHombre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditarForaneo(dominio + "actualizarForaneo.php?id_foraneo=" + id_Foraneo + "&sexoForaneo=Hombre");
+            }
+        });
+
+        EditarMujer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditarForaneo(dominio + "actualizarForaneo.php?id_foraneo=" + id_Foraneo + "&sexoForaneo=Mujer");
             }
         });
     }

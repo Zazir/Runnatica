@@ -10,12 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ajustes_competidor extends AppCompatActivity {
 
@@ -37,7 +37,6 @@ public class ajustes_competidor extends AppCompatActivity {
         arrayList.add("Aviso de Privacidad");
         arrayList.add("Administrador de Competencia");
         arrayList.add("Agregar Usuarios Foraneos");
-        arrayList.add("Editar Usuarios Foraneos");
         arrayList.add("Cerrar Sesión");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
@@ -92,10 +91,6 @@ public class ajustes_competidor extends AppCompatActivity {
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
                 if(i == 6){
-                    EditarForaneos();
-                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
-                }
-                if(i == 7){
                     CerrarSesion();
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
@@ -146,10 +141,6 @@ public class ajustes_competidor extends AppCompatActivity {
     }
     private void Historial(){
         Intent next = new Intent(this, historial_competidor.class);
-        startActivity(next);
-    }
-    private void EditarForaneos(){
-        Intent next = new Intent(this, editarForaneos.class);
         startActivity(next);
     }
     private void Foraneos(){

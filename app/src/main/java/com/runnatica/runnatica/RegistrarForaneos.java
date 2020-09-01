@@ -218,6 +218,7 @@ public class RegistrarForaneos extends AppCompatActivity {
         Intent intent = new Intent(RegistrarForaneos.this, editarForaneos.class);
         intent.putExtra("id", id_foreign);
         startActivity(intent);
+        finish();
         //Toast.makeText(RegistrarForaneos.this, id_foreign, Toast.LENGTH_SHORT).show();
     }
 
