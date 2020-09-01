@@ -2,9 +2,6 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,11 +10,15 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.poho.Usuario;
 
 public class agregarForaneo extends AppCompatActivity {
@@ -46,7 +47,7 @@ public class agregarForaneo extends AppCompatActivity {
 
         //Posicionar el icono del menu
         Menu menu = MenuUsuario.getMenu();
-        MenuItem menuItem= menu.getItem(0);
+        MenuItem menuItem= menu.getItem(3);
         menuItem.setChecked(true);
         //
 

@@ -43,7 +43,8 @@ public class registro_basico extends AppCompatActivity {
     }
     private void ValidarCorreo(){
         String dominio = getString(R.string.ip);
-        String url = dominio + "sesion.php?correo=" + Correo.getText().toString();
+        String url = dominio + "sesion.php?correo=" + Correo.getText().toString()+ "&operacion=1";
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -54,6 +55,7 @@ public class registro_basico extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Este correo ya esta Registrado en Runnatica", Toast.LENGTH_SHORT).show();
                     return;
                 }else if(response.equals("Noexiste")) {
+
                     Intent intent = new Intent(registro_basico.this, verificar_correo.class);
                     intent.putExtra("Correo", Correo.getText().toString());
                     startActivity(intent);

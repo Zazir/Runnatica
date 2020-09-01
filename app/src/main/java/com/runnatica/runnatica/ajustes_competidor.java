@@ -37,6 +37,7 @@ public class ajustes_competidor extends AppCompatActivity {
         arrayList.add("Aviso de Privacidad");
         arrayList.add("Administrador de Competencia");
         arrayList.add("Agregar Usuarios Foraneos");
+        arrayList.add("Editar Usuarios Foraneos");
         arrayList.add("Cerrar Sesión");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
@@ -91,6 +92,10 @@ public class ajustes_competidor extends AppCompatActivity {
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
                 if(i == 6){
+                    EditarForaneos();
+                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(i == 7){
                     CerrarSesion();
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
@@ -143,8 +148,8 @@ public class ajustes_competidor extends AppCompatActivity {
         Intent next = new Intent(this, historial_competidor.class);
         startActivity(next);
     }
-    private void Ajustes(){
-        Intent next = new Intent(this, ajustes_competidor.class);
+    private void EditarForaneos(){
+        Intent next = new Intent(this, editarForaneos.class);
         startActivity(next);
     }
     private void Foraneos(){
