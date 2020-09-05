@@ -11,6 +11,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,11 +32,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class RegistrarForaneos extends AppCompatActivity {
 
@@ -156,7 +156,7 @@ public class RegistrarForaneos extends AppCompatActivity {
             txtCorreo.setError("Ese correo no es válido");
         }else if (txtEdad.length() == 0){
             txtEdad.setError("Debes poner una Edad");
-        } else if (EdadInt <0 || EdadInt >99){
+        } else if (EdadInt <=3 || EdadInt >=90){
             txtEdad.setError("La edad no es valida");
         }else if (rbHombre.isChecked() || rbMujer.isChecked()){
             siguiente = true;
@@ -196,7 +196,11 @@ public class RegistrarForaneos extends AppCompatActivity {
                                 @Override
                                 public void OnItemClick(int position) {
                                     String idS = new String("" + foraneoList.get(position).getId_foreign());
-                                    modificarForaneo(idS);
+                                    String Nombre = new String("" + foraneoList.get(position).getNombre());
+                                    String Correo = new String("" + foraneoList.get(position).getCorreon());
+                                    String Edad = new String("" + foraneoList.get(position).getEdad());
+                                    String Sexo = new String("" + foraneoList.get(position).getSexo());
+                                    modificarForaneo(idS, Nombre, Correo, Edad, Sexo);
                                 }
                             });
 
@@ -214,9 +218,14 @@ public class RegistrarForaneos extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-    private void modificarForaneo(String id_foreign) {
+    private void modificarForaneo(String id_foreign, String Nombre, String Correo, String Edad, String Sexo) {
         Intent intent = new Intent(RegistrarForaneos.this, editarForaneos.class);
         intent.putExtra("id", id_foreign);
+        intent.putExtra("Nombre", Nombre);
+        intent.putExtra("Correo", Correo);
+        intent.putExtra("Edad", Edad);
+        intent.putExtra("Sexo", Sexo);
+
         startActivity(intent);
         finish();
         //Toast.makeText(RegistrarForaneos.this, id_foreign, Toast.LENGTH_SHORT).show();

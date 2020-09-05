@@ -28,7 +28,7 @@ public class editarForaneos extends AppCompatActivity {
     private Button EditarForaneo;
     private EditText EditarNombreForaneo, EditarCorreoForaneo, EditarEdadForaneo;
     private RadioButton EditarHombre, EditarMujer;
-    private String dominio, id_Foraneo = "70";
+    private String dominio, id_Foraneo, Nombre_Foraneo, Edad_Foraneo, Sexo_Foraneo, Correo_Foraneo;
 
 
     @Override
@@ -52,6 +52,23 @@ public class editarForaneos extends AppCompatActivity {
         //
         getLastViewData();
         dominio = getString(R.string.ip);
+
+        EditarNombreForaneo.setText(Nombre_Foraneo);
+        EditarCorreoForaneo.setText(Correo_Foraneo);
+        EditarEdadForaneo.setText(Edad_Foraneo);
+        if(Sexo_Foraneo.equals("Hombre")){
+            EditarHombre.setChecked(true);
+        }else{
+            EditarMujer.setChecked(true);
+        }
+
+        EditarNombreForaneo.setEnabled(false);
+        EditarCorreoForaneo.setEnabled(false);
+        EditarHombre.setEnabled(false);
+        EditarMujer.setEnabled(false);
+
+
+
 
         MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -130,7 +147,17 @@ public class editarForaneos extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                EditarForaneo(dominio + "actualizarForaneo.php?id_foraneo=" + id_Foraneo + "&EdadForaneo=" + EditarEdadForaneo.getText().toString());
+                try {
+                    int EdadIngresada = Integer.parseInt(EditarEdadForaneo.getText().toString());
+
+                    if (EdadIngresada >= 4 && EdadIngresada <= 99) {
+                        EditarForaneo(dominio + "actualizarForaneo.php?id_foraneo=" + id_Foraneo + "&EdadForaneo=" + EditarEdadForaneo.getText().toString());
+                    } else {
+                        EditarEdadForaneo.setError("La edad no es valida");
+                    }
+                }catch (Exception e){
+                    
+                }
             }
         });
 
@@ -152,6 +179,11 @@ public class editarForaneos extends AppCompatActivity {
     private void getLastViewData() {
     Bundle nombre = getIntent().getExtras();
     id_Foraneo = nombre.getString("id");
+    Nombre_Foraneo = nombre.getString("Nombre");
+    Edad_Foraneo = nombre.getString("Edad");
+    Correo_Foraneo = nombre.getString("Correo");
+    Sexo_Foraneo = nombre.getString("Sexo");
+
     }
 
     private void EditarForaneo(String URL){

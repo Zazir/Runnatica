@@ -22,61 +22,89 @@
             android:textSize="20dp"></TextView>
     </LinearLayout>
 
-
-
     <LinearLayout
     android:layout_below="@+id/kk"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <EditText
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Nombre:"
+            android:textColor="@android:color/background_dark"
+            android:textSize="25dp"
+            ></TextView>
+        <EditText
         android:id="@+id/etEditarNombreForaneo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Nombre"
         android:ems="10" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Correo:"
+            android:textColor="@android:color/background_dark"
+            android:textSize="25dp"
+            ></TextView>
 
-    <EditText
-        android:id="@+id/etEditarCorreoForaneo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Correo"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
-
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <RadioButton
-            android:id="@+id/rbtnEditarHombre"
+        <EditText
+            android:id="@+id/etEditarCorreoForaneo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hombre" />
+            android:hint="Correo"
+            android:ems="10"
+            android:inputType="textEmailAddress" />
 
-        <RadioButton
-            android:id="@+id/rbtnEditarMujer"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Sexo:"
+            android:textColor="@android:color/background_dark"
+            android:textSize="25dp"
+            ></TextView>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/rbtnEditarHombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hombre" />
+
+            <RadioButton
+                android:id="@+id/rbtnEditarMujer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mujer" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Edad:"
+            android:textColor="@android:color/background_dark"
+            android:textSize="25dp"
+            ></TextView>
+
+        <EditText
+            android:id="@+id/etEditarEdadForaneo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mujer" />
-    </RadioGroup>
+            android:hint="Edad"
+            android:ems="10"
+            android:inputType="number" />
 
-    <EditText
-        android:id="@+id/etEditarEdadForaneo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Edad"
-        android:ems="10"
-        android:inputType="number" />
-
-    <Button
-        android:id="@+id/btnCreateForaneo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:text="Terminar"/>
+        <Button
+            android:id="@+id/btnCreateForaneo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="Terminar"/>
 
     </LinearLayout>
 
