@@ -13,16 +13,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import static com.runnatica.runnatica.crear_competencia.AVAL_DE_COMPETENCIA;
 import static com.runnatica.runnatica.crear_competencia.CALLE_COMPETENCIA;
@@ -190,26 +190,34 @@ public class crear_inscripcion extends AppCompatActivity{
 
     private Boolean Validaciones() {
         Boolean siguiente = false;
-        if (Nombre.getText().toString().length() <= 0) {
-            Nombre.setError("Debes de poner el nombre de la inscripcion");
-        }
-        else if (CantidadNormal.getText().toString().length() <= 0 || CantidadNormal.getText().toString().length() >= 5) {
-            CantidadNormal.setError("Ingresa una Cantidad Valida");
-        }
-        else if (CantidadForaneos.getText().toString().length() <= 0 || CantidadForaneos.getText().toString().length() >= 5) {
-            CantidadForaneos.setError("Ingresa una Cantidad Valida");
-        }
-        else if (DesdeAnos.getText().toString().length() <= 0 || DesdeAnos.getText().toString().length() >= 3) {
-            DesdeAnos.setError("Ingresa un Año Valido");
-        }
-        else if (HastaAnos.getText().toString().length() <= 0 || HastaAnos.getText().toString().length() >= 3) {
-            HastaAnos.setError("Ingresa un Año Valido");
-        }
-        else if (nombresInscripciones.contains(":"+Nombre.getText().toString()+":")) {
-            showAlert();
-        }
-        else siguiente = true;
 
+        try {
+            int VerificarEdad = Integer.parseInt(DesdeAnos.getText().toString());
+            int VerificarEdad2 = Integer.parseInt(DesdeAnos.getText().toString());
+
+            if (Nombre.getText().toString().length() <= 0) {
+                Nombre.setError("Debes de poner el nombre de la inscripcion");
+            } else if (CantidadNormal.getText().toString().length() <= 0 || CantidadNormal.getText().toString().length() >= 5) {
+                CantidadNormal.setError("Ingresa una Cantidad Valida");
+            } else if (CantidadForaneos.getText().toString().length() <= 0 || CantidadForaneos.getText().toString().length() >= 5) {
+                CantidadForaneos.setError("Ingresa una Cantidad Valida");
+            } else if (VerificarEdad <= 0 && VerificarEdad >= 99) {
+                DesdeAnos.setError("La edad no es valida");
+            } else if (VerificarEdad2 <= 0 && VerificarEdad2 >= 99) {
+                HastaAnos.setError("La edad no es valida");
+            } else if (VerificarEdad >= VerificarEdad2) {
+                DesdeAnos.setError("No puede ser mayor o igual la edad minima a la edad Maxima");
+            } else if (VerificarEdad2 <= VerificarEdad) {
+                HastaAnos.setError("No puede ser menor o igual la edad maxima a la edad Minima");
+            }else if (HastaAnos.getText().toString().length() <= 0 || HastaAnos.getText().toString().length() >= 3) {
+                HastaAnos.setError("Ingresa un Año Valido");
+            } else if (nombresInscripciones.contains(":" + Nombre.getText().toString() + ":")) {
+                showAlert();
+            } else siguiente = true;
+
+        }catch(Exception e){
+
+        }
         return siguiente;
     }
 
