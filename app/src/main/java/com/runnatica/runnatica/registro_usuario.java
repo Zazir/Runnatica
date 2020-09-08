@@ -24,9 +24,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -43,6 +40,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import static com.runnatica.runnatica.Login.CORREO_SESSION;
 import static com.runnatica.runnatica.Login.ID_USUARIO_SESSION;
@@ -162,9 +162,18 @@ public class registro_usuario extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         String MesTemp = month+1+ "";
-                        if(MesTemp.length() ==1){
+                        String diaTemp = dayOfMonth + "";
+
+                        if(MesTemp.length() == 1){
                             MesTemp = "0" + MesTemp;
                             FechaNacimiento = dayOfMonth + "" + MesTemp + "" + year + "";
+                            MostrarFecha.setText(FechaNacimiento);
+                            flagFecha = true;
+                        }
+
+                        if (diaTemp.length() == 1) {
+                            diaTemp = "0" + diaTemp;
+                            FechaNacimiento = diaTemp + "" + MesTemp + "" + year + "";
                             MostrarFecha.setText(FechaNacimiento);
                             flagFecha = true;
                         }

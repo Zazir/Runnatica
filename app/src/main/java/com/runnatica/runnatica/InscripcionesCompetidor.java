@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -37,6 +38,8 @@ import static com.runnatica.runnatica.carrera_vista1.ORGANIZADOR;
 public class InscripcionesCompetidor extends AppCompatActivity {
     private RecyclerView rvInscripciones;
     private Button btnNext;
+    private ImageView imgTicket;
+
     private List<Inscripciones> inscripcionesList = new ArrayList<>();
     private String id_competencia, monto, NombreCompetencia, Fecha, Lugar, Organizador;
     private inscripcionesUsuarioAdapter inscripcionesAdapter;
@@ -46,6 +49,7 @@ public class InscripcionesCompetidor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscripciones_competidor);
         btnNext = (Button)findViewById(R.id.btnSegundoPaso);
+        imgTicket = (ImageView)findViewById(R.id.igvTicket);
         rvInscripciones = (RecyclerView)findViewById(R.id.rvInscripciones);
         rvInscripciones.setHasFixedSize(true);
         rvInscripciones.setLayoutManager(new LinearLayoutManager(this));
@@ -88,7 +92,7 @@ public class InscripcionesCompetidor extends AppCompatActivity {
 
     private void CrearInscripcion() {
         Intent intent = new Intent(InscripcionesCompetidor.this, InscripcionForaneo.class);
-        intent.putExtra("monto", monto.toString());
+        intent.putExtra("monto", monto);
         intent.putExtra("ID_COMPENTENCIA", id_competencia.toString());
         intent.putExtra("NOMBRE_COMPETENCIA", NombreCompetencia.toString());
         intent.putExtra("FECHA", Fecha.toString());
@@ -124,13 +128,18 @@ public class InscripcionesCompetidor extends AppCompatActivity {
 
                             //Creamos instancia del adapter
                             inscripcionesAdapter = new inscripcionesUsuarioAdapter(InscripcionesCompetidor.this, inscripcionesList);
-                            if (inscripcionesAdapter.puedeAvanzar) {
+                            /*if (inscripcionesAdapter.puedeAvanzar) {
                                 btnNext.setEnabled(inscripcionesAdapter.puedeAvanzar);
-                            }
+                            }*/
                             rvInscripciones.setAdapter(inscripcionesAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        if (inscripcionesAdapter.tieneTicket()) {
+                            imgTicket.setImageResource(R.drawable.ticket);
+                            btnNext.setEnabled(true);
+                        }else imgTicket.setImageResource(R.drawable.dangerous);
                     }
                 },
                 new Response.ErrorListener() {

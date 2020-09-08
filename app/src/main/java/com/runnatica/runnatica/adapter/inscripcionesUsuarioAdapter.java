@@ -3,7 +3,6 @@ package com.runnatica.runnatica.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.runnatica.runnatica.R;
@@ -18,11 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 public class inscripcionesUsuarioAdapter extends RecyclerView.Adapter<inscripcionesUsuarioAdapter.ViewHolderInscripciones> {
     private Context ctx;
     private List<Inscripciones> inscripcionesList;
-    public static boolean puedeAvanzar = false;
+    private boolean puedeAvanzar = false;
 
     public inscripcionesUsuarioAdapter(Context ctx, List<Inscripciones> inscripcionesList) {
         this.ctx = ctx;
         this.inscripcionesList = inscripcionesList;
+    }
+
+    public boolean tieneTicket() {
+        return puedeAvanzar;
     }
 
     @NonNull
@@ -44,7 +47,6 @@ public class inscripcionesUsuarioAdapter extends RecyclerView.Adapter<inscripcio
 
     class ViewHolderInscripciones extends RecyclerView.ViewHolder {
         TextView txtNombreInscripcion, txtMinEdad, txtMaxEdad;
-        ImageView imgTicket;
         Usuario usuario = Usuario.getUsuarioInstance();
 
         public ViewHolderInscripciones(View vistaInscripcion) {
@@ -52,7 +54,6 @@ public class inscripcionesUsuarioAdapter extends RecyclerView.Adapter<inscripcio
             txtNombreInscripcion = (TextView)vistaInscripcion.findViewById(R.id.tvNombreInscripcion);
             txtMinEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMinEdadInscripcion);
             txtMaxEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMaxEdadInscripcion);
-            imgTicket = (ImageView) vistaInscripcion.findViewById(R.id.tvCantidadBoletos);
         }
 
         public void asignarDatos(Inscripciones inscripciones, final int posicion) {
@@ -60,9 +61,9 @@ public class inscripcionesUsuarioAdapter extends RecyclerView.Adapter<inscripcio
             txtMinEdad.setText("Edad mínima "+inscripciones.getEdadMinina() + " años");
             txtMaxEdad.setText("Edad máxima "+inscripciones.getEdadMaxima() + " años");
             if (usuario.getEdadUsuario() >= inscripciones.getEdadMinina() && usuario.getEdadUsuario() <= inscripciones.getEdadMaxima()) {
-                imgTicket.setImageResource(R.drawable.ticket);
+                //imgTicket.setImageResource(R.drawable.ticket);
                 puedeAvanzar = true;
-            }else imgTicket.setImageResource(R.drawable.dangerous);
+            }//else imgTicket.setImageResource(R.drawable.dangerous);
         }
     }
 }
