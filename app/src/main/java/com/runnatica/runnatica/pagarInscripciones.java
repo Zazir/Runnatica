@@ -12,12 +12,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -57,9 +63,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -121,12 +124,39 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         retrofitApi = retrofit.create(RetrofitApi.class);
         //MercadopAGO
 
+        //Posicionar el icono del menu
+        Menu menu = MenuUsuario.getMenu();
+        MenuItem menuItem= menu.getItem(0);
+        menuItem.setChecked(true);
+        //
+
         dominio = getString(R.string.ip);
 
 
         setContentView(R.layout.activity_pagar_inscripciones);
 
         obtenerPreferencias();
+
+        MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    home();
+                }
+                if (menuItem.getItemId() == R.id.menu_busqueda) {
+                    Busqueda();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    Historial();
+                }
+                if (menuItem.getItemId() == R.id.menu_ajustes) {
+                    Ajustes();
+                }
+
+                return true;
+            }
+        });
 
         paypal = (Button)findViewById(R.id.btnPaypal);
         MercadoPago = (Button) findViewById(R.id.btnMercadoPago);
@@ -573,4 +603,23 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         finish();
     }
 
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
+    }
+
+    private void Busqueda(){
+        Intent next = new Intent(this, busqueda_competidor.class);
+        startActivity(next);
+    }
+
+    private void Historial(){
+        Intent next = new Intent(this, historial_competidor.class);
+        startActivity(next);
+    }
+
+    private void Ajustes(){
+        Intent next = new Intent(this, ajustes_competidor.class);
+        startActivity(next);
+    }
 }
