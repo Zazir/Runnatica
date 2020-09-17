@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,9 +23,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.poho.Usuario;
 
 import java.util.regex.Pattern;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class EditarContrasena extends AppCompatActivity {
     private static final Pattern PASSWORD_PATTERN =
@@ -149,6 +149,8 @@ public class EditarContrasena extends AppCompatActivity {
                             ContrasenaNueva.setText("");
                             RepetirContrasena.setText("");
                             Regresar();
+                        }else{
+                            ContrasenaActual.setError("Contraseña Erronea");
                         }
                     }
                 },

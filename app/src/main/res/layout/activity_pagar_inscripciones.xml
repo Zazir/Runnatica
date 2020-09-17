@@ -75,21 +75,24 @@
     <ListView
         android:id="@+id/lvForaneos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtInfoForaneos"/>
+        android:layout_height="343dp"
+        android:layout_below="@+id/txtInfoForaneos" />
 
     <Button
         android:id="@+id/btnPaypal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginEnd="2dp"
         android:layout_above="@+id/btnMercadoPago"
         android:text="Pagar con Paypal" />
 
     <Button
         android:id="@+id/btnMercadoPago"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+
         android:layout_marginBottom="76dp"
         android:layout_alignParentBottom="true"
         android:text="Pagar con Tarjeta o Efectivo" />

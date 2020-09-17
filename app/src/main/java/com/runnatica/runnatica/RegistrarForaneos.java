@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -22,13 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.runnatica.runnatica.adapter.editarForaneoAdapter;
 import com.runnatica.runnatica.poho.Usuario;
 import com.runnatica.runnatica.poho.UsuarioForaneo;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,9 +55,6 @@ public class RegistrarForaneos extends AppCompatActivity {
         btnCrearForaneo = (Button)findViewById(R.id.btnCreateForaneo);
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
-        rvForaneos = (RecyclerView) findViewById(R.id.rcvForaneos);
-        rvForaneos.setHasFixedSize(true);
-        rvForaneos.setLayoutManager(new LinearLayoutManager(this));
 
         //Posicionar el icono del menu
         Menu menu = MenuUsuario.getMenu();
@@ -73,7 +64,6 @@ public class RegistrarForaneos extends AppCompatActivity {
 
         ip = getString(R.string.ip);
         foraneoList = new ArrayList<>();
-        CargarForaneos(ip + "obtenerForaneosTabla.php?id_usuario=" + usuario.getId());
         //peticion();
         MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -99,22 +89,8 @@ public class RegistrarForaneos extends AppCompatActivity {
         btnCrearForaneo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Validaciones()){
-                    setSexo();
-                    crearUsuarioForaneo(ip + "agregarUsuarioForaneo.php?" +
-                            "id_usuario=" + usuario.getId() +
-                            "&nombre=" + txtNombre.getText().toString().replaceAll(" ", "%20") +
-                            "&correo=" + txtCorreo.getText().toString() +
-                            "&sexo=" + sexo +
-                            "&edad=" + txtEdad.getText().toString());
-                    Toast.makeText(getApplicationContext(), "El usuario Foraneo " + txtNombre.getText().toString() + "se ha registrado correctamente", Toast.LENGTH_SHORT).show();
-                    txtNombre.setText("");
-                    txtCorreo.setText("");
-                    txtEdad.setText("");
-                    rbHombre.setChecked(false);
-                    rbMujer.setChecked(false);
-                }else
-                    Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
+                ValidarCorreo();
+
             }
         });
     }
@@ -131,7 +107,6 @@ public class RegistrarForaneos extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         //llenarListView(response);
-                        CargarForaneos(ip + "obtenerForaneosTabla.php?id_usuario=" + usuario.getId());
                     }
                 },
                 new Response.ErrorListener() {
@@ -140,6 +115,33 @@ public class RegistrarForaneos extends AppCompatActivity {
                         Toast.makeText(RegistrarForaneos.this, "Error de conección con el servidor", Toast.LENGTH_SHORT).show();
                     }
                 });
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+    private void ValidarCorreo(){
+        String dominio = getString(R.string.ip);
+        String url = dominio + "sesion.php?correo=" + txtCorreo.getText().toString()+ "&operacion=1";
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if (response.equals("Existe")) {
+                    txtCorreo.setError("Este correo ya esta Registrado");
+                    Toast.makeText(getApplicationContext(), "Este correo ya esta Registrado en Runnatica", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if(response.equals("Noexiste")) {
+                    AgregarForaneo();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Hubo un problema "+error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
@@ -154,7 +156,7 @@ public class RegistrarForaneos extends AppCompatActivity {
             txtCorreo.setError("Debes poner un Correo");
         }else if (!Patterns.EMAIL_ADDRESS.matcher(txtCorreo.getText().toString()).matches()){
             txtCorreo.setError("Ese correo no es válido");
-        }else if (txtEdad.length() == 0){
+        }else if (txtEdad.getText().toString().length() <= 0){
             txtEdad.setError("Debes poner una Edad");
         } else if (EdadInt <=3 || EdadInt >=90){
             txtEdad.setError("La edad no es valida");
@@ -165,70 +167,29 @@ public class RegistrarForaneos extends AppCompatActivity {
         return siguiente;
     }
 
-    private void CargarForaneos(String URL) {
-        foraneoList.clear();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            //Hacer el string a json array object
-                            JSONArray array = new JSONArray(response);
-
-                            //Recorremos con un for lo que tiene el array
-                            for (int i = 0; i < array.length(); i++) {
-                                //Obtenemos los objetos tipo competencias del array
-                                JSONObject foraneo = array.getJSONObject(i);
-
-                                //Añadir valores a los correspondientes textview
-                                foraneoList.add(new UsuarioForaneo(
-                                        foraneo.getInt("id_foraneo"),
-                                        foraneo.getString("nombre"),
-                                        foraneo.getString("correo"),
-                                        "alguno",
-                                        foraneo.getInt("edad")
-                                ));
-                            }
-
-                            //Creamos instancia del adapter
-                            editarForaneoAdapter adapterForaneo = new editarForaneoAdapter(RegistrarForaneos.this, foraneoList, new editarForaneoAdapter.OnItemClickListener() {
-                                @Override
-                                public void OnItemClick(int position) {
-                                    String idS = new String("" + foraneoList.get(position).getId_foreign());
-                                    String Nombre = new String("" + foraneoList.get(position).getNombre());
-                                    String Correo = new String("" + foraneoList.get(position).getCorreon());
-                                    String Edad = new String("" + foraneoList.get(position).getEdad());
-                                    String Sexo = new String("" + foraneoList.get(position).getSexo());
-                                    modificarForaneo(idS, Nombre, Correo, Edad, Sexo);
-                                }
-                            });
-
-                            rvForaneos.setAdapter(adapterForaneo);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
+    private void AgregarForaneo(){
+        try{
+            if(Validaciones()){
+                setSexo();
+                crearUsuarioForaneo(ip + "agregarUsuarioForaneo.php?" +
+                        "id_usuario=" + usuario.getId() +
+                        "&nombre=" + txtNombre.getText().toString().replaceAll(" ", "%20") +
+                        "&correo=" + txtCorreo.getText().toString() +
+                        "&sexo=" + sexo +
+                        "&edad=" + txtEdad.getText().toString());
+                Toast.makeText(getApplicationContext(), "El usuario Foraneo " + txtNombre.getText().toString() + "se ha registrado correctamente", Toast.LENGTH_SHORT).show();
+                Regresar();
+                txtNombre.setText("");
+                txtCorreo.setText("");
+                txtEdad.setText("");
+                rbHombre.setChecked(false);
+                rbMujer.setChecked(false);
+            }else{
+                Toast.makeText(RegistrarForaneos.this, "Complete los Campos", Toast.LENGTH_SHORT).show();
             }
-        });
-        Volley.newRequestQueue(this).add(stringRequest);
-    }
+        }catch(Exception e){
 
-    private void modificarForaneo(String id_foreign, String Nombre, String Correo, String Edad, String Sexo) {
-        Intent intent = new Intent(RegistrarForaneos.this, editarForaneos.class);
-        intent.putExtra("id", id_foreign);
-        intent.putExtra("Nombre", Nombre);
-        intent.putExtra("Correo", Correo);
-        intent.putExtra("Edad", Edad);
-        intent.putExtra("Sexo", Sexo);
-
-        startActivity(intent);
-        finish();
-        //Toast.makeText(RegistrarForaneos.this, id_foreign, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void home(){
@@ -250,6 +211,9 @@ public class RegistrarForaneos extends AppCompatActivity {
         Intent next = new Intent(this, ajustes_competidor.class);
         startActivity(next);
     }
-
+    private void Regresar(){
+        Intent next = new Intent(this, ListaForaneos.class);
+        startActivity(next);
+    }
 
 }

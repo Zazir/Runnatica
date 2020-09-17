@@ -343,7 +343,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/menu_book/baseline_menu_book_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/person_add/baseline_person_add_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -353,7 +353,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_pasadas" />
+                            <entry key="outputName" value="ic_agregar" />
                             <entry key="sourceFile" value="C:\Runnatica\Runnatica" />
                           </map>
                         </option>

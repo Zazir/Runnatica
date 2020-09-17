@@ -14,6 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -32,9 +35,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Verificar_CorreoNuevo extends AppCompatActivity {
@@ -156,7 +156,7 @@ public class Verificar_CorreoNuevo extends AppCompatActivity {
             }
         });
 
-        pdialog = ProgressDialog.show(context, "", "Enviando Codigo...", true);
+        //pdialog = ProgressDialog.show(context, "", "Enviando Codigo...", true);
 
        RetreiveFeedTask task = new RetreiveFeedTask();
         task.execute();
@@ -184,7 +184,7 @@ public class Verificar_CorreoNuevo extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            pdialog.dismiss();
+            //pdialog.dismiss();
             Toast.makeText(getApplicationContext(), "Codigo Enviado a: " + Correo, Toast.LENGTH_LONG).show();
         }
     }

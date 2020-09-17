@@ -18,72 +18,113 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Usuarios Foraneos"
+            android:text="Registrar Usuarios Foraneos"
             android:textColor="@android:color/background_light"
-            android:textSize="30dp"/>
+            android:textSize="20dp"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/lay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/llInscribirse"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/etNombreForaneo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Nombre"
-            android:ems="10" />
-
-        <EditText
-            android:id="@+id/etCorreoForaneo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Correo"
-            android:ems="10"
-            android:inputType="textEmailAddress" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RadioButton
-                android:id="@+id/rbtnHombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hombre" />
-
-            <RadioButton
-                android:id="@+id/rbtnMujer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mujer" />
-        </RadioGroup>
-
-        <EditText
-            android:id="@+id/etEdadForaneo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Edad"
-            android:ems="10"
-            android:inputType="number" />
-
-        <Button
-            android:id="@+id/btnCreateForaneo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Crear usuario foráneo"/>
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvForaneos"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_below="@+id/lay"
-        android:layout_above="@+id/bottomNavigation"/>
+        android:layout_below="@+id/llInscribirse"
+        android:layout_above="@+id/bottomNavigation"
+        android:layout_marginBottom="5dp">
+        <LinearLayout
+            android:id="@+id/lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llInscribirse"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Nombre:"
+                android:layout_gravity="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <EditText
+                android:id="@+id/etNombreForaneo"
+                android:layout_width="346dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:hint="Nombre" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Correo:"
+                android:layout_gravity="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <EditText
+                android:id="@+id/etCorreoForaneo"
+                android:layout_width="347dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_gravity="center"
+                android:hint="Correo"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Sexo:"
+                android:layout_gravity="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp"></TextView>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/rbtnHombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Hombre" />
+
+                <RadioButton
+                    android:id="@+id/rbtnMujer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Mujer" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Edad:"
+                android:textColor="@android:color/background_dark"
+                android:layout_gravity="center"
+                android:textSize="25dp"></TextView>
+
+            <EditText
+                android:id="@+id/etEdadForaneo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_gravity="center"
+                android:hint="Edad"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/btnCreateForaneo"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:text="Terminar" />
+        </LinearLayout>
+
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"

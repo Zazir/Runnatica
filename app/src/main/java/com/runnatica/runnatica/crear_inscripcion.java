@@ -194,6 +194,7 @@ public class crear_inscripcion extends AppCompatActivity{
         try {
             int VerificarEdad = Integer.parseInt(DesdeAnos.getText().toString());
             int VerificarEdad2 = Integer.parseInt(DesdeAnos.getText().toString());
+            int VerificarCantidad = Integer.parseInt(CantidadNormal.getText().toString());
 
             if (Nombre.getText().toString().length() <= 0) {
                 Nombre.setError("Debes de poner el nombre de la inscripcion");
@@ -211,6 +212,8 @@ public class crear_inscripcion extends AppCompatActivity{
                 HastaAnos.setError("No puede ser menor o igual la edad maxima a la edad Minima");
             }else if (HastaAnos.getText().toString().length() <= 0 || HastaAnos.getText().toString().length() >= 3) {
                 HastaAnos.setError("Ingresa un Año Valido");
+            } else if (VerificarCantidad <= 0) {
+                CantidadNormal.setError("Ingresa una Cantidad Valida");
             } else if (nombresInscripciones.contains(":" + Nombre.getText().toString() + ":")) {
                 showAlert();
             } else siguiente = true;

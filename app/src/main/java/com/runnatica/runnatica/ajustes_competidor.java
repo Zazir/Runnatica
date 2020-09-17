@@ -10,12 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class ajustes_competidor extends AppCompatActivity {
 
@@ -36,7 +36,7 @@ public class ajustes_competidor extends AppCompatActivity {
         arrayList.add("Centro de Ayuda");
         arrayList.add("Aviso de Privacidad");
         arrayList.add("Administrador de Competencia");
-        arrayList.add("Agregar Usuarios Foraneos");
+        arrayList.add("Usuarios Foraneos");
         arrayList.add("Cerrar Sesión");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
@@ -144,7 +144,7 @@ public class ajustes_competidor extends AppCompatActivity {
         startActivity(next);
     }
     private void Foraneos(){
-        Intent next = new Intent(this, RegistrarForaneos.class);
+        Intent next = new Intent(this, ListaForaneos.class);
         startActivity(next);
     }
 }

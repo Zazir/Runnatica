@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -19,9 +22,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.poho.Usuario;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 
 public class EditarCorreo extends AppCompatActivity {
@@ -140,7 +140,7 @@ public class EditarCorreo extends AppCompatActivity {
                             finish();
 
                         }else if(response.equals("Incorrecto")){
-                            Toast.makeText(getApplicationContext(), "Contraseña Incorrecta, Vuelve a Intentar", Toast.LENGTH_SHORT).show();
+                            confirmarContrasena.setError("Contraseña Invalida");
                         }
                     }
                 },

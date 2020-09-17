@@ -30,37 +30,42 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Nombre:"
             android:textColor="@android:color/background_dark"
-            android:textSize="25dp"
-            ></TextView>
+            android:textSize="25dp"></TextView>
+
         <EditText
-        android:id="@+id/etEditarNombreForaneo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Nombre"
-        android:ems="10" />
+            android:id="@+id/etEditarNombreForaneo"
+            android:layout_width="322dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:hint="Nombre" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Correo:"
+            android:layout_gravity="center"
             android:textColor="@android:color/background_dark"
             android:textSize="25dp"
             ></TextView>
 
         <EditText
             android:id="@+id/etEditarCorreoForaneo"
-            android:layout_width="wrap_content"
+            android:layout_width="330dp"
             android:layout_height="wrap_content"
-            android:hint="Correo"
             android:ems="10"
+            android:layout_gravity="center"
+            android:hint="Correo"
             android:inputType="textEmailAddress" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Sexo:"
+            android:layout_gravity="center"
             android:textColor="@android:color/background_dark"
             android:textSize="25dp"
             ></TextView>
@@ -73,12 +78,14 @@
                 android:id="@+id/rbtnEditarHombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="Hombre" />
 
             <RadioButton
                 android:id="@+id/rbtnEditarMujer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="Mujer" />
         </RadioGroup>
 
@@ -86,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Edad:"
+            android:layout_gravity="center"
             android:textColor="@android:color/background_dark"
             android:textSize="25dp"
             ></TextView>
@@ -95,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Edad"
+            android:layout_gravity="center"
             android:ems="10"
             android:inputType="number" />
 

@@ -2,14 +2,16 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Correo_Editado extends AppCompatActivity {
     BottomNavigationView MenuUsuario;
@@ -21,6 +23,8 @@ public class Correo_Editado extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_correo__editado);
+
+        getLastViewData();
 
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         MostrarCorreo = (TextView)findViewById(R.id.tvMostrarCorreo);

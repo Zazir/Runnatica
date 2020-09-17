@@ -18,8 +18,9 @@
 
             <ImageView
                 android:id="@+id/igvTicket"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="90dp"
+                android:layout_below="@+id/tvMaxEdadInscripcion"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="5dp"/>
 
@@ -27,7 +28,6 @@
                 android:id="@+id/txtLeyenda"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/igvTicket"
                 android:layout_marginStart="5dp"/>
 
 

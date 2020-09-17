@@ -102,8 +102,9 @@
 
             <Button
                 android:id="@+id/btnGuardarEditar"
-                android:layout_width="310dp"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:textSize="25sp"
                 android:layout_below="@+id/btnImagenCompetencia"
                 android:layout_centerHorizontal="true"
                 android:layout_marginEnd="20dp"

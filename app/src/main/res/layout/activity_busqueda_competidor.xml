@@ -78,8 +78,8 @@
 
                     <Button
                         android:id="@+id/btnFiltroFecha"
-                        android:layout_width="202dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="200dp"
+                        android:layout_height="60dp"
                         android:layout_below="@+id/xx"
                         android:text="Seleccionar fecha"
                         android:layout_centerHorizontal="true"
@@ -110,8 +110,8 @@
 
                     <Button
                         android:id="@+id/btnBuscarEstado"
-                        android:layout_width="199dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="200dp"
+                        android:layout_height="60dp"
                         android:layout_below="@+id/spFiltroEstado"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"

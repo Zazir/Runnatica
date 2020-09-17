@@ -4,9 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -22,10 +27,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import static com.runnatica.runnatica.carrera_vista1.FECHA_COMPETENCIA;
 import static com.runnatica.runnatica.carrera_vista1.ID_COMPETENCIA;
@@ -132,8 +133,13 @@ public class InscripcionesCompetidor extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        Log.i("Puede_avanzar1", inscripcionesAdapter.tieneTicket()+ "");
 
                         /*if (inscripcionesAdapter.tieneTicket()) {
+=======
+                        if (inscripcionesAdapter.tieneTicket()) {
+
+>>>>>>> Stashed changes
                             imgTicket.setImageResource(R.drawable.ticket);
                             btnNext.setEnabled(true);
                         }else imgTicket.setImageResource(R.drawable.dangerous);*/

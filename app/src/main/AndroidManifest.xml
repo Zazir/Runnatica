@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_index"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".editarForaneos"></activity>
+        <activity android:name=".ListaForaneos"></activity>
+        <activity android:name=".editarForaneos" />
         <activity android:name=".RegistroMedio" />
         <activity android:name=".RegistrarForaneos" />
         <activity android:name=".AvisoPago" />
