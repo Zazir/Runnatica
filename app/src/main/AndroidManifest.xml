@@ -2,14 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.runnatica.runnatica">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -30,6 +22,9 @@
         <activity
             android:name=".ui.login.NoGPS"
             android:label="@string/title_activity_no_g_p_s" />
+        <activity
+            android:name=".Fragmentos.mapCompetencia"
+            android:label="@string/title_activity_map_competencia" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -38,9 +33,6 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <activity
-            android:name=".Fragmentos.mapCompetencia"
-            android:label="@string/title_activity_map_competencia" />
         <activity android:name=".Correo_Editado" />
         <activity
             android:name=".Verificar_CorreoNuevo"
@@ -190,17 +182,16 @@
             android:name=".registro_usuario"
             android:screenOrientation="portrait" />
         <activity android:name=".Login" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="$[applicationId].provider"
@@ -212,6 +203,11 @@
         </provider>
 
         <service
+            android:name=".services.FCM_Service"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <service
             android:name=".FetchAddressIntentService"
             android:exported="false" />
 
@@ -219,5 +215,13 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

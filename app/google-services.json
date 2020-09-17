@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "379556523368",
+    "firebase_url": "https://runnatica-87d43.firebaseio.com",
+    "project_id": "runnatica-87d43",
+    "storage_bucket": "runnatica-87d43.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379556523368:android:d867b3089de37167d73add",
+        "android_client_info": {
+          "package_name": "com.runnatica.runnatica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "379556523368-i7i4qsouq6omaes3fc3o8t0q1blr7act.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.runnatica.runnatica",
+            "certificate_hash": "3ed5676cbbb8000bedb0b251d6d6c6ab5060763d"
+          }
+        },
+        {
+          "client_id": "379556523368-7s9dififvb12r8s3i4ij0qhrlhbodi7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBadGA31yzd0g8eOLm9duRmZSswYchnB0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "379556523368-7s9dififvb12r8s3i4ij0qhrlhbodi7v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
