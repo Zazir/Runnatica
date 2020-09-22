@@ -28,8 +28,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/llEditarCorreo"
         android:text="Introduce el nuevo correo"
+        android:textColor="@android:color/background_dark"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="25sp"/>
 
     <EditText
         android:id="@+id/etCorreoNuevo"
@@ -43,9 +44,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etCorreoNuevo"
+        android:textColor="@android:color/background_dark"
         android:text="Confirma tu contraseña"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="25sp"/>
 
     <EditText
         android:id="@+id/confirmContrasena"

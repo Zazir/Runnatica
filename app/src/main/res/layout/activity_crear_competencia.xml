@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtInformacion"
-                android:layout_marginStart="10dp"
+                android:layout_centerHorizontal="true"
                 android:text="Nombre de la Competencia"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp"/>
@@ -57,8 +57,7 @@
                 android:id="@+id/etNombreCompetencia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/txtNombreCompetencia"
                 android:textColor="@android:color/background_dark" />
 
@@ -67,7 +66,7 @@
                 android:layout_width="313dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etNombreCompetencia"
-                android:layout_marginStart="10dp"
+                android:layout_centerHorizontal="true"
                 android:text="Precio de la Competencia"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp"/>
@@ -76,7 +75,7 @@
                 android:id="@+id/txtSimbol"
                 android:layout_width="wrap_content"
                 android:layout_height="58dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="25dp"
                 android:layout_below="@+id/txtPrecio"
                 android:text="$"
                 android:textColor="@android:color/background_dark"
@@ -113,7 +112,7 @@
                 android:id="@+id/tvFechaPicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/txtFechaCompetencia"
                 android:text="Seleccionar fecha"
                 android:textColor="@android:color/background_dark"
@@ -121,30 +120,29 @@
 
             <Button
                 android:id="@+id/btnSeleccionarFecha"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:padding="15dp"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
                 android:backgroundTint="#ef9a9a"
                 android:layout_below="@+id/tvFechaPicker"
                 android:drawableLeft="@drawable/calendar"
-                android:text=" Fecha"/>
+                android:text="Fecha"/>
 
             <TextView
                 android:id="@+id/tvHoraCompetencia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtFechaCompetencia"
-                android:layout_marginStart="190dp"
+                android:layout_below="@+id/btnSeleccionarFecha"
+                android:layout_centerHorizontal="true"
                 android:text="Seleccionar hora"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp" />
 
             <Button
                 android:id="@+id/btnHoraCompetencia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="190dp"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/tvHoraCompetencia"
                 android:backgroundTint="#ef9a9e"
                 android:drawableLeft="@drawable/hour"
@@ -154,7 +152,7 @@
                 android:id="@+id/txtImagenEvento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/btnSeleccionarFecha"
+                android:layout_below="@+id/btnHoraCompetencia"
                 android:layout_centerHorizontal="true"
                 android:text="Imagen del Evento"
                 android:textColor="@android:color/background_dark"
@@ -169,8 +167,8 @@
 
             <Button
                 android:id="@+id/btnImagenCompetencia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/imgCompetencia"
                 android:text="Seleccionar"/>
@@ -189,8 +187,9 @@
                 android:id="@+id/txtPais"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="Pais:"
-                android:layout_marginLeft="20dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/tvCoordenadas"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"/>
@@ -200,7 +199,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Estado:"
-                android:layout_marginLeft="20dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/txtPaisCompetencia"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"/>
@@ -210,7 +210,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ciudad:"
-                android:layout_marginLeft="20dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/txtEstadoCompetencia"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"/>
@@ -219,7 +220,8 @@
                 android:id="@+id/tvCiudadCompetencia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/txtCiudadCompetencia"
                 android:text="Ciudad"
                 android:textSize="25sp"/>
@@ -229,7 +231,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Colonia:"
-                android:layout_marginLeft="20dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/tvCiudadCompetencia"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20sp"/>
@@ -238,7 +241,7 @@
                 android:id="@+id/tvColoniaCompetencia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/txtColoniaCompetencia"
                 android:text="Colonia"
                 android:textSize="25sp"/>
@@ -247,7 +250,7 @@
                 android:id="@+id/txtPaisCompetencia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/txtPais"
                 android:text="Pais"
                 android:textSize="25sp"/>
@@ -256,7 +259,7 @@
                 android:id="@+id/txtEstadoCompetencia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/txtEstado"
                 android:text="Estado"
                 android:textSize="25sp"/>
@@ -266,7 +269,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Calle:"
-                android:layout_marginLeft="20dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/tvColoniaCompetencia"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"/>
@@ -275,15 +279,15 @@
                 android:id="@+id/tvCalleCompetencia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
                 android:layout_below="@+id/txtCalleCompetencia"
+                android:layout_centerHorizontal="true"
                 android:text="Calle"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/btnSeleccionarLugar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/txtDireccion"
                 android:text="Seleccionar inicio de la competencia"/>
@@ -318,8 +322,8 @@
 
             <Button
                 android:id="@+id/btnAvalCompetencia"
-                android:layout_width="228dp"
-                android:layout_height="35dp"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/imgAval"
                 android:text="Subir"/>
@@ -328,7 +332,8 @@
                 android:id="@+id/txtDescripcion"
                 android:layout_width="wrap_content"
                 android:layout_height="58dp"
-                android:layout_marginLeft="20dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/btnAvalCompetencia"
                 android:text="Descripcion de la Competencia"
                 android:textColor="@android:color/background_dark"

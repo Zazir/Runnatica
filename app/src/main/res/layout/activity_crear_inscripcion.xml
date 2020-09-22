@@ -71,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/barra_verde"
                     android:layout_below="@+id/txtCantidades"
+                    android:gravity="center"
                     android:text="Para Usuarios"
                     android:textColor="@android:color/background_dark"
                     android:textSize="25dp"
