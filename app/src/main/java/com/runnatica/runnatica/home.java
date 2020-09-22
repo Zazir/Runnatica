@@ -18,18 +18,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.runnatica.runnatica.adapter.MyAdapter;
 import com.runnatica.runnatica.poho.Competencias;
 import com.runnatica.runnatica.poho.Usuario;
@@ -42,6 +37,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class home extends AppCompatActivity {
     BottomNavigationView MenuUsuario;
@@ -58,6 +59,7 @@ public class home extends AppCompatActivity {
     private String dominio;
 
     private Usuario user = Usuario.getUsuarioInstance();
+    private String fcmToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,7 @@ public class home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         obtenerPreferencias();
+        fcmToken = FirebaseInstanceId.getInstance().getToken();
 
         //Enlaces de elementos por id's
         txtAdvertencia = (TextView)findViewById(R.id.tvAdvertencia);
@@ -78,6 +81,7 @@ public class home extends AppCompatActivity {
         //Toast.makeText(this, user.getId()+"", Toast.LENGTH_SHORT).show();
         Localizacion();
         guardarPreferencias();
+        saveFCMToken(dominio + "notificaciones.php?id_usuario="+ user.getId() + "&token_fcm=" + fcmToken);
         CargarCompetencias(dominio + "obtenerCompetencias.php?estado="+Localizacion);
 
         //Inicializar arreglo de competencias
@@ -276,6 +280,21 @@ public class home extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
+    private void saveFCMToken(String URL) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
+            }
+        });
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
 
     private void launchCompetenciaView(String id) {
         Intent intent = new Intent(home.this, carrera_vista1.class);
