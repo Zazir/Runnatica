@@ -36,6 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre y Apellido"
+                android:layout_centerHorizontal="true"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
                 android:textColor="@android:color/background_dark"
@@ -54,6 +55,7 @@
                 android:id="@+id/txtSexo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/etNombre"
                 android:layout_marginStart="15dp"
                 android:text="Sexo"
@@ -66,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtSexo"
                 android:background="@color/grisBoton"
-                android:layout_marginStart="30dp"
+                android:layout_centerHorizontal="true"
                 android:text="Mujer"
                 android:drawableLeft="@drawable/mujer"
                 android:paddingHorizontal="10dp"
@@ -77,11 +79,10 @@
                 android:id="@+id/btnHombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtSexo"
+                android:layout_below="@+id/btnMujer"
+                android:layout_centerHorizontal="true"
                 android:background="@color/grisBoton"
-                android:layout_toEndOf="@+id/btnMujer"
-                android:layout_marginStart="15dp"
-                android:paddingHorizontal="10dp"
+                android:layout_marginTop="10dp"
                 android:text=" Hombre"
                 android:drawableLeft="@drawable/hombre"
                 android:textColor="@android:color/background_dark"
@@ -91,6 +92,7 @@
                 android:id="@+id/txtFechaN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/btnHombre"
                 android:layout_marginStart="15dp"
                 android:text="Fecha de Nacimiento"
@@ -99,22 +101,23 @@
 
             <Button
                 android:id="@+id/btnSeleccionNacimiento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="170dp"
+                android:layout_height="60dp"
                 android:layout_below="@+id/txtFechaN"
-                android:background="@color/grisBoton"
                 android:layout_marginStart="30dp"
-                android:text=" Seleccionar Fecha"
+                android:layout_centerHorizontal="true"
+                android:background="@color/grisBoton"
                 android:drawableLeft="@drawable/calendar"
                 android:paddingHorizontal="15dp"
+                android:text=" Seleccionar Fecha"
                 android:textColor="@android:color/background_dark"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tvResidencia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/btnSeleccionNacimiento"
+                android:layout_below="@+id/tvMostrarFecha"
                 android:text="Lugar de Residencia"
                 android:layout_centerHorizontal="true"
                 android:textColor="@android:color/background_dark"
@@ -126,6 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvResidencia"
                 android:text="Ciudad"
+                android:layout_centerHorizontal="true"
                 android:layout_marginStart="15dp"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
@@ -144,16 +148,18 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etCiudad"
                 android:text="Estado"
+                android:layout_centerHorizontal="true"
                 android:layout_marginStart="15dp"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
 
             <Spinner
                 android:id="@+id/spEstado"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_width="271dp"
+                android:layout_height="54dp"
                 android:layout_below="@+id/tvEstado"
-                android:layout_marginStart="30dp"/>
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="30dp" />
 
             <TextView
                 android:id="@+id/tvPais"
@@ -161,16 +167,18 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/spEstado"
                 android:text="Pais"
+                android:layout_centerHorizontal="true"
                 android:layout_marginStart="15dp"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
 
             <Spinner
                 android:id="@+id/spPais"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="30dp"
-                android:layout_below="@+id/tvPais" />
+                android:layout_width="271dp"
+                android:layout_height="54dp"
+                android:layout_below="@+id/tvPais"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="30dp" />
 
             <TextView
                 android:id="@+id/tvFoto"
@@ -178,6 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/spPais"
                 android:text="Imagen de perfil"
+                android:layout_centerHorizontal="true"
                 android:layout_marginStart="15dp"
                 android:textColor="@android:color/background_dark"
                 android:textSize="30sp" />
@@ -208,9 +217,9 @@
                 android:id="@+id/tvMostrarFecha"
                 android:layout_width="146dp"
                 android:layout_height="48dp"
-                android:layout_below="@+id/txtFechaN"
-                android:layout_marginLeft="200dp"
+                android:layout_below="@+id/btnSeleccionNacimiento"
                 android:textColor="@android:color/background_dark"
+                android:layout_centerHorizontal="true"
                 android:textSize="20dp"></TextView>
 
             <Button
@@ -229,8 +238,10 @@
                 android:layout_width="310dp"
                 android:layout_height="34dp"
                 android:layout_marginStart="15dp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/ivFotoUsuarioRegistro"
                 android:text="Terminos y Condiciones:"
+                android:gravity="center"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
 

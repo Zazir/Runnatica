@@ -45,7 +45,7 @@ import java.util.Map;
 
 public class Editar_perfil extends AppCompatActivity {
 
-    Button MujerEditar, HombreEditar, btnFotoEditar, EditarContrasena, btnGuardar, btnFechaNacimiento, btnEditarCorreo;
+    Button MujerEditar, HombreEditar, btnFotoEditar, EditarContrasena, btnGuardar, btnFechaNacimiento, btnEditarCorreo, btnCancelar;
     EditText CiudadEditar, EstadoEditar, PaisEditar, NombreEditar;
     TextView MostrarFecha;
     ImageView img;
@@ -88,6 +88,7 @@ public class Editar_perfil extends AppCompatActivity {
         //img = (ImageView)findViewById(R.id.imgFotoPerfil);
         MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         FotoUsuarioNueva = (ImageView)findViewById(R.id.ivFotoUsuarioNueva);
+        btnCancelar = (Button)findViewById(R.id.btnCancelar);
 
         getLastViewData();
 
@@ -169,6 +170,16 @@ public class Editar_perfil extends AppCompatActivity {
 
             }
         });
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Atras();
+                Toast.makeText(getApplicationContext(), "Edicion Calcelada", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         MenuUsuario.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

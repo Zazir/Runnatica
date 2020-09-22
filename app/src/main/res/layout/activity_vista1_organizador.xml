@@ -161,30 +161,30 @@
 
             <Button
                 android:id="@+id/btnListaInscritos"
-                android:layout_width="331dp"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/llIncripcionesForaneos"
                 android:text="Lista de Inscritos"></Button>
 
             <Button
                 android:id="@+id/btnEditarCompetencia"
-                android:layout_width="331dp"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/btnListaInscritos"
                 android:text="Editar Competencia"></Button>
             <Button
                 android:id="@+id/btnPosponerEliminarCompetencia"
-                android:layout_width="331dp"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/btnEditarCompetencia"
                 android:text="Posponer/Eliminar Competencia"></Button>
             <Button
                 android:id="@+id/btnFotosResultados"
-                android:layout_width="331dp"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/btnPosponerEliminarCompetencia"
                 android:text="Subir Fotos de Resultados"></Button>

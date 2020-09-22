@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="10dp"
-        card_view:cardBackgroundColor="#B86553"
+        card_view:cardBackgroundColor="#00b034"
         card_view:cardElevation="5dp"
         card_view:cardUseCompatPadding="true">
 
@@ -27,7 +27,7 @@
                     android:layout_marginEnd="5dp"
                     android:text="Precio"
                     android:textSize="15sp"
-                    android:textColor="@color/cardview_light_background"/>
+                    android:textColor="@android:color/background_dark"/>
 
                 <TextView
                     android:id="@+id/tvNombreForaneos"
@@ -37,7 +37,7 @@
                     android:textAlignment="center"
                     android:text="Nombre Fornaeo"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/cardview_light_background"/>
+                    android:textColor="@android:color/background_dark"/>
 
                 <TextView
                     android:id="@+id/tvCorreoForaneo"
@@ -48,7 +48,7 @@
                     android:layout_centerHorizontal="true"
                     android:textAlignment="center"
                     android:text="Correo"
-                    android:textColor="@color/cardview_light_background"/>
+                    android:textColor="@android:color/background_dark"/>
 
         </RelativeLayout>
 

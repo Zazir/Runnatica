@@ -7,6 +7,7 @@
     tools:context=".Centrodeayuda">
 
     <LinearLayout
+        android:id="@+id/arriba1"
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:background="@drawable/barra_verde">
@@ -28,45 +29,45 @@
 
 
     <TextView
+        android:id="@+id/txtTelefonos"
         android:layout_width="238dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="81dp"
-        android:layout_marginEnd="162dp"
+        android:layout_below="@+id/arriba1"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:text="Telefonos:"
         android:textColor="@android:color/background_dark"
         android:textSize="30dp"></TextView>
 
     <TextView
+        android:id="@+id/txtTelefonos1"
         android:layout_width="181dp"
         android:layout_height="37dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="193dp"
+        android:layout_below="@+id/txtTelefonos"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:text="(33)26738162"
         android:textColor="@android:color/background_dark"
         android:textSize="25dp"></TextView>
 
     <TextView
+        android:id="@+id/txtTelefonos2"
         android:layout_width="181dp"
         android:layout_height="37dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="164dp"
-        android:layout_marginEnd="191dp"
+        android:layout_below="@+id/txtTelefonos1"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:text="(33)33427679"
         android:textColor="@android:color/background_dark"
         android:textSize="25dp"></TextView>
 
     <TextView
+        android:id="@+id/txtMensaje"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="233dp"
-        android:layout_marginEnd="13dp"
+       android:layout_below="@+id/txtTelefonos2"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:text="Mandar Mensaje:"
         android:textColor="@android:color/background_dark"
         android:textSize="25dp"></TextView>
@@ -76,8 +77,8 @@
         android:layout_width="376dp"
         android:layout_height="115dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="272dp"
-        android:layout_marginEnd="24dp"></EditText>
+        android:layout_below="@+id/txtMensaje"
+        ></EditText>
 
     <Button
         android:id="@+id/btn_submit"
@@ -92,10 +93,8 @@
     <TextView
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="463dp"
-        android:layout_marginEnd="0dp"
+        android:layout_below="@+id/btn_submit"
+        android:gravity="center"
         android:text="La respuesta se mandara a su correo en 24 a 72 horas"
         android:textColor="@android:color/background_dark"
         android:textSize="25dp"></TextView>

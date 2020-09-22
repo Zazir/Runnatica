@@ -64,20 +64,21 @@
 
     <Button
         android:id="@+id/btnReenviar"
-        android:layout_width="248dp"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:layout_below="@+id/txtCorreo"
-        android:layout_marginLeft="55dp"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:text="Reenviar Codigo"
         ></Button>
     <Button
         android:id="@+id/btnVerificar"
-        android:layout_width="248dp"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/btnReenviar"
-        android:layout_marginLeft="55dp"
         android:gravity="center"
         android:text="Siguiente"
         ></Button>

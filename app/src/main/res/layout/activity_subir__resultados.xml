@@ -7,13 +7,14 @@
     tools:context=".Subir_Resultados">
 
     <LinearLayout
+        android:id="@+id/tvResultados"
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:background="@drawable/barra_verde"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tvNombreCompetencia"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -38,18 +39,18 @@
                 android:id="@+id/kk"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="46dp"
-                android:layout_marginEnd="-2dp"
+                android:layout_below="@+id/tvResultados"
                 android:text="Subir Imagenes de Resultados:"
                 android:textColor="@android:color/background_dark"
-                android:textSize="35dp"></TextView>
+                android:gravity="center"
+                android:textSize="35dp"
+                android:layout_marginTop="25dp"
+                tools:ignore="NotSibling"></TextView>
 
             <Button
                 android:id="@+id/btnSeleccioarResultados"
-                android:layout_width="164dp"
-                android:layout_height="37dp"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:layout_below="@+id/kk"
                 android:layout_centerHorizontal="true"
                 android:text="Seleccionar"
@@ -61,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/btnSeleccioarResultados"
                 android:text="Foto con la siguiente información:"
+                android:gravity="center"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20dp"/>
             <TextView
@@ -69,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Sugerencias"
                 android:text="- Nombre de Competidores"
+                android:gravity="center"
                 android:textSize="20dp"
                 android:textColor="@android:color/background_dark"/>
 
@@ -78,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Sugerencias2"
                 android:text="- Lugar de cada competidor"
+                android:gravity="center"
                 android:textSize="20dp"
                 android:textColor="@android:color/background_dark"/>
 
@@ -88,12 +92,14 @@
                 android:layout_below="@id/Sugerencias3"
                 android:text="- Tiempo hecho en la Ruta"
                 android:textSize="20dp"
+                android:gravity="center"
                 android:textColor="@android:color/background_dark"/>
 
             <Button
                 android:id="@+id/btnSubirResultados"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:layout_below="@+id/Sugerencias4"
                 android:text="Subir Resultados"
                 android:textColor="@android:color/background_dark"/>

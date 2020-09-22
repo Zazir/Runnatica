@@ -37,17 +37,19 @@
 
             <Button
                 android:id="@+id/btnEditarCorreo"
-                android:layout_width="215dp"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
                 android:text="Editar Correo"
                 android:textColor="@android:color/background_dark"
                 android:textSize="15dp"/>
 
             <Button
                 android:id="@+id/btnEditarContrasena"
-                android:layout_width="215dp"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
-                android:layout_height="wrap_content"
                 android:layout_below="@+id/btnEditarCorreo"
                 android:text="Editar Contraseña"
                 android:textColor="@android:color/background_dark"
@@ -56,8 +58,9 @@
                 android:id="@+id/txtFechaN"
                 android:layout_width="346dp"
                 android:layout_height="39dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/btnHombreEditar"
-                android:layout_marginEnd="41dp"
                 android:text="Fecha de Nacimiento:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
@@ -65,28 +68,31 @@
 
             <Button
                 android:id="@+id/btnSeleccionNacimiento"
-                android:layout_width="166dp"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="15sp"
                 android:layout_below="@+id/txtFechaN"
-                android:layout_marginEnd="191dp"
                 android:background="@color/grisBoton"
                 android:text="Seleccionar Fecha"
-                android:textColor="@android:color/background_dark"
-                android:textSize="15sp"></Button>
+                android:drawableLeft="@drawable/calendar"
+                android:textColor="@android:color/background_dark"></Button>
 
             <TextView
                 android:id="@+id/tvMostrarFechaEditar"
                 android:layout_width="146dp"
                 android:layout_height="48dp"
-                android:layout_below="@+id/txtFechaN"
-                android:layout_marginLeft="200dp"
+                android:layout_below="@+id/btnSeleccionNacimiento"
                 android:textColor="@android:color/background_dark"
+                android:layout_centerHorizontal="true"
                 android:textSize="20dp"></TextView>
 
             <TextView
                 android:id="@+id/Ciudad"
                 android:layout_width="117dp"
                 android:layout_height="33dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/tvResidencia"
                 android:layout_marginEnd="243dp"
                 android:text="Ciudad:"
@@ -97,6 +103,8 @@
                 android:id="@+id/tvEstado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/etCiudadEditar"
                 android:text="Estado:"
                 android:textColor="@android:color/background_dark"
@@ -106,6 +114,8 @@
                 android:id="@+id/tvPais"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/etEstadoEditar"
                 android:text="Pais:"
                 android:textColor="@android:color/background_dark"
@@ -116,6 +126,8 @@
                 android:id="@+id/etCiudadEditar"
                 android:layout_width="241dp"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:inputType="text"
                 android:layout_below="@+id/Ciudad" />
 
@@ -123,6 +135,8 @@
                 android:id="@+id/etEstadoEditar"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/tvEstado"
                 android:inputType="text"
                 />
@@ -132,50 +146,67 @@
                 android:layout_width="241dp"
                 android:layout_height="wrap_content"
                 android:inputType="text"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/tvPais" />
 
             <Button
                 android:id="@+id/btnMujerEditar"
-                android:layout_width="125dp"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:layout_below="@+id/txtSexo"
-                android:layout_marginLeft="110dp"
                 android:background="@color/grisBoton"
+                android:layout_centerHorizontal="true"
                 android:text="Mujer"
+                android:drawableLeft="@drawable/mujer"
                 android:textColor="@android:color/background_dark"
-                android:textSize="20sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/btnHombreEditar"
-                android:layout_width="125dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtSexo"
-                android:layout_marginEnd="263dp"
-                android:background="@color/grisBoton"
-                android:text="Hombre"
-                android:textColor="@android:color/background_dark"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/btnGuardar"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/ivFotoUsuarioNueva"
-                android:layout_marginLeft="45dp"
+                android:textSize="25sp"
+                android:layout_below="@+id/btnMujerEditar"
+                android:layout_marginTop="10dp"
                 android:background="@color/grisBoton"
-                android:layout_marginTop="20dp"
+                android:text="Hombre"
+                android:drawableLeft="@drawable/mujer"
+                android:textColor="@android:color/background_dark"/>
+
+            <Button
+                android:id="@+id/btnGuardar"
+                android:layout_width="184dp"
+                android:layout_height="49dp"
+                android:layout_below="@+id/ivFotoUsuarioNueva"
+                android:layout_centerHorizontal="true"
+                android:background="@color/grisBoton"
                 android:text="Guardar"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20sp" />
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="184dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/btnGuardar"
+                android:layout_centerHorizontal="true"
+                android:background="@color/px_color_red_error"
+                android:text="Cancelar"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp" />
+
 
             <Button
                 android:id="@+id/btnFotoEditar"
-                android:layout_width="159dp"
-                android:layout_height="31dp"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:layout_below="@+id/tvFoto"
                 android:background="@color/grisBoton"
                 android:text="Seleccionar"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:textColor="@android:color/background_dark"
                 android:textSize="14sp" />
 
@@ -183,6 +214,8 @@
                 android:id="@+id/txtnombre"
                 android:layout_width="346dp"
                 android:layout_height="39dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/btnEditarContrasena"
                 android:text="Nombre y Apellido:"
                 android:textColor="@android:color/background_dark"
@@ -193,18 +226,21 @@
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvFoto"
-                android:layout_marginLeft="170dp"
+                android:layout_below="@+id/btnFotoEditar"
                 android:text="Archivo"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:textColor="@android:color/background_dark"
-                android:textSize="18sp" />
+                android:textSize="25sp" />
 
 
             <TextView
                 android:id="@+id/tvResidencia"
                 android:layout_width="346dp"
                 android:layout_height="39dp"
-                android:layout_below="@+id/btnSeleccionNacimiento"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_below="@+id/tvMostrarFechaEditar"
                 android:text="Lugar de Residencia:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
@@ -215,6 +251,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etPaisEditar"
                 android:text="Foto:"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
 
@@ -224,6 +262,8 @@
                 android:layout_height="39dp"
                 android:layout_below="@+id/etNombreEditar"
                 android:layout_marginEnd="41dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:text="Sexo:"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
@@ -232,6 +272,8 @@
                 android:id="@+id/etNombreEditar"
                 android:layout_width="355dp"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/txtnombre"
                 android:layout_marginEnd="37dp"
                 android:inputType="text"
@@ -241,7 +283,7 @@
                 android:id="@+id/ivFotoUsuarioNueva"
                 android:layout_width="match_parent"
                 android:layout_height="179dp"
-                android:layout_below="@+id/btnFotoEditar"></ImageView>
+                android:layout_below="@+id/textView9"></ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
