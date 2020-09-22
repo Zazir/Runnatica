@@ -3,14 +3,16 @@ package com.runnatica.runnatica;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class informacion_inscrito extends AppCompatActivity {
     private Button Atras;
@@ -24,8 +26,8 @@ public class informacion_inscrito extends AppCompatActivity {
         setContentView(R.layout.activity_informacion_inscrito);
         txtNombre = (TextView)findViewById(R.id.tvNombreinscrito);
         txtCorreo = (TextView)findViewById(R.id.tvCorreoInscrito);
-        txtF_inscrito = (TextView)findViewById(R.id.tvFechaInscripcion);
-        txtF_nacimiento = (TextView)findViewById(R.id.tvNacimientoUsuario);
+        txtF_inscrito = (TextView)findViewById(R.id.tvFechaInscripcion2);
+        txtF_nacimiento = (TextView)findViewById(R.id.tvNacimientoUsuario2);
 
         MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
 
