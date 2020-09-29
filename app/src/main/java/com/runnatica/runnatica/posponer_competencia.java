@@ -34,7 +34,7 @@ import java.util.Calendar;
 public class posponer_competencia extends AppCompatActivity {
 
     private Button btnDate, btnPosponer, btnCancelar, btnHora;
-    private TextView txtFecha, txtFechaPosponer;
+    private TextView txtFecha, txtFechaPosponer, txtHoraPosponer;
 
     private String id_competencia;
 
@@ -51,6 +51,7 @@ public class posponer_competencia extends AppCompatActivity {
     private TimePickerDialog timePicker;
     private String dominio;
     private String  hora="";
+    private int DiaM, MesM, AnoM, HoraM, MinutosM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +63,9 @@ public class posponer_competencia extends AppCompatActivity {
         btnDate = (Button)findViewById(R.id.btnPosponerFecha);
         btnPosponer = (Button)findViewById(R.id.btnActualizar);
         btnCancelar = (Button)findViewById(R.id.btnActualizarC);
-        btnHora = (Button)findViewById(R.id.btnPosponerHora);
         txtFecha = (TextView)findViewById(R.id.tvFechaActual);
         txtFechaPosponer = (TextView)findViewById(R.id.tvFechaPosponer);
+        txtHoraPosponer = (TextView)findViewById(R.id.tvHoraPosponer);
 
         MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
 
@@ -101,42 +102,23 @@ public class posponer_competencia extends AppCompatActivity {
         btnDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                picker = new DatePickerDialog(posponer_competencia.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        fecha = year + "-" + (month+1) + "-" + dayOfMonth;
-                        txtFechaPosponer.setText("Se pospondrá al " + dayOfMonth + "-" + (month+1) + "-" + year);
-                    }
-                }, ano, mes, dia);
-
-                picker.getDatePicker().setMinDate(System.currentTimeMillis() + 100);
-                picker.show();
-            }
-        });
-        btnHora.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendar = Calendar.getInstance();
-                int horas = calendar.get(Calendar.HOUR_OF_DAY);
-                int minuto = calendar.get(Calendar.MINUTE);
-
-                timePicker = new TimePickerDialog(posponer_competencia.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        hora = hourOfDay + ":" + minute;
-                    }
-                }, horas, minuto, true);
-
-
-                timePicker.show();
+                Hora();
+                Fecha();
             }
         });
 
         btnPosponer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchPosponer();
+                try {
+                    if (fecha.equals("") || hora.equals("")) {
+                        btnDate.setError("No seha seleccionado una fecha correcta");
+                    } else {
+                        launchPosponer();
+                    }
+                }catch(Exception e){
+                    Toast.makeText(getApplicationContext(), "Error en la fecha, Intentalo de nuevo", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -215,6 +197,7 @@ public class posponer_competencia extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                     txtFechaPosponer.setText("Posponer competencia");
                     fecha = "";
+                    hora = "";
             }
         });
 
@@ -233,6 +216,8 @@ public class posponer_competencia extends AppCompatActivity {
                         "id_competencia=" + id_competencia +
                         "&fecha_posponer=" + fecha +
                         "&operacion=3");
+                Salir();
+                Toast.makeText(getApplicationContext(), "La carrera se ha eliminado satisfactoriamente", Toast.LENGTH_SHORT).show();
             }
         });
         alerta.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -240,6 +225,7 @@ public class posponer_competencia extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 txtFechaPosponer.setText("Posponer competencia");
                 fecha = "";
+                hora= "";
             }
         });
 
@@ -268,6 +254,36 @@ public class posponer_competencia extends AppCompatActivity {
                     }
                 });
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void Fecha(){
+        picker = new DatePickerDialog(posponer_competencia.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                fecha = year + "-" + (month+1) + "-" + dayOfMonth;
+                txtFechaPosponer.setText("Se pospondrá al: " + dayOfMonth + "-" + (month+1) + "-" + year);
+            }
+        }, ano, mes, dia);
+
+        picker.getDatePicker().setMinDate(System.currentTimeMillis() + 100);
+        picker.show();
+    }
+    private void Hora(){
+
+        calendar = Calendar.getInstance();
+        int horas = calendar.get(Calendar.HOUR_OF_DAY);
+        int minuto = calendar.get(Calendar.MINUTE);
+
+        timePicker = new TimePickerDialog(posponer_competencia.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                hora = hourOfDay + ":" + minute;
+                txtHoraPosponer.setText("A las " + hora);
+            }
+        }, horas, minuto, true);
+
+
+        timePicker.show();
     }
 
     private void homeOrganizador(){
