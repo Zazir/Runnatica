@@ -26,8 +26,8 @@ public class informacion_inscrito extends AppCompatActivity {
         setContentView(R.layout.activity_informacion_inscrito);
         txtNombre = (TextView)findViewById(R.id.tvNombreinscrito);
         txtCorreo = (TextView)findViewById(R.id.tvCorreoInscrito);
-        //txtF_inscrito = (TextView)findViewById(R.id.tvFechaInscripcion);
-        //txtF_nacimiento = (TextView)findViewById(R.id.tvNacimientoUsuario);
+        txtF_inscrito = (TextView)findViewById(R.id.tvFechaInscripcion2);
+        txtF_nacimiento = (TextView)findViewById(R.id.tvNacimientoUsuario2);
 
         MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
 
