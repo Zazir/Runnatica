@@ -10,20 +10,15 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-<<<<<<< HEAD
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-=======
->>>>>>> RamaZ_save
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class informacion_inscrito extends AppCompatActivity {
     private TextView txtNombre, txtCorreo, txtF_inscrito, txtF_nacimiento;
     BottomNavigationView MenuOrganizador;

@@ -1,7 +1,7 @@
 package com.runnatica.runnatica;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -9,7 +9,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.runnatica.runnatica.adapter.inscripcionesUsuarioAdapter;
+import com.runnatica.runnatica.adapter.MyAdapter;
+import com.runnatica.runnatica.adapter.inscripcionesAdapter;
 import com.runnatica.runnatica.poho.Inscripciones;
 
 import org.json.JSONArray;
@@ -29,7 +30,7 @@ public class EditarCategoria1 extends AppCompatActivity {
     private String dominio, id_competencia;
 
     private List<Inscripciones> inscripcionesList = new ArrayList<>();
-    private inscripcionesUsuarioAdapter inscripcionesAdapter;
+    private inscripcionesAdapter inscripcionesAdaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class EditarCategoria1 extends AppCompatActivity {
 
                                 //Añadir valores a los correspondientes textview
                                 inscripcionesList.add(new Inscripciones(
+                                        objetoinscripcion.getInt("id_inscripcion"),
                                         objetoinscripcion.getInt("id_competencia"),
                                         objetoinscripcion.getString("nombre_inscripcion"),
                                         objetoinscripcion.getInt("cantidad_usuarios"),
@@ -75,15 +77,17 @@ public class EditarCategoria1 extends AppCompatActivity {
                             }
 
                             //Creamos instancia del adapter
-                            inscripcionesAdapter = new inscripcionesUsuarioAdapter(EditarCategoria1.this, inscripcionesList);
-                            /*if (inscripcionesAdapter.puedeAvanzar) {
-                                btnNext.setEnabled(inscripcionesAdapter.puedeAvanzar);
-                            }*/
-                            rvInscripciones.setAdapter(inscripcionesAdapter);
+                            inscripcionesAdaptador= new inscripcionesAdapter(EditarCategoria1.this, inscripcionesList, new MyAdapter.OnItemClickListener() {
+                                @Override
+                                public void OnItemClick(int position) {
+                                    launchCategoria(inscripcionesList.get(position).getId_categoria()+"");
+                                }
+                            });
+
+                            rvInscripciones.setAdapter(inscripcionesAdaptador);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Log.i("Puede_avanzar1", inscripcionesAdapter.tieneTicket()+ "");
                     }
                 },
                 new Response.ErrorListener() {
@@ -93,5 +97,11 @@ public class EditarCategoria1 extends AppCompatActivity {
                     }
                 });
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void launchCategoria(String id_cat) {
+        Intent intent = new Intent(EditarCategoria1.this, EditarCategorias2.class);
+        intent.putExtra("ID_CAT", id_cat);
+        startActivity(intent);
     }
 }

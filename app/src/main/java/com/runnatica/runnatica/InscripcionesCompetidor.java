@@ -9,10 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,6 +23,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static com.runnatica.runnatica.carrera_vista1.FECHA_COMPETENCIA;
 import static com.runnatica.runnatica.carrera_vista1.ID_COMPETENCIA;
@@ -115,6 +115,7 @@ public class InscripcionesCompetidor extends AppCompatActivity {
 
                                 //Añadir valores a los correspondientes textview
                                 inscripcionesList.add(new Inscripciones(
+                                        objetoinscripcion.getInt("id_inscripcion"),
                                         objetoinscripcion.getInt("id_competencia"),
                                         objetoinscripcion.getString("nombre_inscripcion"),
                                         objetoinscripcion.getInt("cantidad_usuarios"),
