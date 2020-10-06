@@ -21,6 +21,13 @@
             android:textSize="30dp"/>
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvInscripciones"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/llEditarCompetencia"
+        android:layout_above="@+id/MenuOrganizador"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/MenuOrganizador"
         android:layout_width="match_parent"
