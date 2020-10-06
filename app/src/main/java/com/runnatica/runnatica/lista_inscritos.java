@@ -3,20 +3,21 @@ package com.runnatica.runnatica;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.adapter.inscritosAdapter;
 import com.runnatica.runnatica.poho.UsuariosInscritos;
 
@@ -48,15 +49,16 @@ public class lista_inscritos extends AppCompatActivity {
         rvInscritos.setLayoutManager(new LinearLayoutManager(this));
         MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
 
+        Menu menu = MenuOrganizador.getMenu();
+        MenuItem menuItem= menu.getItem(0);
+        menuItem.setChecked(true);
+
         dominio = getString(R.string.ip);
 
         usuariosInscritosList = new ArrayList<>();
 
         getLastViewData();
         cargarUsuariosInscritos(dominio + "obtenerUsuariosInscritos.php?id_competencia="+id_competencia);
-        Menu menu = MenuOrganizador.getMenu();
-        MenuItem menuItem= menu.getItem(3);
-        menuItem.setChecked(true);
 
         MenuOrganizador.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -79,8 +81,6 @@ public class lista_inscritos extends AppCompatActivity {
                 return true;
             }
         });
-
-
     }
 
     private void cargarUsuariosInscritos(String URL) {

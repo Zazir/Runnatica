@@ -37,7 +37,6 @@ public class RegistroMedio extends AppCompatActivity {
         VerificarContrasena = (EditText)findViewById(R.id.etVerificarContrasena);
         Siguiente = (Button)findViewById(R.id.btnSiguiente);
         getLastViewData();
-        Toast.makeText(getApplicationContext(), Foto, Toast.LENGTH_SHORT).show();
 
         etCorreo.setText(Correo);
         etCorreo.setEnabled(false);

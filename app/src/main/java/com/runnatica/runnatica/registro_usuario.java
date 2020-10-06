@@ -24,6 +24,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -40,9 +43,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import static com.runnatica.runnatica.Login.CORREO_SESSION;
 import static com.runnatica.runnatica.Login.ID_USUARIO_SESSION;
@@ -199,7 +199,7 @@ public class registro_usuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 genero = "Mujer";
-                Toast.makeText(getApplicationContext(), "Eres una " + genero + " muy fit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Eres una " + genero + " muy Atletica", Toast.LENGTH_SHORT).show();
                 Hombre.setBackgroundColor(Color.GRAY);
                 Mujer.setBackgroundColor(Color.RED);
             }

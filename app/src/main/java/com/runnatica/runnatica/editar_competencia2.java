@@ -10,11 +10,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -22,20 +27,19 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 public class editar_competencia2 extends AppCompatActivity {
 
-    EditText EditarNombre, EditarDescripcion;
-    Button SeleccionarFoto, Siguiente;
+    EditText EditarNombre, EditarDescripcion, EditarPrecio;
+    Button SeleccionarFoto, Siguiente, EditarCategoria;
     private ImageView imgCompetencia;
+    BottomNavigationView MenuOrganizador;
 
     private String path, dominio, id_competencia;
     private Bitmap bitmap;
@@ -44,20 +48,34 @@ public class editar_competencia2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_competencia2);
+        MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
 
         EditarNombre = (EditText)findViewById(R.id.etNombreCompetencia);
         EditarDescripcion = (EditText)findViewById(R.id.etEditarDescripcion);
+        EditarPrecio = (EditText)findViewById(R.id.etEditarPrecio);
         SeleccionarFoto = (Button)findViewById(R.id.btnImagenCompetencia);
         Siguiente = (Button)findViewById(R.id.btnGuardarEditar);
         imgCompetencia = (ImageView)findViewById(R.id.imgCompetencia);
+        EditarCategoria = (Button)findViewById(R.id.btnEditarCategoria);
 
         dominio = getString(R.string.ip);
         getLastViewData();
+
+        Menu menu = MenuOrganizador.getMenu();
+        MenuItem menuItem= menu.getItem(0);
+        menuItem.setChecked(true);
 
         SeleccionarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CargarImagen();
+            }
+        });
+
+        EditarCategoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditarCategoria();
             }
         });
 
@@ -86,6 +104,24 @@ public class editar_competencia2 extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 ActualizarCompetencia(dominio + "actualizarCompetencia.php?" +
                         "nombre_competencia=" + EditarNombre.getText().toString().replaceAll(" ", "%20") +
+                        "&id_competencia=" + id_competencia);
+            }
+        });
+        EditarPrecio.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ActualizarCompetencia(dominio + "actualizarCompetencia.php?" +
+                        "Precio=" + EditarPrecio.getText().toString().replaceAll(" ", "%20") +
                         "&id_competencia=" + id_competencia);
             }
         });
@@ -222,5 +258,9 @@ public class editar_competencia2 extends AppCompatActivity {
 
 
         return siguiente;
+    }
+    private void EditarCategoria(){
+        Intent next = new Intent(this, EditarCategoria1.class);
+        startActivity(next);
     }
 }

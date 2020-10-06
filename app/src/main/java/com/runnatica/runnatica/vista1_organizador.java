@@ -31,7 +31,7 @@ public class vista1_organizador extends AppCompatActivity {
     BarChart graficaBarras;
     List<String> ListaFechas;
     Button ListaInscritos, FotosResultados, btnEditarCompetencia, PosponerEliminarCompetencia;
-    TextView txtVendidasUsuarios, txtTotalUsuarios, txtVendidosForaneos, txtTotalForaneos, txtIngresoTotal;
+    TextView txtVendidasUsuarios, txtTotalUsuarios, txtVendidosForaneos, txtTotalForaneos, txtIngresoTotal, txtNombreCompetencia;
     BottomNavigationView MenuOrganizador;
 
 
@@ -46,6 +46,7 @@ public class vista1_organizador extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista1_organizador);
 
+        txtNombreCompetencia = (TextView)findViewById(R.id.tvNombreCompetencia);
         ListaInscritos = (Button)findViewById(R.id.btnListaInscritos);
         FotosResultados = (Button)findViewById(R.id.btnFotosResultados);
         txtTotalUsuarios = (TextView)findViewById(R.id.tvTotalInscripciones);
@@ -131,7 +132,7 @@ public class vista1_organizador extends AppCompatActivity {
         }else {
             FotosResultados.setEnabled(flag);
         }
-
+        ConsultarNombre();
         consultarTotalInscripciones();
         consultarInscritos();
     }
@@ -237,8 +238,8 @@ public class vista1_organizador extends AppCompatActivity {
                         try {
                             vendidosForaneo = Integer.parseInt(response);
                         }catch (Exception e) {}
-                        int TotalGanancia = (precio * vendidosForaneo) + (precio * vendidosUsuario);
-                        txtIngresoTotal.setText(String.valueOf("$"+TotalGanancia+ " MXN"));
+                        int TotalGanancia = (vendidosUsuario + vendidosForaneo);
+                        txtIngresoTotal.setText(String.valueOf(TotalGanancia+ " registrados"));
                     }
                 },
                 new Response.ErrorListener() {
@@ -255,6 +256,7 @@ public class vista1_organizador extends AppCompatActivity {
         request = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override
+
                     public void onResponse(String response) {
                         try {
                             JSONArray res = new JSONArray(response);
@@ -277,12 +279,33 @@ public class vista1_organizador extends AppCompatActivity {
                 });
         Volley.newRequestQueue(this).add(request);
     }
+    private void ConsultarNombre(){
+        String URL = dominio + "obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=4";
+        request = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+
+                    public void onResponse(String response) {
+                        txtNombreCompetencia.setText(response);
+
+                        //txtTotalUsuarios.setText();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(vista1_organizador.this, "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(request);
+    }
 
     private void ListaInscritos(){
         Intent next = new Intent(this, lista_inscritos.class);
         next.putExtra("id_competencia", id_competencia);
         startActivity(next);
     }
+
 
     void FotosResultados(){
         Intent next = new Intent(this, Subir_Resultados.class);

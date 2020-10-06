@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditarCategorias2">
+
+    <LinearLayout
+        android:id="@+id/kkto"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="@drawable/barra_verde">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Editar Categorias"
+            android:textColor="@android:color/background_light"
+            android:textSize="30dp"></TextView>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kkto"
+        android:layout_above="@+id/bottomNavigation"
+        android:layout_marginBottom="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/txtNombreCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_centerHorizontal="true"
+                android:text="Nombre de la Categoria"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30dp"/>
+
+            <EditText
+                android:id="@+id/etNombreInscripcion"
+                android:layout_width="301dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtNombreCategoria"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/background_dark"/>
+
+            <RelativeLayout
+                android:id="@+id/llCantidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etNombreInscripcion"
+                android:background="@drawable/btn_desing1"
+                >
+                <TextView
+                    android:id="@+id/txtCantidades"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="Cantidad de Inscripciones"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="30dp" />
+                <TextView
+                    android:id="@+id/ParaUsuarios"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/barra_verde"
+                    android:layout_below="@+id/txtCantidades"
+                    android:gravity="center"
+                    android:text="Para Usuarios"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="25dp"
+                    ></TextView>
+
+                <TextView
+                    android:id="@+id/txtUsuariosCompetidores"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ParaUsuarios"
+                    android:text="Competidores:"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="25dp" />
+
+                <EditText
+                    android:id="@+id/etCantidadNormal"
+                    android:layout_width="154dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txtUsuariosCompetidores"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/txtUsuariosCompetidores"
+
+                    android:inputType="number"
+                    android:numeric="integer"
+                    android:textColor="@android:color/background_dark" />
+
+                <TextView
+                    android:id="@+id/txtForaneos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtUsuariosCompetidores"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Foraneos:"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="25dp"></TextView>
+
+                <EditText
+                    android:id="@+id/etCantidadForaneos"
+                    android:layout_width="164dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txtForaneos"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/txtForaneos"
+                    android:inputType="number"
+                    android:numeric="integer"
+                    android:textColor="@android:color/background_dark" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/llEdades"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llCantidad"
+                android:background="@drawable/btn_desing1"
+                >
+
+                <TextView
+                    android:id="@+id/txtEdades"
+                    android:layout_width="234dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:text="Edades para la Categoria:"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="30dp"></TextView>
+                <TextView
+                    android:id="@+id/txtMinimo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/txtEdades"
+                    android:text="Mínimo de edad:"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="25dp"/>
+
+                <EditText
+                    android:id="@+id/etDesdeAnos"
+                    android:layout_width="136dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txtMinimo"
+                    android:layout_toRightOf="@+id/txtMinimo"
+                    android:inputType="number"
+                    android:numeric="integer"
+                    android:textColor="@android:color/background_dark" />
+                <TextView
+                    android:id="@+id/txtMaximo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="Máximo de edad:"
+                    android:layout_below="@+id/txtMinimo"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="25sp"/>
+
+                <EditText
+                    android:id="@+id/etHastaAnos"
+                    android:layout_width="129dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txtMaximo"
+                    android:layout_toRightOf="@+id/txtMaximo"
+                    android:numeric="integer"
+                    android:textColor="@android:color/background_dark" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnFinalizarCompetencia"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="@color/grisBoton"
+                android:layout_below="@+id/llEdades"
+                android:text="Finalizar"
+                android:enabled="false"
+                android:textColor="@android:color/background_light"
+                android:textSize="20dp"></Button>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/barra_verde"
+        android:minHeight="@android:dimen/thumbnail_height"
+        app:itemTextColor="@android:color/background_dark"
+        app:menu="@menu/main_menu"/>
+
+</RelativeLayout>

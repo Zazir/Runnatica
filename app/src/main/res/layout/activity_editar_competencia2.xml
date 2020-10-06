@@ -76,10 +76,54 @@
                 android:textColor="@android:color/background_dark" />
 
             <TextView
+                android:id="@+id/txtPrecio"
+                android:layout_width="wrap_content"
+                android:layout_height="58dp"
+                android:layout_below="@+id/etEditarDescripcion"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="Precio de la Competencia"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/Precio"
+                android:layout_width="wrap_content"
+                android:layout_height="58dp"
+                android:layout_below="@+id/txtPrecio"
+                android:layout_alignStart="@+id/etEditarPrecio"
+                android:gravity="center"
+                android:text="$"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp" />
+            <TextView
+                android:id="@+id/MXN"
+                android:layout_width="wrap_content"
+                android:layout_height="58dp"
+                android:layout_below="@+id/txtPrecio"
+                android:layout_toRightOf="@+id/etEditarPrecio"
+                android:gravity="center"
+                android:text="MXN"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/etEditarPrecio"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPrecio"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="10dp"
+                android:inputType="textMultiLine"
+                android:numeric="integer"
+                android:textColor="@android:color/background_dark" />
+
+            <TextView
                 android:id="@+id/txtEditarImagenEvento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/etEditarDescripcion"
+                android:layout_below="@+id/etEditarPrecio"
                 android:layout_centerHorizontal="true"
                 android:text="Imagen del Evento"
                 android:textColor="@android:color/background_dark"
@@ -101,15 +145,28 @@
                 android:text="Seleccionar" />
 
             <Button
+                android:id="@+id/btnEditarCategoria"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:textSize="20sp"
+                android:layout_below="@+id/btnImagenCompetencia"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/grisBoton"
+                android:text="Editar Categoria" />
+
+            <Button
                 android:id="@+id/btnGuardarEditar"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:textSize="25sp"
-                android:layout_below="@+id/btnImagenCompetencia"
+                android:layout_below="@+id/btnEditarCategoria"
                 android:layout_centerHorizontal="true"
                 android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/grisBoton"
-                android:text="Siguiente" />
+                android:text="Guardar" />
 
         </RelativeLayout>
     </ScrollView>
