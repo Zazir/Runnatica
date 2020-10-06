@@ -10,11 +10,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -38,6 +33,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static com.runnatica.runnatica.carrera_vista1.IDS_FORANEOS;
 
@@ -186,6 +186,7 @@ public class InscripcionForaneo extends AppCompatActivity {
 
                                 //Añadir valores a los correspondientes textview
                                 inscripcionesList.add(new Inscripciones(
+                                        objetoinscripcion.getInt("id_inscripcion"),
                                         objetoinscripcion.getInt("id_competencia"),
                                         objetoinscripcion.getString("nombre_inscripcion"),
                                         objetoinscripcion.getInt("cantidad_usuarios"),
