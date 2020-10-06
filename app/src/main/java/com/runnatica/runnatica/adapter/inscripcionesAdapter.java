@@ -37,7 +37,7 @@ public class inscripcionesAdapter extends RecyclerView.Adapter<inscripcionesAdap
 
     @Override
     public void onBindViewHolder(@NonNull inscripcionesAdapter.ViewHolderInscripciones viewHolderInscripciones, int position) {
-        viewHolderInscripciones.asignarDatos(inscripcionesList.get(position), position);
+        viewHolderInscripciones.asignarDatos(inscripcionesList.get(position), position, listener);
     }
 
     @Override
@@ -56,10 +56,17 @@ public class inscripcionesAdapter extends RecyclerView.Adapter<inscripcionesAdap
             txtLeyenda = (TextView)vistaInscripcion.findViewById(R.id.txtLeyenda);
         }
 
-        public void asignarDatos(Inscripciones inscripciones, final int posicion) {
+        public void asignarDatos(Inscripciones inscripciones, final int posicion, final OnItemClickListener listener) {
             txtNombreInscripcion.setText(inscripciones.getNombreInscripcion());
             txtMinEdad.setText("Edad mínima "+inscripciones.getEdadMinina() + " años");
             txtMaxEdad.setText("Edad máxima "+inscripciones.getEdadMaxima() + " años");
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.OnItemClick(posicion);
+                }
+            });
         }
     }
 }
