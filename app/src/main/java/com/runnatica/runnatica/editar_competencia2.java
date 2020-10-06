@@ -260,7 +260,8 @@ public class editar_competencia2 extends AppCompatActivity {
         return siguiente;
     }
     private void EditarCategoria(){
-        Intent next = new Intent(this, EditarCategoria1.class);
-        startActivity(next);
+        Intent intent = new Intent(editar_competencia2.this, EditarCategoria1.class);
+        intent.putExtra("ID_COMPENTENCIA", id_competencia);
+        startActivity(intent);
     }
 }
