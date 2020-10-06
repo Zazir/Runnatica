@@ -16,9 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 public class inscripcionesAdapter extends RecyclerView.Adapter<inscripcionesAdapter.ViewHolderInscripciones> {
     private Context ctx;
     private List<Inscripciones> inscripcionesList;
-    private MyAdapter.OnItemClickListener listener;
+    private OnItemClickListener listener;
 
-    public inscripcionesAdapter(Context ctx, List<Inscripciones> inscripcionesList, MyAdapter.OnItemClickListener listener) {
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
+    }
+
+    public inscripcionesAdapter(Context ctx, List<Inscripciones> inscripcionesList, OnItemClickListener listener) {
         this.ctx = ctx;
         this.inscripcionesList = inscripcionesList;
         this.listener = listener;

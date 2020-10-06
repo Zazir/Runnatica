@@ -9,7 +9,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.runnatica.runnatica.adapter.MyAdapter;
 import com.runnatica.runnatica.adapter.inscripcionesAdapter;
 import com.runnatica.runnatica.poho.Inscripciones;
 
@@ -77,14 +76,14 @@ public class EditarCategoria1 extends AppCompatActivity {
                             }
 
                             //Creamos instancia del adapter
-                            inscripcionesAdaptador= new inscripcionesAdapter(EditarCategoria1.this, inscripcionesList, new MyAdapter.OnItemClickListener() {
+                            inscripcionesAdaptador= new inscripcionesAdapter(EditarCategoria1.this, inscripcionesList, new inscripcionesAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(int position) {
                                     launchCategoria(inscripcionesList.get(position).getId_categoria()+"");
                                 }
                             });
 
-                            rvInscripciones.setAdapter(inscripcionesAdaptador);
+                                    rvInscripciones.setAdapter(inscripcionesAdaptador);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
