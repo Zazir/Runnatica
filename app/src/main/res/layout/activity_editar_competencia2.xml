@@ -114,9 +114,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtPrecio"
                 android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="10dp"
-                android:inputType="textMultiLine"
                 android:numeric="integer"
+                android:inputType="number"
                 android:textColor="@android:color/background_dark" />
 
             <TextView

@@ -48,10 +48,10 @@ dependencies {
 
     implementation 'com.android.support:design:28.0.0'
 
-    implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/mail.jar')
-    implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/additionnal.jar')
-    implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/activation.jar')
-    implementation files('C:/Repos/Runnatica/Runnatica/.idea/libraries/glide-3.6.0.jar')
+    implementation files('C:/Runnatica/Runnatica/.idea/libraries/mail.jar')
+    implementation files('C:/Runnatica/Runnatica/.idea/libraries/additionnal.jar')
+    implementation files('C:/Runnatica/Runnatica/.idea/libraries/activation.jar')
+    implementation files('C:/Runnatica/Runnatica/.idea/libraries/glide-3.6.0.jar')
 
 
     implementation 'io.conekta:conektasdk:2.0'
