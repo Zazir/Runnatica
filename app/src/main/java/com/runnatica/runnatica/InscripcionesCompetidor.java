@@ -6,8 +6,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -24,10 +31,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import static com.runnatica.runnatica.carrera_vista1.FECHA_COMPETENCIA;
 import static com.runnatica.runnatica.carrera_vista1.ID_COMPETENCIA;
 import static com.runnatica.runnatica.carrera_vista1.LUGAR_COMPETENCIA;
@@ -38,6 +41,7 @@ import static com.runnatica.runnatica.carrera_vista1.ORGANIZADOR;
 public class InscripcionesCompetidor extends AppCompatActivity {
     private RecyclerView rvInscripciones;
     private Button btnNext;
+    private Spinner spBoletos;
 
     private List<Inscripciones> inscripcionesList = new ArrayList<>();
     private String id_competencia, monto, NombreCompetencia, Fecha, Lugar, Organizador;
@@ -51,7 +55,9 @@ public class InscripcionesCompetidor extends AppCompatActivity {
         rvInscripciones = (RecyclerView)findViewById(R.id.rvInscripciones);
         rvInscripciones.setHasFixedSize(true);
         rvInscripciones.setLayoutManager(new LinearLayoutManager(this));
+        spBoletos = (Spinner)findViewById(R.id.spBoletos);
 
+        cargarSpinner();
         //getLastViewData();
         obtenerAutoguardado();
 
@@ -88,6 +94,7 @@ public class InscripcionesCompetidor extends AppCompatActivity {
         Organizador = preferences.getString(ORGANIZADOR, "");
     }
 
+
     private void CrearInscripcion() {
         Intent intent = new Intent(InscripcionesCompetidor.this, InscripcionForaneo.class);
         intent.putExtra("monto", monto);
@@ -97,6 +104,29 @@ public class InscripcionesCompetidor extends AppCompatActivity {
         intent.putExtra("LUGAR", Lugar.toString());
         intent.putExtra("ORGANIZADOR", Organizador.toString());
         startActivity(intent);
+    }
+
+    private void cargarSpinner() {
+        ArrayAdapter<CharSequence> opcionesSpCat = ArrayAdapter.createFromResource(this, R.array.numeros, android.R.layout.simple_spinner_item);
+
+        spBoletos.setAdapter(opcionesSpCat);
+
+        spBoletos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position>=1){
+                    btnNext.setEnabled(true);
+                    btnNext.setText("Siguiente");
+                    Toast.makeText(getApplicationContext(), "Inscripcion Seleccioada", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 
     private void cargarInscripciones(String URL) {

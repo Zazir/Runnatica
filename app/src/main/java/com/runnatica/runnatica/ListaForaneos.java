@@ -1,5 +1,6 @@
 package com.runnatica.runnatica;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -138,7 +140,7 @@ public class ListaForaneos extends AppCompatActivity {
                                     String Correo = new String("" + foraneoList.get(position).getCorreon());
                                     String Edad = new String("" + foraneoList.get(position).getEdad());
                                     String Sexo = new String("" + foraneoList.get(position).getSexo());
-                                    modificarForaneo(idS, Nombre, Correo, Edad, Sexo);
+                                    SeleccionarOpcion(idS, Nombre, Correo, Edad, Sexo);
                                 }
                             });
 
@@ -167,6 +169,61 @@ public class ListaForaneos extends AppCompatActivity {
         startActivity(intent);
         finish();
         //Toast.makeText(RegistrarForaneos.this, id_foreign, Toast.LENGTH_SHORT).show();
+    }
+    private void SeleccionarOpcion(String idS, String Nombre, String Correo, String Edad, String Sexo){
+
+        String[] opciones = {"Editar Usuario", "Eliminar Usuario"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("¿Que deseas hacer?");
+        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(which == 0){
+                    modificarForaneo(idS, Nombre, Correo, Edad, Sexo);
+                }else if(which == 1){
+                    EliminarForaneo(ip+"actualizarForaneo.php?id_foraneo="+idS);
+
+                }
+            }
+        });
+        builder.show();
+    }
+    private void EliminarForaneo(String URL){
+        AlertDialog.Builder alertaComentario = new AlertDialog.Builder(this);
+        alertaComentario.setTitle("Eliminar Usuario");
+        alertaComentario.setMessage("Esta acción es irreversible");
+        alertaComentario.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                StringRequest request = new StringRequest(Request.Method.GET, URL,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                if (response.equals("Exito")) {
+                                    Toast.makeText(ListaForaneos.this, "Usuario Eliminado", Toast.LENGTH_SHORT).show();
+                                    foraneoList.clear();
+                                    CargarForaneos(ip + "obtenerForaneosTabla.php?id_usuario=" + usuario.getId());
+                                }else if (response.equals("Error"))
+                                    Toast.makeText(ListaForaneos.this, "Vuelve a intentarlo en un poco de tiempo", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(ListaForaneos.this, "Hubo un error con el servidor", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                Volley.newRequestQueue(getApplicationContext()).add(request);
+            }
+        });
+        alertaComentario.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        alertaComentario.show();
     }
 
     private void AgregarForaneo(){

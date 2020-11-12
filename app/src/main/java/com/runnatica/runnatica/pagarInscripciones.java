@@ -117,7 +117,16 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pagar_inscripciones);
 
+        MenuUsuario = (BottomNavigationView) findViewById(R.id.bottomNavigation10);
+        paypal = (Button)findViewById(R.id.btnPaypal);
+        MercadoPago = (Button) findViewById(R.id.btnMercadoPago);
+        txtCantidadForaneos = (TextView)findViewById(R.id.txtBoletosForaneos);
+        txtTotal = (TextView)findViewById(R.id.txtTotal);
+        lvForaneosAInscribir = (ListView)findViewById(R.id.lvForaneos);
+
+        //paypal.setEnabled(false);
 
         //MercadoPago
         retrofit = RetrofitClient.getInstance();
@@ -131,9 +140,6 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         //
 
         dominio = getString(R.string.ip);
-
-
-        setContentView(R.layout.activity_pagar_inscripciones);
 
         obtenerPreferencias();
 
@@ -157,13 +163,6 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
                 return true;
             }
         });
-
-        paypal = (Button)findViewById(R.id.btnPaypal);
-        MercadoPago = (Button) findViewById(R.id.btnMercadoPago);
-        txtCantidadForaneos = (TextView)findViewById(R.id.txtBoletosForaneos);
-        txtTotal = (TextView)findViewById(R.id.txtTotal);
-        lvForaneosAInscribir = (ListView)findViewById(R.id.lvForaneos);
-        paypal.setEnabled(false);
 
         getLastViewData();
         MostrarForaneosInscripcion(dominio + "obtenerForaneosTabla.php?id_foraneo="+ids_foraneos.replaceAll(" ", "%20"));
@@ -191,6 +190,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
             @Override
             public void onClick(View v) {
                 generarPago();
+                Log.i("hola2", "hola2");
             }
         });
     }

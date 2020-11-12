@@ -26,7 +26,7 @@ public class EditarCategorias2 extends AppCompatActivity {
     private EditText NombreCategoria, CompetidoresCategorias, ForaneosCategorias, MinimoEdad, MaximoEdad;
     private Button Finalizar;
     BottomNavigationView MenuOrganizador;
-    private String dominio, id_categoria;
+    private String dominio, id_categoria,id_competencia="";;
 
 
     @Override
@@ -75,6 +75,11 @@ public class EditarCategorias2 extends AppCompatActivity {
                     peticion(dominio + "actualizarCategoria.php?cantidad_usuarios"+CompetidoresCategorias.getText().toString()+"&id_categoria="+id_categoria);
                     peticion(dominio + "actualizarCategoria.php?cantidad_foraneos="+ForaneosCategorias.getText().toString()+"&id_categoria="+id_categoria);
                     peticion(dominio + "actualizarCategoria.php?nombre_categoria="+NombreCategoria.getText().toString().replaceAll(" ", "%20")+"&id_categoria="+id_categoria);
+                    MaximoEdad.setText("");
+                    MinimoEdad.setText("");
+                    CompetidoresCategorias.setText("");
+                    ForaneosCategorias.setText("");
+                    NombreCategoria.setText("");
                     Atras();
             }
         });
@@ -83,6 +88,7 @@ public class EditarCategorias2 extends AppCompatActivity {
     private void getLastViewData() {
         Bundle extra = this.getIntent().getExtras();
         id_categoria = extra.getString("ID_CAT");
+        id_competencia = extra.getString("ID_COMPENTENCIA5");
     }
 
     private void peticion(String URL) {
@@ -124,6 +130,7 @@ public class EditarCategorias2 extends AppCompatActivity {
     }
     private void Atras(){
         Intent next = new Intent(this, EditarCategoria1.class);
+        next.putExtra("ID_COMPENTENCIA5", id_competencia);
         startActivity(next);
     }
 }

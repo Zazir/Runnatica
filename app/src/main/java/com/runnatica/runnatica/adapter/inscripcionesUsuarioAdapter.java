@@ -1,7 +1,6 @@
 package com.runnatica.runnatica.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -53,21 +52,18 @@ public class inscripcionesUsuarioAdapter extends RecyclerView.Adapter<inscripcio
             txtNombreInscripcion = (TextView)vistaInscripcion.findViewById(R.id.tvNombreInscripcion);
             txtMinEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMinEdadInscripcion);
             txtMaxEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMaxEdadInscripcion);
-            txtLeyenda = (TextView)vistaInscripcion.findViewById(R.id.txtLeyenda);
-            imgTicket = (ImageView) vistaInscripcion.findViewById(R.id.igvTicket);
         }
 
         public void asignarDatos(Inscripciones inscripciones, final int posicion) {
             txtNombreInscripcion.setText(inscripciones.getNombreInscripcion());
             txtMinEdad.setText("Edad mínima "+inscripciones.getEdadMinina() + " años");
             txtMaxEdad.setText("Edad máxima "+inscripciones.getEdadMaxima() + " años");
-            if (usuario.getEdadUsuario() >= inscripciones.getEdadMinina() && usuario.getEdadUsuario() <= inscripciones.getEdadMaxima()) {
-                imgTicket.setImageResource(R.drawable.ticket);
-                txtLeyenda.setText("Puedes adquirir 1 entrada");
-                puedeAvanzar = true;
-            }else imgTicket.setImageResource(R.drawable.dangerous);
-                Log.i("Puede_avanzar", puedeAvanzar+ "");
-            }//else imgTicket.setImageResource(R.drawable.dangerous);
+                /*if (usuario.getEdadUsuario() >= inscripciones.getEdadMinina() && usuario.getEdadUsuario() <= inscripciones.getEdadMaxima()) {
+
+                    txtLeyenda.setText("Puedes adquirir 1 entrada");
+                    puedeAvanzar = true;
+                }*/
+            }
         }
         public boolean tieneTicket() {
 

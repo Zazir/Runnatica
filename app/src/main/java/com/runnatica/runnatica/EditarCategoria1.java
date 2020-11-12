@@ -129,6 +129,7 @@ public class EditarCategoria1 extends AppCompatActivity {
     private void launchCategoria(String id_cat) {
         Intent intent = new Intent(EditarCategoria1.this, EditarCategorias2.class);
         intent.putExtra("ID_CAT", id_cat);
+        intent.putExtra("ID_COMPENTENCIA5", id_competencia);
         startActivity(intent);
     }
     private void homeOrganizador() {

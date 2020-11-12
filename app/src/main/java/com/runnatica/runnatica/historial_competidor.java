@@ -8,6 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -24,11 +29,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class historial_competidor extends AppCompatActivity {
     private List<Competencias> competenciasList;
@@ -140,7 +140,7 @@ public class historial_competidor extends AppCompatActivity {
     private void launchCompetenciaView(String id) {
         Intent intent = new Intent(historial_competidor.this, carrera_vista1.class);
         intent.putExtra("id", id);
-        intent.putExtra("registro", false);
+        intent.putExtra("BanderaHistorial", true);
         startActivity(intent);
     }
 

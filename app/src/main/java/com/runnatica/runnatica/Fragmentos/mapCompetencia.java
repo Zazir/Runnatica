@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -24,11 +26,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.runnatica.runnatica.R;
 import com.runnatica.runnatica.crear_competencia;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.fragment.app.FragmentActivity;
 
 import static com.runnatica.runnatica.crear_competencia.CALLE_COMPETENCIA;
 import static com.runnatica.runnatica.crear_competencia.CIUDAD_COMPETENCIA;
@@ -107,6 +106,7 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
 
         try {
             address = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            String Municipio;
 
             String addres = address.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
             String addressPart[] = addres.split(",");
@@ -116,11 +116,13 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
             pais = address.get(0).getCountryName();
             colonia = address.get(0).getSubLocality();
             calle = addressPart[0];
+            Municipio= address.get(0).getSubAdminArea();
 
             Log.i("Point_selected", addres);
-            Log.i("Point_selected", colonia + "");
+            Log.i("Point_selected", Municipio + "");
+            Log.i("Point_selected", calle + "");
 
-            if (colonia == null) {
+            if (colonia == null && calle.equals(pais) || calle=="Unnamed Road" || calle.equals(Municipio)) {
                 Toast.makeText(this, "Debes seleccionar un punto real", Toast.LENGTH_SHORT).show();
             }else {
 

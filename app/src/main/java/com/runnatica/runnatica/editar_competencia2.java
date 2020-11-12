@@ -220,7 +220,6 @@ public class editar_competencia2 extends AppCompatActivity {
                 return parametros;
             }
         };
-
         Volley.newRequestQueue(this).add(stringRequest);
     }
 

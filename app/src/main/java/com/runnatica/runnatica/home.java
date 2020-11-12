@@ -18,6 +18,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -37,12 +43,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class home extends AppCompatActivity {
     BottomNavigationView MenuUsuario;
@@ -299,7 +299,7 @@ public class home extends AppCompatActivity {
     private void launchCompetenciaView(String id) {
         Intent intent = new Intent(home.this, carrera_vista1.class);
         intent.putExtra("id", id);
-        intent.putExtra("registro", true);
+        intent.putExtra("BanderaHistorial", false);
         startActivity(intent);
     }
 

@@ -5,13 +5,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.runnatica.runnatica.R;
 import com.runnatica.runnatica.poho.Inscripciones;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class inscripcionesAdapter extends RecyclerView.Adapter<inscripcionesAdapter.ViewHolderInscripciones> {
     private Context ctx;
@@ -53,7 +53,6 @@ public class inscripcionesAdapter extends RecyclerView.Adapter<inscripcionesAdap
             txtNombreInscripcion = (TextView)vistaInscripcion.findViewById(R.id.tvNombreInscripcion);
             txtMinEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMinEdadInscripcion);
             txtMaxEdad = (TextView)vistaInscripcion.findViewById(R.id.tvMaxEdadInscripcion);
-            txtLeyenda = (TextView)vistaInscripcion.findViewById(R.id.txtLeyenda);
         }
 
         public void asignarDatos(Inscripciones inscripciones, final int posicion, final OnItemClickListener listener) {
