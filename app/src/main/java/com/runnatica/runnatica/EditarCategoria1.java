@@ -2,13 +2,21 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.adapter.inscripcionesAdapter;
 import com.runnatica.runnatica.poho.Inscripciones;
 
@@ -19,15 +27,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 public class EditarCategoria1 extends AppCompatActivity {
     private RecyclerView rvInscripciones;
 
-    private String dominio, id_competencia;
-
+    private String dominio, id_competencia="";
+    BottomNavigationView MenuOrganizador;
     private List<Inscripciones> inscripcionesList = new ArrayList<>();
     private inscripcionesAdapter inscripcionesAdaptador;
 
@@ -38,16 +42,40 @@ public class EditarCategoria1 extends AppCompatActivity {
         rvInscripciones = (RecyclerView)findViewById(R.id.rvInscripciones);
         rvInscripciones.setHasFixedSize(true);
         rvInscripciones.setLayoutManager(new LinearLayoutManager(this));
+        MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
 
         getLastViewData();
         dominio = getString(R.string.ip);
         cargarInscripciones(dominio + "obtenerInscripciones.php?id_compentencia=" + id_competencia);
+
+        Menu menu = MenuOrganizador.getMenu();
+        MenuItem menuItem= menu.getItem(0);
+        menuItem.setChecked(true);
+
+        MenuOrganizador.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    homeOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    historialOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_regresar) {
+                    home();
+                }
+                return true;
+            }
+        });
     }
 
     private void getLastViewData() {
-        Bundle extra = EditarCategoria1.this.getIntent().getExtras();
-        id_competencia = extra.getString("ID_COMPENTENCIA");
+        Bundle extra = this.getIntent().getExtras();
+        id_competencia = extra.getString("ID_COMPENTENCIA5");
     }
+
+
 
     private void cargarInscripciones(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
@@ -101,6 +129,19 @@ public class EditarCategoria1 extends AppCompatActivity {
     private void launchCategoria(String id_cat) {
         Intent intent = new Intent(EditarCategoria1.this, EditarCategorias2.class);
         intent.putExtra("ID_CAT", id_cat);
+        intent.putExtra("ID_COMPENTENCIA5", id_competencia);
         startActivity(intent);
+    }
+    private void homeOrganizador() {
+        Intent next = new Intent(this, home_organizador.class);
+        startActivity(next);
+    }
+    private void historialOrganizador(){
+        Intent next = new Intent(this, historial_organizador.class);
+        startActivity(next);
+    }
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
     }
 }

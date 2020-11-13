@@ -40,6 +40,7 @@ public class editar_competencia2 extends AppCompatActivity {
     Button SeleccionarFoto, Siguiente, EditarCategoria;
     private ImageView imgCompetencia;
     BottomNavigationView MenuOrganizador;
+    private StringRequest request;
 
     private String path, dominio, id_competencia;
     private Bitmap bitmap;
@@ -175,6 +176,7 @@ public class editar_competencia2 extends AppCompatActivity {
     private void getLastViewData() {
         Bundle extra = editar_competencia2.this.getIntent().getExtras();
         id_competencia = extra.getString("id_competencia");
+        ConsultarNombre();
     }
 
     private void subirImagenCompetencia(String URL) {
@@ -218,7 +220,6 @@ public class editar_competencia2 extends AppCompatActivity {
                 return parametros;
             }
         };
-
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
@@ -253,15 +254,37 @@ public class editar_competencia2 extends AppCompatActivity {
 
         }
     }
+    private void ConsultarNombre(){
+        String URL = dominio + "obtenerDatosCompetencia.php?id_competencia="+id_competencia+"&consulta=4";
+        request = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+
+                    public void onResponse(String response) {
+                        EditarNombre.setText(response);
+
+                        //txtTotalUsuarios.setText();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(editar_competencia2.this, "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(request);
+    }
+
     private Boolean Validaciones() {
         Boolean siguiente = false;
 
 
         return siguiente;
     }
+
     private void EditarCategoria(){
         Intent intent = new Intent(editar_competencia2.this, EditarCategoria1.class);
-        intent.putExtra("ID_COMPENTENCIA", id_competencia);
+        intent.putExtra("ID_COMPENTENCIA5", id_competencia);
         startActivity(intent);
     }
 }

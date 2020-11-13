@@ -6,6 +6,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -22,11 +27,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class historial_organizador extends AppCompatActivity {
     private List<Competencias> competenciasList;
@@ -58,9 +58,6 @@ public class historial_organizador extends AppCompatActivity {
                 }
                 if (menuItem.getItemId() == R.id.menu_historial) {
                     historialOrganizador();
-                }
-                if (menuItem.getItemId() == R.id.menu_ajustes) {
-                    ajuestesOrganizador();
                 }
                 if (menuItem.getItemId() == R.id.menu_regresar) {
                     home();
@@ -138,10 +135,6 @@ public class historial_organizador extends AppCompatActivity {
     }
     private void historialOrganizador(){
         Intent next = new Intent(this, historial_organizador.class);
-        startActivity(next);
-    }
-    private void ajuestesOrganizador(){
-        Intent next = new Intent(this, ajustes_organizador.class);
         startActivity(next);
     }
     private void home(){

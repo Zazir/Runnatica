@@ -19,6 +19,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -46,12 +52,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallback {
     //Constantes
@@ -84,6 +84,7 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
     private String dominio;
     private String coordenadas, nombreCompe;
     private int totalInscripcionesInt;
+    private boolean flag;
 
     private GoogleMap mMap;
     private MarkerOptions marker = new MarkerOptions();
@@ -279,6 +280,8 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
                             txtPrecioCompe.setText("$" + respuesta.optString("precio") + " MXN");
                             txtDescripcionCompe.setText(respuesta.optString("descripcion"));
                             createMark();
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -293,17 +296,10 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-    private void getLastViewData() {
-        boolean flag;
-
+    private void getLastViewData(){
         Bundle extra = carrera_vista1.this.getIntent().getExtras();
         id_competencia = extra.getString("id");
-        flag = extra.getBoolean("registro");
-
-        if (flag)
-            btnInscripcion.setEnabled(flag);
-        else
-            btnInscripcion.setEnabled(flag);
+        flag = extra.getBoolean("BanderaHistorial");
     }
 
     private void comentarForo(String URL) {
@@ -532,8 +528,10 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
                         try {
                             int usuariosInscritos = Integer.parseInt(response);
 
-                            if (totalInscripcionesInt < usuariosInscritos) {
+                            if (totalInscripcionesInt < usuariosInscritos && !flag || !id_organizador.equals(user.getId()+"") && !flag) {
                                 btnInscripcion.setEnabled(true);
+                                Log.i("id:otronombre",  id_organizador);
+                                Log.i("id:otronombre",  user.getId()+" id de la persistencia");
                             }
                         }catch (Exception e) {}
                     }

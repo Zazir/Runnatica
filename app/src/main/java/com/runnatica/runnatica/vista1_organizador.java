@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -24,9 +27,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 public class vista1_organizador extends AppCompatActivity {
     BarChart graficaBarras;
     List<String> ListaFechas;
@@ -39,7 +39,7 @@ public class vista1_organizador extends AppCompatActivity {
     private StringRequest request;
     private int precio, vendidosUsuario, vendidosForaneo;
 
-    private String dominio;
+    private String dominio, NombreCompetencia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -289,6 +289,7 @@ public class vista1_organizador extends AppCompatActivity {
 
                     public void onResponse(String response) {
                         txtNombreCompetencia.setText(response);
+                        NombreCompetencia = response;
 
                         //txtTotalUsuarios.setText();
                     }
