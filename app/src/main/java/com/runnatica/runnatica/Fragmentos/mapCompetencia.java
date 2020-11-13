@@ -120,7 +120,7 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
             Log.i("Point_selected", addres);
             Log.i("Point_selected", colonia + "");
 
-            if (colonia == null) {
+            if (calle == null) {
                 Toast.makeText(this, "Debes seleccionar un punto real", Toast.LENGTH_SHORT).show();
             }else {
 
@@ -134,7 +134,7 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
 
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Debes seleccionar un punto real", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tenemos problemas con esa dirección, selecciona alguna un poco separada", Toast.LENGTH_LONG).show();
         }
     }
 
