@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.runnatica.runnatica.services.MainActivity;
 
 import java.util.ArrayList;
 
@@ -37,6 +38,7 @@ public class ajustes_competidor extends AppCompatActivity {
         arrayList.add("Aviso de Privacidad");
         arrayList.add("Administrador de Competencia");
         arrayList.add("Usuarios Foraneos");
+        arrayList.add("Notificación servicio");
         arrayList.add("Cerrar Sesión");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
@@ -91,6 +93,10 @@ public class ajustes_competidor extends AppCompatActivity {
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
                 if(i == 6){
+                    mainActivity();
+                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(i == 7){
                     CerrarSesion();
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
@@ -145,6 +151,10 @@ public class ajustes_competidor extends AppCompatActivity {
     }
     private void Foraneos(){
         Intent next = new Intent(this, ListaForaneos.class);
+        startActivity(next);
+    }
+    private void mainActivity(){
+        Intent next = new Intent(this, MainActivity.class);
         startActivity(next);
     }
 }
