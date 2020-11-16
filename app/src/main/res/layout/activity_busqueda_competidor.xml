@@ -84,6 +84,7 @@
                         android:layout_below="@+id/xx"
                         android:text="Seleccionar fecha"
                         android:layout_centerHorizontal="true"
+                        android:textSize="15dp"
                         android:drawableLeft="@drawable/buscar"
                         android:layout_marginBottom="2dp"/>
 
@@ -116,6 +117,7 @@
                         android:layout_below="@+id/spFiltroEstado"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
+                        android:textSize="15dp"
                         android:text="Buscar"
                         android:drawableLeft="@drawable/buscar"
                         android:layout_marginBottom="2dp"/>

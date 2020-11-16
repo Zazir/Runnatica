@@ -94,7 +94,7 @@ public class editarForaneos extends AppCompatActivity {
         EditarForaneo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(editarForaneos.this, RegistrarForaneos.class);
+                Intent intent = new Intent(editarForaneos.this, ListaForaneos.class);
                 startActivity(intent);
                 finish();
             }

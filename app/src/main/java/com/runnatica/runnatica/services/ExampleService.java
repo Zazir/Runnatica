@@ -28,7 +28,7 @@ public class ExampleService extends Service {
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Example Service")
                 .setContentText(input)
-                .setSmallIcon(R.drawable.logo)
+                .setSmallIcon(R.drawable.ic_ajustes)
                 .setContentIntent(pendingIntent)
                 .build();
         startForeground(1, notification);

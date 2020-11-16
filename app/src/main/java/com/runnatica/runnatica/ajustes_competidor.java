@@ -38,7 +38,6 @@ public class ajustes_competidor extends AppCompatActivity {
         arrayList.add("Aviso de Privacidad");
         arrayList.add("Administrador de Competencia");
         arrayList.add("Usuarios Foraneos");
-        arrayList.add("Notificación servicio");
         arrayList.add("Cerrar Sesión");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
@@ -93,10 +92,6 @@ public class ajustes_competidor extends AppCompatActivity {
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
                 if(i == 6){
-                    mainActivity();
-                    //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
-                }
-                if(i == 7){
                     CerrarSesion();
                     //Toast.makeText(ajustes_competidor.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
                 }
