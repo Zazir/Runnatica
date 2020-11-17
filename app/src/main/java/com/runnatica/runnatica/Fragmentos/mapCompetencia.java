@@ -1,10 +1,12 @@
 package com.runnatica.runnatica.Fragmentos;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -12,8 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -28,6 +28,9 @@ import com.runnatica.runnatica.crear_competencia;
 
 import java.util.List;
 import java.util.Locale;
+
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import static com.runnatica.runnatica.crear_competencia.CALLE_COMPETENCIA;
 import static com.runnatica.runnatica.crear_competencia.CIUDAD_COMPETENCIA;
@@ -57,7 +60,7 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         obtenerPreferencias();
 
-        btnSelectCoords = (Button)findViewById(R.id.btnMandarCordenadas);
+        btnSelectCoords = (Button) findViewById(R.id.btnMandarCordenadas);
 
         btnSelectCoords.setEnabled(false);
 
@@ -68,8 +71,8 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
                     .findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
 
-        }else {
-            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, (Activity)getApplicationContext(), 10);
+        } else {
+            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, (Activity) getApplicationContext(), 10);
             dialog.show();
         }
 
@@ -84,6 +87,16 @@ public class mapCompetencia extends FragmentActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         //mMap.moveCamera();

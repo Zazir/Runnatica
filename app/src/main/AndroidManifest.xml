@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
+        android:name=".services.App"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_index"
@@ -19,7 +20,7 @@
         android:roundIcon="@mipmap/ic_index"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".services.MainActivity"></activity>
+        <activity android:name=".services.MainActivity"/>
         <activity android:name=".EditarCategorias2" />
         <activity android:name=".EditarCategoria1" />
         <activity android:name=".ListaForaneos" />
