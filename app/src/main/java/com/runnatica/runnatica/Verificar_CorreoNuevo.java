@@ -152,7 +152,7 @@ public class Verificar_CorreoNuevo extends AppCompatActivity {
 
         session = Session.getDefaultInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("runnaticapp@gmail.com", "Lotoloto2125");
+                return new PasswordAuthentication("runnaticapp@gmail.com", "Panconajo1");
             }
         });
 

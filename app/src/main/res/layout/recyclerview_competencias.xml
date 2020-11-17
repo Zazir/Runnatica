@@ -52,12 +52,16 @@
                     android:id="@+id/tvNombreCompe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:layout_below="@+id/tvPrecioCompe"
-                    android:textAlignment="center"
+                    android:layout_marginTop="-11dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
                     android:text="Nombre Competencia"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/cardview_light_background"/>
+                    android:textColor="@color/cardview_light_background" />
 
                 <TextView
                     android:id="@+id/tvDescripcionCompe"

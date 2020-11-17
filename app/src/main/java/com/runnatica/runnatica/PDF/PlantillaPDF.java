@@ -7,6 +7,8 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.core.content.FileProvider;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -35,8 +37,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import androidx.core.content.FileProvider;
-
 
 public class PlantillaPDF {
 
@@ -45,7 +45,7 @@ public class PlantillaPDF {
 
     //Datos para enviar correo
     private String correo = "runnaticapp@gmail.com";
-    private String contraseña = "Lotoloto2125";
+    private String contraseña = "Panconajo1";
     private Session session;
 
     //Text Constant

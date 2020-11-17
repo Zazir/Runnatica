@@ -31,7 +31,7 @@ public class ExampleService extends Service {
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Example Service")
                 .setContentText(input)
-                .setSmallIcon(R.drawable.ic_ajustes)
+                .setSmallIcon(R.drawable.logodos)
                 .setContentIntent(pendingIntent)
                 .build();
 
