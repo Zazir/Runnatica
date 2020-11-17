@@ -91,10 +91,9 @@
         android:id="@+id/btnMercadoPago"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
 
-        android:layout_marginBottom="76dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="76dp"
         android:text="Pagar con Tarjeta o Efectivo" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

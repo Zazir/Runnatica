@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -21,16 +22,19 @@ public class ExampleService extends Service {
     }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.i("Loquesea", "hola");
         String input = intent.getStringExtra("inputExtra");
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0, notificationIntent, 0);
+
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Example Service")
                 .setContentText(input)
                 .setSmallIcon(R.drawable.ic_ajustes)
                 .setContentIntent(pendingIntent)
                 .build();
+
         startForeground(1, notification);
         //do heavy work on a background thread
         //stopSelf();
