@@ -62,7 +62,7 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
     public static final String COORDENADAS_COMPETENCIA = "coordenadas.competencia.guardado";
     public static final String AVAL_DE_COMPETENCIA = "aval.competencia.guardado";
     public static final String DESCRIPCION_COMPETENCIA = "descripcion.competencia.guardado";
-
+    
     private TextView txtFecha, txtHora, txtCoordenadas, Ciudad, Colonia, Calle, Pais, Estado;
     private EditText Nombre, Precio, Descripcion;
     private Button Informacion, btnImagen, btnDate, Aval, Guardar, btnHora, btnLugar;

@@ -38,7 +38,7 @@ public class ajustes_competidor extends AppCompatActivity {
         arrayList.add("Aviso de Privacidad");
         arrayList.add("Administrador de Competencia");
         arrayList.add("Usuarios Foraneos");
-        arrayList.add("Notificación servicio");
+        arrayList.add("Notificaciones");
         arrayList.add("Cerrar Sesión");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);

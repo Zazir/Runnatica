@@ -365,6 +365,7 @@ public class Editar_perfil extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 progreso.dismiss();
+                Log.i("bien", response);
                 if (response.equals("Exito")){
                     NombreEditar.setText("");
                     CiudadEditar.setText("");
