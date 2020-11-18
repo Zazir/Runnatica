@@ -10,6 +10,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,9 +28,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcionesForaneoAdapter.ViewHolderInscripciones>
     implements AdapterView.OnItemSelectedListener{
@@ -124,7 +124,7 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
             /*txtMinEdad.setText("Edad mínima "+inscripciones.getEdadMinina() + " años");
             txtMaxEdad.setText("Edad máxima "+inscripciones.getEdadMaxima() + " años");*/
 
-            ConsultarDatosSpinner("http://45.15.24.210/WebServiceRunnatica/obtenerForaneos.php?id_usuario=" + usuario.getId(), inscripciones);
+            ConsultarDatosSpinner("http://31.220.61.80/WebServiceRunnatica/obtenerForaneos.php?id_usuario=" + usuario.getId(), inscripciones);
         }
 
         private void ConsultarDatosSpinner(String URL, final Inscripciones inscripciones) {

@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -267,6 +268,8 @@ public class posponer_competencia extends AppCompatActivity {
 
         picker.getDatePicker().setMinDate(System.currentTimeMillis() +100050000);
         picker.show();
+        picker.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        picker.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
     }
     private void Hora(){
 
@@ -282,8 +285,9 @@ public class posponer_competencia extends AppCompatActivity {
             }
         }, horas, minuto, true);
 
-
         timePicker.show();
+        timePicker.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        timePicker.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
     }
 
     private void homeOrganizador(){

@@ -114,7 +114,6 @@ public class registro_usuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (Validaciones()) {
-                    Log.i("Problema", "entra");
                     SubirUsuario(dominio + "agregarUsuario.php?" +
                             "NombreYApellido=" + Nombre.getText().toString().replaceAll(" ", "%20") +
                             "&Email=" + Correo +
@@ -182,6 +181,8 @@ public class registro_usuario extends AppCompatActivity {
                 picker.getDatePicker().setMaxDate(System.currentTimeMillis()-100000000);
                 picker.show();
 
+                picker.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                picker.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
             }
         });
 
@@ -325,8 +326,6 @@ public class registro_usuario extends AppCompatActivity {
     private void SubirUsuario(String URL) {
         //stringRequest es el objeto el cual almacena los datos.
         //Declaramos un StringRequest definiendo el método que utilizamos, en este caso es GET
-
-        Log.i("Problema", URL);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {//Aqui recibimos un objeto como parametro, es la respuesta a un listener
             @Override

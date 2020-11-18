@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -184,6 +185,8 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
                 }, horas, minuto, true);
 
                 timePicker.show();
+                timePicker.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                timePicker.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
             }
         });
 
@@ -207,6 +210,9 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
 
                 picker.getDatePicker().setMinDate(System.currentTimeMillis() + 100000000);
                 picker.show();
+                picker.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                picker.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+
             }
         });
 

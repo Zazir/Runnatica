@@ -80,7 +80,6 @@ public class Login extends AppCompatActivity {
         Contrasenatxt= (EditText) findViewById(R.id.etContrasena);
         rbSesion = (RadioButton)findViewById(R.id.radioSesion);
         rq = Volley.newRequestQueue(this);
-        signInButton = findViewById(R.id.btnEntrarGoogle);
 
                 flagRadio = rbSesion.isChecked();
 
@@ -89,12 +88,12 @@ public class Login extends AppCompatActivity {
 
         mGoogleSignClient = GoogleSignIn.getClient(this,gso);
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
+        /*signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
             }
-        });
+        });*/
 
         Entrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,7 +252,7 @@ public class Login extends AppCompatActivity {
 
             //Signed is succesfully. show authenticated.UI
 
-            ValidarCorreo();
+            //ValidarCorreo();
         }catch (ApiException e){
             //The ApiException status code indicates the detailed falture reason
             Log.w("Google Sign In Error", "signInResults: failed code= "+ e.getStatusCode());
@@ -276,7 +275,6 @@ public class Login extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
 
                 if(response.equals("Noexiste")) {
                     SiguienteGoogle();

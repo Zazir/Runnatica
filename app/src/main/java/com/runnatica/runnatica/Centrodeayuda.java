@@ -99,7 +99,7 @@ public class Centrodeayuda extends Activity implements OnClickListener{
             }
         });
 
-        pdialog = ProgressDialog.show(context, "", "Sending Mail...", true);
+        pdialog = ProgressDialog.show(context, "", "Enviando Correo...", true);
 
         RetreiveFeedTask task = new RetreiveFeedTask();
         task.execute();
@@ -129,7 +129,7 @@ public class Centrodeayuda extends Activity implements OnClickListener{
         protected void onPostExecute(String result) {
             pdialog.dismiss();
             msg.setText("");
-            Toast.makeText(getApplicationContext(), "Message sent", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Correo Enviado, la respuesta se enviara en unas horas", Toast.LENGTH_LONG).show();
         }
     }
     private void home(){

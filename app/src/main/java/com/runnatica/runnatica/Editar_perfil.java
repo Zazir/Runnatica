@@ -167,7 +167,8 @@ public class Editar_perfil extends AppCompatActivity {
 
                 picker.getDatePicker().setMaxDate(System.currentTimeMillis()-100000000);
                 picker.show();
-
+                picker.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                picker.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
             }
         });
 

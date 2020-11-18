@@ -85,14 +85,4 @@
         android:background="@color/grisBoton"
         android:text="Registrase"
         android:textSize="20sp" />
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btnEntrarGoogle"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/btnRegistrarse"
-        />
-
 </RelativeLayout>
