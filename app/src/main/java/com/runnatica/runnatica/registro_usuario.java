@@ -166,14 +166,16 @@ public class registro_usuario extends AppCompatActivity {
                         if(MesTemp.length() == 1){
                             MesTemp = "0" + MesTemp;
                             FechaNacimiento = dayOfMonth + "" + MesTemp + "" + year + "";
-                            MostrarFecha.setText(FechaNacimiento);
+                            String FechaNacimiento2 = "Fecha: " + dayOfMonth + "/" + MesTemp + "/" + year;
+                            MostrarFecha.setText(FechaNacimiento2);
                             flagFecha = true;
                         }
 
                         if (diaTemp.length() == 1) {
                             diaTemp = "0" + diaTemp;
                             FechaNacimiento = diaTemp + "" + MesTemp + "" + year + "";
-                            MostrarFecha.setText(FechaNacimiento);
+                            String FechaNacimiento2 = "Fecha: " + dayOfMonth + "/" + MesTemp + "/" + year;
+                            MostrarFecha.setText(FechaNacimiento2);
                             flagFecha = true;
                         }
                     }

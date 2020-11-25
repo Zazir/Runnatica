@@ -81,8 +81,9 @@
 
                 <Button
                     android:id="@+id/btnPosponerFecha"
-                    android:layout_width="152dp"
-                    android:layout_height="60dp"
+                    android:layout_width="259dp"
+                    android:layout_height="50dp"
+                    android:padding="2dp"
                     android:layout_below="@+id/tvHoraPosponer"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
@@ -93,8 +94,9 @@
 
                 <Button
                     android:id="@+id/btnActualizar"
-                    android:layout_width="200dp"
-                    android:layout_height="60dp"
+                    android:layout_width="259dp"
+                    android:layout_height="50dp"
+                    android:padding="2dp"
                     android:layout_below="@+id/btnPosponerFecha"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="50dp"
@@ -134,8 +136,9 @@
 
                 <Button
                     android:id="@+id/btnActualizarC"
-                    android:layout_width="200dp"
-                    android:layout_height="60dp"
+                    android:layout_width="259dp"
+                    android:layout_height="50dp"
+                    android:padding="2dp"
                     android:layout_below="@+id/algo"
                     android:layout_centerHorizontal="true"
                     android:layout_marginEnd="50dp"

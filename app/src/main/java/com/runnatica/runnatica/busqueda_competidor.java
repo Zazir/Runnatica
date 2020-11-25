@@ -31,6 +31,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.runnatica.runnatica.adapter.MyAdapter;
 import com.runnatica.runnatica.poho.Competencias;
+import com.runnatica.runnatica.poho.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,6 +59,8 @@ public class busqueda_competidor extends AppCompatActivity {
     private int[] id;
     private String fecha;
 
+    private Usuario usuario;
+
     private String dominio;
 
     @Override
@@ -82,6 +85,8 @@ public class busqueda_competidor extends AppCompatActivity {
         rvFiltro.setLayoutManager(new LinearLayoutManager(this));
 
         listCompetencias = new ArrayList<>();
+
+        usuario = Usuario.getUsuarioInstance();
 
         cargarSpinnerEstado();
         //cargarSpinnerPais();
@@ -153,7 +158,8 @@ public class busqueda_competidor extends AppCompatActivity {
         btnEstado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CargarCompetencias(dominio + "filtroCompetencias.php?estado=" + estado);
+
+                CargarCompetencias(dominio + "home.php?id_usuario="+ usuario.getId()+"&Estado="+estado);
             }
         });
 

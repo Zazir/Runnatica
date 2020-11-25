@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.ParseException;
@@ -15,9 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class informacion_inscrito extends AppCompatActivity {
     private TextView txtNombre, txtCorreo, txtF_inscrito, txtF_nacimiento;
@@ -49,8 +49,8 @@ public class informacion_inscrito extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.menu_historial) {
                     historialOrganizador();
                 }
-                if (menuItem.getItemId() == R.id.menu_ajustes) {
-                    ajuestesOrganizador();
+                if (menuItem.getItemId() == R.id.menu_regresar) {
+                    HomeOrganizador();
                 }
 
                 return true;
@@ -64,7 +64,14 @@ public class informacion_inscrito extends AppCompatActivity {
         txtNombre.setText(extra.getString("NOMBRE"));
         txtCorreo.setText(extra.getString("CORREO"));
         txtF_inscrito.setText(PonerMes(extra.getString("F_INSCRIPCION"))+ "");
-        txtF_nacimiento.setText(CalcularEdad(extra.getString("F_NACIMIENTO"))+ " Años");
+
+        String edad = extra.getString("F_NACIMIENTO");
+        if(edad.length() > 4){
+            txtF_nacimiento.setText(CalcularEdad(edad)+ " Años");
+        }else{
+            txtF_nacimiento.setText(edad + " Años");
+        }
+
         //id_competencia = extra.getString("id");
     }
 
@@ -76,8 +83,8 @@ public class informacion_inscrito extends AppCompatActivity {
         Intent next = new Intent(this, historial_organizador.class);
         startActivity(next);
     }
-    private void ajuestesOrganizador(){
-        Intent next = new Intent(this, ajustes_organizador.class);
+    private void HomeOrganizador(){
+        Intent next = new Intent(this, home.class);
         startActivity(next);
     }
     public int CalcularEdad(String fechaNacimiento) {

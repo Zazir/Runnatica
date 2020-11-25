@@ -202,7 +202,7 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
                 picker = new DatePickerDialog(crear_competencia.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        fecha = year + "-" + (month+1) + "-" + dayOfMonth;
+                        fecha = "Fecha: " +  dayOfMonth + "/" + (month+1) + "/" + year;
                         txtFecha.setText(fecha);
                         autoguardadoOportuno();
                     }

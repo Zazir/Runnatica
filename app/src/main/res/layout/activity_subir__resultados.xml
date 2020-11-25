@@ -14,7 +14,6 @@
         android:orientation="horizontal">
 
         <TextView
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -27,9 +26,9 @@
     </LinearLayout>
 
     <ScrollView
-        android:layout_width="469dp"
-        android:layout_height="613dp"
-        android:layout_marginTop="30dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below= "@+id/tvResultados">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -39,7 +38,7 @@
                 android:id="@+id/kk"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/tvResultados"
+
                 android:text="Subir Imagenes de Resultados:"
                 android:textColor="@android:color/background_dark"
                 android:gravity="center"

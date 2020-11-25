@@ -10,6 +10,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -34,11 +37,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import static com.runnatica.runnatica.carrera_vista1.IDS_FORANEOS;
 
 public class InscripcionForaneo extends AppCompatActivity {
@@ -46,7 +44,6 @@ public class InscripcionForaneo extends AppCompatActivity {
     private String monto = "";
 
     private Button btnCrearForaneos, btnInscribir;
-    private RecyclerView rvInscripcionesForaneos;
 
     private String id_competencia, NombreCompetencia, Fecha, Lugar, Organizador;
     private List<Inscripciones> inscripcionesList = new ArrayList<>();
@@ -65,9 +62,6 @@ public class InscripcionForaneo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscripcion_foraneo);
         btnInscribir = (Button)findViewById(R.id.btnPagarInscripciones);
-        rvInscripcionesForaneos = (RecyclerView)findViewById(R.id.rvInscripcionesForaneos);
-        rvInscripcionesForaneos.setHasFixedSize(true);
-        rvInscripcionesForaneos.setLayoutManager(new LinearLayoutManager(this));
 
         getLastViewData();
         String dominio = getString(R.string.ip);
@@ -197,7 +191,7 @@ public class InscripcionForaneo extends AppCompatActivity {
                             }
 
                             //Creamos instancia del adapter
-                            inscripcionesAdapter = new inscripcionesForaneoAdapter(InscripcionForaneo.this, inscripcionesList);
+                            inscripcionesAdapter = new inscripcionesForaneoAdapter(InscripcionForaneo.this, inscripcionesList, id_competencia);
 
                             inscripcionesAdapter.setOnItemClick(new AdapterView.OnItemClickListener() {
                                 @Override
@@ -206,7 +200,6 @@ public class InscripcionForaneo extends AppCompatActivity {
                                 }
                             });
 
-                            rvInscripcionesForaneos.setAdapter(inscripcionesAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

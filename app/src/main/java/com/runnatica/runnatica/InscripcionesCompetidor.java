@@ -114,6 +114,11 @@ public class InscripcionesCompetidor extends AppCompatActivity {
         spBoletos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(position==0){
+                    btnNext.setEnabled(false);
+                    btnNext.setText(" ");
+                }
                 if(position>=1){
                     btnNext.setEnabled(true);
                     btnNext.setText("Siguiente");

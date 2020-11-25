@@ -248,7 +248,6 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
                         @Override
                         public void onError(Throwable e) {
                             Log.d("aca", "error = " + e.getMessage());
-
                         }
 
                         @Override
@@ -330,9 +329,13 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
                 PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
                 if (confirmation != null){
                     try {
+
                         String DetallesPago = confirmation.toJSONObject().toString(4);
-                        startActivity(new Intent(this, DetallesTransaccion.class).putExtra("PaymentDetails", DetallesPago)
+                        startActivity(new Intent(this, FelicidadesCompetidor.class).putExtra("PaymentDetails", DetallesPago)
                                 .putExtra("PaymentAmount", total));
+                        /*Intent intent = new Intent(this, FelicidadesCompetidor.class);
+                        startActivity(intent);*/
+
                     }catch (JSONException e){
                         e.printStackTrace();
                     }
@@ -413,7 +416,9 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         Log.i("ids_foraneos", "Estas son las ids: "+ids_foraneos);
         total = ids_foraneos.split(" ").length;
         //Toast.makeText(this, total+"", Toast.LENGTH_SHORT).show();
-        Log.i("Cantidad_seleccionados", total+"Total");
+        String []arregloids= ids_foraneos.split(" ");
+        Log.i("foraneos", arregloids + "");
+        Log.i("Cantidad_seleccionados", total+" Total");
     }
 
     private void obtenerAutoguardado() {
@@ -513,7 +518,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         plantillaPDF.addHeaders("Runnatica", "Inscripcion Oficial", "");
         plantillaPDF.addParagraph("Informacion: " );
         plantillaPDF.addParagraph("Carrera: " + NombreCompetencia.toString());
-        plantillaPDF.addParagraph("Nombre del Competidor"+ usuario.getNombre());
+        plantillaPDF.addParagraph("Nombre del Competidor: "+ usuario.getNombre());
         plantillaPDF.addParagraph("Fecha de Inscripcion: "+ Fecha1);
         plantillaPDF.addParagraph("Monto Pagado: "+ total + " MXN");
         plantillaPDF.addParagraph("Direccion de Competencia: "+Lugar);

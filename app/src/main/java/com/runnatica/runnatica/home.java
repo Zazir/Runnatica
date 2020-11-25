@@ -82,7 +82,7 @@ public class home extends AppCompatActivity {
         Localizacion();
         guardarPreferencias();
         saveFCMToken(dominio + "notificaciones.php?id_usuario="+ user.getId() + "&token_fcm=" + fcmToken);
-        CargarCompetencias(dominio + "obtenerCompetencias.php?estado="+Localizacion);
+        CargarCompetencias(dominio + "home.php?id_usuario="+user.getId()+"&Estado="+Localizacion);
 
         //Inicializar arreglo de competencias
         competenciasList = new ArrayList<>();

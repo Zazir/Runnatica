@@ -37,10 +37,13 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
     private int contForaneosSeleccionados = 0;
     //public String[] idsForaneos = new String[5];
     public String idsForaneos = "";
+    private String idCompetencia;
 
-    public inscripcionesForaneoAdapter(Context ctx, List<Inscripciones> inscripcionesList) {
+    public inscripcionesForaneoAdapter(Context ctx, List<Inscripciones> inscripcionesList, String idCompetencia) {
         this.ctx = ctx;
         this.inscripcionesList = inscripcionesList;
+        this.idCompetencia = idCompetencia;
+
     }
 
     @NonNull
@@ -77,9 +80,12 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
 
     }
 
+
     class ViewHolderInscripciones extends RecyclerView.ViewHolder implements AdapterView.OnItemClickListener {
         TextView txtNombreInscripcion, txtMinEdad, txtMaxEdad;
         ListView lvForaneo;
+        int Cupo, Totalyainscritos=0, GuardarInscritos;
+
 
         Usuario usuario = Usuario.getUsuarioInstance();
 
@@ -91,6 +97,8 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
             lvForaneo = (ListView) vistaInscripcion.findViewById(R.id.lvForaneos);
 
             lvForaneo.setOnItemClickListener(this);
+
+
         }
 
         @Override
@@ -98,25 +106,9 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
             String[] idTemp = parent.getItemAtPosition(position).toString().split(" ");
             String idTemporalPulsado = idTemp[0];
 
-            if (idsForaneos.equals("")) {
+            consultarForaneosInscritos(idTemporalPulsado, idTemp);
 
-                    idsForaneos = " "+idTemporalPulsado+" ";
-                    Toast.makeText(ctx, "Has seleccionado a: " + idTemp[2], Toast.LENGTH_SHORT).show();
-                    contForaneosSeleccionados++; //contForaneosSeleccionados siempre será 1 a inicio
-                    Log.i("foraneos", idsForaneos);
 
-            }else if (contForaneosSeleccionados <= 5) {
-                Log.i("contador_foraneos", contForaneosSeleccionados+"");
-                Log.i("foraneos", idsForaneos);
-
-                if (idsForaneos.contains(" "+idTemporalPulsado+" ")) {
-                    Toast.makeText(ctx, "Ya elegiste a ese usuario", Toast.LENGTH_SHORT).show();
-                }else {
-                    idsForaneos = idsForaneos.concat(idTemporalPulsado + " ");
-                    contForaneosSeleccionados++;
-                    Toast.makeText(ctx, "Has seleccionado a: " + idTemp[2], Toast.LENGTH_SHORT).show();
-                }
-            }
         }
 
         public void asignarDatos(Inscripciones inscripciones, final int posicion) {
@@ -166,5 +158,101 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
                 e.printStackTrace();
             }
         }
+
+        private void consultarForaneosInscritos(String idTemporalPulsado, String []idTemp) {
+            String URL = "http://31.220.61.80/WebServiceRunnatica/" + "obtenerDatosCompetencia.php?id_competencia="+idCompetencia+"&consulta=2";
+
+            StringRequest request = new StringRequest(Request.Method.GET, URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                Log.i(response, "consultarForaneosInscritos");
+                                //totalforaneos, foraneosyaregistrados;
+                                Totalyainscritos = Integer.parseInt(response);
+                                consultarTotalInscripciones(idTemporalPulsado, idTemp);
+                            }catch (Exception e) {}
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(ctx, "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            Volley.newRequestQueue(ctx).add(request);
+        }
+
+        private void consultarTotalInscripciones(String idTemporalPulsado, String []idTemp) {
+            String URL = "http://31.220.61.80/WebServiceRunnatica/" + "obtenerDatosCompetencia.php?id_competencia="+idCompetencia+"&consulta=3";
+            StringRequest request = new StringRequest(Request.Method.GET, URL,
+                    new Response.Listener<String>() {
+                        @Override
+
+                        public void onResponse(String response) {
+                            try {
+                                Log.i(response, "consultarTotalInscripciones");
+                                JSONArray res = new JSONArray(response);
+                                JSONObject totalInscripciones = res.getJSONObject(0);
+                                Cupo = totalInscripciones.optInt("Total_foraneos");
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            //txtTotalUsuarios.setText();
+
+                            if (idsForaneos.equals("")) {
+                                idsForaneos = " "+idTemporalPulsado+" ";
+                                Toast.makeText(ctx, "Has seleccionado a: " + idTemp[2], Toast.LENGTH_SHORT).show();
+                                contForaneosSeleccionados++; //contForaneosSeleccionados siempre será 1 a inicio
+                                Log.i("foraneos", idsForaneos);
+
+                                GuardarInscritos = Totalyainscritos+1;
+
+                                Log.i("GuardarInscritos", GuardarInscritos+"");
+
+                                if(Totalyainscritos > Cupo){
+                                    Toast.makeText(ctx, "Ya no se admiten mas Usuarios Foraneos ", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+
+                            }else if (contForaneosSeleccionados <= 4) {
+
+                                Log.i("contador_foraneos", contForaneosSeleccionados+"");
+                                Log.i("foraneos", idsForaneos);
+
+                                if (idsForaneos.contains(" "+idTemporalPulsado+" ")) {
+                                    Toast.makeText(ctx, "Ya elegiste a ese usuario", Toast.LENGTH_SHORT).show();
+                                }else {
+
+                                    if(GuardarInscritos >= Cupo){
+                                        Toast.makeText(ctx, "Ya se han agotado las inscripciones de Usuarios Foraneos", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+
+                                    idsForaneos = idsForaneos.concat(idTemporalPulsado + " ");
+                                    contForaneosSeleccionados++;
+                                    Toast.makeText(ctx, "Has seleccionado a: " + idTemp[2], Toast.LENGTH_SHORT).show();
+
+                                    GuardarInscritos++;
+                                }
+                            }else if(contForaneosSeleccionados >= 5){
+                                Toast.makeText(ctx, "No se pueden seleccionar mas de 5 usuarios foraneos", Toast.LENGTH_SHORT).show();
+                            }
+                            Log.i("Cupo", Cupo+"");
+                            Log.i("Totalyainscritos", Totalyainscritos+"");
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(ctx, "Error de conexión con el servidor", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            Volley.newRequestQueue(ctx).add(request);
+        }
+
     }
 }

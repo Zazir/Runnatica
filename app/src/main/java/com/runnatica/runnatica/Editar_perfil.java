@@ -101,7 +101,7 @@ public class Editar_perfil extends AppCompatActivity {
         Glide.with(Editar_perfil.this).load(FotoUsuario).into(FotoUsuarioNueva);
 
         FechaNacimiento = dia + "" + mes + "" + ano + "";
-        String FechaMostrar =  dia + "/" + mes + "/" + ano + "/";
+        String FechaMostrar = "Fecha: " +  dia + "/" + mes + "/" + ano + "";
         MostrarFecha.setText(FechaMostrar);
 
         NombreEditar.setText(NombreUsuario1);
@@ -159,7 +159,7 @@ public class Editar_perfil extends AppCompatActivity {
                         }
 
                         FechaNacimiento = DayTemp + "" + MesTemp + "" + year + "";
-                        String FechaMostrar2 =  DayTemp + "/" + MesTemp + "/" + year + "/";
+                        String FechaMostrar2 =  "Fecha: " + DayTemp + "/" + MesTemp + "/" + year + "";
                         MostrarFecha.setText(FechaMostrar2);
                         flagFecha = true;
                     }

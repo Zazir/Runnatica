@@ -15,22 +15,27 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class Subir_Resultados extends AppCompatActivity {
 
@@ -40,9 +45,9 @@ public class Subir_Resultados extends AppCompatActivity {
     private ProgressDialog progreso;
     BottomNavigationView MenuOrganizador;
     private String path = "xxx";
+    boolean validar = false;
 
     private String dominio, id_competencia;
-
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -83,6 +88,8 @@ public class Subir_Resultados extends AppCompatActivity {
         dominio = getString(R.string.ip);
         getLastViewData();
 
+        cargarImagen(dominio+ "resultadosCompetencia.php?id_competencia="+ id_competencia);
+
         btnImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,9 +100,14 @@ public class Subir_Resultados extends AppCompatActivity {
         btnSubirResultados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(validar==true){
                 actualizarResultadosCompetencia(dominio+"actualizarCompetencia.php?"+
                         "PathFoto=" + path +
                         "&id_competencia=" + id_competencia);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Debes de subir una foto primero", Toast.LENGTH_SHORT).show();
+                    btnSubirResultados.setError("No se ha seleccionado una imagen");
+                }
             }
         });
     }
@@ -125,7 +137,7 @@ public class Subir_Resultados extends AppCompatActivity {
                     public void onResponse(String response) {
                         progreso.hide();
                         if (response.equals("Error al subir")) {
-                            Toast.makeText(getApplicationContext(), "La imagen no se pudo subir con éxito", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "La imagen no se pudo subir", Toast.LENGTH_SHORT).show();
                         } else {
                             //Aqui recibo el URL de la Imagen
                             path = response;
@@ -163,6 +175,36 @@ public class Subir_Resultados extends AppCompatActivity {
         startActivityForResult(intent.createChooser(intent, "Seleccione la aplicación"), 10);//inicia la actividad y recibe el intent (createChooser muestra las opciones para mostrtar imagenes)
     }
 
+    private void cargarImagen(String URL) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            JSONObject respuesta = jsonArray.getJSONObject(0);
+
+                            if(respuesta.optString("resultados").equals("xxx")){
+                                return;
+                            }else {
+                                Glide.with(Subir_Resultados.this).load(respuesta.optString("resultados")).into(img);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Error de conexión al servidor", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -174,6 +216,8 @@ public class Subir_Resultados extends AppCompatActivity {
                 bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), path);//metodo para convetir la imagen a bitmap, el path es la imagen que obtuviste del metodo sobrecargado
                 img.setImageBitmap(bitmap);//Se obtiene el bipmap
                 subirImagenResultados(dominio + "guardarImagen.php?");
+                validar = true;
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -185,8 +229,10 @@ public class Subir_Resultados extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if (response.equals("Resultados registrados")) {
-                    Toast.makeText(getApplicationContext(), "Se guardaron los resultados", Toast.LENGTH_SHORT).show();
-                    img.setImageResource(android.R.color.transparent);
+                    Toast.makeText(getApplicationContext(), "Se guardaron los resultados exitosamente", Toast.LENGTH_SHORT).show();
+                    //img.setImageResource(android.R.color.transparent);
+                    //homeOrganizador();
+                    finish();
                 }
                 else Toast.makeText(getApplicationContext(), "Hubo un problema con el servidor", Toast.LENGTH_SHORT).show();
             }

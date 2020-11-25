@@ -36,10 +36,7 @@
             android:layout_gravity="center"
             android:text="Nota* No puedes inscribir a más de 5 usuarios foráneos"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvInscripcionesForaneos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+
 
     </LinearLayout>
 

@@ -113,7 +113,7 @@ public class posponer_competencia extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     if (fecha.equals("") || hora.equals("")) {
-                        btnDate.setError("No seha seleccionado una fecha correcta");
+                        btnDate.setError("No se ha seleccionado una fecha correcta");
                     } else {
                         launchPosponer();
                     }
@@ -262,8 +262,9 @@ public class posponer_competencia extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 fecha = year + "-" + (month+1) + "-" + dayOfMonth;
-                txtFechaPosponer.setText("Se pospondrá al: " + dayOfMonth + "-" + (month+1) + "-" + year);
+                txtFechaPosponer.setText("Se pospondrá al: " + dayOfMonth + "/" + (month+1) + "/" + year);
             }
+
         }, ano, mes, dia);
 
         picker.getDatePicker().setMinDate(System.currentTimeMillis() +100050000);

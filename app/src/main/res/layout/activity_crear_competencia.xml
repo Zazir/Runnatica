@@ -111,13 +111,15 @@
 
             <TextView
                 android:id="@+id/tvFechaPicker"
-                android:layout_width="wrap_content"
+                android:layout_width="340dp"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/txtFechaCompetencia"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
                 android:text="Seleccionar fecha"
                 android:textColor="@android:color/background_dark"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btnSeleccionarFecha"

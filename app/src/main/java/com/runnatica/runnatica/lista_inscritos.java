@@ -105,7 +105,7 @@ public class lista_inscritos extends AppCompatActivity {
                             inscritosAdaptador = new inscritosAdapter(lista_inscritos.this, usuariosInscritosList, new inscritosAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(int position) {
-                                    Toast.makeText(getApplicationContext(), usuariosInscritosList.get(position).getNombre(), Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getApplicationContext(), usuariosInscritosList.get(position).getNombre(), Toast.LENGTH_SHORT).show();
                                     detallesInscrito(
                                             usuariosInscritosList.get(position).getNombre(),
                                             usuariosInscritosList.get(position).getCorreo(),

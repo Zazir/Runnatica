@@ -64,11 +64,12 @@
 
             <Button
                 android:id="@+id/btnMujer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="259dp"
+                android:layout_height="50dp"
                 android:layout_below="@+id/txtSexo"
                 android:background="@color/grisBoton"
                 android:layout_centerHorizontal="true"
+                android:padding="2dp"
                 android:text="Mujer"
                 android:drawableLeft="@drawable/mujer"
                 android:paddingHorizontal="10dp"
@@ -77,12 +78,13 @@
 
             <Button
                 android:id="@+id/btnHombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="259dp"
+                android:layout_height="50dp"
                 android:layout_below="@+id/btnMujer"
                 android:layout_centerHorizontal="true"
                 android:background="@color/grisBoton"
                 android:layout_marginTop="10dp"
+                android:padding="2dp"
                 android:text=" Hombre"
                 android:drawableLeft="@drawable/hombre"
                 android:textColor="@android:color/background_dark"
@@ -101,12 +103,13 @@
 
             <Button
                 android:id="@+id/btnSeleccionNacimiento"
-                android:layout_width="170dp"
-                android:layout_height="60dp"
+                android:layout_width="259dp"
+                android:layout_height="50dp"
                 android:layout_below="@+id/txtFechaN"
                 android:layout_marginStart="30dp"
                 android:layout_centerHorizontal="true"
                 android:background="@color/grisBoton"
+                android:padding="2dp"
                 android:drawableLeft="@drawable/calendar"
                 android:paddingHorizontal="15dp"
                 android:text=" Seleccionar Fecha"
@@ -193,12 +196,13 @@
 
             <Button
                 android:id="@+id/btnFoto"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_width="259dp"
+                android:layout_height="50dp"
                 android:layout_below="@+id/tvFoto"
                 android:background="@color/grisBoton"
                 android:text=" Seleccionar"
                 android:drawableLeft="@drawable/imagen"
+                android:padding="2dp"
                 android:paddingHorizontal="5dp"
                 android:layout_centerHorizontal="true"
                 android:textColor="@android:color/background_dark"
@@ -215,21 +219,24 @@
 
             <TextView
                 android:id="@+id/tvMostrarFecha"
-                android:layout_width="146dp"
-                android:layout_height="48dp"
+                android:layout_width="326dp"
+                android:layout_height="46dp"
                 android:layout_below="@+id/btnSeleccionNacimiento"
-                android:textColor="@android:color/background_dark"
                 android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_marginTop="-2dp"
+                android:textColor="@android:color/background_dark"
                 android:textSize="20dp"></TextView>
 
             <Button
                 android:id="@+id/btnRegistrarse"
                 android:layout_width="259dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_below="@+id/checkTerminos"
                 android:background="@color/grisBoton"
                 android:layout_centerHorizontal="true"
                 android:text="Registrar"
+                android:padding="2dp"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20sp" />
 
@@ -242,6 +249,7 @@
                 android:layout_below="@+id/ivFotoUsuarioRegistro"
                 android:text="Terminos y Condiciones:"
                 android:gravity="center"
+                android:padding="2dp"
                 android:textColor="@android:color/background_dark"
                 android:textSize="25sp" />
 
