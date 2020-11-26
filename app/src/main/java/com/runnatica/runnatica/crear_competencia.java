@@ -198,12 +198,13 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
                 mes = calendar.get(Calendar.MONTH);
                 ano = calendar.get(Calendar.YEAR);
 
-
                 picker = new DatePickerDialog(crear_competencia.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        fecha = "Fecha: " +  dayOfMonth + "/" + (month+1) + "/" + year;
-                        txtFecha.setText(fecha);
+                        String mostrarFecha;
+                        fecha = year + "-" + (month+1) + "-" + dayOfMonth;
+                        mostrarFecha = "Fecha: " + dayOfMonth + "/" + (month+1) + "/" + year;
+                        txtFecha.setText(mostrarFecha);
                         autoguardadoOportuno();
                     }
                 }, ano, mes, dia);
@@ -301,11 +302,12 @@ public class crear_competencia extends AppCompatActivity implements TextWatcher 
         progreso = new ProgressDialog(crear_competencia.this);
         progreso.setMessage("Creando competencia...");
         progreso.show();
-
+        Log.i("URL", URL);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progreso.dismiss();
+
                 if (response.equals("NO")) {
                     Toast.makeText(getApplicationContext(), "Hoy ya creaste una competencia", Toast.LENGTH_SHORT).show();
                 }else if (response.equals("error al crear el competencia")){

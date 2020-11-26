@@ -114,7 +114,11 @@ public class posponer_competencia extends AppCompatActivity {
                 try {
                     if (fecha.equals("") || hora.equals("")) {
                         btnDate.setError("No se ha seleccionado una fecha correcta");
-                    } else {
+                        Toast.makeText(getApplicationContext(), "Error en la fecha, Intentalo de nuevo", Toast.LENGTH_LONG).show();
+                    }else if (fecha.equals("") && hora.equals("")){
+                        btnDate.setError("No se ha seleccionado una fecha correcta");
+                        Toast.makeText(getApplicationContext(), "Error en la fecha, Intentalo de nuevo", Toast.LENGTH_LONG).show();
+                    }else {
                         launchPosponer();
                     }
                 }catch(Exception e){

@@ -107,7 +107,14 @@ public class EditarCategoria1 extends AppCompatActivity {
                             inscripcionesAdaptador= new inscripcionesAdapter(EditarCategoria1.this, inscripcionesList, new inscripcionesAdapter.OnItemClickListener() {
                                 @Override
                                 public void OnItemClick(int position) {
-                                    launchCategoria(inscripcionesList.get(position).getId_categoria()+"");
+
+                                    String Nombre = new String("" + inscripcionesList.get(position).getNombreInscripcion());
+                                    String Competidores = new String("" + inscripcionesList.get(position).getCantidadUsuarios());
+                                    String Foraneos = new String("" + inscripcionesList.get(position).getCantidadForaneos());
+                                    String MinEdad = new String("" + inscripcionesList.get(position).getEdadMinina());
+                                    String MaxEdad = new String("" + inscripcionesList.get(position).getEdadMaxima());
+                                    launchCategoria(inscripcionesList.get(position).getId_categoria()+"", Nombre, Competidores, Foraneos, MinEdad, MaxEdad);
+
                                 }
                             });
 
@@ -126,10 +133,16 @@ public class EditarCategoria1 extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-    private void launchCategoria(String id_cat) {
+    private void launchCategoria(String id_cat, String Nombre2, String Competidores2, String Foraneos2, String MinEdad2, String MaxEdad2) {
         Intent intent = new Intent(EditarCategoria1.this, EditarCategorias2.class);
         intent.putExtra("ID_CAT", id_cat);
         intent.putExtra("ID_COMPENTENCIA5", id_competencia);
+        intent.putExtra("Nombre", Nombre2);
+        intent.putExtra("Competidores", Competidores2);
+        intent.putExtra("Foraneos", Foraneos2);
+        intent.putExtra("MinEdad", MinEdad2);
+        intent.putExtra("MaxEdad", MaxEdad2);
+
         startActivity(intent);
     }
     private void homeOrganizador() {

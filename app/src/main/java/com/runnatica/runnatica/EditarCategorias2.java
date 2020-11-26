@@ -27,6 +27,7 @@ public class EditarCategorias2 extends AppCompatActivity {
     private Button Finalizar;
     BottomNavigationView MenuOrganizador;
     private String dominio, id_categoria,id_competencia="";;
+    String Nombre, Competidores, Foraneos, MinEdad, MaxEdad;
 
 
     @Override
@@ -44,6 +45,12 @@ public class EditarCategorias2 extends AppCompatActivity {
         MaximoEdad = (EditText)findViewById(R.id.etHastaAnos);
         Finalizar = (Button) findViewById(R.id.btnFinalizarCompetencia2);
         MenuOrganizador= (BottomNavigationView)findViewById(R.id.MenuOrganizador);
+
+        NombreCategoria.setText(Nombre);
+        CompetidoresCategorias.setText(Competidores);
+        ForaneosCategorias.setText(Foraneos);
+        MinimoEdad.setText(MinEdad);
+        MaximoEdad.setText(MaxEdad);
 
         Menu menu = MenuOrganizador.getMenu();
         MenuItem menuItem= menu.getItem(0);
@@ -69,18 +76,22 @@ public class EditarCategorias2 extends AppCompatActivity {
         Finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Categoria Editada Exitosamente", Toast.LENGTH_SHORT).show();
-                    peticion(dominio + "actualizarCategoria.php?edad_max="+MaximoEdad.getText().toString()+"&id_categoria="+id_categoria);
-                    peticion(dominio + "actualizarCategoria.php?edad_min="+MinimoEdad.getText().toString()+"&id_categoria="+id_categoria);
-                    peticion(dominio + "actualizarCategoria.php?cantidad_usuarios"+CompetidoresCategorias.getText().toString()+"&id_categoria="+id_categoria);
-                    peticion(dominio + "actualizarCategoria.php?cantidad_foraneos="+ForaneosCategorias.getText().toString()+"&id_categoria="+id_categoria);
-                    peticion(dominio + "actualizarCategoria.php?nombre_categoria="+NombreCategoria.getText().toString().replaceAll(" ", "%20")+"&id_categoria="+id_categoria);
+                if(validaciones()) {
+                    Toast.makeText(getApplicationContext(), "Categoria Editada Exitosamente", Toast.LENGTH_SHORT).show();
+                    peticion(dominio + "actualizarCategoria.php?edad_max=" + MaximoEdad.getText().toString() + "&id_categoria=" + id_categoria);
+                    peticion(dominio + "actualizarCategoria.php?edad_min=" + MinimoEdad.getText().toString() + "&id_categoria=" + id_categoria);
+                    peticion(dominio + "actualizarCategoria.php?cantidad_usuarios=" + CompetidoresCategorias.getText().toString() + "&id_categoria=" + id_categoria);
+                    peticion(dominio + "actualizarCategoria.php?cantidad_foraneos=" + ForaneosCategorias.getText().toString() + "&id_categoria=" + id_categoria);
+                    peticion(dominio + "actualizarCategoria.php?nombre_categoria=" + NombreCategoria.getText().toString().replaceAll(" ", "%20") + "&id_categoria=" + id_categoria);
                     MaximoEdad.setText("");
                     MinimoEdad.setText("");
                     CompetidoresCategorias.setText("");
                     ForaneosCategorias.setText("");
                     NombreCategoria.setText("");
                     Atras();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Verifica los campos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -89,6 +100,11 @@ public class EditarCategorias2 extends AppCompatActivity {
         Bundle extra = this.getIntent().getExtras();
         id_categoria = extra.getString("ID_CAT");
         id_competencia = extra.getString("ID_COMPENTENCIA5");
+        Nombre = extra.getString("Nombre");
+        Competidores = extra.getString("Competidores");
+        Foraneos = extra.getString("Foraneos");
+        MinEdad = extra.getString("MinEdad");
+        MaxEdad = extra.getString("MaxEdad");
     }
 
     private void peticion(String URL) {
@@ -113,8 +129,38 @@ public class EditarCategorias2 extends AppCompatActivity {
     }
 
     private boolean validaciones() {
+        Boolean siguiente = false;
 
-        return true;
+        try {
+            int VerificarEdad = Integer.parseInt(MinimoEdad.getText().toString());
+            int VerificarEdad2 = Integer.parseInt(MaximoEdad.getText().toString());
+            int VerificarCantidad = Integer.parseInt(CompetidoresCategorias.getText().toString());
+
+            if(NombreCategoria.getText().toString().length() <= 0){
+                NombreCategoria.setError("Debes de poner el nombre de la inscripcion");
+            }else if (CompetidoresCategorias.getText().toString().length() <= 0 || CompetidoresCategorias.getText().toString().length() >= 5) {
+                CompetidoresCategorias.setError("Ingresa una Cantidad Valida");
+            }else if (ForaneosCategorias.getText().toString().length() <= 0 || ForaneosCategorias.getText().toString().length() >= 5) {
+                ForaneosCategorias.setError("Ingresa una Cantidad Valida");
+            }else if (VerificarEdad <= 3 || VerificarEdad >= 99) {
+                MinimoEdad.setError("La edad no es valida");
+            } else if (VerificarEdad2 <= 3 || VerificarEdad2 >= 99) {
+                MaximoEdad.setError("La edad no es valida");
+            } else if (VerificarEdad >= VerificarEdad2) {
+                MinimoEdad.setError("No puede ser mayor o igual la edad minima a la edad Maxima");
+            } else if (VerificarEdad2 <= VerificarEdad) {
+                MaximoEdad.setError("No puede ser menor o igual la edad maxima a la edad Minima");
+            }else if (MaximoEdad.getText().toString().length() <= 0 || MaximoEdad.getText().toString().length() >= 3) {
+                MaximoEdad.setError("Ingresa un Año Valido");
+            } else if (VerificarCantidad <= 0) {
+                CompetidoresCategorias.setError("Ingresa una Cantidad Valida");
+            } else siguiente = true;
+
+
+        }catch(Exception e){
+
+        }
+        return siguiente;
     }
     private void homeOrganizador() {
         Intent next = new Intent(this, home_organizador.class);

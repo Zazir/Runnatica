@@ -48,8 +48,9 @@
 
             <Button
                 android:id="@+id/btnSeleccioarResultados"
-                android:layout_width="200dp"
-                android:layout_height="60dp"
+                android:layout_width="259dp"
+                android:layout_height="50dp"
+                android:padding="2dp"
                 android:layout_below="@+id/kk"
                 android:layout_centerHorizontal="true"
                 android:text="Seleccionar"
@@ -97,8 +98,9 @@
             <Button
                 android:id="@+id/btnSubirResultados"
                 android:layout_centerHorizontal="true"
-                android:layout_width="200dp"
-                android:layout_height="60dp"
+                android:layout_width="259dp"
+                android:layout_height="50dp"
+                android:padding="2dp"
                 android:layout_below="@+id/Sugerencias4"
                 android:text="Subir Resultados"
                 android:textColor="@android:color/background_dark"/>

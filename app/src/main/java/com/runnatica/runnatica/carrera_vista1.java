@@ -536,15 +536,17 @@ public class carrera_vista1 extends AppCompatActivity implements OnMapReadyCallb
                         try {
                             int usuariosInscritos = Integer.parseInt(response);
                             Log.i("aver",response);
-                            if (!flag || !id_organizador.equals(user.getId()+"") && !flag) {
+                            if (totalInscripcionesInt < usuariosInscritos && !flag  || !id_organizador.equals(user.getId()+"") && !flag) {
                                 btnInscripcion.setEnabled(true);
                                 Log.i("id:otronombre",  id_organizador);
                                 Log.i("id:otronombre",  user.getId()+" id de la persistencia");
                             }
                             if(totalInscripcionesInt <= usuariosInscritos){
+
                                 btnInscripcion.setEnabled(false);
                                 btnInscripcion.setError("Ya se agotaron las inscripciones para esta competencia");
                                 Toast.makeText(carrera_vista1.this, "Ya se agotaron las inscripciones para esta competencia", Toast.LENGTH_SHORT).show();
+
                             }
                         }catch (Exception e) {}
                     }

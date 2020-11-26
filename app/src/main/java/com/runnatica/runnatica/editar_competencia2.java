@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,8 +43,9 @@ public class editar_competencia2 extends AppCompatActivity {
     BottomNavigationView MenuOrganizador;
     private StringRequest request;
 
-    private String path, dominio, id_competencia;
+    private String path, dominio, id_competencia, Descripcion;
     private Bitmap bitmap;
+    String Precio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +64,29 @@ public class editar_competencia2 extends AppCompatActivity {
         dominio = getString(R.string.ip);
         getLastViewData();
 
+        EditarDescripcion.setText(Descripcion);
+        EditarPrecio.setText(Precio);
+
         Menu menu = MenuOrganizador.getMenu();
-        MenuItem menuItem= menu.getItem(0);
+        MenuItem menuItem= menu.getItem(2);
         menuItem.setChecked(true);
+
+        MenuOrganizador.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.menu_home) {
+                    homeOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_historial) {
+                    historialOrganizador();
+                }
+                if (menuItem.getItemId() == R.id.menu_regresar) {
+                    home();
+                }
+                return true;
+            }
+        });
 
         SeleccionarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +130,7 @@ public class editar_competencia2 extends AppCompatActivity {
                         "&id_competencia=" + id_competencia);
             }
         });
+
         EditarPrecio.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -176,6 +199,8 @@ public class editar_competencia2 extends AppCompatActivity {
     private void getLastViewData() {
         Bundle extra = editar_competencia2.this.getIntent().getExtras();
         id_competencia = extra.getString("id_competencia");
+        Descripcion = extra.getString("Descripcion");
+        Precio = extra.getString("Precio");
         ConsultarNombre();
     }
 
@@ -286,5 +311,18 @@ public class editar_competencia2 extends AppCompatActivity {
         Intent intent = new Intent(editar_competencia2.this, EditarCategoria1.class);
         intent.putExtra("ID_COMPENTENCIA5", id_competencia);
         startActivity(intent);
+    }
+
+    private void homeOrganizador() {
+        Intent next = new Intent(this, home_organizador.class);
+        startActivity(next);
+    }
+    private void historialOrganizador(){
+        Intent next = new Intent(this, historial_organizador.class);
+        startActivity(next);
+    }
+    private void home(){
+        Intent next = new Intent(this, home.class);
+        startActivity(next);
     }
 }

@@ -43,7 +43,6 @@ public class inscripcionesForaneoAdapter extends RecyclerView.Adapter<inscripcio
         this.ctx = ctx;
         this.inscripcionesList = inscripcionesList;
         this.idCompetencia = idCompetencia;
-
     }
 
     @NonNull

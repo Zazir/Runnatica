@@ -8,6 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -24,11 +29,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class home_organizador extends AppCompatActivity {
     private List<Competencias> competenciasList;
@@ -121,7 +121,8 @@ public class home_organizador extends AppCompatActivity {
                                 public void OnItemClick(int position) {
                                     String idS = new String("" + competenciasList.get(position).getId());
                                     int price = Integer.parseInt(competenciasList.get(position).getPrecioCompetencia());
-                                    launchCompetenciaView(idS, price);
+                                    String Descripcion = new String("" + competenciasList.get(position).getDescripcionCompetencia());
+                                    launchCompetenciaView(idS, price, Descripcion);
                                 }
                             });
                             recyclerView.setAdapter(adapter);
@@ -139,11 +140,12 @@ public class home_organizador extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-    private void launchCompetenciaView(String id, int Precio) {
+    private void launchCompetenciaView(String id, int Precio, String Descripcion) {
         Intent intent = new Intent(home_organizador.this, vista1_organizador.class);
         intent.putExtra("id", id);
         intent.putExtra("precio", Precio);
         intent.putExtra("resultados", false);
+        intent.putExtra("Descripcion", Descripcion);
         startActivity(intent);
     }
 

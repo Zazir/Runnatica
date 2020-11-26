@@ -2,6 +2,7 @@ package com.runnatica.runnatica;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,7 +40,7 @@ public class vista1_organizador extends AppCompatActivity {
     private StringRequest request;
     private int precio, vendidosUsuario, vendidosForaneo;
 
-    private String dominio, NombreCompetencia;
+    private String dominio, NombreCompetencia, Descripcion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +126,7 @@ public class vista1_organizador extends AppCompatActivity {
         Bundle extra = vista1_organizador.this.getIntent().getExtras();
         id_competencia = extra.getString("id");
         precio = extra.getInt("precio");
+        Descripcion = extra.getString("Descripcion");
         flag = extra.getBoolean("resultados");
 
         if (flag) {
@@ -338,13 +340,25 @@ public class vista1_organizador extends AppCompatActivity {
 
     private void goToEditarCompetencia() {
         Intent intent = new Intent(this, editar_competencia2.class);
+
         intent.putExtra("id_competencia", id_competencia);
+
+        String Precio2 = Integer.toString(precio);
+
+        Log.i(Descripcion, "Descripcion");
+
+        intent.putExtra("Precio", Precio2);
+
+        intent.putExtra("Descripcion", Descripcion);
         startActivity(intent);
     }
 
     private void goToPosponerCompetencia() {
+
         Intent intent = new Intent(this, posponer_competencia.class);
         intent.putExtra("id_competencia", id_competencia);
+
+
         startActivity(intent);
     }
 }

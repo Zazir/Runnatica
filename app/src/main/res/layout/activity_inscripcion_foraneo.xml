@@ -36,7 +36,10 @@
             android:layout_gravity="center"
             android:text="Nota* No puedes inscribir a más de 5 usuarios foráneos"/>
 
-
+        <ListView
+            android:id="@+id/lvForaneos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
