@@ -196,6 +196,8 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
     }
 
     private void generarPago() {
+        total = 0;
+        getLastViewData();
         List<Item> list = new ArrayList<>();//lista con datos de la venta
         Item item = new Item();
         if (monto == null) {
@@ -218,7 +220,6 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
             Payer payer = new Payer(); //objeto con los datos de usuario comprador
             payer.setEmail(usuario2.getCorreo()); //email del usuario comprador
 
-
             List<ExcludedPaymentType> list1 = new ArrayList<>();//lista con datos de la venta
             ExcludedPaymentType itempay = new ExcludedPaymentType();
             itempay.setId("prepaid_card"); //EXCLUIR MEDIOS DE PAG
@@ -233,7 +234,6 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
             pagoDetalles.setPayer(payer);
             pagoDetalles.setItems(list);
             pagoDetalles.setmPayment_methods(methods);
-
 
             disposable = retrofitApi.obtenerDatosPago(pagoDetalles).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribeWith(new DisposableObserver<ResponsePago>() {
@@ -256,7 +256,6 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
                         }
                     });
         }
-
     }
 
     @Override
@@ -450,12 +449,16 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
 
     // --------------------------> PAYPAL INTEGRATION <------------------------------- //
     private void hacerPago() {
+        total = 0;
+        getLastViewData();
         if (monto == null) {
             Toast.makeText(this, "Hubo un error al cargar la información de la competencia, vuelve a seleccionar la competenca", Toast.LENGTH_SHORT).show();
         } else if (ids_foraneos.length() < 1) {
             total = Integer.parseInt(monto);
         }else if (ids_foraneos.length() > 1){
             total = Integer.parseInt(monto) * (this.total+1);
+            Log.i("tortadetamal", total+"");
+            Log.i("panconajo", this.total+1+"");
         }
         PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(total), "MXN", NombreCompetencia, PayPalPayment.PAYMENT_INTENT_SALE);
 
@@ -463,6 +466,7 @@ public class pagarInscripciones extends AppCompatActivity implements GoogleApiCl
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
         startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+        //finish();
     }
 
     // --------------------------> PAYPAL INTEGRATION <------------------------------- //
