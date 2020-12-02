@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
     <application
         android:name=".services.App"
         android:allowBackup="true"
@@ -21,7 +20,8 @@
         android:roundIcon="@mipmap/ic_index"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".services.MainActivity"/>
+        <activity android:name=".InfoResultados"></activity>
+        <activity android:name=".services.MainActivity" />
         <activity android:name=".EditarCategorias2" />
         <activity android:name=".EditarCategoria1" />
         <activity android:name=".ListaForaneos" />
@@ -191,7 +191,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name=".services.ExampleService" />
+
         <activity
             android:name=".registro_usuario"
             android:screenOrientation="portrait" />
